@@ -7,6 +7,7 @@ using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
 using Microsoft.Office.Interop.Word;
 using System.IO;
+using System.Windows.Forms;
 
 namespace DocFrequencies
 {
@@ -16,7 +17,7 @@ namespace DocFrequencies
         private void ConvertDocToDocx()
         {
             // only open and close Word once to maximize performance 
-            Application word = new Application();
+            Microsoft.Office.Interop.Word.Application word = new Microsoft.Office.Interop.Word.Application();
 
             try
             {
@@ -56,6 +57,10 @@ namespace DocFrequencies
 
         public string GetAllText()
         {
+            var form = Form.ActiveForm as frmMain;
+            form.lblStatus.Text = "Читаю Doc и Docx ... ";
+            form.Refresh();
+
             ConvertDocToDocx();
             string allText = "";
             foreach (string filePath in (new Utils()).FindFilesRecursively("*.docx"))

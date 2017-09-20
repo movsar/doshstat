@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Windows.Forms;
 
 namespace DocFrequencies
 {
@@ -11,6 +12,10 @@ namespace DocFrequencies
     {
         public string GetAllText()
         {
+            var form = Form.ActiveForm as frmMain;
+            form.lblStatus.Text = "Читаю Txt ... ";
+            form.Refresh();
+
             string allText = "";
 
             foreach (string filePath in (new Utils()).FindFilesRecursively("*.txt"))

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace DocFrequencies
 {
@@ -12,6 +13,10 @@ namespace DocFrequencies
     {
         public string GetAllText()
         {
+            var form = Form.ActiveForm as frmMain;
+            form.lblStatus.Text = "Читаю Pdf ... ";
+            form.Refresh();
+
             string allText = "";
             foreach (string filePath in (new Utils()).FindFilesRecursively("*.pdf"))
             {

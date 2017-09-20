@@ -8,11 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
+using System.Diagnostics;
 
 namespace DocFrequencies
 {
     public partial class frmMain : Form
     {
+
         public frmMain()
         {
             /*  ANNOTATION
@@ -38,6 +41,17 @@ namespace DocFrequencies
             InitializeComponent();
         }
 
+        public void UpdateStatus(string status)
+        {
+            lblStatus.Text = status;
+        }
+
+        public void UpdateProgress(int ProgressPercentage)
+        {
+
+        }
+
+
         private void Form1_Load(object sender, EventArgs e)
         {
             Utils.WorkDirPath = Environment.CurrentDirectory + "\\input\\";
@@ -48,7 +62,7 @@ namespace DocFrequencies
         {
             // Do not allow the user to create new files via the FolderBrowserDialog.
             fbWorkingDir.ShowNewFolderButton = false;
-            fbWorkingDir.RootFolder = Environment.SpecialFolder.Personal;
+            fbWorkingDir.RootFolder = Environment.SpecialFolder.MyComputer;
             DialogResult result = fbWorkingDir.ShowDialog();
             if (result == DialogResult.OK)
             {
@@ -60,15 +74,56 @@ namespace DocFrequencies
         {
             string everything = "";
             DocProcessor docProcessor = new DocProcessor();
-            everything += docProcessor.GetAllText();
             PdfProcessor pdfProcessor = new PdfProcessor();
-            everything += pdfProcessor.GetAllText();
             TxtProcessor txtProcessor = new TxtProcessor();
+
+            everything += docProcessor.GetAllText();
+            everything += pdfProcessor.GetAllText();
             everything += txtProcessor.GetAllText();
 
-            File.WriteAllText("output.txt", everything, Encoding.UTF8);
-            MessageBox.Show("Ok");
+            var frequencies = new Dictionary<string, int>(StringComparer.CurrentCultureIgnoreCase);
+            count(everything, frequencies);
+            
+            everything = "";
 
+            lblStatus.Text = "Считаю частотность";
+            Refresh();
+
+           
+            foreach (var frequencyRow in frequencies.OrderByDescending(pair => pair.Value))
+            {
+                string word = frequencyRow.Key.ToLower();
+                word = word.Substring(0, 1).ToUpper() + word.Substring(1);
+
+                everything += word + spacer(30 - word.Length) + frequencyRow.Value + "\r\n";
+            }
+
+            File.WriteAllText("output.txt", everything, Encoding.UTF8);
+
+            lblStatus.Text = "Работа выполнена";
+            Process.Start("notepad", (new DirectoryInfo(Utils.WorkDirPath)).FullName + "\\..\\output.txt");
+            Refresh();
+
+        }
+
+        private string spacer(int count) {
+            string spaces = "";
+            for (int i = 0; i < count; i++) spaces+=" ";
+            return spaces;
+        }
+
+        private void count(string content, Dictionary<string, int> words)
+        {
+            var wordPattern = new Regex(@"\w+");
+
+            foreach (Match match in wordPattern.Matches(content))
+            {
+                int currentCount = 0;
+                words.TryGetValue(match.Value, out currentCount);
+
+                currentCount++;
+                words[match.Value] = currentCount;
+            }
         }
     }
 }
