@@ -33,33 +33,36 @@
             this.label1 = new System.Windows.Forms.Label();
             this.fbWorkingDir = new System.Windows.Forms.FolderBrowserDialog();
             this.btnStart = new System.Windows.Forms.Button();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.prbProgress = new System.Windows.Forms.ToolStripProgressBar();
-            this.lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
-            this.statusStrip1.SuspendLayout();
+            this.lblInfo = new System.Windows.Forms.Label();
+            this.lblStatus = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnBrowse
             // 
-            this.btnBrowse.Location = new System.Drawing.Point(324, 47);
+            this.btnBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnBrowse.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btnBrowse.Location = new System.Drawing.Point(292, 31);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(75, 23);
             this.btnBrowse.TabIndex = 0;
             this.btnBrowse.Text = "Выбрать";
-            this.btnBrowse.UseVisualStyleBackColor = true;
+            this.btnBrowse.UseVisualStyleBackColor = false;
             this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
             // 
             // txtWorkingDir
             // 
-            this.txtWorkingDir.Location = new System.Drawing.Point(12, 47);
+            this.txtWorkingDir.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtWorkingDir.Location = new System.Drawing.Point(7, 31);
             this.txtWorkingDir.Name = "txtWorkingDir";
-            this.txtWorkingDir.Size = new System.Drawing.Size(306, 20);
+            this.txtWorkingDir.Size = new System.Drawing.Size(279, 20);
             this.txtWorkingDir.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 31);
+            this.label1.ForeColor = System.Drawing.Color.Cornsilk;
+            this.label1.Location = new System.Drawing.Point(7, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(197, 13);
             this.label1.TabIndex = 2;
@@ -67,42 +70,48 @@
             // 
             // btnStart
             // 
-            this.btnStart.Location = new System.Drawing.Point(324, 76);
+            this.btnStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnStart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btnStart.Location = new System.Drawing.Point(292, 60);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(75, 23);
             this.btnStart.TabIndex = 3;
             this.btnStart.Text = "Начать";
-            this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.UseVisualStyleBackColor = false;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
-            // statusStrip1
+            // lblInfo
             // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lblStatus,
-            this.prbProgress});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 202);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(418, 22);
-            this.statusStrip1.TabIndex = 5;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // prbProgress
-            // 
-            this.prbProgress.Name = "prbProgress";
-            this.prbProgress.Size = new System.Drawing.Size(100, 16);
+            this.lblInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblInfo.ForeColor = System.Drawing.Color.Cornsilk;
+            this.lblInfo.Location = new System.Drawing.Point(7, 60);
+            this.lblInfo.Name = "lblInfo";
+            this.lblInfo.Size = new System.Drawing.Size(279, 95);
+            this.lblInfo.TabIndex = 6;
+            this.lblInfo.Text = "Выберите папку с входными файлами\r\nПоддерживаемые форматы:\r\n *.doc, *.docx, *.pdf" +
+    ", *.txt, *.odt, *.xlsx, *.rtf, *.htm, *.html";
             // 
             // lblStatus
             // 
+            this.lblStatus.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.lblStatus.ForeColor = System.Drawing.Color.Lime;
+            this.lblStatus.Location = new System.Drawing.Point(0, 155);
+            this.lblStatus.Margin = new System.Windows.Forms.Padding(3, 0, 5, 3);
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(124, 17);
-            this.lblStatus.Text = "Жду ваших указаний!";
+            this.lblStatus.Size = new System.Drawing.Size(377, 31);
+            this.lblStatus.TabIndex = 7;
+            this.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(418, 224);
-            this.Controls.Add(this.statusStrip1);
+            this.BackColor = System.Drawing.Color.Black;
+            this.ClientSize = new System.Drawing.Size(377, 186);
+            this.Controls.Add(this.lblStatus);
+            this.Controls.Add(this.lblInfo);
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtWorkingDir);
@@ -111,8 +120,6 @@
             this.Name = "frmMain";
             this.Text = "wFrequencies";
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -125,9 +132,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.FolderBrowserDialog fbWorkingDir;
         private System.Windows.Forms.Button btnStart;
-        private System.Windows.Forms.StatusStrip statusStrip1;
-        public System.Windows.Forms.ToolStripProgressBar prbProgress;
-        public System.Windows.Forms.ToolStripStatusLabel lblStatus;
+        private System.Windows.Forms.Label lblInfo;
+        public System.Windows.Forms.Label lblStatus;
     }
 }
 

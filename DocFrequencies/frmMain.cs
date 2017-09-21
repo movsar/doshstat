@@ -5,7 +5,6 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
@@ -72,24 +71,35 @@ namespace DocFrequencies
 
         private void btnStart_Click(object sender, EventArgs e)
         {
+            txtWorkingDir.Enabled = false;
+            btnBrowse.Enabled = false;
+            btnStart.Enabled = false;
+
             string everything = "";
             DocProcessor docProcessor = new DocProcessor();
-            PdfProcessor pdfProcessor = new PdfProcessor();
-            TxtProcessor txtProcessor = new TxtProcessor();
-
             everything += docProcessor.GetAllText();
+            PdfProcessor pdfProcessor = new PdfProcessor();
             everything += pdfProcessor.GetAllText();
+            TxtProcessor txtProcessor = new TxtProcessor();
             everything += txtProcessor.GetAllText();
+            OdtProcessor odtProcessor = new OdtProcessor();
+            everything += odtProcessor.GetAllText();
+            RtfProcessor rtfProcessor = new RtfProcessor();
+            everything += rtfProcessor.GetAllText();
+            XlsProcessor xlsProcessor = new XlsProcessor();
+            everything += xlsProcessor.GetAllText();
+            HtmProcessor htmProcessor = new HtmProcessor();
+            everything += htmProcessor.GetAllText();
 
             var frequencies = new Dictionary<string, int>(StringComparer.CurrentCultureIgnoreCase);
             count(everything, frequencies);
-            
+
             everything = "";
 
             lblStatus.Text = "Считаю частотность";
             Refresh();
 
-           
+
             foreach (var frequencyRow in frequencies.OrderByDescending(pair => pair.Value))
             {
                 string word = frequencyRow.Key.ToLower();
@@ -102,13 +112,19 @@ namespace DocFrequencies
 
             lblStatus.Text = "Работа выполнена";
             Process.Start("notepad", (new DirectoryInfo(Utils.WorkDirPath)).FullName + "\\..\\output.txt");
+
+            lblInfo.Text = "Файл c результатами находится по адресу: " + (new DirectoryInfo(Utils.WorkDirPath)).Parent.FullName + "\\output.txt";
             Refresh();
 
+            txtWorkingDir.Enabled = true;
+            btnBrowse.Enabled = true;
+            btnStart.Enabled = true;
         }
 
-        private string spacer(int count) {
+        private string spacer(int count)
+        {
             string spaces = "";
-            for (int i = 0; i < count; i++) spaces+=" ";
+            for (int i = 0; i < count; i++) spaces += " ";
             return spaces;
         }
 
@@ -124,6 +140,11 @@ namespace DocFrequencies
                 currentCount++;
                 words[match.Value] = currentCount;
             }
+        }
+
+        private void statusStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
         }
     }
 }
