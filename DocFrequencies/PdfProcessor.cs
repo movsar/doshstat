@@ -7,10 +7,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace DocFrequencies
+namespace wFrequencies
 {
-    class PdfProcessor
+    class PdfProcessor : ITextProcessor
     {
+        // Make it into a singleton
+        private static readonly ITextProcessor _instance = new DocProcessor();
+        public ITextProcessor GetProcessor() { return _instance; }
+
+
         public string GetAllText()
         {
             var form = Form.ActiveForm as frmMain;
@@ -18,9 +23,9 @@ namespace DocFrequencies
             form.Refresh();
 
             string allText = "";
-            foreach (string filePath in (new Utils()).FindFilesRecursively("*.pdf"))
-            {
-                allText += pdfText(filePath);
+
+            foreach (xTextFile file in Utils.fList.Where((x) => x.fileName.EndsWith("pdf"))) {
+                allText += pdfText(file.filePath);
             }
             return allText;
         }

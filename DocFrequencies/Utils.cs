@@ -5,12 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DocFrequencies
+namespace wFrequencies
 {
     public class Utils
     {
         public static string WorkDirPath;
-        List<string> all_files;
+        List<string> all_files; // For search files method
+
+
+        public static List<xTextFile> fList; // Hold the files
 
         public static Encoding GetEncoding(string filename)
         {

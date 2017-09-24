@@ -10,11 +10,11 @@ using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using System.Diagnostics;
 
-namespace DocFrequencies
+namespace wFrequencies
 {
     public partial class frmMain : Form
     {
-        private List<xTextFile> fList;
+       
 
         public frmMain()
         {
@@ -52,13 +52,14 @@ namespace DocFrequencies
         }
         private void loadFiles()
         {
-            fList = new List<xTextFile>();
+            Utils.fList = new List<xTextFile>();
 
             foreach (string file in Directory.EnumerateFiles(Utils.WorkDirPath, "*.*", SearchOption.AllDirectories)
-            .Where(s => s.EndsWith(".doc") || s.EndsWith(".docx") || s.EndsWith(".odt") || s.EndsWith(".pdf") || s.EndsWith(".txt") || s.EndsWith(".xls") || s.EndsWith(".rtf"))) { fList.Add(new xTextFile(file)); }
+            .Where(s => s.EndsWith(".doc") || s.EndsWith(".docx") || s.EndsWith(".odt") || s.EndsWith(".pdf") || s.EndsWith(".txt") || s.EndsWith(".xls") || s.EndsWith(".rtf") || s.EndsWith(".htm") || s.EndsWith(".html"))) {
+                Utils.fList.Add(new xTextFile(file));
+            }
 
-
-            olvFiles.SetObjects(fList);
+            olvFiles.SetObjects(Utils.fList);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -75,8 +76,7 @@ namespace DocFrequencies
             fbWorkingDir.ShowNewFolderButton = false;
             fbWorkingDir.RootFolder = Environment.SpecialFolder.MyComputer;
             DialogResult result = fbWorkingDir.ShowDialog();
-            if (result == DialogResult.OK)
-            {
+            if (result == DialogResult.OK) {
                 Utils.WorkDirPath = fbWorkingDir.SelectedPath;
                 txtWorkingDir.Text = Utils.WorkDirPath;
                 loadFiles();
@@ -90,20 +90,13 @@ namespace DocFrequencies
             btnStart.Enabled = false;
 
             string everything = "";
-            DocProcessor docProcessor = new DocProcessor();
-            everything += docProcessor.GetAllText();
-            PdfProcessor pdfProcessor = new PdfProcessor();
-            everything += pdfProcessor.GetAllText();
-            TxtProcessor txtProcessor = new TxtProcessor();
-            everything += txtProcessor.GetAllText();
-            OdtProcessor odtProcessor = new OdtProcessor();
-            everything += odtProcessor.GetAllText();
-            RtfProcessor rtfProcessor = new RtfProcessor();
-            everything += rtfProcessor.GetAllText();
-            XlsProcessor xlsProcessor = new XlsProcessor();
-            everything += xlsProcessor.GetAllText();
-            HtmProcessor htmProcessor = new HtmProcessor();
-            everything += htmProcessor.GetAllText();
+
+
+           
+
+            foreach (xTextFile xFile in Utils.fList) {
+                everything += xFile.Processor.GetAllText();
+            }
 
             var frequencies = new Dictionary<string, int>(StringComparer.CurrentCultureIgnoreCase);
             count(everything, frequencies);
@@ -114,8 +107,7 @@ namespace DocFrequencies
             Refresh();
 
 
-            foreach (var frequencyRow in frequencies.OrderByDescending(pair => pair.Value))
-            {
+            foreach (var frequencyRow in frequencies.OrderByDescending(pair => pair.Value)) {
                 string word = frequencyRow.Key.ToLower();
                 word = word.Substring(0, 1).ToUpper() + word.Substring(1);
 
@@ -146,8 +138,7 @@ namespace DocFrequencies
         {
             var wordPattern = new Regex(@"\w+");
 
-            foreach (Match match in wordPattern.Matches(content))
-            {
+            foreach (Match match in wordPattern.Matches(content)) {
                 int currentCount = 0;
                 words.TryGetValue(match.Value, out currentCount);
 

@@ -1,4 +1,4 @@
-﻿namespace DocFrequencies
+﻿namespace wFrequencies
 {
     partial class frmMain
     {

@@ -8,13 +8,19 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
 
-namespace DocFrequencies
+namespace wFrequencies
 {
     /// <summary>
     ///     Экстрактор текста из файлов .odt
     /// </summary>
-    public class OdtProcessor
+    public class OdtProcessor : ITextProcessor
     {
+        private ITextProcessor _object;
+        public ITextProcessor getInstance()
+        {
+            if (_object == null) _object = new DocProcessor();
+            return _object;
+        }
         private const string ContentFileName = "content.xml";
 
         public string GetAllText()
@@ -24,9 +30,8 @@ namespace DocFrequencies
             form.Refresh();
 
             string allText = "";
-            foreach (string filePath in (new Utils()).FindFilesRecursively("*.odt"))
-            {
-                    allText += Extract(new FileInfo(filePath).OpenRead());
+            foreach (xTextFile file in Utils.fList.Where((x) => x.fileName.EndsWith("odt"))) {
+                allText += Extract(new FileInfo(file.filePath).OpenRead());
             }
 
             return allText;
@@ -35,15 +40,13 @@ namespace DocFrequencies
 
         public string Extract(Stream stream)
         {
-            using (var zipArchive = new ZipArchive(stream))
-            {
+            using (var zipArchive = new ZipArchive(stream)) {
                 var contentEntry = zipArchive.Entries.SingleOrDefault(x => x.Name == ContentFileName);
 
                 if (contentEntry == null)
                     throw new InvalidOperationException("Can not find content.xml in ODT file");
 
-                using (var contentEntryStream = contentEntry.Open())
-                {
+                using (var contentEntryStream = contentEntry.Open()) {
                     var document = XDocument.Load(contentEntryStream);
 
                     return document.Root?.Value;

@@ -10,10 +10,16 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
 
-namespace DocFrequencies
+namespace wFrequencies
 {
-    class XlsProcessor
+    class XlsProcessor : ITextProcessor
     {
+        private ITextProcessor _object;
+        public ITextProcessor getInstance()
+        {
+            if (_object == null) _object = new DocProcessor();
+            return _object;
+        }
         private const string SheetEntryName = @"xl/worksheets/sheet(\d+)\.xml";
         private const string SharedStringsEntryName = @"xl/sharedStrings.xml";
 
@@ -24,10 +30,8 @@ namespace DocFrequencies
             form.Refresh();
 
             string allText = "";
-            foreach (string filePath in (new Utils()).FindFilesRecursively("*.xls"))
-            {
-
-                allText += Extract(new FileInfo(filePath).OpenRead());
+            foreach (xTextFile file in Utils.fList.Where((x) => x.fileName.EndsWith("xls"))) {
+                allText += Extract(new FileInfo(file.filePath).OpenRead());
             }
 
             return allText;
@@ -37,8 +41,7 @@ namespace DocFrequencies
         {
             var result = new StringBuilder();
 
-            using (var zipArchive = new ZipArchive(stream))
-            {
+            using (var zipArchive = new ZipArchive(stream)) {
                 var sharedStringsEntry = zipArchive.Entries.SingleOrDefault(x => x.FullName == SharedStringsEntryName);
                 var sharedStrings = GetSharedStrings(sharedStringsEntry);
 
@@ -59,8 +62,7 @@ namespace DocFrequencies
             if (sharedStringsEntry == null)
                 return null;
 
-            using (var sharedStringsEntryStream = sharedStringsEntry.Open())
-            {
+            using (var sharedStringsEntryStream = sharedStringsEntry.Open()) {
                 var document = XDocument.Load(sharedStringsEntryStream);
                 var defaultNamespace = document.Root.GetDefaultNamespace();
 
@@ -76,13 +78,11 @@ namespace DocFrequencies
             if (sheetEntry == null)
                 return;
 
-            using (var sheetEntryStream = sheetEntry.Open())
-            {
+            using (var sheetEntryStream = sheetEntry.Open()) {
                 var document = XDocument.Load(sheetEntryStream);
                 var defaultNamespace = document.Root.GetDefaultNamespace();
 
-                foreach (var row in document.Descendants(XName.Get("row", defaultNamespace.NamespaceName)))
-                {
+                foreach (var row in document.Descendants(XName.Get("row", defaultNamespace.NamespaceName))) {
                     var columnValues = row.Descendants(XName.Get("c", defaultNamespace.NamespaceName))
                                           .Select(x => GetColumnValue(x, sharedStrings));
 

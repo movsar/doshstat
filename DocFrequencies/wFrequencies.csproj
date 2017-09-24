@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{659653B7-544F-49AB-974B-17496EA0636E}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>DocFrequencies</RootNamespace>
-    <AssemblyName>DocFrequencies</AssemblyName>
+    <RootNamespace>wFrequencies</RootNamespace>
+    <AssemblyName>wFrequencies</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -91,7 +91,7 @@
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
     <Compile Include="HtmProcessor.cs" />
-    <Compile Include="IContentExtractor.cs" />
+    <Compile Include="ITextProcessor.cs" />
     <Compile Include="OdtProcessor.cs" />
     <Compile Include="PdfProcessor.cs" />
     <Compile Include="Program.cs" />

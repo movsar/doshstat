@@ -6,10 +6,16 @@ using System.Web;
 using System.Windows.Forms;
 using System.Xml.Linq;
 
-namespace DocFrequencies
+namespace wFrequencies
 {
-    class HtmProcessor : IContentExtractor
+    class HtmProcessor : ITextProcessor
     {
+        private ITextProcessor _object;
+        public ITextProcessor getInstance()
+        {
+            if (_object == null) _object = new DocProcessor();
+            return _object;
+        }
         public string GetAllText()
         {
             var form = Form.ActiveForm as frmMain;
@@ -17,11 +23,10 @@ namespace DocFrequencies
             form.Refresh();
 
             string allText = "";
-
-            foreach (string filePath in (new Utils()).FindFilesRecursively("*.htm?"))
-            {
-                allText += Extract(new FileInfo(filePath).OpenRead());
+            foreach (xTextFile file in Utils.fList.Where((x) => x.fileName.EndsWith("htm?"))) {
+                allText += Extract(new FileInfo(file.filePath).OpenRead());
             }
+          
             return allText;
         }
 
