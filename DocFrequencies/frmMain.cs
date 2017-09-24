@@ -14,9 +14,11 @@ namespace DocFrequencies
 {
     public partial class frmMain : Form
     {
+        private List<xTextFile> fList;
 
         public frmMain()
         {
+
             /*  ANNOTATION
              *  The software should be able to read pdf,doc,txt and odf
              *  The software should take all files in the input folder and read them one at a time
@@ -36,7 +38,6 @@ namespace DocFrequencies
              *  10. Voila!
             */
 
-
             InitializeComponent();
         }
 
@@ -49,12 +50,23 @@ namespace DocFrequencies
         {
 
         }
+        private void loadFiles()
+        {
+            fList = new List<xTextFile>();
 
+            foreach (string file in Directory.EnumerateFiles(Utils.WorkDirPath, "*.*", SearchOption.AllDirectories)
+            .Where(s => s.EndsWith(".doc") || s.EndsWith(".docx") || s.EndsWith(".odt") || s.EndsWith(".pdf") || s.EndsWith(".txt") || s.EndsWith(".xls") || s.EndsWith(".rtf"))) { fList.Add(new xTextFile(file)); }
+
+
+            olvFiles.SetObjects(fList);
+        }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             Utils.WorkDirPath = Environment.CurrentDirectory + "\\input\\";
             txtWorkingDir.Text = Utils.WorkDirPath;
+
+            loadFiles();
         }
 
         private void btnBrowse_Click(object sender, EventArgs e)
@@ -65,7 +77,9 @@ namespace DocFrequencies
             DialogResult result = fbWorkingDir.ShowDialog();
             if (result == DialogResult.OK)
             {
-                txtWorkingDir.Text = fbWorkingDir.SelectedPath;
+                Utils.WorkDirPath = fbWorkingDir.SelectedPath;
+                txtWorkingDir.Text = Utils.WorkDirPath;
+                loadFiles();
             }
         }
 
