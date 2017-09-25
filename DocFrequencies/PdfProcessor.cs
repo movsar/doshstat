@@ -17,18 +17,9 @@ namespace wFrequencies
         private PdfProcessor() { }
 
 
-        public string GetAllText()
+        public string GetAllText(string path)
         {
-            var form = Form.ActiveForm as frmMain;
-            form.lblStatus.Text = "Читаю Pdf ... ";
-            form.Refresh();
-
-            string allText = "";
-
-            foreach (xTextFile file in Utils.fList.Where((x) => x.fileName.EndsWith("pdf"))) {
-                allText += pdfText(file.filePath);
-            }
-            return allText;
+            return pdfText(path);
         }
 
         public static string pdfText(string path)

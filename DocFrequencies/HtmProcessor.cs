@@ -15,22 +15,13 @@ namespace wFrequencies
         public static ITextProcessor GetInstance() { return _instance; }
         private HtmProcessor() { }
 
-        public string GetAllText()
+        public string GetAllText(string path)
         {
-            var form = Form.ActiveForm as frmMain;
-            form.lblStatus.Text = "Читаю Htm и Html ... ";
-            form.Refresh();
-
-            string allText = "";
-            foreach (xTextFile file in Utils.fList.Where((x) => x.fileName.EndsWith("htm") || x.fileName.EndsWith("html"))) {
-                allText += Extract(new FileInfo(file.filePath).OpenRead());
-            }
-          
-            return allText;
+            return Extract(new FileInfo(path).OpenRead());
         }
 
 
-    public string Extract(Stream stream)
+        public string Extract(Stream stream)
         {
             using (var reader = new StreamReader(stream))
             {

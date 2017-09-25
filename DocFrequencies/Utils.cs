@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace wFrequencies
@@ -15,25 +17,38 @@ namespace wFrequencies
 
         public static List<xTextFile> fList; // Hold the files
 
-        public static Encoding GetEncoding(string filename)
+        public static void fillTheFrequencies(xTextFile xFile)
         {
-            // Read the BOM
-            var bom = new byte[4];
-            using (var file = new FileStream(filename, FileMode.Open, FileAccess.Read))
+            string contents = xFile.Processor.GetAllText(xFile.filePath);
+            Debug.WriteLine("characters count: " + contents.Length);
+            xFile.frequencies = new List<xWordFrequencies>();
+            var words = new Dictionary<string, int>(StringComparer.CurrentCultureIgnoreCase);
+
+            var wordPattern = new Regex(@"\w+");            
+            
+            foreach (Match match in wordPattern.Matches(contents))
             {
-                file.Read(bom, 0, 4);
+                xFile.wordsCount++;
+                int currentCount = 0;
+                words.TryGetValue(match.Value, out currentCount);
+                currentCount++;
+                words[match.Value] = currentCount;            
             }
 
-            // Analyze the BOM
-            if (bom[0] == 0x2b && bom[1] == 0x2f && bom[2] == 0x76) return Encoding.UTF7;
-            if (bom[0] == 0xef && bom[1] == 0xbb && bom[2] == 0xbf) return Encoding.UTF8;
-            if (bom[0] == 0xff && bom[1] == 0xfe) return Encoding.Unicode; //UTF-16LE
-            if (bom[0] == 0xfe && bom[1] == 0xff) return Encoding.BigEndianUnicode; //UTF-16BE
-            if (bom[0] == 0 && bom[1] == 0 && bom[2] == 0xfe && bom[3] == 0xff) return Encoding.UTF32;
-            return Encoding.ASCII;
+            xFile.wordsCount = wordPattern.Matches(contents).Count;
+            Debug.WriteLine("words count: " + xFile.wordsCount);
+
+            foreach (var row in words.OrderByDescending(pair => pair.Value))
+            {
+                xWordFrequencies xwf = new xWordFrequencies();
+                xwf.word = row.Key.ToLower();
+                xwf.word = xwf.word.Substring(0, 1).ToUpper() + xwf.word.Substring(1);
+                xwf.frequency = row.Value;
+                xFile.frequencies.Add(xwf);
+            }
         }
 
-
+    
         public List<string> FindFilesRecursively(string filter)
         {
             all_files = new List<string>();

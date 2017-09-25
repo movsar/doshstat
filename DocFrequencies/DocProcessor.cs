@@ -18,17 +18,21 @@ namespace wFrequencies
         public static ITextProcessor GetInstance() { return _instance; }
         private DocProcessor() { }
 
-        private void ConvertDocToDocx()
+        public static void ConvertDocToDocx()
         {
             // only open and close Word once to maximize performance 
             Microsoft.Office.Interop.Word.Application word = new Microsoft.Office.Interop.Word.Application();
 
-            try {
+            try
+            {
                 int affectedFiles = 0;
-                foreach (string filename in (new Utils()).FindFilesRecursively("*.doc")) {
+                foreach (string filename in (new Utils()).FindFilesRecursively("*.doc"))
+                {
                     // exclude the .docx (only include .doc) files as we don't need to convert them. :) 
-                    if (filename.ToLower().EndsWith(".doc")) {
-                        try {
+                    if (filename.ToLower().EndsWith(".doc") && !(new FileInfo(filename + "x")).Exists)
+                    {
+                        try
+                        {
                             var srcFile = new FileInfo(filename);
 
                             // convert the source file 
@@ -39,34 +43,26 @@ namespace wFrequencies
                             // in the project refences. In this case we need version 12 of Office to get the new formats. 
                             doc.SaveAs(FileName: newFilename, FileFormat: WdSaveFormat.wdFormatXMLDocument);
                             affectedFiles++;
-                        } finally {
+                        }
+                        finally
+                        {
                             // we want to make sure the document is always closed 
                             word.ActiveDocument.Close();
                         }
                     }
                 }
-            } finally {
+            }
+            finally
+            {
                 // Close the word application
                 word.Quit();
             }
         }
 
-        public string GetAllText()
+        public string GetAllText(string path)
         {
-            var form = Form.ActiveForm as frmMain;
-            form.lblStatus.Text = "Читаю Doc и Docx ... ";
-            form.Refresh();
-
-            ConvertDocToDocx();
-            string allText = "";
-
-            foreach (xTextFile file in Utils.fList.Where((x) => x.fileName.EndsWith("docx"))) {
-                CSUsingOpenXmlPlainText.GetWordPlainText docxReaderObj = new CSUsingOpenXmlPlainText.GetWordPlainText(file.filePath);
-                allText += docxReaderObj.ReadWordDocument();
-            }
-            return allText;
+            CSUsingOpenXmlPlainText.GetWordPlainText docxReaderObj = new CSUsingOpenXmlPlainText.GetWordPlainText(path);
+            return docxReaderObj.ReadWordDocument();
         }
-
-
     }
 }

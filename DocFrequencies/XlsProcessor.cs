@@ -22,25 +22,17 @@ namespace wFrequencies
         private const string SheetEntryName = @"xl/worksheets/sheet(\d+)\.xml";
         private const string SharedStringsEntryName = @"xl/sharedStrings.xml";
 
-        public string GetAllText()
+        public string GetAllText(string path)
         {
-            var form = Form.ActiveForm as frmMain;
-            form.lblStatus.Text = "Читаю Xlsx ... ";
-            form.Refresh();
-
-            string allText = "";
-            foreach (xTextFile file in Utils.fList.Where((x) => x.fileName.EndsWith("xls"))) {
-                allText += Extract(new FileInfo(file.filePath).OpenRead());
-            }
-
-            return allText;
+            return Extract(new FileInfo(path).OpenRead());
         }
 
         public string Extract(Stream stream)
         {
             var result = new StringBuilder();
 
-            using (var zipArchive = new ZipArchive(stream)) {
+            using (var zipArchive = new ZipArchive(stream))
+            {
                 var sharedStringsEntry = zipArchive.Entries.SingleOrDefault(x => x.FullName == SharedStringsEntryName);
                 var sharedStrings = GetSharedStrings(sharedStringsEntry);
 
@@ -61,7 +53,8 @@ namespace wFrequencies
             if (sharedStringsEntry == null)
                 return null;
 
-            using (var sharedStringsEntryStream = sharedStringsEntry.Open()) {
+            using (var sharedStringsEntryStream = sharedStringsEntry.Open())
+            {
                 var document = XDocument.Load(sharedStringsEntryStream);
                 var defaultNamespace = document.Root.GetDefaultNamespace();
 
@@ -77,11 +70,13 @@ namespace wFrequencies
             if (sheetEntry == null)
                 return;
 
-            using (var sheetEntryStream = sheetEntry.Open()) {
+            using (var sheetEntryStream = sheetEntry.Open())
+            {
                 var document = XDocument.Load(sheetEntryStream);
                 var defaultNamespace = document.Root.GetDefaultNamespace();
 
-                foreach (var row in document.Descendants(XName.Get("row", defaultNamespace.NamespaceName))) {
+                foreach (var row in document.Descendants(XName.Get("row", defaultNamespace.NamespaceName)))
+                {
                     var columnValues = row.Descendants(XName.Get("c", defaultNamespace.NamespaceName))
                                           .Select(x => GetColumnValue(x, sharedStrings));
 

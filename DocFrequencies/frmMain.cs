@@ -14,7 +14,7 @@ namespace wFrequencies
 {
     public partial class frmMain : Form
     {
-       
+
 
         public frmMain()
         {
@@ -55,7 +55,8 @@ namespace wFrequencies
             Utils.fList = new List<xTextFile>();
 
             foreach (string file in Directory.EnumerateFiles(Utils.WorkDirPath, "*.*", SearchOption.AllDirectories)
-            .Where(s => s.EndsWith(".doc") || s.EndsWith(".docx") || s.EndsWith(".odt") || s.EndsWith(".pdf") || s.EndsWith(".txt") || s.EndsWith(".xls") || s.EndsWith(".rtf") || s.EndsWith(".htm") || s.EndsWith(".html"))) {
+            .Where(s => s.EndsWith(".docx") || s.EndsWith(".odt") || s.EndsWith(".pdf") || s.EndsWith(".txt") || s.EndsWith(".xls") || s.EndsWith(".rtf") || s.EndsWith(".htm") || s.EndsWith(".html")))
+            {
                 Utils.fList.Add(new xTextFile(file));
             }
 
@@ -67,7 +68,18 @@ namespace wFrequencies
             Utils.WorkDirPath = Environment.CurrentDirectory + "\\input\\";
             txtWorkingDir.Text = Utils.WorkDirPath;
 
+            this.Enabled = false;
+            // Convert doc to docx before we begin 
+            DocProcessor.ConvertDocToDocx();
+
+            // Load all supported files from the chosen dretory 
             loadFiles();
+
+
+            this.Enabled = true;
+
+            DbHelper.SetConnection();
+            DbHelper.createTables();
         }
 
         private void btnBrowse_Click(object sender, EventArgs e)
@@ -76,7 +88,8 @@ namespace wFrequencies
             fbWorkingDir.ShowNewFolderButton = false;
             fbWorkingDir.RootFolder = Environment.SpecialFolder.MyComputer;
             DialogResult result = fbWorkingDir.ShowDialog();
-            if (result == DialogResult.OK) {
+            if (result == DialogResult.OK)
+            {
                 Utils.WorkDirPath = fbWorkingDir.SelectedPath;
                 txtWorkingDir.Text = Utils.WorkDirPath;
                 loadFiles();
@@ -89,29 +102,16 @@ namespace wFrequencies
             btnBrowse.Enabled = false;
             btnStart.Enabled = false;
 
-            string everything = "";           
+            foreach (xTextFile xFile in Utils.fList)
+            {
+                Utils.fillTheFrequencies(xFile);
+                xFile.wordsCount = xFile.frequencies.Count();
 
-            foreach (xTextFile xFile in Utils.fList) {
-                everything += xFile.Processor.GetAllText();
+
+                Debug.WriteLine("Ok");
             }
 
-            var frequencies = new Dictionary<string, int>(StringComparer.CurrentCultureIgnoreCase);
-            count(everything, frequencies);
-
-            everything = "";
-
-            lblStatus.Text = "Считаю частотность";
-            Refresh();
-
-
-            foreach (var frequencyRow in frequencies.OrderByDescending(pair => pair.Value)) {
-                string word = frequencyRow.Key.ToLower();
-                word = word.Substring(0, 1).ToUpper() + word.Substring(1);
-
-                everything += word + spacer(30 - word.Length) + frequencyRow.Value + "\r\n";
-            }
-
-            File.WriteAllText("output.txt", everything, Encoding.UTF8);
+            //   File.WriteAllText("output.txt", everything, Encoding.UTF8);
 
             lblStatus.Text = "Работа выполнена";
             Process.Start("notepad", (new DirectoryInfo(Utils.WorkDirPath)).FullName + "\\..\\output.txt");
@@ -131,22 +131,22 @@ namespace wFrequencies
             return spaces;
         }
 
-        private void count(string content, Dictionary<string, int> words)
-        {
-            var wordPattern = new Regex(@"\w+");
 
-            foreach (Match match in wordPattern.Matches(content)) {
-                int currentCount = 0;
-                words.TryGetValue(match.Value, out currentCount);
-
-                currentCount++;
-                words[match.Value] = currentCount;
-            }
-        }
 
         private void statusStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
 
+        }
+
+        private void ctxRemoveFromtheList_Click(object sender, EventArgs e)
+        {
+            Utils.fList.Remove((xTextFile)olvFiles.SelectedObject);
+            olvFiles.SetObjects(Utils.fList);
+        }
+
+        private void olvFiles_ItemChecked(object sender, ItemCheckedEventArgs e)
+        {
+            Debug.WriteLine(e.Item.Text);
         }
     }
 }

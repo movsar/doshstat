@@ -22,30 +22,23 @@ namespace wFrequencies
 
         private const string ContentFileName = "content.xml";
 
-        public string GetAllText()
+        public string GetAllText(string path)
         {
-            var form = Form.ActiveForm as frmMain;
-            form.lblStatus.Text = "Читаю Odt ... ";
-            form.Refresh();
-
-            string allText = "";
-            foreach (xTextFile file in Utils.fList.Where((x) => x.fileName.EndsWith("odt"))) {
-                allText += Extract(new FileInfo(file.filePath).OpenRead());
-            }
-
-            return allText;
+            return Extract(new FileInfo(path).OpenRead());
         }
 
 
         public string Extract(Stream stream)
         {
-            using (var zipArchive = new ZipArchive(stream)) {
+            using (var zipArchive = new ZipArchive(stream))
+            {
                 var contentEntry = zipArchive.Entries.SingleOrDefault(x => x.Name == ContentFileName);
 
                 if (contentEntry == null)
                     throw new InvalidOperationException("Can not find content.xml in ODT file");
 
-                using (var contentEntryStream = contentEntry.Open()) {
+                using (var contentEntryStream = contentEntry.Open())
+                {
                     var document = XDocument.Load(contentEntryStream);
 
                     return document.Root?.Value;

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnBrowse = new System.Windows.Forms.Button();
             this.txtWorkingDir = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -43,7 +44,10 @@
             this.olvClmPoetry = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvScientific = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvFiles = new BrightIdeasSoftware.ObjectListView();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ctxRemoveFromtheList = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.olvFiles)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnBrowse
@@ -178,6 +182,7 @@
             this.olvClmReligious,
             this.olvClmPoetry,
             this.olvScientific});
+            this.olvFiles.ContextMenuStrip = this.contextMenuStrip1;
             this.olvFiles.Cursor = System.Windows.Forms.Cursors.Default;
             this.olvFiles.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.olvFiles.FullRowSelect = true;
@@ -187,6 +192,21 @@
             this.olvFiles.TabIndex = 9;
             this.olvFiles.UseCompatibleStateImageBehavior = false;
             this.olvFiles.View = System.Windows.Forms.View.Details;
+            this.olvFiles.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.olvFiles_ItemChecked);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ctxRemoveFromtheList});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(175, 26);
+            // 
+            // ctxRemoveFromtheList
+            // 
+            this.ctxRemoveFromtheList.Name = "ctxRemoveFromtheList";
+            this.ctxRemoveFromtheList.Size = new System.Drawing.Size(174, 22);
+            this.ctxRemoveFromtheList.Text = "Удалить из списка";
+            this.ctxRemoveFromtheList.Click += new System.EventHandler(this.ctxRemoveFromtheList_Click);
             // 
             // frmMain
             // 
@@ -205,6 +225,7 @@
             this.Text = "wFrequencies";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.olvFiles)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -227,6 +248,8 @@
         private BrightIdeasSoftware.OLVColumn olvClmPoetry;
         private BrightIdeasSoftware.OLVColumn olvScientific;
         private BrightIdeasSoftware.ObjectListView olvFiles;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem ctxRemoveFromtheList;
     }
 }
 

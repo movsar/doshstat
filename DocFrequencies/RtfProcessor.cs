@@ -13,25 +13,13 @@ namespace wFrequencies
         // Make it into a singleton
         private static readonly ITextProcessor _instance = new RtfProcessor();
         public static ITextProcessor GetInstance() { return _instance; }
-        private RtfProcessor() { }
+        RichTextBox rtb;
+        private RtfProcessor() { rtb = new RichTextBox(); }
 
-        public string GetAllText()
+        public string GetAllText(string path)
         {
-            var form = Form.ActiveForm as frmMain;
-            form.lblStatus.Text = "Читаю Rtf ... ";
-            form.Refresh();
-
-            string allText = "";
-
-            RichTextBox rtb = new RichTextBox();
-
-            foreach (xTextFile file in Utils.fList.Where((x) => x.fileName.EndsWith("rtf"))) {
-                rtb.Rtf = File.ReadAllText(file.filePath);
-                allText += rtb.Text;
-            }
-
-
-            return allText;
+            rtb.Rtf = File.ReadAllText(path);
+            return rtb.Text;
         }
     }
 }

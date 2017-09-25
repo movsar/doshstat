@@ -8,6 +8,6 @@ namespace wFrequencies
 {
     public interface ITextProcessor
     {
-        String GetAllText();
+        String GetAllText(string path);
     }
 }
