@@ -40,8 +40,7 @@ namespace wFrequencies
             SQLiteDataReader Reader = sql_cmd.ExecuteReader();
             if (!Reader.HasRows) return null;
 
-            while (Reader.Read())
-            {
+            while (Reader.Read()) {
                 xTextFile tFile = new xTextFile() {
                     id = Convert.ToInt64(GetDBInt64("id", Reader)),
                     fileName = GetDBString("file_name", Reader),
@@ -59,13 +58,14 @@ namespace wFrequencies
 
         public static void createTables()
         {
+
             string sql = "create table IF NOT EXISTS wf_files (" +
                 "id INTEGER PRIMARY KEY," +
                 "file_name varchar(150)," +
                 "words_count int," +
                 "unique_words_count int," +
                 "category int," +
-                "created_at varchar(50))";
+                "created_at varchar(50), CONSTRAINT makeUnique UNIQUE (words_count, unique_words_count))";
 
             sql_cmd = sql_con.CreateCommand();
             sql_cmd.CommandText = sql;
@@ -77,14 +77,12 @@ namespace wFrequencies
         {
             string req = "INSERT INTO " + table;
             req += "(";
-            foreach (string name in nameValueData.Keys)
-            {
+            foreach (string name in nameValueData.Keys) {
                 req += name + ",";
             }
             // Remove "," from the end
             req = req.TrimLastCharacter() + ") VALUES (";
-            foreach (string name in nameValueData.Keys)
-            {
+            foreach (string name in nameValueData.Keys) {
                 req += "@" + name + ",";
             }
             req = req.TrimLastCharacter() + ")";
@@ -92,8 +90,7 @@ namespace wFrequencies
 
             sql_cmd.CommandText = req;
 
-            foreach (KeyValuePair<string, object> nameValue in nameValueData)
-            {
+            foreach (KeyValuePair<string, object> nameValue in nameValueData) {
                 sql_cmd.Parameters.AddWithValue("@" + nameValue.Key, nameValue.Value);
             }
 
@@ -103,10 +100,8 @@ namespace wFrequencies
 
         public static int GetColumnIndex(ListView lv, string colTitle)
         {
-            foreach (ColumnHeader col in lv.Columns)
-            {
-                if (col.Text.ToLower().Equals(colTitle.ToLower()))
-                {
+            foreach (ColumnHeader col in lv.Columns) {
+                if (col.Text.ToLower().Equals(colTitle.ToLower())) {
                     return col.Index;
                 }
             }
@@ -117,12 +112,9 @@ namespace wFrequencies
 
         public static string TrimLastCharacter(this String str)
         {
-            if (String.IsNullOrEmpty(str))
-            {
+            if (String.IsNullOrEmpty(str)) {
                 return str;
-            }
-            else
-            {
+            } else {
                 return str.TrimEnd(str[str.Length - 1]);
             }
         }
@@ -144,8 +136,16 @@ namespace wFrequencies
         {
             if (!(new FileInfo(dbName).Exists)) { SQLiteConnection.CreateFile(dbName); }
 
-            long result = cmd.ExecuteNonQuery();
-            return result;
+            try {
+                return cmd.ExecuteNonQuery();
+            } catch (SQLiteException sqliteEx) {
+                if (sqliteEx.ErrorCode == 19) {
+                    // TODO make lines of different background color if they already exist
+                    Debug.WriteLine("ALREADY EXISTS");
+                }
+
+                return -1;
+            }
 
             /*
             

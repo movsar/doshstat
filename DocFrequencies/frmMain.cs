@@ -105,7 +105,8 @@ namespace wFrequencies
             foreach (xTextFile xFile in Utils.fList)
             {
                 Utils.fillTheFrequencies(xFile);
-                xFile.wordsCount = xFile.frequencies.Count();
+
+                xFile.uniqueWordsCount = xFile.frequencies.Count();
                 xFile.Save();
 
                 Debug.WriteLine("Ok");
