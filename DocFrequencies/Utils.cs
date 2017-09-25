@@ -17,6 +17,8 @@ namespace wFrequencies
 
         public static List<xTextFile> fList; // Hold the files
 
+      
+
         public static void fillTheFrequencies(xTextFile xFile)
         {
             string contents = xFile.Processor.GetAllText(xFile.filePath);

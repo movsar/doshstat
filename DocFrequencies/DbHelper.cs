@@ -30,7 +30,37 @@ namespace wFrequencies
             sql_con.Open();
         }
 
+        private static List<xTextFile> GetHistory()
+        {
+            string query = "";
+            List<xTextFile> list = new List<xTextFile>();
 
+            sql_cmd.CommandText = query;
+
+            SQLiteDataReader Reader = sql_cmd.ExecuteReader();
+            if (!Reader.HasRows) return null;
+
+            while (Reader.Read())
+            {
+                xTextFile tFile = new xTextFile()
+                {
+                    id = Convert.ToInt64(GetDBInt64("id", Reader)),
+                    OperatorId = Convert.ToInt64(GetDBInt64("operator_id", Reader)),
+                    UserId = Convert.ToInt64(GetDBInt64("user_id", Reader)),
+                    MenuId = Convert.ToInt64(GetDBInt64("menu_id", Reader)),
+                    CreationDate = GetDBString("c_date", Reader),
+                    UpdatedDate = GetDBString("u_date", Reader),
+                    Status = GetDBString("status", Reader),
+                    ChosenMeals = (List<xCanteenMeal>)(JsonConvert.DeserializeObject(Shared.GetDBString("meals", Reader), typeof(List<xCanteenMeal>)))
+                };
+
+                list.Add(order);
+            }
+            Reader.Close();
+
+
+            return list;
+        }
 
         public static void createTables()
         {
@@ -42,12 +72,12 @@ namespace wFrequencies
                 "category int," +
                 "created_at varchar(50))";
 
-            sql_cmd = new SQLiteCommand();
             sql_cmd = sql_con.CreateCommand();
             sql_cmd.CommandText = sql;
 
             DbExecuteNonQuery(sql_cmd);
         }
+
         public static long InsertReq(string table, Dictionary<string, object> nameValueData)
         {
             string req = "INSERT INTO " + table;

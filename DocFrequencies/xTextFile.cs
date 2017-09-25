@@ -86,38 +86,7 @@ namespace wFrequencies
 
 
 
-       private static List<xCanteenOrder> GetFromOrders(string query) {
-            List<xCanteenOrder> list = new List<xCanteenOrder>();
-            using (MySqlConnection conn = new MySqlConnection(Shared.myConnectionString)) {
-                using (MySqlCommand cmd = conn.CreateCommand()) {
-                    conn.Open();
-                    cmd.CommandText = query;
-                    MySqlDataReader Reader;
-                    Reader = cmd.ExecuteReader();
-                    if (!Reader.HasRows) return null;
-
-                    while (Reader.Read()) {
-                        xCanteenOrder order = new xCanteenOrder() {
-                            Id = Convert.ToInt64(Shared.GetDBInt64("id", Reader)),
-                            OperatorId = Convert.ToInt64(Shared.GetDBInt64("operator_id", Reader)),
-                            UserId = Convert.ToInt64(Shared.GetDBInt64("user_id", Reader)),
-                            MenuId = Convert.ToInt64(Shared.GetDBInt64("menu_id", Reader)),
-                            CreationDate = Shared.GetDBString("c_date", Reader),
-                            UpdatedDate = Shared.GetDBString("u_date", Reader),
-                            Status = Shared.GetDBString("status", Reader),
-                            ChosenMeals = (List<xCanteenMeal>)(JsonConvert.DeserializeObject(Shared.GetDBString("meals", Reader), typeof(List<xCanteenMeal>)))
-                        };
-
-                        list.Add(order);
-                    }
-                    Reader.Close();
-                    conn.Close();
-                }
-
-            }
-
-            return list;
-        }
+     
 
 
 
