@@ -89,10 +89,7 @@ namespace wFrequencies
             btnBrowse.Enabled = false;
             btnStart.Enabled = false;
 
-            string everything = "";
-
-
-           
+            string everything = "";           
 
             foreach (xTextFile xFile in Utils.fList) {
                 everything += xFile.Processor.GetAllText();

@@ -10,12 +10,11 @@ namespace wFrequencies
 {
     public class RtfProcessor : ITextProcessor
     {
-        private ITextProcessor _object;
-        public ITextProcessor getInstance()
-        {
-            if (_object == null) _object = new DocProcessor();
-            return _object;
-        }
+        // Make it into a singleton
+        private static readonly ITextProcessor _instance = new RtfProcessor();
+        public static ITextProcessor GetInstance() { return _instance; }
+        private RtfProcessor() { }
+
         public string GetAllText()
         {
             var form = Form.ActiveForm as frmMain;

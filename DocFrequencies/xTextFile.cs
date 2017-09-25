@@ -8,7 +8,6 @@ namespace wFrequencies
 {
     public class xTextFile
     {
-       
         public String filePath { get; set; }
         public String fileName;
 
@@ -29,9 +28,19 @@ namespace wFrequencies
             this.filePath = filePath;
             fileName = (new FileInfo(filePath)).Name;
             if (fileName.EndsWith("doc") || fileName.EndsWith("docx")) {
-                Processor = (new DocProcessor()).GetProcessor();
+                Processor = DocProcessor.GetInstance();
+            } else if (fileName.EndsWith("htm") || fileName.EndsWith("html")) {
+                Processor = HtmProcessor.GetInstance();
+            } else if (fileName.EndsWith("odt")) {
+                Processor = OdtProcessor.GetInstance();
             } else if (fileName.EndsWith("pdf")) {
-                Processor = (new PdfProcessor()).GetProcessor();
+                Processor = PdfProcessor.GetInstance();
+            } else if (fileName.EndsWith("rtf")) {
+                Processor = RtfProcessor.GetInstance();
+            } else if (fileName.EndsWith("txt")) {
+                Processor = TxtProcessor.GetInstance();
+            } else if (fileName.EndsWith("xlsx")) {
+                Processor = XlsProcessor.GetInstance();
             }
         }
     }

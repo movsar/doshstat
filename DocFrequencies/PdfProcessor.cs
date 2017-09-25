@@ -12,8 +12,9 @@ namespace wFrequencies
     class PdfProcessor : ITextProcessor
     {
         // Make it into a singleton
-        private static readonly ITextProcessor _instance = new DocProcessor();
-        public ITextProcessor GetProcessor() { return _instance; }
+        private static readonly ITextProcessor _instance = new PdfProcessor();
+        public static ITextProcessor GetInstance() { return _instance; }
+        private PdfProcessor() { }
 
 
         public string GetAllText()

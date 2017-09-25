@@ -15,12 +15,11 @@ namespace wFrequencies
     /// </summary>
     public class OdtProcessor : ITextProcessor
     {
-        private ITextProcessor _object;
-        public ITextProcessor getInstance()
-        {
-            if (_object == null) _object = new DocProcessor();
-            return _object;
-        }
+        // Make it into a singleton
+        private static readonly ITextProcessor _instance = new OdtProcessor();
+        public static ITextProcessor GetInstance() { return _instance; }
+        private OdtProcessor() { }
+
         private const string ContentFileName = "content.xml";
 
         public string GetAllText()

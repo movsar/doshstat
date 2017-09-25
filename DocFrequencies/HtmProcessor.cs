@@ -10,12 +10,11 @@ namespace wFrequencies
 {
     class HtmProcessor : ITextProcessor
     {
-        private ITextProcessor _object;
-        public ITextProcessor getInstance()
-        {
-            if (_object == null) _object = new DocProcessor();
-            return _object;
-        }
+        // Make it into a singleton
+        private static readonly ITextProcessor _instance = new HtmProcessor();
+        public static ITextProcessor GetInstance() { return _instance; }
+        private HtmProcessor() { }
+
         public string GetAllText()
         {
             var form = Form.ActiveForm as frmMain;
@@ -23,7 +22,7 @@ namespace wFrequencies
             form.Refresh();
 
             string allText = "";
-            foreach (xTextFile file in Utils.fList.Where((x) => x.fileName.EndsWith("htm?"))) {
+            foreach (xTextFile file in Utils.fList.Where((x) => x.fileName.EndsWith("htm") || x.fileName.EndsWith("html"))) {
                 allText += Extract(new FileInfo(file.filePath).OpenRead());
             }
           

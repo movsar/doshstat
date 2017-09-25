@@ -14,12 +14,11 @@ namespace wFrequencies
 {
     class XlsProcessor : ITextProcessor
     {
-        private ITextProcessor _object;
-        public ITextProcessor getInstance()
-        {
-            if (_object == null) _object = new DocProcessor();
-            return _object;
-        }
+        // Make it into a singleton
+        private static readonly ITextProcessor _instance = new XlsProcessor();
+        public static ITextProcessor GetInstance() { return _instance; }
+        private XlsProcessor() { }
+
         private const string SheetEntryName = @"xl/worksheets/sheet(\d+)\.xml";
         private const string SharedStringsEntryName = @"xl/sharedStrings.xml";
 

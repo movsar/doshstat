@@ -11,11 +11,12 @@ using System.Windows.Forms;
 
 namespace wFrequencies
 {
-    class DocProcessor : ITextProcessor
+    public sealed class DocProcessor : ITextProcessor
     {
         // Make it into a singleton
         private static readonly ITextProcessor _instance = new DocProcessor();
-        public ITextProcessor GetProcessor() { return _instance; }
+        public static ITextProcessor GetInstance() { return _instance; }
+        private DocProcessor() { }
 
         private void ConvertDocToDocx()
         {
