@@ -30,7 +30,7 @@ namespace wFrequencies
             sql_con.Open();
         }
 
-        private static List<xTextFile> GetHistory()
+        public static List<xTextFile> GetHistory()
         {
             string query = "";
             List<xTextFile> list = new List<xTextFile>();
@@ -42,22 +42,17 @@ namespace wFrequencies
 
             while (Reader.Read())
             {
-                xTextFile tFile = new xTextFile()
-                {
+                xTextFile tFile = new xTextFile() {
                     id = Convert.ToInt64(GetDBInt64("id", Reader)),
-                    OperatorId = Convert.ToInt64(GetDBInt64("operator_id", Reader)),
-                    UserId = Convert.ToInt64(GetDBInt64("user_id", Reader)),
-                    MenuId = Convert.ToInt64(GetDBInt64("menu_id", Reader)),
-                    CreationDate = GetDBString("c_date", Reader),
-                    UpdatedDate = GetDBString("u_date", Reader),
-                    Status = GetDBString("status", Reader),
-                    ChosenMeals = (List<xCanteenMeal>)(JsonConvert.DeserializeObject(Shared.GetDBString("meals", Reader), typeof(List<xCanteenMeal>)))
+                    fileName = GetDBString("file_name", Reader),
+                    wordsCount = GetDBInt("words_count", Reader),
+                    uniqueWordsCount = GetDBInt("unique_words_count", Reader),
+                    created_at = GetDBString("created_at", Reader),
                 };
 
-                list.Add(order);
+                list.Add(tFile);
             }
             Reader.Close();
-
 
             return list;
         }
@@ -172,6 +167,35 @@ namespace wFrequencies
         public static string GetCurrentDateTime()
         {
             return DateTime.Now.ToString("dd.MM.yyyy hh:MM:ss");
+        }
+
+        public static string GetDBString(string SqlFieldName, SQLiteDataReader Reader)
+        {
+            int columnIndex = Reader.GetOrdinal(SqlFieldName);
+            return Reader[SqlFieldName].Equals(DBNull.Value) ? String.Empty : Reader.GetString(columnIndex);
+        }
+        public static char GetDBChar(string SqlFieldName, SQLiteDataReader Reader)
+        {
+            int columnIndex = Reader.GetOrdinal(SqlFieldName);
+            return Reader[SqlFieldName].Equals(DBNull.Value) ? ' ' : Reader.GetChar(columnIndex);
+        }
+
+        public static Decimal GetDBDecimal(string SqlFieldName, SQLiteDataReader Reader)
+        {
+            int columnIndex = Reader.GetOrdinal(SqlFieldName);
+            return Reader[SqlFieldName].Equals(DBNull.Value) ? 0 : Reader.GetDecimal(columnIndex);
+        }
+
+        public static long GetDBInt64(string SqlFieldName, SQLiteDataReader Reader)
+        {
+            int columnIndex = Reader.GetOrdinal(SqlFieldName);
+            return Reader[SqlFieldName].Equals(DBNull.Value) ? 0 : Reader.GetInt64(columnIndex);
+        }
+
+        public static int GetDBInt(string SqlFieldName, SQLiteDataReader Reader)
+        {
+            int columnIndex = Reader.GetOrdinal(SqlFieldName);
+            return Reader[SqlFieldName].Equals(DBNull.Value) ? 0 : Reader.GetInt32(columnIndex);
         }
     }
 }

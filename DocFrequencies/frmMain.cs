@@ -106,7 +106,7 @@ namespace wFrequencies
             {
                 Utils.fillTheFrequencies(xFile);
                 xFile.wordsCount = xFile.frequencies.Count();
-
+                xFile.Save();
 
                 Debug.WriteLine("Ok");
             }

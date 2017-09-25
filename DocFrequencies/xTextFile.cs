@@ -11,6 +11,7 @@ namespace wFrequencies
         public long id { get; set; }
         public String fileName { get; set; }
         public int wordsCount { get; set; }
+        public int uniqueWordsCount { get; set; }
         public int category { get; set; }
         public string created_at { get; set; }
 
@@ -27,43 +28,31 @@ namespace wFrequencies
 
         public List<xWordFrequencies> frequencies { get; set; }
         public ITextProcessor Processor { get; set; }
+        public xTextFile() { }
         public xTextFile(string filePath)
         {
             this.frequencies = new List<xWordFrequencies>();
             this.filePath = filePath;
             fileName = (new FileInfo(filePath)).Name;
-            if (fileName.EndsWith(".docx"))
-            {
+            if (fileName.EndsWith(".docx")) {
                 Processor = DocProcessor.GetInstance();
-            }
-            else if (fileName.EndsWith("htm") || fileName.EndsWith("html"))
-            {
+            } else if (fileName.EndsWith("htm") || fileName.EndsWith("html")) {
                 Processor = HtmProcessor.GetInstance();
-            }
-            else if (fileName.EndsWith("odt"))
-            {
+            } else if (fileName.EndsWith("odt")) {
                 Processor = OdtProcessor.GetInstance();
-            }
-            else if (fileName.EndsWith("pdf"))
-            {
+            } else if (fileName.EndsWith("pdf")) {
                 Processor = PdfProcessor.GetInstance();
-            }
-            else if (fileName.EndsWith("rtf"))
-            {
+            } else if (fileName.EndsWith("rtf")) {
                 Processor = RtfProcessor.GetInstance();
-            }
-            else if (fileName.EndsWith("txt"))
-            {
+            } else if (fileName.EndsWith("txt")) {
                 Processor = TxtProcessor.GetInstance();
-            }
-            else if (fileName.EndsWith("xlsx"))
-            {
+            } else if (fileName.EndsWith("xlsx")) {
                 Processor = XlsProcessor.GetInstance();
             }
         }
 
 
-        public void save()
+        public void Save()
         {
             Dictionary<string, object> nameValueData = new Dictionary<string, object>();
 
@@ -74,11 +63,9 @@ namespace wFrequencies
             nameValueData.Add("created_at", DbHelper.GetCurrentDateTime());
 
             id = DbHelper.InsertReq("wf_files", nameValueData);
-            if (id != -1)
-            {
+            if (id != -1) {
                 // Ok                    
             }
-
         }
     }
     /*
