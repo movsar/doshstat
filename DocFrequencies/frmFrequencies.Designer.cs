@@ -53,8 +53,10 @@
             this.olvFrequencies.Cursor = System.Windows.Forms.Cursors.Default;
             this.olvFrequencies.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.olvFrequencies.FullRowSelect = true;
+            this.olvFrequencies.GridLines = true;
             this.olvFrequencies.Location = new System.Drawing.Point(-5, 34);
             this.olvFrequencies.Name = "olvFrequencies";
+            this.olvFrequencies.ShowGroups = false;
             this.olvFrequencies.Size = new System.Drawing.Size(471, 289);
             this.olvFrequencies.TabIndex = 12;
             this.olvFrequencies.UseCompatibleStateImageBehavior = false;

@@ -102,7 +102,8 @@ namespace wFrequencies
         {
             // Do not allow the user to create new files via the FolderBrowserDialog.
             fbWorkingDir.ShowNewFolderButton = false;
-            fbWorkingDir.RootFolder = Environment.SpecialFolder.MyComputer;
+            fbWorkingDir.SelectedPath = txtWorkingDir.Text;
+                
             DialogResult result = fbWorkingDir.ShowDialog();
             if (result == DialogResult.OK) {
                 Utils.WorkDirPath = fbWorkingDir.SelectedPath;
@@ -168,7 +169,7 @@ namespace wFrequencies
             
 
                 // Grouping by months=============================================
-                OLVColumn clm = ((OLVColumn)olvHistory.Columns[4]);
+                OLVColumn clm = ((OLVColumn)olvHistory.Columns[5]);
 
                 clm.GroupKeyGetter = delegate (object rowObject) {
                     xTextFile fm = (xTextFile)rowObject;
@@ -183,7 +184,7 @@ namespace wFrequencies
                 //=================================================================
 
                 // Set DateTime column as default for sorting to make it beautiful when it shows up for the first time!
-                olvHistory.PrimarySortColumn = (olvHistory.GetColumn(4));
+                olvHistory.PrimarySortColumn = (olvHistory.GetColumn(5));
                 olvHistory.SetObjects(history);
 
                 olvHistory.SubItemChecking += delegate (object olvCheckSender, SubItemCheckingEventArgs olvCheckArgs) {
@@ -235,6 +236,17 @@ namespace wFrequencies
             if (e.KeyCode == Keys.Delete && olvFiles.SelectedObjects.Count>0 ) {
                 removeSelectedFromOlvFiles();
             }
+        }
+
+        private void закрытьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void оПрограммеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmAbout frmAbout = new FrmAbout();
+            frmAbout.ShowDialog();
         }
     }
 }

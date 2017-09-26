@@ -29,7 +29,7 @@ namespace wFrequencies
 
         private void frmFrequencies_Load(object sender, EventArgs e)
         {
-            
+            olvFrequencies.PrimarySortColumn = (olvFrequencies.GetColumn(1));
         }
 
         private void btnExport_Click(object sender, EventArgs e)
