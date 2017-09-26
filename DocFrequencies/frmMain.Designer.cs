@@ -61,9 +61,10 @@
             this.btnFrequenciesToXML = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.закрытьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.справкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.оПрограммеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.закрытьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bgwCounter = new System.ComponentModel.BackgroundWorker();
             this.contextMenuStrip1.SuspendLayout();
             this.tbcHistory.SuspendLayout();
             this.tbpCount.SuspendLayout();
@@ -99,7 +100,7 @@
             this.tbcHistory.Location = new System.Drawing.Point(-1, 27);
             this.tbcHistory.Name = "tbcHistory";
             this.tbcHistory.SelectedIndex = 0;
-            this.tbcHistory.Size = new System.Drawing.Size(687, 447);
+            this.tbcHistory.Size = new System.Drawing.Size(763, 475);
             this.tbcHistory.TabIndex = 1;
             this.tbcHistory.SelectedIndexChanged += new System.EventHandler(this.tbcHistory_SelectedIndexChanged);
             // 
@@ -114,7 +115,7 @@
             this.tbpCount.Location = new System.Drawing.Point(4, 22);
             this.tbpCount.Name = "tbpCount";
             this.tbpCount.Padding = new System.Windows.Forms.Padding(3);
-            this.tbpCount.Size = new System.Drawing.Size(679, 421);
+            this.tbpCount.Size = new System.Drawing.Size(755, 449);
             this.tbpCount.TabIndex = 0;
             this.tbpCount.Text = "Подсчет";
             this.tbpCount.UseVisualStyleBackColor = true;
@@ -146,7 +147,7 @@
             this.olvFiles.Location = new System.Drawing.Point(0, 86);
             this.olvFiles.Name = "olvFiles";
             this.olvFiles.ShowGroups = false;
-            this.olvFiles.Size = new System.Drawing.Size(680, 337);
+            this.olvFiles.Size = new System.Drawing.Size(756, 365);
             this.olvFiles.TabIndex = 17;
             this.olvFiles.UseCompatibleStateImageBehavior = false;
             this.olvFiles.View = System.Windows.Forms.View.Details;
@@ -206,7 +207,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblInfo.Location = new System.Drawing.Point(4, 46);
             this.lblInfo.Name = "lblInfo";
-            this.lblInfo.Size = new System.Drawing.Size(589, 46);
+            this.lblInfo.Size = new System.Drawing.Size(665, 74);
             this.lblInfo.TabIndex = 14;
             this.lblInfo.Text = "Выберите папку с входными файлами\r\n *.doc, *.docx, *.pdf, *.txt, *.odt, *.xlsx, *" +
     ".rtf, *.htm, *.html";
@@ -214,8 +215,8 @@
             // btnStart
             // 
             this.btnStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnStart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.btnStart.Location = new System.Drawing.Point(602, 49);
+            this.btnStart.BackColor = System.Drawing.Color.LightGreen;
+            this.btnStart.Location = new System.Drawing.Point(678, 49);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(78, 23);
             this.btnStart.TabIndex = 13;
@@ -238,14 +239,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtWorkingDir.Location = new System.Drawing.Point(2, 21);
             this.txtWorkingDir.Name = "txtWorkingDir";
-            this.txtWorkingDir.Size = new System.Drawing.Size(596, 20);
+            this.txtWorkingDir.Size = new System.Drawing.Size(672, 20);
             this.txtWorkingDir.TabIndex = 11;
             // 
             // btnBrowse
             // 
             this.btnBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnBrowse.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.btnBrowse.Location = new System.Drawing.Point(602, 21);
+            this.btnBrowse.Location = new System.Drawing.Point(678, 21);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(78, 22);
             this.btnBrowse.TabIndex = 10;
@@ -259,7 +260,7 @@
             this.tbpHistory.Location = new System.Drawing.Point(4, 22);
             this.tbpHistory.Name = "tbpHistory";
             this.tbpHistory.Padding = new System.Windows.Forms.Padding(3);
-            this.tbpHistory.Size = new System.Drawing.Size(679, 412);
+            this.tbpHistory.Size = new System.Drawing.Size(679, 421);
             this.tbpHistory.TabIndex = 1;
             this.tbpHistory.Text = "История";
             this.tbpHistory.UseVisualStyleBackColor = true;
@@ -288,7 +289,7 @@
             this.olvHistory.Location = new System.Drawing.Point(3, 3);
             this.olvHistory.MultiSelect = false;
             this.olvHistory.Name = "olvHistory";
-            this.olvHistory.Size = new System.Drawing.Size(673, 406);
+            this.olvHistory.Size = new System.Drawing.Size(673, 415);
             this.olvHistory.TabIndex = 11;
             this.olvHistory.UseCompatibleStateImageBehavior = false;
             this.olvHistory.View = System.Windows.Forms.View.Details;
@@ -342,7 +343,7 @@
             // btnExport
             // 
             this.btnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExport.Location = new System.Drawing.Point(471, 478);
+            this.btnExport.Location = new System.Drawing.Point(547, 506);
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(100, 23);
             this.btnExport.TabIndex = 12;
@@ -355,33 +356,34 @@
             this.statusStrip1.AutoSize = false;
             this.statusStrip1.BackColor = System.Drawing.Color.Silver;
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lblStatus,
-            this.prbStatus});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 477);
+            this.prbStatus,
+            this.lblStatus});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 505);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(687, 26);
+            this.statusStrip1.Size = new System.Drawing.Size(763, 26);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // lblStatus
             // 
-            this.lblStatus.AutoSize = false;
-            this.lblStatus.Margin = new System.Windows.Forms.Padding(0, 2, 0, 2);
+            this.lblStatus.Margin = new System.Windows.Forms.Padding(10, 2, 0, 2);
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(140, 22);
-            this.lblStatus.Text = "Статус";
+            this.lblStatus.Size = new System.Drawing.Size(38, 22);
+            this.lblStatus.Text = "Готов";
             this.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // prbStatus
             // 
+            this.prbStatus.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.prbStatus.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.prbStatus.Name = "prbStatus";
-            this.prbStatus.Size = new System.Drawing.Size(140, 20);
+            this.prbStatus.Size = new System.Drawing.Size(200, 20);
+            this.prbStatus.Visible = false;
             // 
             // btnFrequenciesToXML
             // 
             this.btnFrequenciesToXML.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnFrequenciesToXML.Location = new System.Drawing.Point(571, 478);
+            this.btnFrequenciesToXML.Location = new System.Drawing.Point(647, 506);
             this.btnFrequenciesToXML.Name = "btnFrequenciesToXML";
             this.btnFrequenciesToXML.Size = new System.Drawing.Size(100, 23);
             this.btnFrequenciesToXML.TabIndex = 13;
@@ -397,7 +399,7 @@
             this.справкаToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(687, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(763, 24);
             this.menuStrip1.TabIndex = 14;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -408,6 +410,13 @@
             this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
             this.файлToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.файлToolStripMenuItem.Text = "Файл";
+            // 
+            // закрытьToolStripMenuItem
+            // 
+            this.закрытьToolStripMenuItem.Name = "закрытьToolStripMenuItem";
+            this.закрытьToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
+            this.закрытьToolStripMenuItem.Text = "Закрыть";
+            this.закрытьToolStripMenuItem.Click += new System.EventHandler(this.закрытьToolStripMenuItem_Click);
             // 
             // справкаToolStripMenuItem
             // 
@@ -420,22 +429,23 @@
             // оПрограммеToolStripMenuItem
             // 
             this.оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
-            this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.оПрограммеToolStripMenuItem.Text = "О программе";
             this.оПрограммеToolStripMenuItem.Click += new System.EventHandler(this.оПрограммеToolStripMenuItem_Click);
             // 
-            // закрытьToolStripMenuItem
+            // bgwCounter
             // 
-            this.закрытьToolStripMenuItem.Name = "закрытьToolStripMenuItem";
-            this.закрытьToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.закрытьToolStripMenuItem.Text = "Закрыть";
-            this.закрытьToolStripMenuItem.Click += new System.EventHandler(this.закрытьToolStripMenuItem_Click);
+            this.bgwCounter.WorkerReportsProgress = true;
+            this.bgwCounter.WorkerSupportsCancellation = true;
+            this.bgwCounter.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwCounter_DoWork);
+            this.bgwCounter.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bgwCounter_ProgressChanged);
+            this.bgwCounter.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwCounter_RunWorkerCompleted);
             // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(687, 503);
+            this.ClientSize = new System.Drawing.Size(763, 531);
             this.Controls.Add(this.btnFrequenciesToXML);
             this.Controls.Add(this.btnExport);
             this.Controls.Add(this.statusStrip1);
@@ -497,6 +507,7 @@
         private System.Windows.Forms.ToolStripMenuItem закрытьToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem справкаToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem оПрограммеToolStripMenuItem;
+        private System.ComponentModel.BackgroundWorker bgwCounter;
     }
 }
 

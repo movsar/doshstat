@@ -16,7 +16,7 @@ namespace wFrequencies
 {
     public partial class FrmMain : Form
     {
-
+        private bool isRunning = false;
 
         public FrmMain()
         {
@@ -103,7 +103,7 @@ namespace wFrequencies
             // Do not allow the user to create new files via the FolderBrowserDialog.
             fbWorkingDir.ShowNewFolderButton = false;
             fbWorkingDir.SelectedPath = txtWorkingDir.Text;
-                
+
             DialogResult result = fbWorkingDir.ShowDialog();
             if (result == DialogResult.OK) {
                 Utils.WorkDirPath = fbWorkingDir.SelectedPath;
@@ -114,25 +114,17 @@ namespace wFrequencies
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-            txtWorkingDir.Enabled = false;
-            btnBrowse.Enabled = false;
-            btnStart.Enabled = false;
-
-            foreach (xTextFile xFile in Utils.fList) {
-                Utils.processTheFile(xFile);
-
-                xFile.uniqueWordsCount = xFile.frequencies.Count();
-                xFile.SaveFileInfo();
-                Debug.WriteLine("Ok");
+            if (!isRunning) {
+                txtWorkingDir.Enabled = false;
+                btnBrowse.Enabled = false;
+                isRunning = true;
+                bgwCounter.RunWorkerAsync();
+                btnStart.BackColor = Color.IndianRed;
+                btnStart.Text = "Cтоп";
+                prbStatus.Visible = true;
+            } else {
+                onFinishCounting();
             }
-
-            //   File.WriteAllText("output.txt", everything, Encoding.UTF8);
-            loadHistory();
-            lblStatus.Text = "Работа выполнена";
-
-            txtWorkingDir.Enabled = true;
-            btnBrowse.Enabled = true;
-            btnStart.Enabled = true;
         }
 
         private string spacer(int count)
@@ -142,7 +134,8 @@ namespace wFrequencies
             return spaces;
         }
 
-        private void removeSelectedFromOlvFiles() {
+        private void removeSelectedFromOlvFiles()
+        {
             foreach (xTextFile xtf in (olvFiles.SelectedObjects)) {
                 Utils.fList.Remove(xtf);
             }
@@ -155,7 +148,8 @@ namespace wFrequencies
             removeSelectedFromOlvFiles();
         }
 
-        private void loadHistory() {
+        private void loadHistory()
+        {
             history = DbHelper.GetHistory();
         }
         // Tab History
@@ -166,7 +160,7 @@ namespace wFrequencies
                 btnExport.Visible = true;
                 btnFrequenciesToXML.Visible = true;
                 // Tab History has been selected
-            
+
 
                 // Grouping by months=============================================
                 OLVColumn clm = ((OLVColumn)olvHistory.Columns[5]);
@@ -228,12 +222,12 @@ namespace wFrequencies
 
         private void btnFrequenciesToXML_Click(object sender, EventArgs e)
         {
-            Utils.FullExcelExport(history,"Full Export " + Utils.GetCurrentDate());
+            Utils.FullExcelExport(history, "Full Export " + Utils.GetCurrentDate());
         }
 
         private void olvFiles_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Delete && olvFiles.SelectedObjects.Count>0 ) {
+            if (e.KeyCode == Keys.Delete && olvFiles.SelectedObjects.Count > 0) {
                 removeSelectedFromOlvFiles();
             }
         }
@@ -247,6 +241,68 @@ namespace wFrequencies
         {
             FrmAbout frmAbout = new FrmAbout();
             frmAbout.ShowDialog();
+        }
+
+        private void bgwCounter_DoWork(object sender, DoWorkEventArgs e)
+        {
+            foreach (xTextFile xFile in Utils.fList) {
+                string contents = xFile.Processor.GetAllText(xFile.filePath);
+                xFile.charactersCount = contents.Length;
+
+                xFile.frequencies = new List<xWordFrequencies>();
+                var words = new Dictionary<string, int>(StringComparer.CurrentCultureIgnoreCase);
+
+                var wordPattern = new Regex(@"\w+");
+                xFile.wordsCount = wordPattern.Matches(contents).Count;
+
+                int progress = 0;
+                foreach (Match match in wordPattern.Matches(contents)) {
+                    progress++;
+                    int currentCount = 0;
+                    words.TryGetValue(match.Value, out currentCount);
+                    bgwCounter.ReportProgress(progress, xFile);
+                    currentCount++;
+                    words[match.Value] = currentCount;
+                }
+
+                foreach (var row in words.OrderByDescending(pair => pair.Value)) {
+                    xWordFrequencies xwf = new xWordFrequencies();
+                    xwf.word = row.Key.ToLower();
+                    xwf.word = xwf.word.Substring(0, 1).ToUpper() + xwf.word.Substring(1);
+                    xwf.frequency = row.Value;
+                    xFile.frequencies.Add(xwf);
+                }
+                xFile.uniqueWordsCount = xFile.frequencies.Count();
+                xFile.SaveFileInfo();
+            }
+            loadHistory();
+        }
+
+        private void bgwCounter_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            xTextFile xFile = (xTextFile)e.UserState;
+            prbStatus.Maximum = xFile.wordsCount;
+            prbStatus.Value = e.ProgressPercentage;
+            if ((prbStatus.Maximum != prbStatus.Value) || prbStatus.Maximum == 0) {
+                if (!lblStatus.Text.Equals(xFile.fileName)) { lblStatus.Text = "Обрабатываю: " + xFile.fileName;Update(); }
+            }
+        }
+
+        private void bgwCounter_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            onFinishCounting();
+        }
+
+        private void onFinishCounting()
+        {
+            isRunning = false;
+            if (bgwCounter.IsBusy) bgwCounter.CancelAsync();
+            btnStart.BackColor = Color.LightGreen;
+            txtWorkingDir.Enabled = true;
+            btnBrowse.Enabled = true;
+            btnStart.Text = "Старт";
+            prbStatus.Visible = false;
+            lblStatus.Text = "Работа выполнена";
         }
     }
 }

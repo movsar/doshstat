@@ -146,31 +146,7 @@ namespace wFrequencies
 
         }
 
-        public static void processTheFile(xTextFile xFile)
-        {
-            string contents = xFile.Processor.GetAllText(xFile.filePath);
-            xFile.charactersCount = contents.Length;
-            xFile.frequencies = new List<xWordFrequencies>();
-            var words = new Dictionary<string, int>(StringComparer.CurrentCultureIgnoreCase);
-
-            var wordPattern = new Regex(@"\w+");
-            xFile.wordsCount = 0;
-            foreach (Match match in wordPattern.Matches(contents)) {
-                xFile.wordsCount++;
-                int currentCount = 0;
-                words.TryGetValue(match.Value, out currentCount);
-                currentCount++;
-                words[match.Value] = currentCount;
-            }
-
-            foreach (var row in words.OrderByDescending(pair => pair.Value)) {
-                xWordFrequencies xwf = new xWordFrequencies();
-                xwf.word = row.Key.ToLower();
-                xwf.word = xwf.word.Substring(0, 1).ToUpper() + xwf.word.Substring(1);
-                xwf.frequency = row.Value;
-                xFile.frequencies.Add(xwf);
-            }
-        }
+     
 
         public List<string> FindFilesRecursively(string filter)
         {
