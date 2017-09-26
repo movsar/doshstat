@@ -14,11 +14,11 @@ using System.Collections;
 
 namespace wFrequencies
 {
-    public partial class frmMain : Form
+    public partial class FrmMain : Form
     {
 
 
-        public frmMain()
+        public FrmMain()
         {
 
             /*  ANNOTATION
@@ -42,7 +42,8 @@ namespace wFrequencies
 
             InitializeComponent();
 
-
+            btnExport.Visible = false;
+            btnFrequenciesToXML.Visible = false;
         }
 
         public void UpdateStatus(string status)
@@ -56,6 +57,12 @@ namespace wFrequencies
         }
         private void loadFiles()
         {
+            this.Enabled = false;
+            // Convert doc to docx before we begin 
+            DocProcessor.ConvertDocToDocx();
+            // Load all supported files from the chosen dretory 
+            this.Enabled = true;
+
             Utils.fList = new List<xTextFile>();
 
             foreach (string file in Directory.EnumerateFiles(Utils.WorkDirPath, "*.*", SearchOption.AllDirectories)
@@ -70,35 +77,23 @@ namespace wFrequencies
         {
             Utils.WorkDirPath = Environment.CurrentDirectory + "\\input\\";
             txtWorkingDir.Text = Utils.WorkDirPath;
-
-            this.Enabled = false;
-            // Convert doc to docx before we begin 
-            DocProcessor.ConvertDocToDocx();
-
-            // Load all supported files from the chosen dretory 
-            loadFiles();
-
-
-            this.Enabled = true;
-
             DbHelper.SetConnection();
             DbHelper.createTables();
-          
-             olvFiles.SubItemChecking += delegate (object olvCheckSender, SubItemCheckingEventArgs olvCheckArgs) {
-                 // Set false all the other categories
-                 xTextFile rowObject = ((xTextFile)olvCheckArgs.RowObject);
-                 rowObject.isFiction = false;
-                 rowObject.isPoetry = false;
-                 rowObject.isScientific = false;
-                 rowObject.isSocPol = false;
-                 rowObject.isReligious = false;
 
-                 // After completion it will set the new value
-             };
+            olvFiles.SubItemChecking += delegate (object olvCheckSender, SubItemCheckingEventArgs olvCheckArgs) {
+                // Set false all the other categories
+                xTextFile rowObject = ((xTextFile)olvCheckArgs.RowObject);
+                rowObject.isFiction = false;
+                rowObject.isPoetry = false;
+                rowObject.isScientific = false;
+                rowObject.isSocPol = false;
+                rowObject.isReligious = false;
 
+                // After completion it will set the new value
+            };
 
-
-          
+            loadFiles();
+            loadHistory();
         }
 
 
@@ -123,21 +118,16 @@ namespace wFrequencies
             btnStart.Enabled = false;
 
             foreach (xTextFile xFile in Utils.fList) {
-                Utils.fillTheFrequencies(xFile);
+                Utils.processTheFile(xFile);
 
                 xFile.uniqueWordsCount = xFile.frequencies.Count();
-                xFile.Save();
-
+                xFile.SaveFileInfo();
                 Debug.WriteLine("Ok");
             }
 
             //   File.WriteAllText("output.txt", everything, Encoding.UTF8);
-
+            loadHistory();
             lblStatus.Text = "Работа выполнена";
-            Process.Start("notepad", (new DirectoryInfo(Utils.WorkDirPath)).FullName + "\\..\\output.txt");
-
-            lblInfo.Text = "Файл c результатами находится по адресу: " + (new DirectoryInfo(Utils.WorkDirPath)).Parent.FullName + "\\output.txt";
-            Refresh();
 
             txtWorkingDir.Enabled = true;
             btnBrowse.Enabled = true;
@@ -151,19 +141,31 @@ namespace wFrequencies
             return spaces;
         }
 
-        private void ctxRemoveFromtheList_Click(object sender, EventArgs e)
-        {
-            Utils.fList.Remove((xTextFile)olvFiles.SelectedObject);
+        private void removeSelectedFromOlvFiles() {
+            foreach (xTextFile xtf in (olvFiles.SelectedObjects)) {
+                Utils.fList.Remove(xtf);
+            }
+
             olvFiles.SetObjects(Utils.fList);
         }
 
+        private void ctxRemoveFromtheList_Click(object sender, EventArgs e)
+        {
+            removeSelectedFromOlvFiles();
+        }
+
+        private void loadHistory() {
+            history = DbHelper.GetHistory();
+        }
         // Tab History
         List<xTextFile> history;
         private void tbcHistory_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (tbcHistory.SelectedTab == tbcHistory.TabPages[1]) {
+                btnExport.Visible = true;
+                btnFrequenciesToXML.Visible = true;
                 // Tab History has been selected
-                history = DbHelper.GetHistory();
+            
 
                 // Grouping by months=============================================
                 OLVColumn clm = ((OLVColumn)olvHistory.Columns[4]);
@@ -179,12 +181,59 @@ namespace wFrequencies
                     return groupKey.ToString();
                 };
                 //=================================================================
-                
+
                 // Set DateTime column as default for sorting to make it beautiful when it shows up for the first time!
                 olvHistory.PrimarySortColumn = (olvHistory.GetColumn(4));
                 olvHistory.SetObjects(history);
 
-                
+                olvHistory.SubItemChecking += delegate (object olvCheckSender, SubItemCheckingEventArgs olvCheckArgs) {
+                    // Set false all the other categories
+                    xTextFile rowObject = ((xTextFile)olvCheckArgs.RowObject);
+                    rowObject.isSelected = !rowObject.isSelected;
+
+                    // After completion it will set the new value
+                };
+            } else {
+                btnExport.Visible = false;
+                btnFrequenciesToXML.Visible = false;
+            }
+        }
+
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+            e.Cancel = (olvFiles.SelectedObjects.Count == 0);
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            if (tbcHistory.SelectedTab == tbcHistory.TabPages[0])
+                loadFiles();
+            else
+                loadHistory();
+        }
+
+        private void olvHistory_DoubleClick(object sender, EventArgs e)
+        {
+            if (olvHistory.SelectedObject != null) {
+                FrmFrequencies frmFreq = new FrmFrequencies((xTextFile)(olvHistory.SelectedObject));
+                frmFreq.Show();
+            }
+        }
+
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            Utils.ExcelExport(history, "List Of Literature " + DbHelper.GetCurrentDate());
+        }
+
+        private void btnFrequenciesToXML_Click(object sender, EventArgs e)
+        {
+            Utils.FullExcelExport(history,"Full Export " + DbHelper.GetCurrentDate());
+        }
+
+        private void olvFiles_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete && olvFiles.SelectedObjects.Count>0 ) {
+                removeSelectedFromOlvFiles();
             }
         }
     }

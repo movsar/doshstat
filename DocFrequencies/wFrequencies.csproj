@@ -103,11 +103,17 @@
     <Compile Include="CSUsingOpenXmlPlainText.cs" />
     <Compile Include="DbHelper.cs" />
     <Compile Include="DocProcessor.cs" />
-    <Compile Include="frmMain.cs">
+    <Compile Include="FrmFrequencies.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmMain.Designer.cs">
-      <DependentUpon>frmMain.cs</DependentUpon>
+    <Compile Include="FrmFrequencies.Designer.cs">
+      <DependentUpon>FrmFrequencies.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmMain.Designer.cs">
+      <DependentUpon>FrmMain.cs</DependentUpon>
     </Compile>
     <Compile Include="HtmProcessor.cs" />
     <Compile Include="ITextProcessor.cs" />
@@ -121,8 +127,11 @@
     <Compile Include="Utils.cs" />
     <Compile Include="XlsProcessor.cs" />
     <Compile Include="xWordFrequencies.cs" />
-    <EmbeddedResource Include="frmMain.resx">
-      <DependentUpon>frmMain.cs</DependentUpon>
+    <EmbeddedResource Include="FrmFrequencies.resx">
+      <DependentUpon>FrmFrequencies.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmMain.resx">
+      <DependentUpon>FrmMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

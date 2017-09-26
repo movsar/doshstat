@@ -8,10 +8,9 @@ namespace wFrequencies
 {
     public class xWordFrequencies
     {
-        public int id { get; set; }
-        public int fileId { get; set; }
+        public long id { get; set; }
+        public long fileId { get; set; }
         public string word { get; set; }
         public int frequency { get; set; }
-        public string created_at { get; set; }
     }
 }

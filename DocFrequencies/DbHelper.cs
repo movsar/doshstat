@@ -30,6 +30,33 @@ namespace wFrequencies
             sql_con.Open();
         }
 
+        public static List<xWordFrequencies> GetFrequencies(long fileId)
+        {
+            string query = "SELECT * FROM wf_frequencies WHERE file_id = " + fileId;
+            List<xWordFrequencies> list = new List<xWordFrequencies>();
+
+            SQLiteCommand cmd = new SQLiteCommand();
+            cmd = sql_con.CreateCommand();
+            cmd.CommandText = query;
+            SQLiteDataReader Reader = cmd.ExecuteReader();
+            if (!Reader.HasRows) return null;
+
+            while (Reader.Read()) {
+                xWordFrequencies xwf = new xWordFrequencies() {
+                    id = Convert.ToInt64(GetDBInt64("id", Reader)),
+                    fileId = Convert.ToInt64(GetDBInt64("file_id", Reader)),
+                    word = GetDBString("word", Reader),
+                    frequency = GetDBInt("frequency", Reader),
+                };
+
+                list.Add(xwf);
+            }
+            Reader.Close();
+
+            return list;
+        }
+
+
         public static List<xTextFile> GetHistory()
         {
             string query = "SELECT * FROM wf_files";
@@ -42,12 +69,14 @@ namespace wFrequencies
 
             while (Reader.Read()) {
                 xTextFile tFile = new xTextFile() {
-                    id = Convert.ToInt64(GetDBInt64("id", Reader)),
+                    fileId = Convert.ToInt64(GetDBInt64("id", Reader)),
                     fileName = GetDBString("file_name", Reader),
                     wordsCount = GetDBInt("words_count", Reader),
                     uniqueWordsCount = GetDBInt("unique_words_count", Reader),
+                    charactersCount = GetDBInt("characters_count", Reader),
                     categoryIndex = GetDBInt("category", Reader),
                     created_at = GetDBString("created_at", Reader),
+                    frequencies = GetFrequencies(Convert.ToInt64(GetDBInt64("id", Reader)))
                 };
 
                 list.Add(tFile);
@@ -65,6 +94,7 @@ namespace wFrequencies
                 "file_name varchar(150)," +
                 "words_count int," +
                 "unique_words_count int," +
+                "characters_count int," +
                 "category int," +
                 "created_at varchar(50), CONSTRAINT makeUnique UNIQUE (words_count, unique_words_count))";
 
@@ -72,8 +102,25 @@ namespace wFrequencies
             sql_cmd.CommandText = sql;
 
             DbExecuteNonQuery(sql_cmd);
-        }
 
+            sql = "create table IF NOT EXISTS wf_frequencies (" +
+               "id INTEGER PRIMARY KEY," +
+               "file_id int," +
+               "word varchar (150)," +
+               "frequency int," +
+               "CONSTRAINT makeUnique UNIQUE (file_id, word))";
+
+            sql_cmd = sql_con.CreateCommand();
+            sql_cmd.CommandText = sql;
+
+            DbExecuteNonQuery(sql_cmd);
+        }
+        public static long GetLastInsertedId(string table)
+        {
+            long id = -1L;
+
+            return id;
+        }
         public static long InsertReq(string table, Dictionary<string, object> nameValueData)
         {
             string req = "INSERT INTO " + table;
@@ -97,6 +144,25 @@ namespace wFrequencies
 
             return DbExecuteNonQuery(sql_cmd);
         }
+
+        public static long InsertWithTransaction(string table, List<Dictionary<string, object>> data)
+        {
+            using (var cmd = new SQLiteCommand(sql_con)) {
+                using (var transaction = sql_con.BeginTransaction()) {
+                    //Add your query here.
+
+                    foreach (Dictionary<string, object> nameValueData in data) {
+                        InsertReq(table, nameValueData);
+                    }
+                    transaction.Commit();
+                    
+                }
+            }
+
+            return 1; // Good
+            //return -1;
+        }
+
 
 
         public static int GetColumnIndex(ListView lv, string colTitle)
@@ -137,17 +203,22 @@ namespace wFrequencies
         {
             if (!(new FileInfo(dbName).Exists)) { SQLiteConnection.CreateFile(dbName); }
 
-            try {
-                return cmd.ExecuteNonQuery();
-            } catch (SQLiteException sqliteEx) {
-                if (sqliteEx.ErrorCode == 19) {
-                    // TODO make lines of different background color if they already exist
-                    Debug.WriteLine("ALREADY EXISTS");
-                }
-
+            //   try {
+            if (cmd.ExecuteNonQuery() > 0)
+                return sql_con.LastInsertRowId;
+            else
                 return -1;
-            }
+            /* } catch (SQLiteException sqliteEx) {
 
+                 if (sqliteEx.ErrorCode == 19) {
+                     // TODO make lines of different background color if they already exist
+                     Debug.WriteLine("ALREADY EXISTS");
+                 } else {
+                     Debug.WriteLine("CODE: " + sqliteEx.ErrorCode);
+                 }
+                 return -1;
+             }
+             */
             /*
             
             public void DisposeSQLite()

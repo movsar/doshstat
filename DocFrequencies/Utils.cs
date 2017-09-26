@@ -18,8 +18,73 @@ namespace wFrequencies
 
 
         public static List<xTextFile> fList; // Hold the files
+        public static void FullExcelExport(List<xTextFile> list, string defaultFileName)
+        {
+            StringBuilder sb = new StringBuilder();
 
-        public static void OlvToExcelExport(ObjectListView olv)
+            //Making columns!
+            sb.Append("ID файла" + ",");
+            sb.Append("Имя файла" + ",");
+            sb.Append("Слово" + ",");
+            sb.Append("Частота" + ",");
+
+            sb.AppendLine();
+
+            //Looping through items and subitems
+            foreach (xTextFile xtFile in list.Where(file => (file.isSelected))) {
+                foreach (xWordFrequencies xwf in xtFile.frequencies) {
+                    sb.Append(xtFile.fileId + ",");
+                    sb.Append(xtFile.fileName + ",");
+                    sb.Append(xwf.word + ",");
+                    sb.Append(xwf.frequency + ",");
+                    sb.AppendLine();
+                }
+            }
+
+
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog() {
+                Filter = "CSV Format|*.csv",
+                FileName = defaultFileName + ".csv",
+                Title = "Экспорт ... "
+            };
+            DialogResult dResult = saveFileDialog1.ShowDialog();
+            if (dResult == DialogResult.OK) {
+                File.WriteAllText(saveFileDialog1.FileName, sb.ToString(), Encoding.UTF8);
+                Process.Start(saveFileDialog1.FileName);
+            }
+        }
+        public static void ExcelExport(List<xTextFile> list, string defaultFileName)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            //Making columns!
+            sb.Append("ID файла" + ",");
+            sb.Append("Имя файла" + ",");
+            sb.Append("Слово" + ",");
+            sb.Append("Частота" + ",");
+
+            sb.AppendLine();
+
+            //Looping through items and subitems
+            foreach (xTextFile xtFile in list.Where(file => (file.isSelected))) {
+                    sb.Append(xtFile.fileId + ",");
+                    sb.Append(xtFile.fileName + ",");
+                    sb.AppendLine();
+            }
+
+
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog() {
+                Filter = "CSV Format|*.csv",
+                FileName = defaultFileName + ".csv",
+                Title = "Экспорт ... "
+            };
+            DialogResult dResult = saveFileDialog1.ShowDialog();
+            if (dResult == DialogResult.OK) {
+                File.WriteAllText(saveFileDialog1.FileName, sb.ToString(), Encoding.UTF8);
+                Process.Start(saveFileDialog1.FileName);
+            }
+        }
+        public static void OlvToExcelExport(ObjectListView olv, string defaultFileName)
         {
             StringBuilder sb = new StringBuilder();
 
@@ -44,22 +109,21 @@ namespace wFrequencies
 
             SaveFileDialog saveFileDialog1 = new SaveFileDialog() {
                 Filter = "CSV Format|*.csv",
+                FileName = defaultFileName + ".csv",
                 Title = "Экспорт ... "
             };
-            saveFileDialog1.ShowDialog();
-
-            // If the file name is not an empty string open it for saving.  
-            if (saveFileDialog1.FileName != "") {
+            DialogResult dResult = saveFileDialog1.ShowDialog();
+            if (dResult == DialogResult.OK) {
                 File.WriteAllText(saveFileDialog1.FileName, sb.ToString(), Encoding.UTF8);
                 Process.Start(saveFileDialog1.FileName);
             }
 
         }
 
-        public static void fillTheFrequencies(xTextFile xFile)
+        public static void processTheFile(xTextFile xFile)
         {
             string contents = xFile.Processor.GetAllText(xFile.filePath);
-            Debug.WriteLine("characters count: " + contents.Length);
+            xFile.charactersCount = contents.Length;
             xFile.frequencies = new List<xWordFrequencies>();
             var words = new Dictionary<string, int>(StringComparer.CurrentCultureIgnoreCase);
 
@@ -72,9 +136,6 @@ namespace wFrequencies
                 currentCount++;
                 words[match.Value] = currentCount;
             }
-
-            //    xFile.wordsCount = wordPattern.Matches(contents).Count;
-            Debug.WriteLine("words count: " + xFile.wordsCount);
 
             foreach (var row in words.OrderByDescending(pair => pair.Value)) {
                 xWordFrequencies xwf = new xWordFrequencies();

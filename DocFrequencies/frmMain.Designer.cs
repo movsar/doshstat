@@ -1,6 +1,6 @@
 ﻿namespace wFrequencies
 {
-    partial class frmMain
+    partial class FrmMain
     {
         /// <summary>
         /// Required designer variable.
@@ -47,6 +47,7 @@
             this.txtWorkingDir = new System.Windows.Forms.TextBox();
             this.btnBrowse = new System.Windows.Forms.Button();
             this.tbpHistory = new System.Windows.Forms.TabPage();
+            this.btnExport = new System.Windows.Forms.Button();
             this.olvHistory = new BrightIdeasSoftware.ObjectListView();
             this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvClmCategory = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -56,6 +57,8 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.prbStatus = new System.Windows.Forms.ToolStripProgressBar();
+            this.btnFrequenciesToXML = new System.Windows.Forms.Button();
+            this.olvClmIsIncluded = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.contextMenuStrip1.SuspendLayout();
             this.tbcHistory.SuspendLayout();
             this.tbpCount.SuspendLayout();
@@ -71,6 +74,7 @@
             this.ctxRemoveFromtheList});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(175, 26);
+            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // ctxRemoveFromtheList
             // 
@@ -89,7 +93,7 @@
             this.tbcHistory.Location = new System.Drawing.Point(-1, 2);
             this.tbcHistory.Name = "tbcHistory";
             this.tbcHistory.SelectedIndex = 0;
-            this.tbcHistory.Size = new System.Drawing.Size(687, 447);
+            this.tbcHistory.Size = new System.Drawing.Size(687, 438);
             this.tbcHistory.TabIndex = 1;
             this.tbcHistory.SelectedIndexChanged += new System.EventHandler(this.tbcHistory_SelectedIndexChanged);
             // 
@@ -104,7 +108,7 @@
             this.tbpCount.Location = new System.Drawing.Point(4, 22);
             this.tbpCount.Name = "tbpCount";
             this.tbpCount.Padding = new System.Windows.Forms.Padding(3);
-            this.tbpCount.Size = new System.Drawing.Size(679, 421);
+            this.tbpCount.Size = new System.Drawing.Size(679, 412);
             this.tbpCount.TabIndex = 0;
             this.tbpCount.Text = "Подсчет";
             this.tbpCount.UseVisualStyleBackColor = true;
@@ -135,17 +139,18 @@
             this.olvFiles.Location = new System.Drawing.Point(0, 86);
             this.olvFiles.Name = "olvFiles";
             this.olvFiles.ShowGroups = false;
-            this.olvFiles.Size = new System.Drawing.Size(680, 332);
+            this.olvFiles.Size = new System.Drawing.Size(680, 328);
             this.olvFiles.TabIndex = 17;
             this.olvFiles.UseCompatibleStateImageBehavior = false;
             this.olvFiles.View = System.Windows.Forms.View.Details;
+            this.olvFiles.KeyUp += new System.Windows.Forms.KeyEventHandler(this.olvFiles_KeyUp);
             // 
             // olvClmFileName
             // 
             this.olvClmFileName.AspectName = "fileName";
             this.olvClmFileName.Groupable = false;
             this.olvClmFileName.Text = "Файл";
-            this.olvClmFileName.Width = 300;
+            this.olvClmFileName.Width = 369;
             // 
             // olvClmFiction
             // 
@@ -194,7 +199,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblInfo.Location = new System.Drawing.Point(4, 46);
             this.lblInfo.Name = "lblInfo";
-            this.lblInfo.Size = new System.Drawing.Size(589, 36);
+            this.lblInfo.Size = new System.Drawing.Size(589, 37);
             this.lblInfo.TabIndex = 14;
             this.lblInfo.Text = "Выберите папку с входными файлами\r\n *.doc, *.docx, *.pdf, *.txt, *.odt, *.xlsx, *" +
     ".rtf, *.htm, *.html";
@@ -209,6 +214,7 @@
             this.btnStart.TabIndex = 13;
             this.btnStart.Text = "Начать";
             this.btnStart.UseVisualStyleBackColor = false;
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
             // label1
             // 
@@ -223,7 +229,7 @@
             // 
             this.txtWorkingDir.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtWorkingDir.Location = new System.Drawing.Point(0, 21);
+            this.txtWorkingDir.Location = new System.Drawing.Point(2, 21);
             this.txtWorkingDir.Name = "txtWorkingDir";
             this.txtWorkingDir.Size = new System.Drawing.Size(596, 20);
             this.txtWorkingDir.TabIndex = 11;
@@ -238,6 +244,7 @@
             this.btnBrowse.TabIndex = 10;
             this.btnBrowse.Text = "Выбрать";
             this.btnBrowse.UseVisualStyleBackColor = false;
+            this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
             // 
             // tbpHistory
             // 
@@ -245,14 +252,26 @@
             this.tbpHistory.Location = new System.Drawing.Point(4, 22);
             this.tbpHistory.Name = "tbpHistory";
             this.tbpHistory.Padding = new System.Windows.Forms.Padding(3);
-            this.tbpHistory.Size = new System.Drawing.Size(679, 421);
+            this.tbpHistory.Size = new System.Drawing.Size(679, 412);
             this.tbpHistory.TabIndex = 1;
             this.tbpHistory.Text = "История";
             this.tbpHistory.UseVisualStyleBackColor = true;
             // 
+            // btnExport
+            // 
+            this.btnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExport.Location = new System.Drawing.Point(471, 444);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(100, 23);
+            this.btnExport.TabIndex = 12;
+            this.btnExport.Text = "Экспорт Списка";
+            this.btnExport.UseVisualStyleBackColor = true;
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
+            // 
             // olvHistory
             // 
             this.olvHistory.AllColumns.Add(this.olvColumn1);
+            this.olvHistory.AllColumns.Add(this.olvClmIsIncluded);
             this.olvHistory.AllColumns.Add(this.olvClmCategory);
             this.olvHistory.AllColumns.Add(this.olvClmWordsCount);
             this.olvHistory.AllColumns.Add(this.olvClmUniqueWords);
@@ -260,6 +279,7 @@
             this.olvHistory.CellEditUseWholeCell = false;
             this.olvHistory.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn1,
+            this.olvClmIsIncluded,
             this.olvClmCategory,
             this.olvClmWordsCount,
             this.olvClmUniqueWords,
@@ -269,15 +289,18 @@
             this.olvHistory.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.olvHistory.FullRowSelect = true;
             this.olvHistory.Location = new System.Drawing.Point(3, 3);
+            this.olvHistory.MultiSelect = false;
             this.olvHistory.Name = "olvHistory";
-            this.olvHistory.Size = new System.Drawing.Size(673, 415);
+            this.olvHistory.Size = new System.Drawing.Size(673, 406);
             this.olvHistory.TabIndex = 11;
             this.olvHistory.UseCompatibleStateImageBehavior = false;
             this.olvHistory.View = System.Windows.Forms.View.Details;
+            this.olvHistory.DoubleClick += new System.EventHandler(this.olvHistory_DoubleClick);
             // 
             // olvColumn1
             // 
             this.olvColumn1.AspectName = "fileName";
+            this.olvColumn1.DisplayIndex = 1;
             this.olvColumn1.Groupable = false;
             this.olvColumn1.Text = "Файл";
             this.olvColumn1.Width = 220;
@@ -311,6 +334,7 @@
             // 
             // statusStrip1
             // 
+            this.statusStrip1.AutoSize = false;
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblStatus,
             this.prbStatus});
@@ -331,18 +355,41 @@
             // 
             // prbStatus
             // 
-            this.prbStatus.Margin = new System.Windows.Forms.Padding(0, 2, 0, 2);
+            this.prbStatus.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.prbStatus.Name = "prbStatus";
-            this.prbStatus.Size = new System.Drawing.Size(140, 22);
+            this.prbStatus.Size = new System.Drawing.Size(140, 20);
             // 
-            // frmMain
+            // btnFrequenciesToXML
+            // 
+            this.btnFrequenciesToXML.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnFrequenciesToXML.Location = new System.Drawing.Point(571, 444);
+            this.btnFrequenciesToXML.Name = "btnFrequenciesToXML";
+            this.btnFrequenciesToXML.Size = new System.Drawing.Size(100, 23);
+            this.btnFrequenciesToXML.TabIndex = 13;
+            this.btnFrequenciesToXML.Text = "Полный Экспорт";
+            this.btnFrequenciesToXML.UseVisualStyleBackColor = true;
+            this.btnFrequenciesToXML.Click += new System.EventHandler(this.btnFrequenciesToXML_Click);
+            // 
+            // olvClmIsIncluded
+            // 
+            this.olvClmIsIncluded.AspectName = "isSelected";
+            this.olvClmIsIncluded.CheckBoxes = true;
+            this.olvClmIsIncluded.DisplayIndex = 0;
+            this.olvClmIsIncluded.Groupable = false;
+            this.olvClmIsIncluded.Sortable = false;
+            this.olvClmIsIncluded.Text = "v";
+            this.olvClmIsIncluded.Width = 20;
+            // 
+            // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(687, 469);
+            this.Controls.Add(this.btnFrequenciesToXML);
+            this.Controls.Add(this.btnExport);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.tbcHistory);
-            this.Name = "frmMain";
+            this.Name = "FrmMain";
             this.Text = "wFrequencies";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.contextMenuStrip1.ResumeLayout(false);
@@ -355,7 +402,6 @@
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -387,6 +433,9 @@
         private BrightIdeasSoftware.OLVColumn olvClmDateTime;
         private System.Windows.Forms.ToolStripStatusLabel lblStatus;
         private System.Windows.Forms.ToolStripProgressBar prbStatus;
+        private System.Windows.Forms.Button btnExport;
+        private System.Windows.Forms.Button btnFrequenciesToXML;
+        private BrightIdeasSoftware.OLVColumn olvClmIsIncluded;
     }
 }
 
