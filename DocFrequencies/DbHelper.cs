@@ -147,20 +147,23 @@ namespace wFrequencies
 
         public static long InsertWithTransaction(string table, List<Dictionary<string, object>> data)
         {
-            using (var cmd = new SQLiteCommand(sql_con)) {
-                using (var transaction = sql_con.BeginTransaction()) {
-                    //Add your query here.
+            try {
+                using (var cmd = new SQLiteCommand(sql_con)) {
+                    using (var transaction = sql_con.BeginTransaction()) {
+                        //Add your query here.
 
-                    foreach (Dictionary<string, object> nameValueData in data) {
-                        InsertReq(table, nameValueData);
+                        foreach (Dictionary<string, object> nameValueData in data) {
+                            InsertReq(table, nameValueData);
+                        }
+                        transaction.Commit();
+
                     }
-                    transaction.Commit();
-                    
                 }
+                return 1;
+            } catch (Exception ex) {
+                Utils.Logging(ex);
+                return -1;
             }
-
-            return 1; // Good
-            //return -1;
         }
 
 
@@ -186,39 +189,18 @@ namespace wFrequencies
             }
         }
 
-        public static void Logging(Exception ex)
-        {
-            Debug.WriteLine("Internal Error" + ex.Message + ex.StackTrace.ToString());
-        }
-        public static void Logging(String ex)
-        {
-            Debug.WriteLine("Internal String Error" + ex);
-        }
-        public static void Logging(string format, params object[] args)
-        {
-            Debug.WriteLine(format, args);
-        }
 
         public static long DbExecuteNonQuery(SQLiteCommand cmd)
         {
             if (!(new FileInfo(dbName).Exists)) { SQLiteConnection.CreateFile(dbName); }
 
-            //   try {
-            if (cmd.ExecuteNonQuery() > 0)
-                return sql_con.LastInsertRowId;
-            else
+            try {
+                if (cmd.ExecuteNonQuery() > 0) return sql_con.LastInsertRowId; else return -1;
+            } catch (Exception ex) {
+                Utils.Logging(ex);
                 return -1;
-            /* } catch (SQLiteException sqliteEx) {
+            }
 
-                 if (sqliteEx.ErrorCode == 19) {
-                     // TODO make lines of different background color if they already exist
-                     Debug.WriteLine("ALREADY EXISTS");
-                 } else {
-                     Debug.WriteLine("CODE: " + sqliteEx.ErrorCode);
-                 }
-                 return -1;
-             }
-             */
             /*
             
             public void DisposeSQLite()
@@ -232,14 +214,6 @@ namespace wFrequencies
             */
         }
 
-        public static string GetCurrentDate()
-        {
-            return DateTime.Now.ToString("dd.MM.yyyy");
-        }
-        public static string GetCurrentDateTime()
-        {
-            return DateTime.Now.ToString("dd.MM.yyyy hh:MM:ss");
-        }
 
         public static string GetDBString(string SqlFieldName, SQLiteDataReader Reader)
         {

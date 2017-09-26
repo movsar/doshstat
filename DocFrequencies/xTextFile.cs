@@ -100,7 +100,7 @@ namespace wFrequencies
             nameValueData.Add("unique_words_count", frequencies.Count);
             nameValueData.Add("characters_count", charactersCount);
             nameValueData.Add("category", getCategoryIndex());
-            nameValueData.Add("created_at", DbHelper.GetCurrentDateTime());
+            nameValueData.Add("created_at", Utils.GetCurrentDateTime());
 
             fileId = DbHelper.InsertReq("wf_files", nameValueData);
             if (fileId != -1) {

@@ -15,9 +15,35 @@ namespace wFrequencies
     {
         public static string WorkDirPath;
         List<string> all_files; // For search files method
-
-
         public static List<xTextFile> fList; // Hold the files
+
+        public static void Logging(Exception ex)
+        {
+            using (StreamWriter sw = new StreamWriter("wfrequencies.log", true)) {
+                sw.WriteLine(GetCurrentDateTime() + " : " + ex.Message);
+                sw.WriteLine(ex.StackTrace.ToString());
+                sw.WriteLine();
+            }
+        }
+
+        public static void Logging(String ex)
+        {
+            Debug.WriteLine("Internal String Error" + ex);
+        }
+        public static void Logging(string format, params object[] args)
+        {
+            Debug.WriteLine(format, args);
+        }
+        public static string GetCurrentDate()
+        {
+            return DateTime.Now.ToString("dd.MM.yyyy");
+        }
+        public static string GetCurrentDateTime()
+        {
+            return DateTime.Now.ToString("dd.MM.yyyy hh:MM:ss");
+        }
+
+
         public static void FullExcelExport(List<xTextFile> list, string defaultFileName)
         {
             StringBuilder sb = new StringBuilder();
@@ -67,9 +93,9 @@ namespace wFrequencies
 
             //Looping through items and subitems
             foreach (xTextFile xtFile in list.Where(file => (file.isSelected))) {
-                    sb.Append(xtFile.fileId + ",");
-                    sb.Append(xtFile.fileName + ",");
-                    sb.AppendLine();
+                sb.Append(xtFile.fileId + ",");
+                sb.Append(xtFile.fileName + ",");
+                sb.AppendLine();
             }
 
 

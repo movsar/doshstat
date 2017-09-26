@@ -222,12 +222,12 @@ namespace wFrequencies
 
         private void btnExport_Click(object sender, EventArgs e)
         {
-            Utils.ExcelExport(history, "List Of Literature " + DbHelper.GetCurrentDate());
+            Utils.ExcelExport(history, "List Of Literature " + Utils.GetCurrentDate());
         }
 
         private void btnFrequenciesToXML_Click(object sender, EventArgs e)
         {
-            Utils.FullExcelExport(history,"Full Export " + DbHelper.GetCurrentDate());
+            Utils.FullExcelExport(history,"Full Export " + Utils.GetCurrentDate());
         }
 
         private void olvFiles_KeyUp(object sender, KeyEventArgs e)
