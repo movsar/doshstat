@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BrightIdeasSoftware;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -6,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace wFrequencies
 {
@@ -17,7 +19,42 @@ namespace wFrequencies
 
         public static List<xTextFile> fList; // Hold the files
 
+        public static void OlvToExcelExport(ObjectListView olv)
+        {
+            StringBuilder sb = new StringBuilder();
 
+            //Making columns!
+            foreach (ColumnHeader ch in olv.Columns) {
+                sb.Append(ch.Text + ",");
+            }
+
+            sb.AppendLine();
+
+            //Looping through items and subitems
+            foreach (ListViewItem lvi in olv.Items) {
+                foreach (ListViewItem.ListViewSubItem lvs in lvi.SubItems) {
+                    if (lvs.Text.Trim() == string.Empty)
+                        sb.Append(" ,");
+                    else
+                        sb.Append(string.Format("\"{0}\",", lvs.Text));
+                }
+                sb.AppendLine();
+            }
+
+
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog() {
+                Filter = "CSV Format|*.csv",
+                Title = "Экспорт ... "
+            };
+            saveFileDialog1.ShowDialog();
+
+            // If the file name is not an empty string open it for saving.  
+            if (saveFileDialog1.FileName != "") {
+                File.WriteAllText(saveFileDialog1.FileName, sb.ToString(), Encoding.UTF8);
+                Process.Start(saveFileDialog1.FileName);
+            }
+
+        }
 
         public static void fillTheFrequencies(xTextFile xFile)
         {
