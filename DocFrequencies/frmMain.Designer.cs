@@ -439,7 +439,6 @@
             this.bgwCounter.WorkerSupportsCancellation = true;
             this.bgwCounter.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwCounter_DoWork);
             this.bgwCounter.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bgwCounter_ProgressChanged);
-            this.bgwCounter.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwCounter_RunWorkerCompleted);
             // 
             // FrmMain
             // 

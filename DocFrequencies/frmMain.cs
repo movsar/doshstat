@@ -123,6 +123,8 @@ namespace wFrequencies
                 btnStart.Text = "Cтоп";
                 prbStatus.Visible = true;
             } else {
+                if (bgwCounter.IsBusy) bgwCounter.CancelAsync();
+                lblStatus.Text = "Отмена"; Update();
                 onFinishCounting();
             }
         }
@@ -245,7 +247,13 @@ namespace wFrequencies
 
         private void bgwCounter_DoWork(object sender, DoWorkEventArgs e)
         {
+
             foreach (xTextFile xFile in Utils.fList) {
+                if (bgwCounter.CancellationPending) {
+                    bgwCounter.ReportProgress(-1, xFile);
+                    return;
+                }
+                bgwCounter.ReportProgress(-2, xFile);
                 string contents = xFile.Processor.GetAllText(xFile.filePath);
                 xFile.charactersCount = contents.Length;
 
@@ -257,6 +265,10 @@ namespace wFrequencies
 
                 int progress = 0;
                 foreach (Match match in wordPattern.Matches(contents)) {
+                    if (bgwCounter.CancellationPending) {
+                        bgwCounter.ReportProgress(-1, xFile);
+                        return;
+                    }
                     progress++;
                     int currentCount = 0;
                     words.TryGetValue(match.Value, out currentCount);
@@ -276,27 +288,43 @@ namespace wFrequencies
                 xFile.SaveFileInfo();
             }
             loadHistory();
+
+            bgwCounter.ReportProgress(-3, null);
         }
 
         private void bgwCounter_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             xTextFile xFile = (xTextFile)e.UserState;
-            prbStatus.Maximum = xFile.wordsCount;
-            prbStatus.Value = e.ProgressPercentage;
-            if ((prbStatus.Maximum != prbStatus.Value) || prbStatus.Maximum == 0) {
-                if (!lblStatus.Text.Equals(xFile.fileName)) { lblStatus.Text = "Обрабатываю: " + xFile.fileName;Update(); }
-            }
-        }
 
-        private void bgwCounter_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            onFinishCounting();
+            if (e.ProgressPercentage == -1) {
+                // Is cancelled
+                lblStatus.Text = "Отменено пользователем";
+            } else if (e.ProgressPercentage == -2) {
+                // Still reading
+                if (!lblStatus.Text.Equals("Читаю: " + xFile.fileName)) {
+                    lblStatus.Text = "Читаю: " + xFile.fileName; Update();
+                }
+            } else if (e.ProgressPercentage == -3) {
+                // Has finished
+                onFinishCounting();
+            } else {
+                // Counting
+                prbStatus.Maximum = xFile.wordsCount;
+                prbStatus.Value = e.ProgressPercentage;
+                if ((prbStatus.Maximum != prbStatus.Value) || prbStatus.Maximum == 0) {
+                    if (prbStatus.Visible == false) prbStatus.Visible = true;
+                    if (!lblStatus.Text.Equals("Обрабатываю: " + xFile.fileName)) { lblStatus.Text = "Обрабатываю: " + xFile.fileName; Update(); }
+                } else {
+                    // Current process has been finished, let's move to the next
+                    prbStatus.Value = 0;
+                    prbStatus.Visible = false;
+                }
+            }
         }
 
         private void onFinishCounting()
         {
             isRunning = false;
-            if (bgwCounter.IsBusy) bgwCounter.CancelAsync();
             btnStart.BackColor = Color.LightGreen;
             txtWorkingDir.Enabled = true;
             btnBrowse.Enabled = true;

@@ -96,7 +96,7 @@ namespace wFrequencies
                 "unique_words_count int," +
                 "characters_count int," +
                 "category int," +
-                "created_at varchar(50), CONSTRAINT makeUnique UNIQUE (words_count, unique_words_count))";
+                "created_at varchar(50), CONSTRAINT makeUnique UNIQUE (words_count, unique_words_count,characters_count))";
 
             sql_cmd = sql_con.CreateCommand();
             sql_cmd.CommandText = sql;
