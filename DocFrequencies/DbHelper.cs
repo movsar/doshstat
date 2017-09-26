@@ -32,7 +32,7 @@ namespace wFrequencies
 
         public static List<xTextFile> GetHistory()
         {
-            string query = "";
+            string query = "SELECT * FROM wf_files";
             List<xTextFile> list = new List<xTextFile>();
 
             sql_cmd.CommandText = query;
@@ -46,6 +46,7 @@ namespace wFrequencies
                     fileName = GetDBString("file_name", Reader),
                     wordsCount = GetDBInt("words_count", Reader),
                     uniqueWordsCount = GetDBInt("unique_words_count", Reader),
+                    categoryIndex = GetDBInt("category", Reader),
                     created_at = GetDBString("created_at", Reader),
                 };
 

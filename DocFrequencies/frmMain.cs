@@ -9,6 +9,8 @@ using System.IO;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using System.Diagnostics;
+using BrightIdeasSoftware;
+using System.Collections;
 
 namespace wFrequencies
 {
@@ -39,6 +41,8 @@ namespace wFrequencies
             */
 
             InitializeComponent();
+
+
         }
 
         public void UpdateStatus(string status)
@@ -55,8 +59,7 @@ namespace wFrequencies
             Utils.fList = new List<xTextFile>();
 
             foreach (string file in Directory.EnumerateFiles(Utils.WorkDirPath, "*.*", SearchOption.AllDirectories)
-            .Where(s => s.EndsWith(".docx") || s.EndsWith(".odt") || s.EndsWith(".pdf") || s.EndsWith(".txt") || s.EndsWith(".xls") || s.EndsWith(".rtf") || s.EndsWith(".htm") || s.EndsWith(".html")))
-            {
+            .Where(s => s.EndsWith(".docx") || s.EndsWith(".odt") || s.EndsWith(".pdf") || s.EndsWith(".txt") || s.EndsWith(".xls") || s.EndsWith(".rtf") || s.EndsWith(".htm") || s.EndsWith(".html"))) {
                 Utils.fList.Add(new xTextFile(file));
             }
 
@@ -80,7 +83,25 @@ namespace wFrequencies
 
             DbHelper.SetConnection();
             DbHelper.createTables();
+          
+             olvFiles.SubItemChecking += delegate (object olvCheckSender, SubItemCheckingEventArgs olvCheckArgs) {
+                 // Set false all the other categories
+                 xTextFile rowObject = ((xTextFile)olvCheckArgs.RowObject);
+                 rowObject.isFiction = false;
+                 rowObject.isPoetry = false;
+                 rowObject.isScientific = false;
+                 rowObject.isSocPol = false;
+                 rowObject.isReligious = false;
+
+                 // After completion it will set the new value
+             };
+
+
+
+          
         }
+
+
 
         private void btnBrowse_Click(object sender, EventArgs e)
         {
@@ -88,8 +109,7 @@ namespace wFrequencies
             fbWorkingDir.ShowNewFolderButton = false;
             fbWorkingDir.RootFolder = Environment.SpecialFolder.MyComputer;
             DialogResult result = fbWorkingDir.ShowDialog();
-            if (result == DialogResult.OK)
-            {
+            if (result == DialogResult.OK) {
                 Utils.WorkDirPath = fbWorkingDir.SelectedPath;
                 txtWorkingDir.Text = Utils.WorkDirPath;
                 loadFiles();
@@ -102,8 +122,7 @@ namespace wFrequencies
             btnBrowse.Enabled = false;
             btnStart.Enabled = false;
 
-            foreach (xTextFile xFile in Utils.fList)
-            {
+            foreach (xTextFile xFile in Utils.fList) {
                 Utils.fillTheFrequencies(xFile);
 
                 xFile.uniqueWordsCount = xFile.frequencies.Count();
@@ -132,22 +151,41 @@ namespace wFrequencies
             return spaces;
         }
 
-
-
-        private void statusStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
-
         private void ctxRemoveFromtheList_Click(object sender, EventArgs e)
         {
             Utils.fList.Remove((xTextFile)olvFiles.SelectedObject);
             olvFiles.SetObjects(Utils.fList);
         }
 
-        private void olvFiles_ItemChecked(object sender, ItemCheckedEventArgs e)
+        // Tab History
+        List<xTextFile> history;
+        private void tbcHistory_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Debug.WriteLine(e.Item.Text);
+            if (tbcHistory.SelectedTab == tbcHistory.TabPages[1]) {
+                // Tab History has been selected
+                history = DbHelper.GetHistory();
+
+                // Grouping by months=============================================
+                OLVColumn clm = ((OLVColumn)olvHistory.Columns[4]);
+
+                clm.GroupKeyGetter = delegate (object rowObject) {
+                    xTextFile fm = (xTextFile)rowObject;
+                    return fm.created_at.Substring(0, 10);
+                };
+
+                clm.GroupKeyToTitleConverter = delegate (object groupKey) {
+                    DateTime dt = new DateTime();
+                    dt = DateTime.ParseExact(groupKey.ToString(), "dd.MM.yyyy", null);
+                    return groupKey.ToString();
+                };
+                //=================================================================
+                
+                // Set DateTime column as default for sorting to make it beautiful when it shows up for the first time!
+                olvHistory.PrimarySortColumn = (olvHistory.GetColumn(4));
+                olvHistory.SetObjects(history);
+
+                
+            }
         }
     }
 }

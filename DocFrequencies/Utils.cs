@@ -85,7 +85,6 @@ namespace wFrequencies
             }
         }
 
-
         public List<string> FindFilesRecursively(string filter)
         {
             all_files = new List<string>();
@@ -97,8 +96,6 @@ namespace wFrequencies
             _findFilesRecursively(filter);
             return all_files;
         }
-
-
 
         private void _findFilesRecursively(string filter)
         {

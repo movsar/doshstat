@@ -89,8 +89,9 @@
             this.tbcHistory.Location = new System.Drawing.Point(-1, 2);
             this.tbcHistory.Name = "tbcHistory";
             this.tbcHistory.SelectedIndex = 0;
-            this.tbcHistory.Size = new System.Drawing.Size(735, 474);
+            this.tbcHistory.Size = new System.Drawing.Size(687, 447);
             this.tbcHistory.TabIndex = 1;
+            this.tbcHistory.SelectedIndexChanged += new System.EventHandler(this.tbcHistory_SelectedIndexChanged);
             // 
             // tbpCount
             // 
@@ -103,7 +104,7 @@
             this.tbpCount.Location = new System.Drawing.Point(4, 22);
             this.tbpCount.Name = "tbpCount";
             this.tbpCount.Padding = new System.Windows.Forms.Padding(3);
-            this.tbpCount.Size = new System.Drawing.Size(727, 448);
+            this.tbpCount.Size = new System.Drawing.Size(679, 421);
             this.tbpCount.TabIndex = 0;
             this.tbpCount.Text = "Подсчет";
             this.tbpCount.UseVisualStyleBackColor = true;
@@ -133,7 +134,8 @@
             this.olvFiles.FullRowSelect = true;
             this.olvFiles.Location = new System.Drawing.Point(0, 86);
             this.olvFiles.Name = "olvFiles";
-            this.olvFiles.Size = new System.Drawing.Size(728, 359);
+            this.olvFiles.ShowGroups = false;
+            this.olvFiles.Size = new System.Drawing.Size(680, 332);
             this.olvFiles.TabIndex = 17;
             this.olvFiles.UseCompatibleStateImageBehavior = false;
             this.olvFiles.View = System.Windows.Forms.View.Details;
@@ -150,6 +152,7 @@
             this.olvClmFiction.AspectName = "isFiction";
             this.olvClmFiction.CheckBoxes = true;
             this.olvClmFiction.Groupable = false;
+            this.olvClmFiction.Sortable = false;
             this.olvClmFiction.Text = "Художественная";
             // 
             // olvClmSocPol
@@ -157,6 +160,7 @@
             this.olvClmSocPol.AspectName = "isSocPol";
             this.olvClmSocPol.CheckBoxes = true;
             this.olvClmSocPol.Groupable = false;
+            this.olvClmSocPol.Sortable = false;
             this.olvClmSocPol.Text = "Социально-политическая";
             // 
             // olvClmReligious
@@ -164,6 +168,7 @@
             this.olvClmReligious.AspectName = "isReligious";
             this.olvClmReligious.CheckBoxes = true;
             this.olvClmReligious.Groupable = false;
+            this.olvClmReligious.Sortable = false;
             this.olvClmReligious.Text = "Религиозная";
             // 
             // olvClmPoetry
@@ -171,6 +176,7 @@
             this.olvClmPoetry.AspectName = "isPoetry";
             this.olvClmPoetry.CheckBoxes = true;
             this.olvClmPoetry.Groupable = false;
+            this.olvClmPoetry.Sortable = false;
             this.olvClmPoetry.Text = "Поэтическая";
             // 
             // olvScientific
@@ -178,6 +184,7 @@
             this.olvScientific.AspectName = "isScientific";
             this.olvScientific.CheckBoxes = true;
             this.olvScientific.Groupable = false;
+            this.olvScientific.Sortable = false;
             this.olvScientific.Text = "Научная";
             // 
             // lblInfo
@@ -187,7 +194,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblInfo.Location = new System.Drawing.Point(4, 46);
             this.lblInfo.Name = "lblInfo";
-            this.lblInfo.Size = new System.Drawing.Size(637, 63);
+            this.lblInfo.Size = new System.Drawing.Size(589, 36);
             this.lblInfo.TabIndex = 14;
             this.lblInfo.Text = "Выберите папку с входными файлами\r\n *.doc, *.docx, *.pdf, *.txt, *.odt, *.xlsx, *" +
     ".rtf, *.htm, *.html";
@@ -196,7 +203,7 @@
             // 
             this.btnStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnStart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.btnStart.Location = new System.Drawing.Point(650, 49);
+            this.btnStart.Location = new System.Drawing.Point(602, 49);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(78, 23);
             this.btnStart.TabIndex = 13;
@@ -218,14 +225,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtWorkingDir.Location = new System.Drawing.Point(0, 21);
             this.txtWorkingDir.Name = "txtWorkingDir";
-            this.txtWorkingDir.Size = new System.Drawing.Size(644, 20);
+            this.txtWorkingDir.Size = new System.Drawing.Size(596, 20);
             this.txtWorkingDir.TabIndex = 11;
             // 
             // btnBrowse
             // 
             this.btnBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnBrowse.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.btnBrowse.Location = new System.Drawing.Point(650, 21);
+            this.btnBrowse.Location = new System.Drawing.Point(602, 21);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(78, 22);
             this.btnBrowse.TabIndex = 10;
@@ -238,7 +245,7 @@
             this.tbpHistory.Location = new System.Drawing.Point(4, 22);
             this.tbpHistory.Name = "tbpHistory";
             this.tbpHistory.Padding = new System.Windows.Forms.Padding(3);
-            this.tbpHistory.Size = new System.Drawing.Size(727, 448);
+            this.tbpHistory.Size = new System.Drawing.Size(679, 421);
             this.tbpHistory.TabIndex = 1;
             this.tbpHistory.Text = "История";
             this.tbpHistory.UseVisualStyleBackColor = true;
@@ -263,7 +270,7 @@
             this.olvHistory.FullRowSelect = true;
             this.olvHistory.Location = new System.Drawing.Point(3, 3);
             this.olvHistory.Name = "olvHistory";
-            this.olvHistory.Size = new System.Drawing.Size(721, 442);
+            this.olvHistory.Size = new System.Drawing.Size(673, 415);
             this.olvHistory.TabIndex = 11;
             this.olvHistory.UseCompatibleStateImageBehavior = false;
             this.olvHistory.View = System.Windows.Forms.View.Details;
@@ -273,23 +280,26 @@
             this.olvColumn1.AspectName = "fileName";
             this.olvColumn1.Groupable = false;
             this.olvColumn1.Text = "Файл";
-            this.olvColumn1.Width = 271;
+            this.olvColumn1.Width = 220;
             // 
             // olvClmCategory
             // 
-            this.olvClmCategory.AspectName = "category";
+            this.olvClmCategory.AspectName = "getCategoryName";
+            this.olvClmCategory.Groupable = false;
             this.olvClmCategory.Text = "Категория";
-            this.olvClmCategory.Width = 111;
+            this.olvClmCategory.Width = 89;
             // 
             // olvClmWordsCount
             // 
             this.olvClmWordsCount.AspectName = "wordsCount";
+            this.olvClmWordsCount.Groupable = false;
             this.olvClmWordsCount.Text = "Всего слов";
-            this.olvClmWordsCount.Width = 108;
+            this.olvClmWordsCount.Width = 89;
             // 
             // olvClmUniqueWords
             // 
             this.olvClmUniqueWords.AspectName = "uniqueWordsCount";
+            this.olvClmUniqueWords.Groupable = false;
             this.olvClmUniqueWords.Text = "Уникальных слов";
             this.olvClmUniqueWords.Width = 129;
             // 
@@ -297,16 +307,16 @@
             // 
             this.olvClmDateTime.AspectName = "created_at";
             this.olvClmDateTime.Text = "Дата и время";
-            this.olvClmDateTime.Width = 100;
+            this.olvClmDateTime.Width = 138;
             // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblStatus,
             this.prbStatus});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 470);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 443);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(735, 26);
+            this.statusStrip1.Size = new System.Drawing.Size(687, 26);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -329,7 +339,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(735, 496);
+            this.ClientSize = new System.Drawing.Size(687, 469);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.tbcHistory);
             this.Name = "frmMain";
