@@ -17,11 +17,15 @@ namespace wFrequencies
 
         public string GetAllText(string path)
         {
-            using (StreamReader reader = new StreamReader(path, Encoding.GetEncoding(1251), true))
-            {
-                reader.Peek(); // you need this!
-                var encoding = reader.CurrentEncoding;
-                return File.ReadAllText(path, encoding);
+            int stgCodepage = Convert.ToInt32(Properties.Settings.Default["TxtCodepage"]);
+            if (stgCodepage == 0) {
+                using (StreamReader reader = new StreamReader(path, Encoding.GetEncoding(1251), true)) {
+                    reader.Peek(); // you need this!
+                    var encoding = reader.CurrentEncoding;
+                    return File.ReadAllText(path, encoding);
+                }
+            } else {
+                return File.ReadAllText(path, Encoding.GetEncoding(stgCodepage));
             }
         }
     }
