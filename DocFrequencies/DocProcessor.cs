@@ -1,13 +1,10 @@
-﻿using System;
+﻿using Microsoft.Office.Interop.Word;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DocumentFormat.OpenXml.Packaging;
-using DocumentFormat.OpenXml.Wordprocessing;
-using Microsoft.Office.Interop.Word;
-using System.IO;
-using System.Windows.Forms;
 
 namespace wFrequencies
 {
@@ -16,53 +13,26 @@ namespace wFrequencies
         // Make it into a singleton
         private static readonly ITextProcessor _instance = new DocProcessor();
         public static ITextProcessor GetInstance() { return _instance; }
-        private DocProcessor() { }
-
-        public static void ConvertDocToDocx()
-        {
-            // only open and close Word once to maximize performance 
-            Microsoft.Office.Interop.Word.Application word = new Microsoft.Office.Interop.Word.Application();
-
-            try
-            {
-                int affectedFiles = 0;
-                foreach (string filename in (new Utils()).FindFilesRecursively("*.doc"))
-                {
-                    // exclude the .docx (only include .doc) files as we don't need to convert them. :) 
-                    if (filename.ToLower().EndsWith(".doc") && !(new FileInfo(filename + "x")).Exists)
-                    {
-                        try
-                        {
-                            var srcFile = new FileInfo(filename);
-
-                            // convert the source file 
-                            var doc = word.Documents.Open(srcFile.FullName);
-                            string newFilename = srcFile.FullName.Replace(".doc", ".docx");
-
-                            // Be sure to include the correct reference to Microsoft.Office.Interop.Word 
-                            // in the project refences. In this case we need version 12 of Office to get the new formats. 
-                            doc.SaveAs(FileName: newFilename, FileFormat: WdSaveFormat.wdFormatXMLDocument);
-                            affectedFiles++;
-                        }
-                        finally
-                        {
-                            // we want to make sure the document is always closed 
-                            word.ActiveDocument.Close();
-                        }
-                    }
-                }
-            }
-            finally
-            {
-                // Close the word application
-                word.Quit();
-            }
-        }
+        static Application wordApplication; // Make only one instance to make it work faster
+        private DocProcessor() { wordApplication = new Microsoft.Office.Interop.Word.Application(); }
 
         public string GetAllText(string path)
         {
-            CSUsingOpenXmlPlainText.GetWordPlainText docxReaderObj = new CSUsingOpenXmlPlainText.GetWordPlainText(path);
-            return docxReaderObj.ReadWordDocument();
+            try
+            {
+                var srcFile = new FileInfo(path);
+                var doc = wordApplication.Documents.Open(srcFile.FullName);
+                return doc.Content.Text;
+            }
+            finally
+            {
+                // we want to make sure the document is always closed 
+                wordApplication.ActiveDocument.Close();
+            }
+        }
+
+        public static void Dispose() {
+            wordApplication.Quit();
         }
     }
 }

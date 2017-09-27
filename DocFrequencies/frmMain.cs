@@ -58,9 +58,7 @@ namespace wFrequencies
         private void loadFiles()
         {
             this.Enabled = false;
-            // Convert doc to docx before we begin 
-            lblStatus.Text = "Конвертирую doc в docx ...";
-            DocProcessor.ConvertDocToDocx();
+                   
             lblStatus.Text = "Загружаю список файлов";
             // Load all supported files from the chosen dretory 
             this.Enabled = true;
@@ -68,7 +66,7 @@ namespace wFrequencies
             Utils.fList = new List<xTextFile>();
 
             foreach (string file in Directory.EnumerateFiles(Utils.WorkDirPath, "*.*", SearchOption.AllDirectories)
-            .Where(s => s.EndsWith(".docx") || s.EndsWith(".odt") || s.EndsWith(".pdf") || s.EndsWith(".txt") || s.EndsWith(".xls") || s.EndsWith(".rtf") || s.EndsWith(".htm") || s.EndsWith(".html"))) {
+            .Where(s => s.EndsWith(".doc") || s.EndsWith(".docx") || s.EndsWith(".odt") || s.EndsWith(".pdf") || s.EndsWith(".txt") || s.EndsWith(".xls") || s.EndsWith(".rtf") || s.EndsWith(".htm") || s.EndsWith(".html"))) {
                 Utils.fList.Add(new xTextFile(file));
             }
 
@@ -287,7 +285,7 @@ namespace wFrequencies
                 xFile.SaveFileInfo();
 
             }
-
+       
             bgwCounter.ReportProgress(-3, null);
         }
 
@@ -301,7 +299,7 @@ namespace wFrequencies
             } else if (e.ProgressPercentage == -2) {
                 // Still reading
                 if (!lblStatus.Text.Equals("Читаю: " + xFile.fileName)) {
-                    lblStatus.Text = "Читаю: " + xFile.fileName; Update();
+                    lblStatus.Text = "Читаю: " + xFile.fileName; Update(); 
                 }
             } else if (e.ProgressPercentage == -3) {
                 // Has finished
@@ -341,6 +339,11 @@ namespace wFrequencies
                 loadHistory();
                 lblStatus.Text = "База данных успешно очищена!";
             }
+        }
+
+        private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DocProcessor.Dispose();
         }
     }
 }

@@ -378,9 +378,11 @@
             // 
             // lblStatus
             // 
+            this.lblStatus.AutoSize = false;
             this.lblStatus.Margin = new System.Windows.Forms.Padding(10, 2, 0, 2);
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(38, 22);
+            this.lblStatus.Overflow = System.Windows.Forms.ToolStripItemOverflow.Always;
+            this.lblStatus.Size = new System.Drawing.Size(250, 22);
             this.lblStatus.Text = "Готов";
             this.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -474,6 +476,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FrmMain";
             this.Text = "wFrequencies";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmMain_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.contextMenuStrip1.ResumeLayout(false);
             this.tbcHistory.ResumeLayout(false);

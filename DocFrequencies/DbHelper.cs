@@ -56,7 +56,6 @@ namespace wFrequencies
             return list;
         }
 
-
         public static List<xTextFile> GetHistory()
         {
             ResetSQLite();

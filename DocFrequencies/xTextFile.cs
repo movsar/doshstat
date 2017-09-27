@@ -29,22 +29,32 @@ namespace wFrequencies
 
         public int getCategoryIndex()
         {
-            if (isFiction) {
+            if (isFiction)
+            {
                 return 1;
-            } else if (isSocPol) {
+            }
+            else if (isSocPol)
+            {
                 return 2;
-            } else if (isReligious) {
+            }
+            else if (isReligious)
+            {
                 return 3;
-            } else if (isPoetry) {
+            }
+            else if (isPoetry)
+            {
                 return 4;
-            } else if (isScientific) {
+            }
+            else if (isScientific)
+            {
                 return 5;
             }
             return 0;
         }
         public string getCategoryName()
         {
-            switch (categoryIndex) {
+            switch (categoryIndex)
+            {
                 case 1:
                     return "Художественная";
                 case 2:
@@ -73,19 +83,36 @@ namespace wFrequencies
             this.frequencies = new List<xWordFrequencies>();
             this.filePath = filePath;
             fileName = (new FileInfo(filePath)).Name;
-            if (fileName.EndsWith(".docx")) {
+            if (fileName.EndsWith(".doc"))
+            {
                 Processor = DocProcessor.GetInstance();
-            } else if (fileName.EndsWith("htm") || fileName.EndsWith("html")) {
+            }
+            else if (fileName.EndsWith("docx"))
+            {
+                Processor = DocxProcessor.GetInstance();
+            }
+            else if (fileName.EndsWith("htm") || fileName.EndsWith("html"))
+            {
                 Processor = HtmProcessor.GetInstance();
-            } else if (fileName.EndsWith("odt")) {
+            }
+            else if (fileName.EndsWith("odt"))
+            {
                 Processor = OdtProcessor.GetInstance();
-            } else if (fileName.EndsWith("pdf")) {
+            }
+            else if (fileName.EndsWith("pdf"))
+            {
                 Processor = PdfProcessor.GetInstance();
-            } else if (fileName.EndsWith("rtf")) {
+            }
+            else if (fileName.EndsWith("rtf"))
+            {
                 Processor = RtfProcessor.GetInstance();
-            } else if (fileName.EndsWith("txt")) {
+            }
+            else if (fileName.EndsWith("txt"))
+            {
                 Processor = TxtProcessor.GetInstance();
-            } else if (fileName.EndsWith("xlsx")) {
+            }
+            else if (fileName.EndsWith("xlsx"))
+            {
                 Processor = XlsProcessor.GetInstance();
             }
         }
@@ -104,9 +131,11 @@ namespace wFrequencies
             nameValueData.Add("created_at", Utils.GetCurrentDateTime());
 
             fileId = DbHelper.InsertReq("wf_files", nameValueData);
-            if (fileId != -1) {
+            if (fileId != -1)
+            {
                 List<Dictionary<string, object>> data = new List<Dictionary<string, object>>();
-                foreach (xWordFrequencies xwf in frequencies) {
+                foreach (xWordFrequencies xwf in frequencies)
+                {
                     nameValueData = new Dictionary<string, object>();
                     nameValueData.Add("file_id", fileId);
                     nameValueData.Add("word", xwf.word);
@@ -115,7 +144,9 @@ namespace wFrequencies
                 }
                 DbHelper.InsertWithTransaction("wf_frequencies", data);
                 isProcessed = true;
-            } else {
+            }
+            else
+            {
                 isProcessed = false;
             }
             // Ok                    

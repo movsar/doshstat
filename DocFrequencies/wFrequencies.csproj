@@ -103,6 +103,7 @@
     <Compile Include="CSUsingOpenXmlPlainText.cs" />
     <Compile Include="DbHelper.cs" />
     <Compile Include="DocProcessor.cs" />
+    <Compile Include="DocxProcessor.cs" />
     <Compile Include="FrmAbout.cs">
       <SubType>Form</SubType>
     </Compile>
