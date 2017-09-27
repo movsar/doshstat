@@ -74,11 +74,20 @@ namespace wFrequencies
 
 
 
-        public static void Logging(Exception ex)
+        public static void ErrLog(Exception ex)
         {
             using (StreamWriter sw = new StreamWriter("wfrequencies.log", true)) {
                 sw.WriteLine(GetCurrentDateTime() + " : " + ex.Message);
                 sw.WriteLine(ex.StackTrace.ToString());
+                sw.WriteLine();
+            }
+        }
+        public static void ErrLog(String caption, String msg)
+        {
+            using (StreamWriter sw = new StreamWriter("wfrequencies.log", true))
+            {
+                sw.WriteLine(GetCurrentDateTime() + " : " + caption);
+                sw.WriteLine(msg);
                 sw.WriteLine();
             }
         }
@@ -121,7 +130,7 @@ namespace wFrequencies
                         sb.AppendLine();
                     }
                 } catch (NullReferenceException nrex) {
-                    Logging(nrex);
+                    ErrLog(nrex);
                 }
             }
 

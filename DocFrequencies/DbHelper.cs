@@ -41,8 +41,10 @@ namespace wFrequencies
             SQLiteDataReader Reader = cmd.ExecuteReader();
             if (!Reader.HasRows) return null;
 
-            while (Reader.Read()) {
-                xWordFrequencies xwf = new xWordFrequencies() {
+            while (Reader.Read())
+            {
+                xWordFrequencies xwf = new xWordFrequencies()
+                {
                     id = Convert.ToInt64(GetDBInt64("id", Reader)),
                     fileId = Convert.ToInt64(GetDBInt64("file_id", Reader)),
                     word = GetDBString("word", Reader),
@@ -67,8 +69,10 @@ namespace wFrequencies
             SQLiteDataReader Reader = sql_cmd.ExecuteReader();
             if (!Reader.HasRows) return null;
 
-            while (Reader.Read()) {
-                xTextFile tFile = new xTextFile() {
+            while (Reader.Read())
+            {
+                xTextFile tFile = new xTextFile()
+                {
                     fileId = Convert.ToInt64(GetDBInt64("id", Reader)),
                     fileName = GetDBString("file_name", Reader),
                     wordsCount = GetDBInt("words_count", Reader),
@@ -104,7 +108,8 @@ namespace wFrequencies
             GC.Collect();
         }
 
-        public static void ResetSQLite() {
+        public static void ResetSQLite()
+        {
             DisposeSQLite();
             SetConnection();
         }
@@ -147,12 +152,14 @@ namespace wFrequencies
         {
             string req = "INSERT INTO " + table;
             req += "(";
-            foreach (string name in nameValueData.Keys) {
+            foreach (string name in nameValueData.Keys)
+            {
                 req += name + ",";
             }
             // Remove "," from the end
             req = req.TrimLastCharacter() + ") VALUES (";
-            foreach (string name in nameValueData.Keys) {
+            foreach (string name in nameValueData.Keys)
+            {
                 req += "@" + name + ",";
             }
             req = req.TrimLastCharacter() + ")";
@@ -160,7 +167,8 @@ namespace wFrequencies
 
             sql_cmd.CommandText = req;
 
-            foreach (KeyValuePair<string, object> nameValue in nameValueData) {
+            foreach (KeyValuePair<string, object> nameValue in nameValueData)
+            {
                 sql_cmd.Parameters.AddWithValue("@" + nameValue.Key, nameValue.Value);
             }
 
@@ -172,14 +180,16 @@ namespace wFrequencies
         {
             string req = "UPDATE " + table;
             req += " SET ";
-            foreach (string name in nameValueData.Keys) {
+            foreach (string name in nameValueData.Keys)
+            {
                 req += name + "=@" + name + ",";
             }
             // Remove "," from the end
             req = req.TrimLastCharacter() + " WHERE id = " + id;
             sql_cmd.CommandText = req;
 
-            foreach (KeyValuePair<string, object> nameValue in nameValueData) {
+            foreach (KeyValuePair<string, object> nameValue in nameValueData)
+            {
                 sql_cmd.Parameters.AddWithValue("@" + nameValue.Key, nameValue.Value);
             }
 
@@ -187,42 +197,50 @@ namespace wFrequencies
         }
         public static long RemoveReq(string table, long id)
         {
-            try {
+            try
+            {
                 sql_cmd.CommandText = "DELETE from `" + table + "` WHERE `id`=" + id.ToString();
                 return DbExecuteNonQuery(sql_cmd);
-            } catch (Exception ex) {
-                Utils.Logging(ex);
+            }
+            catch (Exception ex)
+            {
+                Utils.ErrLog(ex);
                 return -1;
             }
         }
 
         public static long InsertWithTransaction(string table, List<Dictionary<string, object>> data)
         {
-            try {
-                using (var cmd = new SQLiteCommand(sql_con)) {
-                    using (var transaction = sql_con.BeginTransaction()) {
+            try
+            {
+                using (var cmd = new SQLiteCommand(sql_con))
+                {
+                    using (var transaction = sql_con.BeginTransaction())
+                    {
                         //Add your query here.
 
-                        foreach (Dictionary<string, object> nameValueData in data) {
+                        foreach (Dictionary<string, object> nameValueData in data)
+                        {
                             InsertReq(table, nameValueData);
                         }
                         transaction.Commit();
-
                     }
                 }
                 return 1;
-            } catch (Exception ex) {
-                Utils.Logging(ex);
+            }
+            catch (Exception ex)
+            {
+                Utils.ErrLog(ex);
                 return -1;
             }
         }
 
-
-
         public static int GetColumnIndex(ListView lv, string colTitle)
         {
-            foreach (ColumnHeader col in lv.Columns) {
-                if (col.Text.ToLower().Equals(colTitle.ToLower())) {
+            foreach (ColumnHeader col in lv.Columns)
+            {
+                if (col.Text.ToLower().Equals(colTitle.ToLower()))
+                {
                     return col.Index;
                 }
             }
@@ -233,9 +251,12 @@ namespace wFrequencies
 
         public static string TrimLastCharacter(this String str)
         {
-            if (String.IsNullOrEmpty(str)) {
+            if (String.IsNullOrEmpty(str))
+            {
                 return str;
-            } else {
+            }
+            else
+            {
                 return str.TrimEnd(str[str.Length - 1]);
             }
         }
@@ -243,24 +264,37 @@ namespace wFrequencies
 
         public static long DbExecuteNonQuery(SQLiteCommand cmd)
         {
-            try {
+            try
+            {
                 if (cmd.ExecuteNonQuery() > 0) return sql_con.LastInsertRowId; else return -1;
-            } catch (Exception ex) {
-                Utils.Logging(ex);
+            }
+            catch (SQLiteException sqlex)
+            {
+                string msg = "";
+
+                if (sqlex.ErrorCode == 19)
+                {
+                    if (cmd.Parameters[0].ParameterName == "@file_name")
+                    {
+                        // It's a file insert request
+                        msg = "файл: " + cmd.Parameters[0].Value.ToString();
+                    }
+                    else if (cmd.Parameters[0].ParameterName == "@file_id")
+                    {
+                        // It's a frequency insert request
+                        msg = "слово: " + cmd.Parameters[1].Value;
+                    }
+                    Utils.ErrLog("Запись уже существует", msg);
+                }
+                else
+                    Utils.ErrLog(sqlex);
                 return -1;
             }
-
-            /*
-
-            public void DisposeSQLite()
+            catch (Exception ex)
             {
-                SQLiteConnection.Dispose();
-                SQLiteCommand.Dispose();
-
-                GC.Collect();
+                Utils.ErrLog(ex);
+                return -1;
             }
-
-            */
         }
 
 
