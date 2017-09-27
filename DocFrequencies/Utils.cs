@@ -16,6 +16,63 @@ namespace wFrequencies
         public static string WorkDirPath;
         List<string> all_files; // For search files method
         public static List<xTextFile> fList; // Hold the files
+        private static string appName = "wFrequencies";
+
+        public static DialogResult msgQuestion(String txt)
+        {
+            return MessageBox.Show(txt, appName, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+        }
+        public static DialogResult msgConfirmation(String txt)
+        {
+            return MessageBox.Show(txt, appName, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+        }
+        public static DialogResult msgCriticalError(String txt)
+        {
+            return MessageBox.Show(txt, appName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+        public static DialogResult msgExclamation(String txt)
+        {
+            return MessageBox.Show(txt, appName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
+        public static void msgAccessDenied()
+        {
+            MessageBox.Show("У вас недостаточно привилегий", appName, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
+        public static void msgInformation(String txt)
+        {
+            MessageBox.Show(txt, appName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        public static int GetColumnIndex(ListView lv, string colTitle)
+        {
+            foreach (ColumnHeader col in lv.Columns) {
+                if (col.Text.ToLower().Equals(colTitle.ToLower())) {
+                    return col.Index;
+                }
+            }
+            return -1;
+        }
+        public static ListViewItem GetLVIByValue(ListView lv, string colTitle, string value)
+        {
+            int colIndex = GetColumnIndex(lv, colTitle);
+            foreach (ListViewItem li in lv.Columns[colIndex].ListView.Items) {
+                if (li.Text.ToLower().Equals(value.ToLower())) {
+                    return li;
+                }
+            }
+            return null;
+        }
+        public static ListViewItem GetLVIByValue(ListView lv, int colIndex, string value)
+        {
+            foreach (ListViewItem li in lv.Columns[colIndex].ListView.Items) {
+                if (li.Text.ToLower().Equals(value.ToLower())) {
+                    return li;
+                }
+            }
+            return null;
+        }
+
+
 
         public static void Logging(Exception ex)
         {
@@ -25,7 +82,6 @@ namespace wFrequencies
                 sw.WriteLine();
             }
         }
-
         public static void Logging(String ex)
         {
             Debug.WriteLine("Internal String Error" + ex);
@@ -42,8 +98,6 @@ namespace wFrequencies
         {
             return DateTime.Now.ToString("dd.MM.yyyy hh:MM:ss");
         }
-
-
         public static void FullExcelExport(List<xTextFile> list, string defaultFileName)
         {
             StringBuilder sb = new StringBuilder();
@@ -58,12 +112,16 @@ namespace wFrequencies
 
             //Looping through items and subitems
             foreach (xTextFile xtFile in list.Where(file => (file.isSelected))) {
-                foreach (xWordFrequencies xwf in xtFile.frequencies) {
-                    sb.Append(xtFile.fileId + ",");
-                    sb.Append(xtFile.fileName + ",");
-                    sb.Append(xwf.word + ",");
-                    sb.Append(xwf.frequency + ",");
-                    sb.AppendLine();
+                try {
+                    foreach (xWordFrequencies xwf in xtFile.frequencies) {
+                        sb.Append(xtFile.fileId + ",");
+                        sb.Append(xtFile.fileName + ",");
+                        sb.Append(xwf.word + ",");
+                        sb.Append(xwf.frequency + ",");
+                        sb.AppendLine();
+                    }
+                } catch (NullReferenceException nrex) {
+                    Logging(nrex);
                 }
             }
 
@@ -145,9 +203,6 @@ namespace wFrequencies
             }
 
         }
-
-     
-
         public List<string> FindFilesRecursively(string filter)
         {
             all_files = new List<string>();
@@ -159,7 +214,6 @@ namespace wFrequencies
             _findFilesRecursively(filter);
             return all_files;
         }
-
         private void _findFilesRecursively(string filter)
         {
             // Get files from this dir's children

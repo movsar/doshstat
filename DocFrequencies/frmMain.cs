@@ -59,7 +59,9 @@ namespace wFrequencies
         {
             this.Enabled = false;
             // Convert doc to docx before we begin 
+            lblStatus.Text = "Конвертирую doc в docx ...";
             DocProcessor.ConvertDocToDocx();
+            lblStatus.Text = "Загружаю список файлов";
             // Load all supported files from the chosen dretory 
             this.Enabled = true;
 
@@ -71,11 +73,14 @@ namespace wFrequencies
             }
 
             olvFiles.SetObjects(Utils.fList);
+            lblStatus.Text = "Готов";
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             Utils.WorkDirPath = Environment.CurrentDirectory + "\\input\\";
+            DirectoryInfo dInfo = new DirectoryInfo(Utils.WorkDirPath);
+            if (!dInfo.Exists) dInfo.Create();
             txtWorkingDir.Text = Utils.WorkDirPath;
             DbHelper.SetConnection();
             DbHelper.createTables();
@@ -92,8 +97,37 @@ namespace wFrequencies
                 // After completion it will set the new value
             };
 
+            // Grouping by months=============================================
+            OLVColumn clm = ((OLVColumn)olvHistory.Columns[5]);
+
+            clm.GroupKeyGetter = delegate (object rowObject) {
+                xTextFile fm = (xTextFile)rowObject;
+                return fm.created_at.Substring(0, 10);
+            };
+
+            clm.GroupKeyToTitleConverter = delegate (object groupKey) {
+                DateTime dt = new DateTime();
+                dt = DateTime.ParseExact(groupKey.ToString(), "dd.MM.yyyy", null);
+                return groupKey.ToString();
+            };
+            //=================================================================
+
+            // Set DateTime column as default for sorting to make it beautiful when it shows up for the first time!
+            olvHistory.PrimarySortColumn = (olvHistory.GetColumn(5));
+
+            olvHistory.SubItemChecking += delegate (object olvCheckSender, SubItemCheckingEventArgs olvCheckArgs) {
+                // Set false all the other categories
+                xTextFile rowObject = ((xTextFile)olvCheckArgs.RowObject);
+                rowObject.isSelected = !rowObject.isSelected;
+
+                // After completion it will set the new value
+            };
+
             loadFiles();
             loadHistory();
+
+
+
         }
 
 
@@ -153,6 +187,7 @@ namespace wFrequencies
         private void loadHistory()
         {
             history = DbHelper.GetHistory();
+            olvHistory.SetObjects(history);
         }
         // Tab History
         List<xTextFile> history;
@@ -162,34 +197,6 @@ namespace wFrequencies
                 btnExport.Visible = true;
                 btnFrequenciesToXML.Visible = true;
                 // Tab History has been selected
-
-
-                // Grouping by months=============================================
-                OLVColumn clm = ((OLVColumn)olvHistory.Columns[5]);
-
-                clm.GroupKeyGetter = delegate (object rowObject) {
-                    xTextFile fm = (xTextFile)rowObject;
-                    return fm.created_at.Substring(0, 10);
-                };
-
-                clm.GroupKeyToTitleConverter = delegate (object groupKey) {
-                    DateTime dt = new DateTime();
-                    dt = DateTime.ParseExact(groupKey.ToString(), "dd.MM.yyyy", null);
-                    return groupKey.ToString();
-                };
-                //=================================================================
-
-                // Set DateTime column as default for sorting to make it beautiful when it shows up for the first time!
-                olvHistory.PrimarySortColumn = (olvHistory.GetColumn(5));
-                olvHistory.SetObjects(history);
-
-                olvHistory.SubItemChecking += delegate (object olvCheckSender, SubItemCheckingEventArgs olvCheckArgs) {
-                    // Set false all the other categories
-                    xTextFile rowObject = ((xTextFile)olvCheckArgs.RowObject);
-                    rowObject.isSelected = !rowObject.isSelected;
-
-                    // After completion it will set the new value
-                };
             } else {
                 btnExport.Visible = false;
                 btnFrequenciesToXML.Visible = false;
@@ -199,14 +206,6 @@ namespace wFrequencies
         private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
         {
             e.Cancel = (olvFiles.SelectedObjects.Count == 0);
-        }
-
-        private void btnRefresh_Click(object sender, EventArgs e)
-        {
-            if (tbcHistory.SelectedTab == tbcHistory.TabPages[0])
-                loadFiles();
-            else
-                loadHistory();
         }
 
         private void olvHistory_DoubleClick(object sender, EventArgs e)
@@ -286,8 +285,8 @@ namespace wFrequencies
                 }
                 xFile.uniqueWordsCount = xFile.frequencies.Count();
                 xFile.SaveFileInfo();
+
             }
-            loadHistory();
 
             bgwCounter.ReportProgress(-3, null);
         }
@@ -315,7 +314,7 @@ namespace wFrequencies
                     if (prbStatus.Visible == false) prbStatus.Visible = true;
                     if (!lblStatus.Text.Equals("Обрабатываю: " + xFile.fileName)) { lblStatus.Text = "Обрабатываю: " + xFile.fileName; Update(); }
                 } else {
-                    // Current process has been finished, let's move to the next
+                    // Current file has been finished, let's move to the next
                     prbStatus.Value = 0;
                     prbStatus.Visible = false;
                 }
@@ -324,6 +323,7 @@ namespace wFrequencies
 
         private void onFinishCounting()
         {
+            loadHistory();
             isRunning = false;
             btnStart.BackColor = Color.LightGreen;
             txtWorkingDir.Enabled = true;
@@ -331,6 +331,16 @@ namespace wFrequencies
             btnStart.Text = "Старт";
             prbStatus.Visible = false;
             lblStatus.Text = "Работа выполнена";
+        }
+
+        private void сброситьБДToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Utils.msgConfirmation("Это действие приведет к полной очистке всей БД приложения, вы уверены?") == DialogResult.Yes) {
+                DbHelper.dropTables();
+                loadFiles();
+                loadHistory();
+                lblStatus.Text = "База данных успешно очищена!";
+            }
         }
     }
 }

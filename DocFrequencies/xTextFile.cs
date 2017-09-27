@@ -93,6 +93,7 @@ namespace wFrequencies
 
         public void SaveFileInfo()
         {
+            if (frequencies.Count == 0) return; // An empty or unsupported file 
             Dictionary<string, object> nameValueData = new Dictionary<string, object>();
 
             nameValueData.Add("file_name", fileName);
@@ -104,7 +105,6 @@ namespace wFrequencies
 
             fileId = DbHelper.InsertReq("wf_files", nameValueData);
             if (fileId != -1) {
-
                 List<Dictionary<string, object>> data = new List<Dictionary<string, object>>();
                 foreach (xWordFrequencies xwf in frequencies) {
                     nameValueData = new Dictionary<string, object>();
@@ -114,94 +114,11 @@ namespace wFrequencies
                     data.Add(nameValueData);
                 }
                 DbHelper.InsertWithTransaction("wf_frequencies", data);
+                isProcessed = true;
+            } else {
+                isProcessed = false;
             }
             // Ok                    
         }
     }
-
-
-
-    /*
-     * 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        public static bool ContainsInColumn(ListView lv, string colTitle, string value) {
-            int colIndex = GetColumnIndex(lv, colTitle);
-            if (colIndex == -1) return false;
-
-            foreach (ListViewItem li in lv.Columns[colIndex].ListView.Items) {
-                if (li.Text.ToLower().Equals(value.ToLower())) {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-
-        public static ListViewItem GetLVIByValue(ListView lv, string colTitle, string value) {
-            int colIndex = GetColumnIndex(lv, colTitle);
-            foreach (ListViewItem li in lv.Columns[colIndex].ListView.Items) {
-                if (li.Text.ToLower().Equals(value.ToLower())) {
-                    return li;
-                }
-            }
-            return null;
-        }
-
-        public static long UpdateReq(string table, Dictionary<string, object> nameValueData, long id) {
-            MySqlCommand comm = new MySqlCommand();
-
-            string req = "UPDATE " + table;
-            req += " SET ";
-            foreach (string name in nameValueData.Keys) {
-                req += name + "=@" + name + ",";
-            }
-            // Remove "," from the end
-            req = req.TrimLastCharacter() + " WHERE id = " + id;
-            comm.CommandText = req;
-
-            foreach (KeyValuePair<string, object> nameValue in nameValueData) {
-                comm.Parameters.AddWithValue("@" + nameValue.Key, nameValue.Value);
-            }
-
-            return DbExecuteNonQuery(comm);
-        }
-
-
-        public static long RemoveReq(string table, long id) {
-            using (MySqlConnection connection = new MySqlConnection(Shared.myConnectionString)) {
-                try {
-                    connection.Open();
-                    MySqlDataReader reader;
-
-                    var cmd = new MySqlCommand("DELETE from `" + table + "` WHERE `id`=" + id.ToString() + "", connection);
-                    reader = cmd.ExecuteReader();
-                    return reader.RecordsAffected;
-                } catch (Exception ex) {
-                    Logging(ex);
-                    return -1;
-                }
-            }
-        }
-
-
-     */
 }

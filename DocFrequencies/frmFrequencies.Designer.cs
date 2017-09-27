@@ -59,6 +59,7 @@
             this.olvFrequencies.ShowGroups = false;
             this.olvFrequencies.Size = new System.Drawing.Size(471, 289);
             this.olvFrequencies.TabIndex = 12;
+            this.olvFrequencies.UseAlternatingBackColors = true;
             this.olvFrequencies.UseCompatibleStateImageBehavior = false;
             this.olvFrequencies.View = System.Windows.Forms.View.Details;
             // 

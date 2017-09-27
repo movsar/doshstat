@@ -17,7 +17,6 @@ namespace wFrequencies
     {
         private static SQLiteConnection sql_con;
         private static SQLiteCommand sql_cmd;
-        private static SQLiteDataAdapter DB;
         private static DataSet DS = new DataSet();
         private static DataTable DT = new DataTable();
         private static string dbName = "wFrequencies.sqlite";
@@ -28,6 +27,7 @@ namespace wFrequencies
             Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("ru-RU");
             sql_con = new SQLiteConnection("Data Source=" + dbName + ";Version=3;New=False;Compress=True;");
             sql_con.Open();
+            sql_cmd = sql_con.CreateCommand();
         }
 
         public static List<xWordFrequencies> GetFrequencies(long fileId)
@@ -59,11 +59,12 @@ namespace wFrequencies
 
         public static List<xTextFile> GetHistory()
         {
+            ResetSQLite();
+
+
             string query = "SELECT * FROM wf_files";
             List<xTextFile> list = new List<xTextFile>();
-
             sql_cmd.CommandText = query;
-
             SQLiteDataReader Reader = sql_cmd.ExecuteReader();
             if (!Reader.HasRows) return null;
 
@@ -85,10 +86,32 @@ namespace wFrequencies
 
             return list;
         }
+        public static void dropTables()
+        {
+            sql_cmd.CommandText = " DROP Table 'wf_files'";
+            sql_cmd.ExecuteNonQuery();
 
+            sql_cmd.CommandText = " DROP Table 'wf_frequencies'";
+            sql_cmd.ExecuteNonQuery();
+
+            createTables();
+        }
+
+        public static void DisposeSQLite()
+        {
+            sql_con.Dispose();
+            sql_cmd.Dispose();
+
+            GC.Collect();
+        }
+
+        public static void ResetSQLite() {
+            DisposeSQLite();
+            SetConnection();
+        }
         public static void createTables()
         {
-
+            if (!(new FileInfo(dbName).Exists)) { SQLiteConnection.CreateFile(dbName); }
             string sql = "create table IF NOT EXISTS wf_files (" +
                 "id INTEGER PRIMARY KEY," +
                 "file_name varchar(150)," +
@@ -145,6 +168,35 @@ namespace wFrequencies
             return DbExecuteNonQuery(sql_cmd);
         }
 
+
+        public static long UpdateReq(string table, Dictionary<string, object> nameValueData, long id)
+        {
+            string req = "UPDATE " + table;
+            req += " SET ";
+            foreach (string name in nameValueData.Keys) {
+                req += name + "=@" + name + ",";
+            }
+            // Remove "," from the end
+            req = req.TrimLastCharacter() + " WHERE id = " + id;
+            sql_cmd.CommandText = req;
+
+            foreach (KeyValuePair<string, object> nameValue in nameValueData) {
+                sql_cmd.Parameters.AddWithValue("@" + nameValue.Key, nameValue.Value);
+            }
+
+            return DbExecuteNonQuery(sql_cmd);
+        }
+        public static long RemoveReq(string table, long id)
+        {
+            try {
+                sql_cmd.CommandText = "DELETE from `" + table + "` WHERE `id`=" + id.ToString();
+                return DbExecuteNonQuery(sql_cmd);
+            } catch (Exception ex) {
+                Utils.Logging(ex);
+                return -1;
+            }
+        }
+
         public static long InsertWithTransaction(string table, List<Dictionary<string, object>> data)
         {
             try {
@@ -192,8 +244,6 @@ namespace wFrequencies
 
         public static long DbExecuteNonQuery(SQLiteCommand cmd)
         {
-            if (!(new FileInfo(dbName).Exists)) { SQLiteConnection.CreateFile(dbName); }
-
             try {
                 if (cmd.ExecuteNonQuery() > 0) return sql_con.LastInsertRowId; else return -1;
             } catch (Exception ex) {
@@ -202,7 +252,7 @@ namespace wFrequencies
             }
 
             /*
-            
+
             public void DisposeSQLite()
             {
                 SQLiteConnection.Dispose();
@@ -210,7 +260,7 @@ namespace wFrequencies
 
                 GC.Collect();
             }
-            
+
             */
         }
 

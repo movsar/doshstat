@@ -56,12 +56,14 @@
             this.olvClmDateTime = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.btnExport = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.prbStatus = new System.Windows.Forms.ToolStripProgressBar();
+            this.lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.btnFrequenciesToXML = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.закрытьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.инструментыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.сброситьБДToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.справкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.оПрограммеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bgwCounter = new System.ComponentModel.BackgroundWorker();
@@ -149,6 +151,7 @@
             this.olvFiles.ShowGroups = false;
             this.olvFiles.Size = new System.Drawing.Size(756, 365);
             this.olvFiles.TabIndex = 17;
+            this.olvFiles.UseAlternatingBackColors = true;
             this.olvFiles.UseCompatibleStateImageBehavior = false;
             this.olvFiles.View = System.Windows.Forms.View.Details;
             this.olvFiles.KeyUp += new System.Windows.Forms.KeyEventHandler(this.olvFiles_KeyUp);
@@ -260,7 +263,7 @@
             this.tbpHistory.Location = new System.Drawing.Point(4, 22);
             this.tbpHistory.Name = "tbpHistory";
             this.tbpHistory.Padding = new System.Windows.Forms.Padding(3);
-            this.tbpHistory.Size = new System.Drawing.Size(679, 421);
+            this.tbpHistory.Size = new System.Drawing.Size(755, 449);
             this.tbpHistory.TabIndex = 1;
             this.tbpHistory.Text = "История";
             this.tbpHistory.UseVisualStyleBackColor = true;
@@ -289,8 +292,9 @@
             this.olvHistory.Location = new System.Drawing.Point(3, 3);
             this.olvHistory.MultiSelect = false;
             this.olvHistory.Name = "olvHistory";
-            this.olvHistory.Size = new System.Drawing.Size(673, 415);
+            this.olvHistory.Size = new System.Drawing.Size(749, 443);
             this.olvHistory.TabIndex = 11;
+            this.olvHistory.UseAlternatingBackColors = true;
             this.olvHistory.UseCompatibleStateImageBehavior = false;
             this.olvHistory.View = System.Windows.Forms.View.Details;
             this.olvHistory.DoubleClick += new System.EventHandler(this.olvHistory_DoubleClick);
@@ -364,14 +368,6 @@
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
             // 
-            // lblStatus
-            // 
-            this.lblStatus.Margin = new System.Windows.Forms.Padding(10, 2, 0, 2);
-            this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(38, 22);
-            this.lblStatus.Text = "Готов";
-            this.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // prbStatus
             // 
             this.prbStatus.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
@@ -379,6 +375,14 @@
             this.prbStatus.Name = "prbStatus";
             this.prbStatus.Size = new System.Drawing.Size(200, 20);
             this.prbStatus.Visible = false;
+            // 
+            // lblStatus
+            // 
+            this.lblStatus.Margin = new System.Windows.Forms.Padding(10, 2, 0, 2);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(38, 22);
+            this.lblStatus.Text = "Готов";
+            this.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // btnFrequenciesToXML
             // 
@@ -396,6 +400,7 @@
             this.menuStrip1.BackColor = System.Drawing.Color.Silver;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.файлToolStripMenuItem,
+            this.инструментыToolStripMenuItem,
             this.справкаToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -417,6 +422,22 @@
             this.закрытьToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
             this.закрытьToolStripMenuItem.Text = "Закрыть";
             this.закрытьToolStripMenuItem.Click += new System.EventHandler(this.закрытьToolStripMenuItem_Click);
+            // 
+            // инструментыToolStripMenuItem
+            // 
+            this.инструментыToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.сброситьБДToolStripMenuItem});
+            this.инструментыToolStripMenuItem.Name = "инструментыToolStripMenuItem";
+            this.инструментыToolStripMenuItem.Size = new System.Drawing.Size(95, 20);
+            this.инструментыToolStripMenuItem.Text = "Инструменты";
+            // 
+            // сброситьБДToolStripMenuItem
+            // 
+            this.сброситьБДToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.сброситьБДToolStripMenuItem.Name = "сброситьБДToolStripMenuItem";
+            this.сброситьБДToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.сброситьБДToolStripMenuItem.Text = "Сброс БД";
+            this.сброситьБДToolStripMenuItem.Click += new System.EventHandler(this.сброситьБДToolStripMenuItem_Click);
             // 
             // справкаToolStripMenuItem
             // 
@@ -507,6 +528,8 @@
         private System.Windows.Forms.ToolStripMenuItem справкаToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem оПрограммеToolStripMenuItem;
         private System.ComponentModel.BackgroundWorker bgwCounter;
+        private System.Windows.Forms.ToolStripMenuItem инструментыToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem сброситьБДToolStripMenuItem;
     }
 }
 
