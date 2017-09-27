@@ -216,7 +216,7 @@ namespace wFrequencies
 
         private void btnExport_Click(object sender, EventArgs e)
         {
-            Utils.ExcelExport(history, "List Of Literature " + Utils.GetCurrentDate());
+            Utils.OlvToExcelExport(olvHistory, "List Of Literature " + Utils.GetCurrentDate());
         }
 
         private void btnFrequenciesToXML_Click(object sender, EventArgs e)

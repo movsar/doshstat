@@ -17,7 +17,8 @@ namespace wFrequencies
         List<string> all_files; // For search files method
         public static List<xTextFile> fList; // Hold the files
         private static string appName = "wFrequencies";
-
+        private static string separator = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ListSeparator;
+       
         public static DialogResult msgQuestion(String txt)
         {
             return MessageBox.Show(txt, appName, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
@@ -112,21 +113,22 @@ namespace wFrequencies
             StringBuilder sb = new StringBuilder();
 
             //Making columns!
-            sb.Append("ID файла" + ",");
-            sb.Append("Имя файла" + ",");
-            sb.Append("Слово" + ",");
-            sb.Append("Частота" + ",");
-
+            sb.Append("ID" + separator);
+            sb.Append("Имя файла" + separator);
+            sb.Append("Слово" + separator);
+            sb.Append("Частота" + separator);
+            sb.Append("Дата и Время" + separator);
             sb.AppendLine();
 
             //Looping through items and subitems
             foreach (xTextFile xtFile in list.Where(file => (file.isSelected))) {
                 try {
                     foreach (xWordFrequencies xwf in xtFile.frequencies) {
-                        sb.Append(xtFile.fileId + ",");
-                        sb.Append(xtFile.fileName + ",");
-                        sb.Append(xwf.word + ",");
-                        sb.Append(xwf.frequency + ",");
+                        sb.Append(xtFile.fileId + separator);
+                        sb.Append(xtFile.fileName + separator);
+                        sb.Append(xwf.word + separator);
+                        sb.Append(xwf.frequency + separator);
+                        sb.Append(xtFile.created_at);
                         sb.AppendLine();
                     }
                 } catch (NullReferenceException nrex) {
@@ -146,44 +148,14 @@ namespace wFrequencies
                 Process.Start(saveFileDialog1.FileName);
             }
         }
-        public static void ExcelExport(List<xTextFile> list, string defaultFileName)
-        {
-            StringBuilder sb = new StringBuilder();
-
-            //Making columns!
-            sb.Append("ID файла" + ",");
-            sb.Append("Имя файла" + ",");
-            sb.Append("Слово" + ",");
-            sb.Append("Частота" + ",");
-
-            sb.AppendLine();
-
-            //Looping through items and subitems
-            foreach (xTextFile xtFile in list.Where(file => (file.isSelected))) {
-                sb.Append(xtFile.fileId + ",");
-                sb.Append(xtFile.fileName + ",");
-                sb.AppendLine();
-            }
-
-
-            SaveFileDialog saveFileDialog1 = new SaveFileDialog() {
-                Filter = "CSV Format|*.csv",
-                FileName = defaultFileName + ".csv",
-                Title = "Экспорт ... "
-            };
-            DialogResult dResult = saveFileDialog1.ShowDialog();
-            if (dResult == DialogResult.OK) {
-                File.WriteAllText(saveFileDialog1.FileName, sb.ToString(), Encoding.UTF8);
-                Process.Start(saveFileDialog1.FileName);
-            }
-        }
+      
         public static void OlvToExcelExport(ObjectListView olv, string defaultFileName)
         {
             StringBuilder sb = new StringBuilder();
 
             //Making columns!
             foreach (ColumnHeader ch in olv.Columns) {
-                sb.Append(ch.Text + ",");
+                sb.Append(ch.Text + separator);
             }
 
             sb.AppendLine();
@@ -192,9 +164,9 @@ namespace wFrequencies
             foreach (ListViewItem lvi in olv.Items) {
                 foreach (ListViewItem.ListViewSubItem lvs in lvi.SubItems) {
                     if (lvs.Text.Trim() == string.Empty)
-                        sb.Append(" ,");
+                        sb.Append(" " + separator);
                     else
-                        sb.Append(string.Format("\"{0}\",", lvs.Text));
+                        sb.Append(string.Format("\"{0}\""+separator, lvs.Text));
                 }
                 sb.AppendLine();
             }
