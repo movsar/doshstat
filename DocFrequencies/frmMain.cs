@@ -345,5 +345,11 @@ namespace wFrequencies
         {
             DocProcessor.Dispose();
         }
+
+        private void настройкиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmSettings frmSettings = new FrmSettings();
+            frmSettings.ShowDialog();
+        }
     }
 }
