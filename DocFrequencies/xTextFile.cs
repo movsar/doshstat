@@ -140,6 +140,7 @@ namespace wFrequencies
                     nameValueData.Add("file_id", fileId);
                     nameValueData.Add("word", xwf.word);
                     nameValueData.Add("frequency", xwf.frequency);
+                    nameValueData.Add("percentage", xwf.percentage);
                     data.Add(nameValueData);
                 }
                 DbHelper.InsertWithTransaction("wf_frequencies", data);

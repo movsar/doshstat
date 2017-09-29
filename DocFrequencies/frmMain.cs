@@ -28,22 +28,35 @@ namespace wFrequencies
              *  The software should be awesome
              *  
              *  TODO:
-             *  1.  Import doc, docx reader library
-             *  2.  Import pdf reader library
-             *  3.  Import odf reader library
-             *  4.  Create functions for each supporting format
-             *  5.  Create open file dialog to show the location of files
-             *  6.  List the files filtering the extension
-             *  7.  Take a file, read all of its contents
-             *  8.  Scan through file and create a list of frequencies for each file
-             *  9.  Sum-up the frequency files
-             *  10. Voila!
+             *  1.v  Import doc, docx reader library
+             *  2.v  Import pdf reader library
+             *  3.v  Import odf reader library
+             *  4.v  Create functions for each supporting format
+             *  5.v  Create open file dialog to show the location of files
+             *  6.v  List the files filtering the extension
+             *  7.v  Take a file, read all of its contents
+             *  8.v  Scan through file and create a list of frequencies for each file
+             *  9.v  Sum-up the frequency files
+             *  10.  Percentage
+             *  11.  Percentage in export and in selection
+             *  12.  Общая частотность
+             *  13.  Окно со статистикой сразу после Начать
+             *  14.  Статистика по слову
             */
 
             InitializeComponent();
 
             btnExport.Visible = false;
             btnFrequenciesToXML.Visible = false;
+
+            // Load settings
+            if (Utils.StgGetString("WorkingDir") == "") {
+                Utils.WorkDirPath = Environment.CurrentDirectory;
+            } else {
+                Utils.WorkDirPath = Utils.StgGetString("WorkingDir");
+            }
+
+            Utils.StgSet("TxtCodepage", Convert.ToInt32(Properties.Settings.Default["TxtCodepage"]));
         }
 
         public void UpdateStatus(string status)
@@ -58,25 +71,29 @@ namespace wFrequencies
         private void loadFiles()
         {
             this.Enabled = false;
-                   
+
             lblStatus.Text = "Загружаю список файлов";
             // Load all supported files from the chosen dretory 
             this.Enabled = true;
 
             Utils.fList = new List<xTextFile>();
+            try {
+                foreach (string file in Directory.EnumerateFiles(Utils.WorkDirPath, "*.*", SearchOption.AllDirectories)
+          .Where(s => s.EndsWith(".doc") || s.EndsWith(".docx") || s.EndsWith(".odt") || s.EndsWith(".pdf") || s.EndsWith(".txt") || s.EndsWith(".xlsx") || s.EndsWith(".rtf") || s.EndsWith(".htm") || s.EndsWith(".html"))) {
+                    Utils.fList.Add(new xTextFile(file));
+                }
 
-            foreach (string file in Directory.EnumerateFiles(Utils.WorkDirPath, "*.*", SearchOption.AllDirectories)
-            .Where(s => s.EndsWith(".doc") || s.EndsWith(".docx") || s.EndsWith(".odt") || s.EndsWith(".pdf") || s.EndsWith(".txt") || s.EndsWith(".xls") || s.EndsWith(".rtf") || s.EndsWith(".htm") || s.EndsWith(".html"))) {
-                Utils.fList.Add(new xTextFile(file));
+                olvFiles.SetObjects(Utils.fList);
+                lblStatus.Text = "Готов";
+            } catch (UnauthorizedAccessException unaex) {
+                Utils.msgCriticalError("Недостаточно прав для обработки данной директори, запустите программу с правами администратора, или выберите другую папку");
             }
 
-            olvFiles.SetObjects(Utils.fList);
-            lblStatus.Text = "Готов";
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Utils.WorkDirPath = Environment.CurrentDirectory + "\\input\\";
+
             DirectoryInfo dInfo = new DirectoryInfo(Utils.WorkDirPath);
             if (!dInfo.Exists) dInfo.Create();
             txtWorkingDir.Text = Utils.WorkDirPath;
@@ -140,6 +157,11 @@ namespace wFrequencies
             if (result == DialogResult.OK) {
                 Utils.WorkDirPath = fbWorkingDir.SelectedPath;
                 txtWorkingDir.Text = Utils.WorkDirPath;
+
+                // Save to settings
+                Utils.StgSet("WorkingDir", Utils.WorkDirPath);
+
+                // Load files list
                 loadFiles();
             }
         }
@@ -251,7 +273,10 @@ namespace wFrequencies
                     return;
                 }
                 bgwCounter.ReportProgress(-2, xFile);
+
                 string contents = xFile.Processor.GetAllText(xFile.filePath);
+
+
                 xFile.charactersCount = contents.Length;
 
                 xFile.frequencies = new List<xWordFrequencies>();
@@ -274,18 +299,23 @@ namespace wFrequencies
                     words[match.Value] = currentCount;
                 }
 
+                // Add words to object's list of words with frequencies
                 foreach (var row in words.OrderByDescending(pair => pair.Value)) {
                     xWordFrequencies xwf = new xWordFrequencies();
                     xwf.word = row.Key.ToLower();
                     xwf.word = xwf.word.Substring(0, 1).ToUpper() + xwf.word.Substring(1);
                     xwf.frequency = row.Value;
+                    float freq = xwf.frequency;
+
+                    // Why it doesn't work with xwf.frequency?
+                    xwf.percentage = (freq / xFile.wordsCount) * 100;
                     xFile.frequencies.Add(xwf);
                 }
                 xFile.uniqueWordsCount = xFile.frequencies.Count();
                 xFile.SaveFileInfo();
 
             }
-       
+
             bgwCounter.ReportProgress(-3, null);
         }
 
@@ -299,7 +329,7 @@ namespace wFrequencies
             } else if (e.ProgressPercentage == -2) {
                 // Still reading
                 if (!lblStatus.Text.Equals("Читаю: " + xFile.fileName)) {
-                    lblStatus.Text = "Читаю: " + xFile.fileName; Update(); 
+                    lblStatus.Text = "Читаю: " + xFile.fileName; Update();
                 }
             } else if (e.ProgressPercentage == -3) {
                 // Has finished

@@ -36,6 +36,7 @@
             this.lblCharactersCount = new System.Windows.Forms.Label();
             this.btnExport = new System.Windows.Forms.Button();
             this.lblFileName = new System.Windows.Forms.Label();
+            this.olvClmPercentage = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             ((System.ComponentModel.ISupportInitialize)(this.olvFrequencies)).BeginInit();
             this.SuspendLayout();
             // 
@@ -43,13 +44,15 @@
             // 
             this.olvFrequencies.AllColumns.Add(this.olvClmWord);
             this.olvFrequencies.AllColumns.Add(this.olvClmFrequency);
+            this.olvFrequencies.AllColumns.Add(this.olvClmPercentage);
             this.olvFrequencies.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.olvFrequencies.CellEditUseWholeCell = false;
             this.olvFrequencies.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvClmWord,
-            this.olvClmFrequency});
+            this.olvClmFrequency,
+            this.olvClmPercentage});
             this.olvFrequencies.Cursor = System.Windows.Forms.Cursors.Default;
             this.olvFrequencies.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.olvFrequencies.FullRowSelect = true;
@@ -68,14 +71,14 @@
             this.olvClmWord.AspectName = "word";
             this.olvClmWord.Groupable = false;
             this.olvClmWord.Text = "Слово";
-            this.olvClmWord.Width = 257;
+            this.olvClmWord.Width = 277;
             // 
             // olvClmFrequency
             // 
             this.olvClmFrequency.AspectName = "frequency";
             this.olvClmFrequency.Groupable = false;
             this.olvClmFrequency.Text = "Частота";
-            this.olvClmFrequency.Width = 66;
+            this.olvClmFrequency.Width = 91;
             // 
             // lblCategory
             // 
@@ -134,6 +137,13 @@
             this.lblFileName.TabIndex = 20;
             this.lblFileName.Text = "Файл: ";
             // 
+            // olvClmPercentage
+            // 
+            this.olvClmPercentage.AspectName = "percentage";
+            this.olvClmPercentage.AspectToStringFormat = "{0:0.0}%";
+            this.olvClmPercentage.Text = "Плотность";
+            this.olvClmPercentage.Width = 92;
+            // 
             // FrmFrequencies
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -166,5 +176,6 @@
         private System.Windows.Forms.Label lblCharactersCount;
         private System.Windows.Forms.Button btnExport;
         private System.Windows.Forms.Label lblFileName;
+        private BrightIdeasSoftware.OLVColumn olvClmPercentage;
     }
 }

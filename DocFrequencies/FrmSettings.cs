@@ -17,22 +17,20 @@ namespace wFrequencies
         {
             InitializeComponent();
             comboBox1.Items.Add("Автоопределение");
-            foreach (var enc in System.Text.Encoding.GetEncodings())
-            {
+            foreach (var enc in System.Text.Encoding.GetEncodings()) {
                 comboBox1.Items.Add(enc.Name);
             }
         }
 
         private void FrmSettings_Load(object sender, EventArgs e)
         {
-            if (Properties.Settings.Default["TxtCodepage"].ToString() == "0")
-            {
+
+
+            if (Utils.StgGetInt("TxtCodepage") == 0) {
                 comboBox1.Text = "Автоопределение";
-            }
-            else
-            {
+            } else {
                 // Saved encoding
-                Encoding enc = Encoding.GetEncoding(Convert.ToInt32(Properties.Settings.Default["TxtCodepage"].ToString()));
+                Encoding enc = Encoding.GetEncoding(Utils.StgGetInt("TxtCodepage"));
                 comboBox1.Text = enc.WebName;
             }
         }
@@ -40,13 +38,11 @@ namespace wFrequencies
         private void btnSave_Click(object sender, EventArgs e)
         {
             if (comboBox1.SelectedIndex == 0)
-                Properties.Settings.Default["TxtCodepage"] = 0;
+                Utils.StgSet("TxtCodepage", 0);
             else
-                Properties.Settings.Default["TxtCodepage"] = Encoding.GetEncoding(comboBox1.Text).CodePage;
+                Utils.StgSet("TxtCodepage", Encoding.GetEncoding(comboBox1.Text).CodePage);
 
-
-            Properties.Settings.Default.Save(); // Saves settings in application configuration file
-            Close();
+             Close();
         }
     }
 }

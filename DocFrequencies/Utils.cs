@@ -18,7 +18,26 @@ namespace wFrequencies
         public static List<xTextFile> fList; // Hold the files
         private static string appName = "wFrequencies";
         private static string separator = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ListSeparator;
-       
+
+        public static void StgSet(string name, int value) {
+            Properties.Settings.Default[name] = value;
+            Properties.Settings.Default.Save();
+        }
+        public static void StgSet(string name, string value)
+        {
+            Properties.Settings.Default[name] = value;
+            Properties.Settings.Default.Save();
+        }
+
+        public static int StgGetInt(string name)
+        {
+            return Convert.ToInt32(Properties.Settings.Default[name]);
+        }
+        public static string StgGetString(string name)
+        {
+            return Convert.ToString(Properties.Settings.Default[name]);
+        }
+
         public static DialogResult msgQuestion(String txt)
         {
             return MessageBox.Show(txt, appName, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);

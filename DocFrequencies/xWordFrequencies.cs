@@ -12,5 +12,6 @@ namespace wFrequencies
         public long fileId { get; set; }
         public string word { get; set; }
         public int frequency { get; set; }
+        public float percentage { get; set; }
     }
 }

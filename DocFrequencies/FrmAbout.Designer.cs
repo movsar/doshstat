@@ -63,11 +63,11 @@
             // labelProductName
             // 
             this.labelProductName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelProductName.Location = new System.Drawing.Point(14, 0);
+            this.labelProductName.Location = new System.Drawing.Point(13, 0);
             this.labelProductName.Margin = new System.Windows.Forms.Padding(6, 0, 3, 0);
             this.labelProductName.MaximumSize = new System.Drawing.Size(0, 17);
             this.labelProductName.Name = "labelProductName";
-            this.labelProductName.Size = new System.Drawing.Size(400, 17);
+            this.labelProductName.Size = new System.Drawing.Size(401, 17);
             this.labelProductName.TabIndex = 19;
             this.labelProductName.Text = "Product Name";
             this.labelProductName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -75,11 +75,11 @@
             // labelVersion
             // 
             this.labelVersion.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelVersion.Location = new System.Drawing.Point(14, 26);
+            this.labelVersion.Location = new System.Drawing.Point(13, 26);
             this.labelVersion.Margin = new System.Windows.Forms.Padding(6, 0, 3, 0);
             this.labelVersion.MaximumSize = new System.Drawing.Size(0, 17);
             this.labelVersion.Name = "labelVersion";
-            this.labelVersion.Size = new System.Drawing.Size(400, 17);
+            this.labelVersion.Size = new System.Drawing.Size(401, 17);
             this.labelVersion.TabIndex = 0;
             this.labelVersion.Text = "Version";
             this.labelVersion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -87,11 +87,11 @@
             // labelCopyright
             // 
             this.labelCopyright.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelCopyright.Location = new System.Drawing.Point(14, 52);
+            this.labelCopyright.Location = new System.Drawing.Point(13, 52);
             this.labelCopyright.Margin = new System.Windows.Forms.Padding(6, 0, 3, 0);
             this.labelCopyright.MaximumSize = new System.Drawing.Size(0, 17);
             this.labelCopyright.Name = "labelCopyright";
-            this.labelCopyright.Size = new System.Drawing.Size(400, 17);
+            this.labelCopyright.Size = new System.Drawing.Size(401, 17);
             this.labelCopyright.TabIndex = 21;
             this.labelCopyright.Text = "Copyright";
             this.labelCopyright.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -99,11 +99,11 @@
             // labelContact
             // 
             this.labelContact.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelContact.Location = new System.Drawing.Point(14, 78);
+            this.labelContact.Location = new System.Drawing.Point(13, 78);
             this.labelContact.Margin = new System.Windows.Forms.Padding(6, 0, 3, 0);
             this.labelContact.MaximumSize = new System.Drawing.Size(0, 17);
             this.labelContact.Name = "labelContact";
-            this.labelContact.Size = new System.Drawing.Size(400, 17);
+            this.labelContact.Size = new System.Drawing.Size(401, 17);
             this.labelContact.TabIndex = 22;
             this.labelContact.Text = "Contact";
             this.labelContact.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -111,13 +111,13 @@
             // textBoxDescription
             // 
             this.textBoxDescription.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxDescription.Location = new System.Drawing.Point(14, 107);
+            this.textBoxDescription.Location = new System.Drawing.Point(13, 107);
             this.textBoxDescription.Margin = new System.Windows.Forms.Padding(6, 3, 3, 3);
             this.textBoxDescription.Multiline = true;
             this.textBoxDescription.Name = "textBoxDescription";
             this.textBoxDescription.ReadOnly = true;
             this.textBoxDescription.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBoxDescription.Size = new System.Drawing.Size(400, 126);
+            this.textBoxDescription.Size = new System.Drawing.Size(401, 126);
             this.textBoxDescription.TabIndex = 23;
             this.textBoxDescription.TabStop = false;
             this.textBoxDescription.Text = "Description";
