@@ -15,11 +15,12 @@ namespace wFrequencies
         private static readonly ITextProcessor _instance = new DocProcessor();
         public static ITextProcessor GetInstance() { return _instance; }
         static Application wordApplication; // Make only one instance to make it work faster
-        private DocProcessor() { wordApplication = new Microsoft.Office.Interop.Word.Application(); }
+        private DocProcessor() { }
 
         public string GetAllText(string path)
         {
             try {
+                if (wordApplication == null) wordApplication = new Microsoft.Office.Interop.Word.Application();
                 var srcFile = new FileInfo(path);
                 var doc = wordApplication.Documents.Open(srcFile.FullName);
                 return doc.Content.Text;
@@ -31,7 +32,7 @@ namespace wFrequencies
 
         public static void Dispose()
         {
-            try {                
+            try {
                 wordApplication.Quit();
             } catch (Exception ex) {
                 Debug.WriteLine("couldn't close the app");
