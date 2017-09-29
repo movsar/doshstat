@@ -36,5 +36,19 @@ namespace wFrequencies
         {
             Utils.OlvToExcelExport(olvFrequencies, _xFile.fileName);
         }
+
+        private void olvFrequencies_SelectionChanged(object sender, EventArgs e)
+        {
+            string lblWordsCountPrefix = "Выделено слов: ";
+            string lblWordsPercentagePrefix = "Выделено в процентах: ";
+
+            lblSelectedWordsCount.Text = lblWordsCountPrefix + olvFrequencies.SelectedObjects.Count.ToString();
+            float sumPercentage = 0;
+            foreach (var obj in olvFrequencies.SelectedObjects) {
+                xWordFrequencies xwf = (xWordFrequencies)obj;
+                sumPercentage += xwf.percentage;
+            }
+            lblSelectedWordsPercentage.Text = lblWordsPercentagePrefix + sumPercentage.ToString("F") + "%";
+        }
     }
 }

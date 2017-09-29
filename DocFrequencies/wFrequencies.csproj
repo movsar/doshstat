@@ -101,6 +101,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CSUsingOpenXmlPlainText.cs" />
+    <Compile Include="CtrlHistory.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CtrlHistory.Designer.cs">
+      <DependentUpon>CtrlHistory.cs</DependentUpon>
+    </Compile>
     <Compile Include="DbHelper.cs" />
     <Compile Include="DocProcessor.cs" />
     <Compile Include="DocxProcessor.cs" />
@@ -128,6 +134,12 @@
     <Compile Include="FrmSettings.Designer.cs">
       <DependentUpon>FrmSettings.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmSumTotal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmSumTotal.Designer.cs">
+      <DependentUpon>FrmSumTotal.cs</DependentUpon>
+    </Compile>
     <Compile Include="HtmProcessor.cs" />
     <Compile Include="ITextProcessor.cs" />
     <Compile Include="OdtProcessor.cs" />
@@ -140,6 +152,9 @@
     <Compile Include="Utils.cs" />
     <Compile Include="XlsProcessor.cs" />
     <Compile Include="xWordFrequencies.cs" />
+    <EmbeddedResource Include="CtrlHistory.resx">
+      <DependentUpon>CtrlHistory.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmAbout.resx">
       <DependentUpon>FrmAbout.cs</DependentUpon>
     </EmbeddedResource>
@@ -151,6 +166,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmSettings.resx">
       <DependentUpon>FrmSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmSumTotal.resx">
+      <DependentUpon>FrmSumTotal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

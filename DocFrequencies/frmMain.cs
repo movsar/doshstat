@@ -37,17 +37,14 @@ namespace wFrequencies
              *  7.v  Take a file, read all of its contents
              *  8.v  Scan through file and create a list of frequencies for each file
              *  9.v  Sum-up the frequency files
-             *  10.  Percentage
-             *  11.  Percentage in export and in selection
+             *  10.v  Percentage
+             *  11.v  Percentage in export and in selection
              *  12.  Общая частотность
              *  13.  Окно со статистикой сразу после Начать
              *  14.  Статистика по слову
             */
 
             InitializeComponent();
-
-            btnExport.Visible = false;
-            btnFrequenciesToXML.Visible = false;
 
             // Load settings
             if (Utils.StgGetString("WorkingDir") == "") {
@@ -91,8 +88,14 @@ namespace wFrequencies
 
         }
 
+
         private void Form1_Load(object sender, EventArgs e)
         {
+            CtrlHistory myCtrlHistory = new CtrlHistory();
+            myCtrlHistory.Dock = DockStyle.Fill;
+
+
+            tbpHistory.Controls.Add(myCtrlHistory);
 
             DirectoryInfo dInfo = new DirectoryInfo(Utils.WorkDirPath);
             if (!dInfo.Exists) dInfo.Create();
@@ -112,37 +115,9 @@ namespace wFrequencies
                 // After completion it will set the new value
             };
 
-            // Grouping by months=============================================
-            OLVColumn clm = ((OLVColumn)olvHistory.Columns[5]);
 
-            clm.GroupKeyGetter = delegate (object rowObject) {
-                xTextFile fm = (xTextFile)rowObject;
-                return fm.created_at.Substring(0, 10);
-            };
-
-            clm.GroupKeyToTitleConverter = delegate (object groupKey) {
-                DateTime dt = new DateTime();
-                dt = DateTime.ParseExact(groupKey.ToString(), "dd.MM.yyyy", null);
-                return groupKey.ToString();
-            };
-            //=================================================================
-
-            // Set DateTime column as default for sorting to make it beautiful when it shows up for the first time!
-            olvHistory.PrimarySortColumn = (olvHistory.GetColumn(5));
-
-            olvHistory.SubItemChecking += delegate (object olvCheckSender, SubItemCheckingEventArgs olvCheckArgs) {
-                // Set false all the other categories
-                xTextFile rowObject = ((xTextFile)olvCheckArgs.RowObject);
-                rowObject.isSelected = !rowObject.isSelected;
-
-                // After completion it will set the new value
-            };
 
             loadFiles();
-            loadHistory();
-
-
-
         }
 
 
@@ -204,46 +179,19 @@ namespace wFrequencies
             removeSelectedFromOlvFiles();
         }
 
-        private void loadHistory()
-        {
-            history = DbHelper.GetHistory();
-            olvHistory.SetObjects(history);
-        }
-        // Tab History
-        List<xTextFile> history;
+
+
         private void tbcHistory_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (tbcHistory.SelectedTab == tbcHistory.TabPages[1]) {
-                btnExport.Visible = true;
-                btnFrequenciesToXML.Visible = true;
-                // Tab History has been selected
+            if (tbcMain.SelectedTab == tbcMain.TabPages[1]) {
             } else {
-                btnExport.Visible = false;
-                btnFrequenciesToXML.Visible = false;
+
             }
         }
 
         private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
         {
             e.Cancel = (olvFiles.SelectedObjects.Count == 0);
-        }
-
-        private void olvHistory_DoubleClick(object sender, EventArgs e)
-        {
-            if (olvHistory.SelectedObject != null) {
-                FrmFrequencies frmFreq = new FrmFrequencies((xTextFile)(olvHistory.SelectedObject));
-                frmFreq.Show();
-            }
-        }
-
-        private void btnExport_Click(object sender, EventArgs e)
-        {
-            Utils.OlvToExcelExport(olvHistory, "List Of Literature " + Utils.GetCurrentDate());
-        }
-
-        private void btnFrequenciesToXML_Click(object sender, EventArgs e)
-        {
-            Utils.FullExcelExport(history, "Full Export " + Utils.GetCurrentDate());
         }
 
         private void olvFiles_KeyUp(object sender, KeyEventArgs e)
@@ -351,7 +299,6 @@ namespace wFrequencies
 
         private void onFinishCounting()
         {
-            loadHistory();
             isRunning = false;
             btnStart.BackColor = Color.LightGreen;
             txtWorkingDir.Enabled = true;
@@ -366,7 +313,6 @@ namespace wFrequencies
             if (Utils.msgConfirmation("Это действие приведет к полной очистке всей БД приложения, вы уверены?") == DialogResult.Yes) {
                 DbHelper.dropTables();
                 loadFiles();
-                loadHistory();
                 lblStatus.Text = "База данных успешно очищена!";
             }
         }

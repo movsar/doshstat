@@ -30,13 +30,15 @@
             this.olvFrequencies = new BrightIdeasSoftware.ObjectListView();
             this.olvClmWord = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvClmFrequency = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvClmPercentage = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.lblCategory = new System.Windows.Forms.Label();
             this.lblWordCount = new System.Windows.Forms.Label();
             this.lblUniqueWords = new System.Windows.Forms.Label();
             this.lblCharactersCount = new System.Windows.Forms.Label();
             this.btnExport = new System.Windows.Forms.Button();
             this.lblFileName = new System.Windows.Forms.Label();
-            this.olvClmPercentage = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.lblSelectedWordsCount = new System.Windows.Forms.Label();
+            this.lblSelectedWordsPercentage = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.olvFrequencies)).BeginInit();
             this.SuspendLayout();
             // 
@@ -57,14 +59,15 @@
             this.olvFrequencies.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.olvFrequencies.FullRowSelect = true;
             this.olvFrequencies.GridLines = true;
-            this.olvFrequencies.Location = new System.Drawing.Point(-5, 34);
+            this.olvFrequencies.Location = new System.Drawing.Point(-5, 46);
             this.olvFrequencies.Name = "olvFrequencies";
             this.olvFrequencies.ShowGroups = false;
-            this.olvFrequencies.Size = new System.Drawing.Size(471, 289);
+            this.olvFrequencies.Size = new System.Drawing.Size(471, 467);
             this.olvFrequencies.TabIndex = 12;
             this.olvFrequencies.UseAlternatingBackColors = true;
             this.olvFrequencies.UseCompatibleStateImageBehavior = false;
             this.olvFrequencies.View = System.Windows.Forms.View.Details;
+            this.olvFrequencies.SelectionChanged += new System.EventHandler(this.olvFrequencies_SelectionChanged);
             // 
             // olvClmWord
             // 
@@ -80,10 +83,17 @@
             this.olvClmFrequency.Text = "Частота";
             this.olvClmFrequency.Width = 91;
             // 
+            // olvClmPercentage
+            // 
+            this.olvClmPercentage.AspectName = "percentage";
+            this.olvClmPercentage.AspectToStringFormat = "{0:0.0}%";
+            this.olvClmPercentage.Text = "Плотность";
+            this.olvClmPercentage.Width = 92;
+            // 
             // lblCategory
             // 
             this.lblCategory.AutoSize = true;
-            this.lblCategory.Location = new System.Drawing.Point(3, 4);
+            this.lblCategory.Location = new System.Drawing.Point(3, 3);
             this.lblCategory.Name = "lblCategory";
             this.lblCategory.Size = new System.Drawing.Size(66, 13);
             this.lblCategory.TabIndex = 14;
@@ -92,7 +102,7 @@
             // lblWordCount
             // 
             this.lblWordCount.AutoSize = true;
-            this.lblWordCount.Location = new System.Drawing.Point(3, 17);
+            this.lblWordCount.Location = new System.Drawing.Point(3, 16);
             this.lblWordCount.Name = "lblWordCount";
             this.lblWordCount.Size = new System.Drawing.Size(70, 13);
             this.lblWordCount.TabIndex = 16;
@@ -101,7 +111,7 @@
             // lblUniqueWords
             // 
             this.lblUniqueWords.AutoSize = true;
-            this.lblUniqueWords.Location = new System.Drawing.Point(190, 17);
+            this.lblUniqueWords.Location = new System.Drawing.Point(190, 16);
             this.lblUniqueWords.Name = "lblUniqueWords";
             this.lblUniqueWords.Size = new System.Drawing.Size(103, 13);
             this.lblUniqueWords.TabIndex = 17;
@@ -110,7 +120,7 @@
             // lblCharactersCount
             // 
             this.lblCharactersCount.AutoSize = true;
-            this.lblCharactersCount.Location = new System.Drawing.Point(190, 4);
+            this.lblCharactersCount.Location = new System.Drawing.Point(190, 3);
             this.lblCharactersCount.Name = "lblCharactersCount";
             this.lblCharactersCount.Size = new System.Drawing.Size(96, 13);
             this.lblCharactersCount.TabIndex = 18;
@@ -119,7 +129,7 @@
             // btnExport
             // 
             this.btnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExport.Location = new System.Drawing.Point(365, 326);
+            this.btnExport.Location = new System.Drawing.Point(365, 516);
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(98, 25);
             this.btnExport.TabIndex = 19;
@@ -131,24 +141,35 @@
             // 
             this.lblFileName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblFileName.AutoSize = true;
-            this.lblFileName.Location = new System.Drawing.Point(3, 332);
+            this.lblFileName.Location = new System.Drawing.Point(3, 522);
             this.lblFileName.Name = "lblFileName";
             this.lblFileName.Size = new System.Drawing.Size(42, 13);
             this.lblFileName.TabIndex = 20;
             this.lblFileName.Text = "Файл: ";
             // 
-            // olvClmPercentage
+            // lblSelectedWordsCount
             // 
-            this.olvClmPercentage.AspectName = "percentage";
-            this.olvClmPercentage.AspectToStringFormat = "{0:0.0}%";
-            this.olvClmPercentage.Text = "Плотность";
-            this.olvClmPercentage.Width = 92;
+            this.lblSelectedWordsCount.AutoSize = true;
+            this.lblSelectedWordsCount.Location = new System.Drawing.Point(3, 29);
+            this.lblSelectedWordsCount.Name = "lblSelectedWordsCount";
+            this.lblSelectedWordsCount.Size = new System.Drawing.Size(0, 13);
+            this.lblSelectedWordsCount.TabIndex = 21;
+            // 
+            // lblSelectedWordsPercentage
+            // 
+            this.lblSelectedWordsPercentage.AutoSize = true;
+            this.lblSelectedWordsPercentage.Location = new System.Drawing.Point(190, 29);
+            this.lblSelectedWordsPercentage.Name = "lblSelectedWordsPercentage";
+            this.lblSelectedWordsPercentage.Size = new System.Drawing.Size(0, 13);
+            this.lblSelectedWordsPercentage.TabIndex = 22;
             // 
             // FrmFrequencies
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(463, 352);
+            this.ClientSize = new System.Drawing.Size(463, 542);
+            this.Controls.Add(this.lblSelectedWordsPercentage);
+            this.Controls.Add(this.lblSelectedWordsCount);
             this.Controls.Add(this.lblFileName);
             this.Controls.Add(this.btnExport);
             this.Controls.Add(this.lblCharactersCount);
@@ -177,5 +198,7 @@
         private System.Windows.Forms.Button btnExport;
         private System.Windows.Forms.Label lblFileName;
         private BrightIdeasSoftware.OLVColumn olvClmPercentage;
+        private System.Windows.Forms.Label lblSelectedWordsCount;
+        private System.Windows.Forms.Label lblSelectedWordsPercentage;
     }
 }

@@ -89,6 +89,7 @@ namespace wFrequencies
         public static void dropTables()
         {
             sql_cmd.Dispose();
+            sql_cmd = sql_con.CreateCommand();
             sql_cmd.CommandText = " DROP Table 'wf_files'";
             sql_cmd.ExecuteNonQuery();
 
