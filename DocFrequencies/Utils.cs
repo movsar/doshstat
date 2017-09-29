@@ -1,4 +1,7 @@
 ﻿using BrightIdeasSoftware;
+using DocumentFormat.OpenXml;
+using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Spreadsheet;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -21,6 +24,65 @@ namespace wFrequencies
         public static List<xTextFile> fList; // Hold the files
         private static string appName = "wFrequencies";
         private static string separator = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ListSeparator;
+
+        public static void Exporter(ObjectListView olv, string filepath)
+        {
+            // Create a spreadsheet document by supplying the filepath.
+            // By default, AutoSave = true, Editable = true, and Type = xlsx.
+            SpreadsheetDocument spreadsheetDocument = SpreadsheetDocument.
+                Create(filepath, SpreadsheetDocumentType.Workbook);
+
+            // Add a WorkbookPart to the document.
+            WorkbookPart workbookpart = spreadsheetDocument.AddWorkbookPart();
+            workbookpart.Workbook = new Workbook();
+
+            // Add a WorksheetPart to the WorkbookPart.
+            WorksheetPart worksheetPart = workbookpart.AddNewPart<WorksheetPart>();
+            worksheetPart.Worksheet = new Worksheet(new SheetData());
+
+            Worksheet worksheet = new Worksheet();
+            SheetData sheetData = new SheetData();
+            
+            // Add Sheets to the Workbook.
+            Sheets sheets = spreadsheetDocument.WorkbookPart.Workbook.
+                AppendChild<Sheets>(new Sheets());
+
+            // Append a new worksheet and associate it with the workbook.
+            Sheet sheet = new Sheet() {
+                Id = spreadsheetDocument.WorkbookPart.
+                GetIdOfPart(worksheetPart),
+                SheetId = 1,
+                Name = "mySheet"
+            };
+            sheets.Append(sheet);
+
+
+            Row row = new Row();
+
+            Cell cell = new Cell() {
+                CellReference = "A1",
+                DataType = CellValues.String,
+                CellValue = new CellValue("Cell1")
+            };
+
+            Cell cell2 = new Cell() {
+                CellReference = "B1",
+                DataType = CellValues.String,
+                CellValue = new CellValue("Cell2")
+            };
+            row.Append(cell);
+            row.Append(cell2);
+
+            sheetData.Append(row);
+            worksheet.Append(sheetData);
+
+            worksheetPart.Worksheet = worksheet;
+            workbookpart.Workbook.Save();
+
+            // Close the document.
+            spreadsheetDocument.Close();
+        }
+
 
         public static void StgSet(string name, int value)
         {

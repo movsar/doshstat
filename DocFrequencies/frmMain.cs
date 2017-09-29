@@ -330,7 +330,7 @@ namespace wFrequencies
 
         private void btnExport_Click(object sender, EventArgs e)
         {
-            Exporter.olvToExcel(olvFiles, "exported.xlsx");
+            Utils.Exporter(olvFiles, "exported.xlsx");
             Process.Start("exported.xlsx");
         }
     }
