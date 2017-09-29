@@ -116,6 +116,12 @@
     <Compile Include="FrmAbout.Designer.cs">
       <DependentUpon>FrmAbout.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmDetailedHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmDetailedHistory.Designer.cs">
+      <DependentUpon>FrmDetailedHistory.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmFrequencies.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -134,12 +140,6 @@
     <Compile Include="FrmSettings.Designer.cs">
       <DependentUpon>FrmSettings.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmSumTotal.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FrmSumTotal.Designer.cs">
-      <DependentUpon>FrmSumTotal.cs</DependentUpon>
-    </Compile>
     <Compile Include="HtmProcessor.cs" />
     <Compile Include="ITextProcessor.cs" />
     <Compile Include="OdtProcessor.cs" />
@@ -147,6 +147,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RtfProcessor.cs" />
+    <Compile Include="xDetails.cs" />
     <Compile Include="xTextFile.cs" />
     <Compile Include="TxtProcessor.cs" />
     <Compile Include="Utils.cs" />
@@ -158,6 +159,9 @@
     <EmbeddedResource Include="FrmAbout.resx">
       <DependentUpon>FrmAbout.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmDetailedHistory.resx">
+      <DependentUpon>FrmDetailedHistory.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmFrequencies.resx">
       <DependentUpon>FrmFrequencies.cs</DependentUpon>
     </EmbeddedResource>
@@ -166,9 +170,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmSettings.resx">
       <DependentUpon>FrmSettings.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FrmSumTotal.resx">
-      <DependentUpon>FrmSumTotal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

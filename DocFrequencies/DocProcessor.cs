@@ -18,21 +18,19 @@ namespace wFrequencies
 
         public string GetAllText(string path)
         {
-            try
-            {
+            try {
                 var srcFile = new FileInfo(path);
                 var doc = wordApplication.Documents.Open(srcFile.FullName);
                 return doc.Content.Text;
-            }
-            finally
-            {
+            } finally {
                 // we want to make sure the document is always closed 
                 wordApplication.ActiveDocument.Close();
             }
         }
 
-        public static void Dispose() {
-            wordApplication.Quit();
+        public static void Dispose()
+        {
+            try { wordApplication.Quit(); } catch (Exception ex) { }
         }
     }
 }

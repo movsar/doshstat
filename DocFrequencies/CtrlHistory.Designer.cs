@@ -29,7 +29,6 @@
         {
             this.olvHistory = new BrightIdeasSoftware.ObjectListView();
             this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvClmIsIncluded = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvClmCategory = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvClmWordsCount = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvClmUniqueWords = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -42,7 +41,6 @@
             // olvHistory
             // 
             this.olvHistory.AllColumns.Add(this.olvColumn1);
-            this.olvHistory.AllColumns.Add(this.olvClmIsIncluded);
             this.olvHistory.AllColumns.Add(this.olvClmCategory);
             this.olvHistory.AllColumns.Add(this.olvClmWordsCount);
             this.olvHistory.AllColumns.Add(this.olvClmUniqueWords);
@@ -50,7 +48,6 @@
             this.olvHistory.CellEditUseWholeCell = false;
             this.olvHistory.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn1,
-            this.olvClmIsIncluded,
             this.olvClmCategory,
             this.olvClmWordsCount,
             this.olvClmUniqueWords,
@@ -74,20 +71,9 @@
             // olvColumn1
             // 
             this.olvColumn1.AspectName = "fileName";
-            this.olvColumn1.DisplayIndex = 1;
             this.olvColumn1.Groupable = false;
             this.olvColumn1.Text = "Файл";
             this.olvColumn1.Width = 220;
-            // 
-            // olvClmIsIncluded
-            // 
-            this.olvClmIsIncluded.AspectName = "isSelected";
-            this.olvClmIsIncluded.CheckBoxes = true;
-            this.olvClmIsIncluded.DisplayIndex = 0;
-            this.olvClmIsIncluded.Groupable = false;
-            this.olvClmIsIncluded.Sortable = false;
-            this.olvClmIsIncluded.Text = "v";
-            this.olvClmIsIncluded.Width = 20;
             // 
             // olvClmCategory
             // 
@@ -123,7 +109,7 @@
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(100, 23);
             this.btnExport.TabIndex = 14;
-            this.btnExport.Text = "Экспорт Списка";
+            this.btnExport.Text = "Экспорт";
             this.btnExport.UseVisualStyleBackColor = true;
             // 
             // btnFullReport
@@ -133,8 +119,9 @@
             this.btnFullReport.Name = "btnFullReport";
             this.btnFullReport.Size = new System.Drawing.Size(182, 23);
             this.btnFullReport.TabIndex = 15;
-            this.btnFullReport.Text = "Подробная История";
+            this.btnFullReport.Text = "Подробный Отчет";
             this.btnFullReport.UseVisualStyleBackColor = true;
+            this.btnFullReport.Click += new System.EventHandler(this.btnFullReport_Click);
             // 
             // CtrlHistory
             // 
@@ -155,7 +142,6 @@
 
         private BrightIdeasSoftware.ObjectListView olvHistory;
         private BrightIdeasSoftware.OLVColumn olvColumn1;
-        private BrightIdeasSoftware.OLVColumn olvClmIsIncluded;
         private BrightIdeasSoftware.OLVColumn olvClmCategory;
         private BrightIdeasSoftware.OLVColumn olvClmWordsCount;
         private BrightIdeasSoftware.OLVColumn olvClmUniqueWords;

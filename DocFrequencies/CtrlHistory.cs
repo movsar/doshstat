@@ -18,10 +18,10 @@ namespace wFrequencies
             InitializeComponent();
         }
 
-        // Tab History
-        List<xTextFile> history;
+   
         private void CtrlHistory_Load(object sender, EventArgs e)
         {
+            loadHistory();
             olvHistory.SubItemChecking += delegate (object olvCheckSender, SubItemCheckingEventArgs olvCheckArgs) {
                 // Set false all the other categories
                 xTextFile rowObject = ((xTextFile)olvCheckArgs.RowObject);
@@ -42,8 +42,14 @@ namespace wFrequencies
 
         private void loadHistory()
         {
-            history = DbHelper.GetHistory();
-            olvHistory.SetObjects(history);
+            Utils.history = DbHelper.GetHistory();
+            olvHistory.SetObjects(Utils.history);
+        }
+
+        private void btnFullReport_Click(object sender, EventArgs e)
+        {
+            FrmDetailedHistory frmDetailedHistory = new FrmDetailedHistory();
+            frmDetailedHistory.Show();
         }
     }
 }

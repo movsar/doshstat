@@ -1,13 +1,13 @@
 ﻿namespace wFrequencies
 {
-    partial class CtrlReport
+    partial class FrmDetailedHistory
     {
-        /// <summary> 
+        /// <summary>
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary> 
+        /// <summary>
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
@@ -19,15 +19,14 @@
             base.Dispose(disposing);
         }
 
-        #region Component Designer generated code
+        #region Windows Form Designer generated code
 
-        /// <summary> 
-        /// Required method for Designer support - do not modify 
+        /// <summary>
+        /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
-            this.olvHistory = new BrightIdeasSoftware.ObjectListView();
             this.olvClmFileName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvClmCategory = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvClmWordsCount = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -36,43 +35,9 @@
             this.olvClmFrequency = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvClmPercentage = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvClmDateTime = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            ((System.ComponentModel.ISupportInitialize)(this.olvHistory)).BeginInit();
+            this.olvDetailedHistory = new BrightIdeasSoftware.ObjectListView();
+            ((System.ComponentModel.ISupportInitialize)(this.olvDetailedHistory)).BeginInit();
             this.SuspendLayout();
-            // 
-            // olvHistory
-            // 
-            this.olvHistory.AllColumns.Add(this.olvClmFileName);
-            this.olvHistory.AllColumns.Add(this.olvClmCategory);
-            this.olvHistory.AllColumns.Add(this.olvClmWordsCount);
-            this.olvHistory.AllColumns.Add(this.olvClmUniqueWords);
-            this.olvHistory.AllColumns.Add(this.olvClmWord);
-            this.olvHistory.AllColumns.Add(this.olvClmFrequency);
-            this.olvHistory.AllColumns.Add(this.olvClmPercentage);
-            this.olvHistory.AllColumns.Add(this.olvClmDateTime);
-            this.olvHistory.CellEditUseWholeCell = false;
-            this.olvHistory.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.olvClmFileName,
-            this.olvClmCategory,
-            this.olvClmWordsCount,
-            this.olvClmUniqueWords,
-            this.olvClmWord,
-            this.olvClmFrequency,
-            this.olvClmPercentage,
-            this.olvClmDateTime});
-            this.olvHistory.Cursor = System.Windows.Forms.Cursors.Default;
-            this.olvHistory.Dock = System.Windows.Forms.DockStyle.Top;
-            this.olvHistory.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.olvHistory.FullRowSelect = true;
-            this.olvHistory.GridLines = true;
-            this.olvHistory.Location = new System.Drawing.Point(0, 0);
-            this.olvHistory.MultiSelect = false;
-            this.olvHistory.Name = "olvHistory";
-            this.olvHistory.ShowGroups = false;
-            this.olvHistory.Size = new System.Drawing.Size(1080, 587);
-            this.olvHistory.TabIndex = 13;
-            this.olvHistory.UseAlternatingBackColors = true;
-            this.olvHistory.UseCompatibleStateImageBehavior = false;
-            this.olvHistory.View = System.Windows.Forms.View.Details;
             // 
             // olvClmFileName
             // 
@@ -116,7 +81,8 @@
             // 
             // olvClmPercentage
             // 
-            this.olvClmPercentage.AspectName = "percentage";
+            this.olvClmPercentage.AspectName = "getNeatPercentage";
+            this.olvClmPercentage.AspectToStringFormat = "";
             this.olvClmPercentage.Text = "Плотность";
             this.olvClmPercentage.Width = 94;
             // 
@@ -126,21 +92,55 @@
             this.olvClmDateTime.Text = "Дата и время";
             this.olvClmDateTime.Width = 138;
             // 
-            // CtrlReport
+            // olvDetailedHistory
+            // 
+            this.olvDetailedHistory.AllColumns.Add(this.olvClmFileName);
+            this.olvDetailedHistory.AllColumns.Add(this.olvClmCategory);
+            this.olvDetailedHistory.AllColumns.Add(this.olvClmWordsCount);
+            this.olvDetailedHistory.AllColumns.Add(this.olvClmUniqueWords);
+            this.olvDetailedHistory.AllColumns.Add(this.olvClmWord);
+            this.olvDetailedHistory.AllColumns.Add(this.olvClmFrequency);
+            this.olvDetailedHistory.AllColumns.Add(this.olvClmPercentage);
+            this.olvDetailedHistory.AllColumns.Add(this.olvClmDateTime);
+            this.olvDetailedHistory.CellEditUseWholeCell = false;
+            this.olvDetailedHistory.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.olvClmFileName,
+            this.olvClmCategory,
+            this.olvClmWordsCount,
+            this.olvClmUniqueWords,
+            this.olvClmWord,
+            this.olvClmFrequency,
+            this.olvClmPercentage,
+            this.olvClmDateTime});
+            this.olvDetailedHistory.Cursor = System.Windows.Forms.Cursors.Default;
+            this.olvDetailedHistory.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.olvDetailedHistory.FullRowSelect = true;
+            this.olvDetailedHistory.GridLines = true;
+            this.olvDetailedHistory.Location = new System.Drawing.Point(0, 0);
+            this.olvDetailedHistory.MultiSelect = false;
+            this.olvDetailedHistory.Name = "olvDetailedHistory";
+            this.olvDetailedHistory.ShowGroups = false;
+            this.olvDetailedHistory.Size = new System.Drawing.Size(1025, 549);
+            this.olvDetailedHistory.TabIndex = 14;
+            this.olvDetailedHistory.UseAlternatingBackColors = true;
+            this.olvDetailedHistory.UseCompatibleStateImageBehavior = false;
+            this.olvDetailedHistory.View = System.Windows.Forms.View.Details;
+            // 
+            // FrmDetailedHistory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.olvHistory);
-            this.Name = "CtrlReport";
-            this.Size = new System.Drawing.Size(1080, 577);
-            ((System.ComponentModel.ISupportInitialize)(this.olvHistory)).EndInit();
+            this.ClientSize = new System.Drawing.Size(1025, 588);
+            this.Controls.Add(this.olvDetailedHistory);
+            this.Name = "FrmDetailedHistory";
+            this.Text = "FrmDetailedHistory";
+            this.Load += new System.EventHandler(this.FrmDetailedHistory_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.olvDetailedHistory)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private BrightIdeasSoftware.ObjectListView olvHistory;
         private BrightIdeasSoftware.OLVColumn olvClmFileName;
         private BrightIdeasSoftware.OLVColumn olvClmCategory;
         private BrightIdeasSoftware.OLVColumn olvClmWordsCount;
@@ -149,5 +149,6 @@
         private BrightIdeasSoftware.OLVColumn olvClmFrequency;
         private BrightIdeasSoftware.OLVColumn olvClmPercentage;
         private BrightIdeasSoftware.OLVColumn olvClmDateTime;
+        private BrightIdeasSoftware.ObjectListView olvDetailedHistory;
     }
 }

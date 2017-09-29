@@ -14,12 +14,16 @@ namespace wFrequencies
     public class Utils
     {
         public static string WorkDirPath;
+        // Tab History
+        public static List<xTextFile> history;
+
         List<string> all_files; // For search files method
         public static List<xTextFile> fList; // Hold the files
         private static string appName = "wFrequencies";
         private static string separator = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ListSeparator;
 
-        public static void StgSet(string name, int value) {
+        public static void StgSet(string name, int value)
+        {
             Properties.Settings.Default[name] = value;
             Properties.Settings.Default.Save();
         }
@@ -104,8 +108,7 @@ namespace wFrequencies
         }
         public static void ErrLog(String caption, String msg)
         {
-            using (StreamWriter sw = new StreamWriter("wfrequencies.log", true))
-            {
+            using (StreamWriter sw = new StreamWriter("wfrequencies.log", true)) {
                 sw.WriteLine(GetCurrentDateTime() + " : " + caption);
                 sw.WriteLine(msg);
                 sw.WriteLine();
@@ -167,7 +170,7 @@ namespace wFrequencies
                 Process.Start(saveFileDialog1.FileName);
             }
         }
-      
+
         public static void OlvToExcelExport(ObjectListView olv, string defaultFileName)
         {
             StringBuilder sb = new StringBuilder();
@@ -185,7 +188,7 @@ namespace wFrequencies
                     if (lvs.Text.Trim() == string.Empty)
                         sb.Append(" " + separator);
                     else
-                        sb.Append(string.Format("\"{0}\""+separator, lvs.Text));
+                        sb.Append(string.Format("\"{0}\"" + separator, lvs.Text));
                 }
                 sb.AppendLine();
             }
