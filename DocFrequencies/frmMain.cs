@@ -191,7 +191,7 @@ namespace wFrequencies
 
         private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
         {
-            e.Cancel = (olvFiles.SelectedObjects.Count == 0);
+            ctxRemoveFromtheList.Enabled = (olvFiles.SelectedObjects.Count != 0);
         }
 
         private void olvFiles_KeyUp(object sender, KeyEventArgs e)
@@ -328,10 +328,9 @@ namespace wFrequencies
             frmSettings.ShowDialog();
         }
 
-        private void btnExport_Click(object sender, EventArgs e)
+        private void экспортироватьСписокToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DataExporter.Export(olvFiles, "exported.xlsx", false);
-            Process.Start("exported.xlsx");
+            Utils.ExcelExport(olvFiles, "Список файлов для обработки", false);
         }
     }
 }

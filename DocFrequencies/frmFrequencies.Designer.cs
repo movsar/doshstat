@@ -66,6 +66,10 @@
             this.olvFrequencies.TabIndex = 12;
             this.olvFrequencies.UseAlternatingBackColors = true;
             this.olvFrequencies.UseCompatibleStateImageBehavior = false;
+            this.olvFrequencies.UseFilterIndicator = true;
+            this.olvFrequencies.UseFiltering = true;
+            this.olvFrequencies.UseHotItem = true;
+            this.olvFrequencies.UseTranslucentHotItem = true;
             this.olvFrequencies.View = System.Windows.Forms.View.Details;
             this.olvFrequencies.SelectionChanged += new System.EventHandler(this.olvFrequencies_SelectionChanged);
             // 
@@ -133,7 +137,7 @@
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(98, 25);
             this.btnExport.TabIndex = 19;
-            this.btnExport.Text = "Экспорт в XML";
+            this.btnExport.Text = "Экспорт";
             this.btnExport.UseVisualStyleBackColor = true;
             this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 

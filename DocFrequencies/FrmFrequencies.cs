@@ -34,7 +34,7 @@ namespace wFrequencies
 
         private void btnExport_Click(object sender, EventArgs e)
         {
-            Utils.OlvToExcelExport(olvFrequencies, _xFile.fileName);
+            Utils.ExcelExport(olvFrequencies, _xFile.fileName, false);
         }
 
         private void olvFrequencies_SelectionChanged(object sender, EventArgs e)

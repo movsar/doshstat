@@ -61,7 +61,7 @@
             this.справкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.оПрограммеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bgwCounter = new System.ComponentModel.BackgroundWorker();
-            this.btnExport = new System.Windows.Forms.Button();
+            this.экспортироватьСписокToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1.SuspendLayout();
             this.tbcMain.SuspendLayout();
             this.tbpCount.SuspendLayout();
@@ -73,9 +73,10 @@
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ctxRemoveFromtheList});
+            this.ctxRemoveFromtheList,
+            this.экспортироватьСписокToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(175, 26);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(206, 70);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // ctxRemoveFromtheList
@@ -387,22 +388,18 @@
             this.bgwCounter.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwCounter_DoWork);
             this.bgwCounter.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bgwCounter_ProgressChanged);
             // 
-            // btnExport
+            // экспортироватьСписокToolStripMenuItem
             // 
-            this.btnExport.Location = new System.Drawing.Point(667, 506);
-            this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(75, 23);
-            this.btnExport.TabIndex = 16;
-            this.btnExport.Text = "Export";
-            this.btnExport.UseVisualStyleBackColor = true;
-            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
+            this.экспортироватьСписокToolStripMenuItem.Name = "экспортироватьСписокToolStripMenuItem";
+            this.экспортироватьСписокToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.экспортироватьСписокToolStripMenuItem.Text = "Экспортировать список";
+            this.экспортироватьСписокToolStripMenuItem.Click += new System.EventHandler(this.экспортироватьСписокToolStripMenuItem_Click);
             // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(763, 531);
-            this.Controls.Add(this.btnExport);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.tbcMain);
@@ -459,7 +456,7 @@
         private System.Windows.Forms.ToolStripMenuItem настройкиToolStripMenuItem;
         private System.Windows.Forms.TabPage tbpUniqueFrequencies;
         private System.Windows.Forms.TabPage tbpWordProcessor;
-        private System.Windows.Forms.Button btnExport;
+        private System.Windows.Forms.ToolStripMenuItem экспортироватьСписокToolStripMenuItem;
     }
 }
 

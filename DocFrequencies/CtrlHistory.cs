@@ -18,7 +18,7 @@ namespace wFrequencies
             InitializeComponent();
         }
 
-   
+
         private void CtrlHistory_Load(object sender, EventArgs e)
         {
             loadHistory();
@@ -50,6 +50,11 @@ namespace wFrequencies
         {
             FrmDetailedHistory frmDetailedHistory = new FrmDetailedHistory();
             frmDetailedHistory.Show();
+        }
+
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            Utils.ExcelExport(olvHistory, "История", false);
         }
     }
 }

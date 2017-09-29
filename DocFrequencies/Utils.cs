@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
+using DocumentFormat.OpenXml.Spreadsheet;
+using SpreadsheetLight;
 
 namespace wFrequencies
 {
@@ -20,6 +20,49 @@ namespace wFrequencies
         private static string appName = "wFrequencies";
         private static string separator = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ListSeparator;
 
+        public static void ExcelExport(ObjectListView olv, string defaultName, bool withStyle)
+        {
+            SLDocument sl = new SLDocument();
+            SLStyle style = sl.CreateStyle();
+
+            for (int i = 1; i <= olv.Columns.Count; ++i) {
+                sl.SetCellValue(1, i, olv.Columns[i - 1].Text);
+            }
+
+            for (int i = 1; i <= olv.Columns.Count; ++i) {
+                for (int j = 1; j <= olv.Items.Count; ++j) {
+                    string cellVal = olv.Items[j - 1].SubItems[i - 1].Text;
+
+                    sl.SetCellValue(j + 1, i, cellVal);
+
+                    if (withStyle) {
+                        System.Drawing.Color backColor = olv.Items[j - 1].BackColor;
+                        System.Drawing.Color foreColor = olv.Items[j - 1].ForeColor;
+                        style.Fill.SetPattern(PatternValues.Solid, backColor, foreColor);
+                        sl.SetCellStyle(j + 1, i, style);
+                    }
+                }
+            }
+
+            SLTable tbl = sl.CreateTable(1, 1, olv.Items.Count + 1, olv.Columns.Count);
+            if (!withStyle) tbl.SetTableStyle(SLTableStyleTypeValues.Medium4);
+
+            tbl.Sort(1, false);
+            sl.InsertTable(tbl);
+
+
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog() {
+                Filter = "XLS Format|*.xlsx",
+                FileName = defaultName + " " + GetCurrentDate() + ".xlsx",
+                Title = "Экспорт ... "
+            };
+
+            DialogResult dResult = saveFileDialog1.ShowDialog();
+            if (dResult == DialogResult.OK) {
+                sl.SaveAs(saveFileDialog1.FileName);
+                Process.Start(saveFileDialog1.FileName);
+            }
+        }
 
         public static void StgSet(string name, int value)
         {
@@ -129,82 +172,7 @@ namespace wFrequencies
         {
             return DateTime.Now.ToString("dd.MM.yyyy hh:MM:ss");
         }
-        public static void FullExcelExport(List<xTextFile> list, string defaultFileName)
-        {
-            StringBuilder sb = new StringBuilder();
 
-            //Making columns!
-            sb.Append("ID" + separator);
-            sb.Append("Имя файла" + separator);
-            sb.Append("Слово" + separator);
-            sb.Append("Частота" + separator);
-            sb.Append("Дата и Время" + separator);
-            sb.AppendLine();
-
-            //Looping through items and subitems
-            foreach (xTextFile xtFile in list.Where(file => (file.isSelected))) {
-                try {
-                    foreach (xWordFrequencies xwf in xtFile.frequencies) {
-                        sb.Append(xtFile.fileId + separator);
-                        sb.Append(xtFile.fileName + separator);
-                        sb.Append(xwf.word + separator);
-                        sb.Append(xwf.frequency + separator);
-                        sb.Append(xtFile.created_at);
-                        sb.AppendLine();
-                    }
-                } catch (NullReferenceException nrex) {
-                    ErrLog(nrex);
-                }
-            }
-
-
-            SaveFileDialog saveFileDialog1 = new SaveFileDialog() {
-                Filter = "CSV Format|*.csv",
-                FileName = defaultFileName + ".csv",
-                Title = "Экспорт ... "
-            };
-            DialogResult dResult = saveFileDialog1.ShowDialog();
-            if (dResult == DialogResult.OK) {
-                File.WriteAllText(saveFileDialog1.FileName, sb.ToString(), Encoding.UTF8);
-                Process.Start(saveFileDialog1.FileName);
-            }
-        }
-
-        public static void OlvToExcelExport(ObjectListView olv, string defaultFileName)
-        {
-            StringBuilder sb = new StringBuilder();
-
-            //Making columns!
-            foreach (ColumnHeader ch in olv.Columns) {
-                sb.Append(ch.Text + separator);
-            }
-
-            sb.AppendLine();
-
-            //Looping through items and subitems
-            foreach (ListViewItem lvi in olv.Items) {
-                foreach (ListViewItem.ListViewSubItem lvs in lvi.SubItems) {
-                    if (lvs.Text.Trim() == string.Empty)
-                        sb.Append(" " + separator);
-                    else
-                        sb.Append(string.Format("\"{0}\"" + separator, lvs.Text));
-                }
-                sb.AppendLine();
-            }
-
-
-            SaveFileDialog saveFileDialog1 = new SaveFileDialog() {
-                Filter = "CSV Format|*.csv",
-                FileName = defaultFileName + ".csv",
-                Title = "Экспорт ... "
-            };
-            DialogResult dResult = saveFileDialog1.ShowDialog();
-            if (dResult == DialogResult.OK) {
-                File.WriteAllText(saveFileDialog1.FileName, sb.ToString(), Encoding.UTF8);
-                Process.Start(saveFileDialog1.FileName);
-            }
-
-        }
         public List<string> FindFilesRecursively(string filter)
         {
             all_files = new List<string>();

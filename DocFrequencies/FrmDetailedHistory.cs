@@ -49,7 +49,7 @@ namespace wFrequencies
 
         private void btnExport_Click(object sender, EventArgs e)
         {
-
+            Utils.ExcelExport(olvDetailedHistory, "Подробная История", false);
         }
     }
 }

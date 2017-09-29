@@ -65,6 +65,10 @@
             this.olvHistory.TabIndex = 12;
             this.olvHistory.UseAlternatingBackColors = true;
             this.olvHistory.UseCompatibleStateImageBehavior = false;
+            this.olvHistory.UseFilterIndicator = true;
+            this.olvHistory.UseFiltering = true;
+            this.olvHistory.UseHotItem = true;
+            this.olvHistory.UseTranslucentHotItem = true;
             this.olvHistory.View = System.Windows.Forms.View.Details;
             this.olvHistory.DoubleClick += new System.EventHandler(this.olvHistory_DoubleClick);
             // 
@@ -111,6 +115,7 @@
             this.btnExport.TabIndex = 14;
             this.btnExport.Text = "Экспорт";
             this.btnExport.UseVisualStyleBackColor = true;
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
             // btnFullReport
             // 
