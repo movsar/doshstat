@@ -47,6 +47,8 @@
             this.txtWorkingDir = new System.Windows.Forms.TextBox();
             this.btnBrowse = new System.Windows.Forms.Button();
             this.tbpHistory = new System.Windows.Forms.TabPage();
+            this.tbpUniqueFrequencies = new System.Windows.Forms.TabPage();
+            this.tbpWordProcessor = new System.Windows.Forms.TabPage();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.prbStatus = new System.Windows.Forms.ToolStripProgressBar();
             this.lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
@@ -59,8 +61,7 @@
             this.справкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.оПрограммеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bgwCounter = new System.ComponentModel.BackgroundWorker();
-            this.tbpUniqueFrequencies = new System.Windows.Forms.TabPage();
-            this.tbpWordProcessor = new System.Windows.Forms.TabPage();
+            this.btnExport = new System.Windows.Forms.Button();
             this.contextMenuStrip1.SuspendLayout();
             this.tbcMain.SuspendLayout();
             this.tbpCount.SuspendLayout();
@@ -261,6 +262,26 @@
             this.tbpHistory.Text = "История";
             this.tbpHistory.UseVisualStyleBackColor = true;
             // 
+            // tbpUniqueFrequencies
+            // 
+            this.tbpUniqueFrequencies.Location = new System.Drawing.Point(4, 22);
+            this.tbpUniqueFrequencies.Name = "tbpUniqueFrequencies";
+            this.tbpUniqueFrequencies.Size = new System.Drawing.Size(755, 449);
+            this.tbpUniqueFrequencies.TabIndex = 2;
+            this.tbpUniqueFrequencies.Text = "Сводная частотность";
+            this.tbpUniqueFrequencies.ToolTipText = "Сводная, обобщенная частотность";
+            this.tbpUniqueFrequencies.UseVisualStyleBackColor = true;
+            // 
+            // tbpWordProcessor
+            // 
+            this.tbpWordProcessor.Location = new System.Drawing.Point(4, 22);
+            this.tbpWordProcessor.Name = "tbpWordProcessor";
+            this.tbpWordProcessor.Size = new System.Drawing.Size(755, 449);
+            this.tbpWordProcessor.TabIndex = 3;
+            this.tbpWordProcessor.Text = "Анализ слова";
+            this.tbpWordProcessor.ToolTipText = "Поиск по слову";
+            this.tbpWordProcessor.UseVisualStyleBackColor = true;
+            // 
             // statusStrip1
             // 
             this.statusStrip1.AutoSize = false;
@@ -366,31 +387,22 @@
             this.bgwCounter.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwCounter_DoWork);
             this.bgwCounter.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bgwCounter_ProgressChanged);
             // 
-            // tbpUniqueFrequencies
+            // btnExport
             // 
-            this.tbpUniqueFrequencies.Location = new System.Drawing.Point(4, 22);
-            this.tbpUniqueFrequencies.Name = "tbpUniqueFrequencies";
-            this.tbpUniqueFrequencies.Size = new System.Drawing.Size(755, 449);
-            this.tbpUniqueFrequencies.TabIndex = 2;
-            this.tbpUniqueFrequencies.Text = "Сводная частотность";
-            this.tbpUniqueFrequencies.ToolTipText = "Сводная, обобщенная частотность";
-            this.tbpUniqueFrequencies.UseVisualStyleBackColor = true;
-            // 
-            // tbpWordProcessor
-            // 
-            this.tbpWordProcessor.Location = new System.Drawing.Point(4, 22);
-            this.tbpWordProcessor.Name = "tbpWordProcessor";
-            this.tbpWordProcessor.Size = new System.Drawing.Size(755, 449);
-            this.tbpWordProcessor.TabIndex = 3;
-            this.tbpWordProcessor.Text = "Анализ слова";
-            this.tbpWordProcessor.ToolTipText = "Поиск по слову";
-            this.tbpWordProcessor.UseVisualStyleBackColor = true;
+            this.btnExport.Location = new System.Drawing.Point(667, 506);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(75, 23);
+            this.btnExport.TabIndex = 16;
+            this.btnExport.Text = "Export";
+            this.btnExport.UseVisualStyleBackColor = true;
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(763, 531);
+            this.Controls.Add(this.btnExport);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.tbcMain);
@@ -447,6 +459,7 @@
         private System.Windows.Forms.ToolStripMenuItem настройкиToolStripMenuItem;
         private System.Windows.Forms.TabPage tbpUniqueFrequencies;
         private System.Windows.Forms.TabPage tbpWordProcessor;
+        private System.Windows.Forms.Button btnExport;
     }
 }
 

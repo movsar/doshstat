@@ -1,6 +1,7 @@
 ﻿using Microsoft.Office.Interop.Word;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -30,7 +31,11 @@ namespace wFrequencies
 
         public static void Dispose()
         {
-            try { wordApplication.Quit(); } catch (Exception ex) { }
+            try {                
+                wordApplication.Quit();
+            } catch (Exception ex) {
+                Debug.WriteLine("couldn't close the app");
+            }
         }
     }
 }

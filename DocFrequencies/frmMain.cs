@@ -327,5 +327,11 @@ namespace wFrequencies
             FrmSettings frmSettings = new FrmSettings();
             frmSettings.ShowDialog();
         }
+
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            Exporter.olvToExcel(olvFiles, "exported.xlsx");
+            Process.Start("exported.xlsx");
+        }
     }
 }

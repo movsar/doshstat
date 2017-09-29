@@ -46,5 +46,10 @@ namespace wFrequencies
 
             olvDetailedHistory.SetObjects(rowObjects);
         }
+
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
