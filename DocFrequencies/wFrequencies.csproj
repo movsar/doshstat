@@ -74,6 +74,9 @@
     <Reference Include="ObjectListView, Version=2.9.1.1072, Culture=neutral, PublicKeyToken=b1c5bf581481bcd4, processorArchitecture=MSIL">
       <HintPath>..\packages\ObjectListView.Official.2.9.1\lib\net20\ObjectListView.dll</HintPath>
     </Reference>
+    <Reference Include="SpreadsheetLight, Version=3.4.9.0, Culture=neutral, PublicKeyToken=32fbb46dc1730c57, processorArchitecture=MSIL">
+      <HintPath>..\packages\SpreadsheetLight.3.4.9\lib\SpreadsheetLight.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -107,6 +110,7 @@
     <Compile Include="CtrlHistory.Designer.cs">
       <DependentUpon>CtrlHistory.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataExporter.cs" />
     <Compile Include="DbHelper.cs" />
     <Compile Include="DocProcessor.cs" />
     <Compile Include="DocxProcessor.cs" />
