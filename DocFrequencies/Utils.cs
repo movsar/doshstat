@@ -14,6 +14,7 @@ namespace wFrequencies
         public static string WorkDirPath;
         // Tab History
         public static List<xTextFile> history;
+        public static List<xWordFrequencies> frequencies;
 
         List<string> all_files; // For search files method
         public static List<xTextFile> fList; // Hold the files

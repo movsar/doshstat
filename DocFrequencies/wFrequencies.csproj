@@ -110,7 +110,6 @@
     <Compile Include="CtrlHistory.Designer.cs">
       <DependentUpon>CtrlHistory.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataExporter.cs" />
     <Compile Include="DbHelper.cs" />
     <Compile Include="DocProcessor.cs" />
     <Compile Include="DocxProcessor.cs" />
@@ -151,6 +150,12 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RtfProcessor.cs" />
+    <Compile Include="FrmTotalFrequencies.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmTotalFrequencies.Designer.cs">
+      <DependentUpon>FrmTotalFrequencies.cs</DependentUpon>
+    </Compile>
     <Compile Include="xDetails.cs" />
     <Compile Include="xTextFile.cs" />
     <Compile Include="TxtProcessor.cs" />
@@ -185,6 +190,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="FrmTotalFrequencies.resx">
+      <DependentUpon>FrmTotalFrequencies.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

@@ -30,6 +30,46 @@ namespace wFrequencies
             sql_cmd = sql_con.CreateCommand();
         }
 
+        public static List<xWordFrequencies> GetTotalFrequencies()
+        {
+            string query = "SELECT * FROM wf_frequencies";
+            List<xWordFrequencies> allFrequencies = new List<xWordFrequencies>();
+
+            SQLiteCommand cmd = new SQLiteCommand();
+            cmd = sql_con.CreateCommand();
+            cmd.CommandText = query;
+            SQLiteDataReader Reader = cmd.ExecuteReader();
+            if (!Reader.HasRows) return null;
+
+            while (Reader.Read()) {
+                xWordFrequencies xwf = new xWordFrequencies() {
+                    id = Convert.ToInt64(GetDBInt64("id", Reader)),
+                    fileId = Convert.ToInt64(GetDBInt64("file_id", Reader)),
+                    word = GetDBString("word", Reader),
+                    frequency = GetDBInt("frequency", Reader),
+                    percentage = GetDBFloat("percentage", Reader),
+                };
+
+                // If our list already has such word, don't add new element but change it
+                xWordFrequencies existing = allFrequencies.Find(x => x.word.Equals(xwf.word));
+                if (existing != null) {
+                    // Combine frequency
+                    existing.frequency = existing.frequency + xwf.frequency;
+                    // Needs to be checked
+                    existing.percentage = existing.percentage + xwf.percentage;
+                } else {
+                    allFrequencies.Add(xwf);
+                }
+            }
+            Reader.Close();
+
+            foreach (xWordFrequencies xwf in allFrequencies.GroupBy(test => test.fileId).Select(grp => grp.First())) {
+                Debug.WriteLine("fileid : " + xwf.fileId);
+            }
+
+            return allFrequencies;
+        }
+
         public static List<xWordFrequencies> GetFrequencies(long fileId)
         {
             string query = "SELECT * FROM wf_frequencies WHERE file_id = " + fileId;
@@ -60,7 +100,7 @@ namespace wFrequencies
         public static List<xTextFile> GetHistory()
         {
             ResetSQLite();
-
+            Utils.frequencies = new List<xWordFrequencies>();
 
             string query = "SELECT * FROM wf_files";
             List<xTextFile> list = new List<xTextFile>();

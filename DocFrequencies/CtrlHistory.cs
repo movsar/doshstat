@@ -56,5 +56,11 @@ namespace wFrequencies
         {
             Utils.ExcelExport(olvHistory, "История", false);
         }
+
+        private void btnTotalFrequencies_Click(object sender, EventArgs e)
+        {
+            FrmTotalFrequencies frmTotalFrequencies = new FrmTotalFrequencies();
+            frmTotalFrequencies.Show();
+        }
     }
 }

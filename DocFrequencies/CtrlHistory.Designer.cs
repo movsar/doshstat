@@ -35,6 +35,7 @@
             this.olvClmDateTime = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.btnExport = new System.Windows.Forms.Button();
             this.btnFullReport = new System.Windows.Forms.Button();
+            this.btnTotalFrequencies = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.olvHistory)).BeginInit();
             this.SuspendLayout();
             // 
@@ -109,7 +110,7 @@
             // btnExport
             // 
             this.btnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExport.Location = new System.Drawing.Point(452, 421);
+            this.btnExport.Location = new System.Drawing.Point(266, 421);
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(100, 23);
             this.btnExport.TabIndex = 14;
@@ -128,10 +129,22 @@
             this.btnFullReport.UseVisualStyleBackColor = true;
             this.btnFullReport.Click += new System.EventHandler(this.btnFullReport_Click);
             // 
+            // btnTotalFrequencies
+            // 
+            this.btnTotalFrequencies.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnTotalFrequencies.Location = new System.Drawing.Point(372, 421);
+            this.btnTotalFrequencies.Name = "btnTotalFrequencies";
+            this.btnTotalFrequencies.Size = new System.Drawing.Size(180, 23);
+            this.btnTotalFrequencies.TabIndex = 16;
+            this.btnTotalFrequencies.Text = "Сводная Частотность";
+            this.btnTotalFrequencies.UseVisualStyleBackColor = true;
+            this.btnTotalFrequencies.Click += new System.EventHandler(this.btnTotalFrequencies_Click);
+            // 
             // CtrlHistory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnTotalFrequencies);
             this.Controls.Add(this.olvHistory);
             this.Controls.Add(this.btnExport);
             this.Controls.Add(this.btnFullReport);
@@ -153,5 +166,6 @@
         private BrightIdeasSoftware.OLVColumn olvClmDateTime;
         private System.Windows.Forms.Button btnExport;
         private System.Windows.Forms.Button btnFullReport;
+        private System.Windows.Forms.Button btnTotalFrequencies;
     }
 }
