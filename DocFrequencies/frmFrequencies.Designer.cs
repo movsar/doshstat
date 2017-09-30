@@ -182,7 +182,7 @@
             this.Controls.Add(this.lblCategory);
             this.Controls.Add(this.olvFrequencies);
             this.Name = "FrmFrequencies";
-            this.Text = "Отчет по файлу";
+            this.Text = "Частотность по файлу";
             this.Load += new System.EventHandler(this.frmFrequencies_Load);
             ((System.ComponentModel.ISupportInitialize)(this.olvFrequencies)).EndInit();
             this.ResumeLayout(false);

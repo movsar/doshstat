@@ -55,17 +55,15 @@ namespace wFrequencies
                 if (existing != null) {
                     // Combine frequency
                     existing.frequency = existing.frequency + xwf.frequency;
-                    // Needs to be checked
-                    existing.percentage = existing.percentage + xwf.percentage;
+                    float freq = existing.frequency;
+                    existing.percentage = (freq / WORDS_COUNT) * 100;
                 } else {
+                    float freq = xwf.frequency;
+                    xwf.percentage = (freq / WORDS_COUNT) * 100;
                     allFrequencies.Add(xwf);
                 }
             }
             Reader.Close();
-
-            foreach (xWordFrequencies xwf in allFrequencies.GroupBy(test => test.fileId).Select(grp => grp.First())) {
-                Debug.WriteLine("fileid : " + xwf.fileId);
-            }
 
             return allFrequencies;
         }
@@ -97,8 +95,13 @@ namespace wFrequencies
             return list;
         }
 
+        public static int WORDS_COUNT;
+        public static int CHARACTERS_COUNT;
+        public static int FILES_COUNT;
+
         public static List<xTextFile> GetHistory()
         {
+            WORDS_COUNT = 0; CHARACTERS_COUNT = 0; FILES_COUNT = 0;
             ResetSQLite();
             Utils.frequencies = new List<xWordFrequencies>();
 
@@ -120,6 +123,9 @@ namespace wFrequencies
                     frequencies = GetFrequencies(Convert.ToInt64(GetDBInt64("id", Reader)))
                 };
 
+                WORDS_COUNT += tFile.wordsCount;
+                CHARACTERS_COUNT += tFile.charactersCount;
+                FILES_COUNT++;
                 list.Add(tFile);
             }
             Reader.Close();

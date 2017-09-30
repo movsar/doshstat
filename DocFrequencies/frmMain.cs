@@ -39,9 +39,10 @@ namespace wFrequencies
              *  9.v  Sum-up the frequency files
              *  10.v  Percentage
              *  11.v  Percentage in export and in selection
-             *  12.  Общая частотность
-             *  13.  Окно со статистикой сразу после Начать
-             *  14.  Статистика по слову
+             *  12.v  Общая частотность
+             *  13.   Add date from and date to, to SELECT for all history requests
+             *  14.   Статистика по слову
+             *  15.   Окно со статистикой сразу после Начать
             */
 
             InitializeComponent();
