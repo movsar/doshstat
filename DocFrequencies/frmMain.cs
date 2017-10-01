@@ -43,6 +43,7 @@ namespace wFrequencies
              *  13.v  Add date from and date to, to SELECT for all history requests
              *  14.   Статистика по слову
              *  15.   Окно со статистикой сразу после Начать
+             *  16.   Read line by line
             */
 
             InitializeComponent();

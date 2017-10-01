@@ -110,6 +110,12 @@
     <Compile Include="CtrlHistory.Designer.cs">
       <DependentUpon>CtrlHistory.cs</DependentUpon>
     </Compile>
+    <Compile Include="CtrlWordAnalyzer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CtrlWordAnalyzer.Designer.cs">
+      <DependentUpon>CtrlWordAnalyzer.cs</DependentUpon>
+    </Compile>
     <Compile Include="DbHelper.cs" />
     <Compile Include="DocProcessor.cs" />
     <Compile Include="DocxProcessor.cs" />
@@ -164,6 +170,9 @@
     <Compile Include="xWordFrequencies.cs" />
     <EmbeddedResource Include="CtrlHistory.resx">
       <DependentUpon>CtrlHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CtrlWordAnalyzer.resx">
+      <DependentUpon>CtrlWordAnalyzer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmAbout.resx">
       <DependentUpon>FrmAbout.cs</DependentUpon>
