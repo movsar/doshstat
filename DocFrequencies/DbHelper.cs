@@ -61,7 +61,7 @@ namespace wFrequencies
             return allfrequencies;
         }
 
-        public static List<xWordFrequencies> GetFrequencies(string dtFrom, string dtTo, long fileId)
+        public static List<xWordFrequencies> GetFrequencies(long fileId)
         {
 
             string query = string.Format("SELECT * FROM wf_frequencies WHERE file_id={0}", fileId);
@@ -93,13 +93,14 @@ namespace wFrequencies
         public static int CHARACTERS_COUNT;
         public static int FILES_COUNT;
 
+
         public static List<xTextFile> GetHistory(string dtFrom, string dtTo)
         {
             WORDS_COUNT = 0; CHARACTERS_COUNT = 0; FILES_COUNT = 0;
             ResetSQLite();
             Utils.frequencies = new List<xWordFrequencies>();
 
-            string query = "SELECT * FROM wf_files";
+            string query = string.Format("SELECT * FROM `wf_files` WHERE strftime('%Y-%m-%d %H:%M:%S',created_at) BETWEEN ('{0}') AND ('{1}')", dtFrom, dtTo);
             List<xTextFile> list = new List<xTextFile>();
             sql_cmd.CommandText = query;
             SQLiteDataReader Reader = sql_cmd.ExecuteReader();
@@ -114,7 +115,7 @@ namespace wFrequencies
                     charactersCount = GetDBInt("characters_count", Reader),
                     categoryIndex = GetDBInt("category", Reader),
                     created_at = GetDBString("created_at", Reader),
-                    frequencies = GetFrequencies(dtFrom, dtTo, Convert.ToInt64(GetDBInt64("id", Reader)))
+                    frequencies = GetFrequencies(Convert.ToInt64(GetDBInt64("id", Reader)))
                 };
 
                 WORDS_COUNT += tFile.wordsCount;

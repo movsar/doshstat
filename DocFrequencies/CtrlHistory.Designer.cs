@@ -147,21 +147,22 @@
             // dtpTo
             // 
             this.dtpTo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.dtpTo.CustomFormat = "dd.MMMM.yyyy";
+            this.dtpTo.CustomFormat = "dd.MMMM.yyyy HH:mm:ss";
             this.dtpTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpTo.Location = new System.Drawing.Point(181, 423);
+            this.dtpTo.Location = new System.Drawing.Point(236, 423);
             this.dtpTo.Name = "dtpTo";
-            this.dtpTo.Size = new System.Drawing.Size(136, 20);
+            this.dtpTo.Size = new System.Drawing.Size(176, 20);
             this.dtpTo.TabIndex = 51;
+            this.dtpTo.ValueChanged += new System.EventHandler(this.dtpTo_ValueChanged);
             // 
             // dtpFrom
             // 
             this.dtpFrom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.dtpFrom.CustomFormat = "dd.MMMM.yyyy";
+            this.dtpFrom.CustomFormat = "dd.MMMM.yyyy HH:mm:ss";
             this.dtpFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpFrom.Location = new System.Drawing.Point(14, 423);
             this.dtpFrom.Name = "dtpFrom";
-            this.dtpFrom.Size = new System.Drawing.Size(137, 20);
+            this.dtpFrom.Size = new System.Drawing.Size(186, 20);
             this.dtpFrom.TabIndex = 50;
             this.dtpFrom.ValueChanged += new System.EventHandler(this.dtpFrom_ValueChanged);
             // 
@@ -177,7 +178,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(157, 427);
+            this.label2.Location = new System.Drawing.Point(206, 427);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(24, 13);
             this.label2.TabIndex = 53;

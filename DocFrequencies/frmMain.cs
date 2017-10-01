@@ -40,7 +40,7 @@ namespace wFrequencies
              *  10.v  Percentage
              *  11.v  Percentage in export and in selection
              *  12.v  Общая частотность
-             *  13.   Add date from and date to, to SELECT for all history requests
+             *  13.v  Add date from and date to, to SELECT for all history requests
              *  14.   Статистика по слову
              *  15.   Окно со статистикой сразу после Начать
             */

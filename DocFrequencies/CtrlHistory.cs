@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
+using System.Diagnostics;
 
 namespace wFrequencies
 {
@@ -18,6 +19,8 @@ namespace wFrequencies
             InitializeComponent();
         }
 
+        // A flag to prevent olv from updating two times on start because of initializing elements
+        private bool isReady = false;
 
         private void CtrlHistory_Load(object sender, EventArgs e)
         {
@@ -33,6 +36,9 @@ namespace wFrequencies
 
                 // After completion it will set the new value
             };
+
+            loadHistory();
+            isReady = true;
         }
 
         private void olvHistory_DoubleClick(object sender, EventArgs e)
@@ -46,30 +52,43 @@ namespace wFrequencies
 
         private void loadHistory()
         {
-            Utils.history = DbHelper.GetHistory(dtpFrom.Value.ToString("dd.MM.yyyy 00:00:00"), dtpTo.Value.ToString("dd.MM.yyyy 23:59:59"));
-            olvHistory.SetObjects(Utils.history);
+            Utils.history = DbHelper.GetHistory(dtpFrom.Value.ToString("yyyy-MM-dd HH:mm:ss"), dtpTo.Value.ToString("yyyy-MM-dd HH:mm:ss"));
+            if (Utils.history != null) {
+                Debug.WriteLine(Utils.history.Count);
+                olvHistory.SetObjects(Utils.history);
+            } else {
+                olvHistory.ClearObjects();
+            }
         }
 
         private void btnFullReport_Click(object sender, EventArgs e)
         {
+            if (Utils.history == null) return;
             FrmDetailedHistory frmDetailedHistory = new FrmDetailedHistory();
             frmDetailedHistory.Show();
         }
 
         private void btnExport_Click(object sender, EventArgs e)
         {
+            if (Utils.history == null) return;
             Utils.ExcelExport(olvHistory, "История", false);
         }
 
         private void btnTotalFrequencies_Click(object sender, EventArgs e)
         {
+            if (Utils.history == null) return;
             FrmTotalFrequencies frmTotalFrequencies = new FrmTotalFrequencies();
             frmTotalFrequencies.Show();
         }
 
         private void dtpFrom_ValueChanged(object sender, EventArgs e)
         {
-            loadHistory();
+            if (isReady)loadHistory();
+        }
+
+        private void dtpTo_ValueChanged(object sender, EventArgs e)
+        {
+            if (isReady) loadHistory();
         }
     }
 }

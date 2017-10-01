@@ -167,11 +167,11 @@ namespace wFrequencies
         }
         public static string GetCurrentDate()
         {
-            return DateTime.Now.ToString("dd.MM.yyyy");
+            return DateTime.Now.ToString("yyyy-MM-dd");
         }
         public static string GetCurrentDateTime()
         {
-            return DateTime.Now.ToString("dd.MM.yyyy hh:MM:ss");
+            return DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss");
         }
 
         public List<string> FindFilesRecursively(string filter)
