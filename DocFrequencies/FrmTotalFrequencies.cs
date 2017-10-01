@@ -19,7 +19,7 @@ namespace wFrequencies
 
         private void TotalFrequencies_Load(object sender, EventArgs e)
         {
-            List<xWordFrequencies> totalFrequencies = DbHelper.GetTotalFrequencies();
+            List<xWordFrequencies> totalFrequencies = DbHelper.GetCombinedFrequencies();
             olvTotalFrequencies.SetObjects(totalFrequencies);
             lblCharactersCount.Text += DbHelper.CHARACTERS_COUNT.ToString();
             lblUniqueWords.Text += totalFrequencies.Count.ToString();

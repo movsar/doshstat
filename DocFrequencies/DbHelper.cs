@@ -30,28 +30,22 @@ namespace wFrequencies
             sql_cmd = sql_con.CreateCommand();
         }
 
-        public static List<xWordFrequencies> GetTotalFrequencies()
+        public static List<xWordFrequencies> GetCombinedFrequencies()
         {
-            string query = "SELECT * FROM wf_frequencies";
-            List<xWordFrequencies> allFrequencies = new List<xWordFrequencies>();
+            // This function gets all frequencies between the range defined with dtFom and dtTO
 
-            SQLiteCommand cmd = new SQLiteCommand();
-            cmd = sql_con.CreateCommand();
-            cmd.CommandText = query;
-            SQLiteDataReader Reader = cmd.ExecuteReader();
-            if (!Reader.HasRows) return null;
+            // Combine all frequencies
+            List<xWordFrequencies> combinedfrequencies = new List<xWordFrequencies>();
+            foreach (xTextFile xtf in Utils.history) {
+                combinedfrequencies.AddRange(xtf.frequencies);
+            }
 
-            while (Reader.Read()) {
-                xWordFrequencies xwf = new xWordFrequencies() {
-                    id = Convert.ToInt64(GetDBInt64("id", Reader)),
-                    fileId = Convert.ToInt64(GetDBInt64("file_id", Reader)),
-                    word = GetDBString("word", Reader),
-                    frequency = GetDBInt("frequency", Reader),
-                    percentage = GetDBFloat("percentage", Reader),
-                };
+            // List for the all unique frequencies
+            List<xWordFrequencies> allfrequencies = new List<xWordFrequencies>();
 
+            foreach (xWordFrequencies xwf in combinedfrequencies) {
                 // If our list already has such word, don't add new element but change it
-                xWordFrequencies existing = allFrequencies.Find(x => x.word.Equals(xwf.word));
+                xWordFrequencies existing = allfrequencies.Find(x => x.word.Equals(xwf.word));
                 if (existing != null) {
                     // Combine frequency
                     existing.frequency = existing.frequency + xwf.frequency;
@@ -60,17 +54,17 @@ namespace wFrequencies
                 } else {
                     float freq = xwf.frequency;
                     xwf.percentage = (freq / WORDS_COUNT) * 100;
-                    allFrequencies.Add(xwf);
+                    allfrequencies.Add(xwf);
                 }
             }
-            Reader.Close();
 
-            return allFrequencies;
+            return allfrequencies;
         }
 
-        public static List<xWordFrequencies> GetFrequencies(long fileId)
+        public static List<xWordFrequencies> GetFrequencies(string dtFrom, string dtTo, long fileId)
         {
-            string query = "SELECT * FROM wf_frequencies WHERE file_id = " + fileId;
+
+            string query = string.Format("SELECT * FROM wf_frequencies WHERE file_id={0}", fileId);
             List<xWordFrequencies> list = new List<xWordFrequencies>();
 
             SQLiteCommand cmd = new SQLiteCommand();
@@ -99,7 +93,7 @@ namespace wFrequencies
         public static int CHARACTERS_COUNT;
         public static int FILES_COUNT;
 
-        public static List<xTextFile> GetHistory()
+        public static List<xTextFile> GetHistory(string dtFrom, string dtTo)
         {
             WORDS_COUNT = 0; CHARACTERS_COUNT = 0; FILES_COUNT = 0;
             ResetSQLite();
@@ -120,7 +114,7 @@ namespace wFrequencies
                     charactersCount = GetDBInt("characters_count", Reader),
                     categoryIndex = GetDBInt("category", Reader),
                     created_at = GetDBString("created_at", Reader),
-                    frequencies = GetFrequencies(Convert.ToInt64(GetDBInt64("id", Reader)))
+                    frequencies = GetFrequencies(dtFrom, dtTo, Convert.ToInt64(GetDBInt64("id", Reader)))
                 };
 
                 WORDS_COUNT += tFile.wordsCount;
@@ -217,8 +211,6 @@ namespace wFrequencies
 
             return DbExecuteNonQuery(sql_cmd);
         }
-
-
         public static long UpdateReq(string table, Dictionary<string, object> nameValueData, long id)
         {
             string req = "UPDATE " + table;
@@ -266,7 +258,6 @@ namespace wFrequencies
                 return -1;
             }
         }
-
         public static int GetColumnIndex(ListView lv, string colTitle)
         {
             foreach (ColumnHeader col in lv.Columns) {
@@ -278,7 +269,6 @@ namespace wFrequencies
             return -1;
         }
 
-
         public static string TrimLastCharacter(this String str)
         {
             if (String.IsNullOrEmpty(str)) {
@@ -287,7 +277,6 @@ namespace wFrequencies
                 return str.TrimEnd(str[str.Length - 1]);
             }
         }
-
 
         public static long DbExecuteNonQuery(SQLiteCommand cmd)
         {
@@ -313,7 +302,6 @@ namespace wFrequencies
                 return -1;
             }
         }
-
 
         public static string GetDBString(string SqlFieldName, SQLiteDataReader Reader)
         {

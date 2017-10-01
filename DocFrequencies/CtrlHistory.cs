@@ -21,7 +21,11 @@ namespace wFrequencies
 
         private void CtrlHistory_Load(object sender, EventArgs e)
         {
-            loadHistory();
+            DateTime dt = DateTime.Now;
+            TimeSpan ts = new TimeSpan(6, 23, 59, 59);
+            dtpFrom.Value = dt.Subtract(ts);
+            dtpTo.Value = dt;
+
             olvHistory.SubItemChecking += delegate (object olvCheckSender, SubItemCheckingEventArgs olvCheckArgs) {
                 // Set false all the other categories
                 xTextFile rowObject = ((xTextFile)olvCheckArgs.RowObject);
@@ -42,7 +46,7 @@ namespace wFrequencies
 
         private void loadHistory()
         {
-            Utils.history = DbHelper.GetHistory();
+            Utils.history = DbHelper.GetHistory(dtpFrom.Value.ToString("dd.MM.yyyy 00:00:00"), dtpTo.Value.ToString("dd.MM.yyyy 23:59:59"));
             olvHistory.SetObjects(Utils.history);
         }
 
@@ -61,6 +65,11 @@ namespace wFrequencies
         {
             FrmTotalFrequencies frmTotalFrequencies = new FrmTotalFrequencies();
             frmTotalFrequencies.Show();
+        }
+
+        private void dtpFrom_ValueChanged(object sender, EventArgs e)
+        {
+            loadHistory();
         }
     }
 }
