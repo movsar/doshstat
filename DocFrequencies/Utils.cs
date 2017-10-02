@@ -171,7 +171,8 @@ namespace wFrequencies
         }
         public static string GetCurrentDateTime()
         {
-            return DateTime.Now.ToString("yyyy-MM-dd hh:MM:ss");
+            string dt = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
+            return dt;
         }
 
         public List<string> FindFilesRecursively(string filter)

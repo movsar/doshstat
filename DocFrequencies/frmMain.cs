@@ -43,7 +43,8 @@ namespace wFrequencies
              *  13.v  Add date from and date to, to SELECT for all history requests
              *  14.   Статистика по слову
              *  15.   Окно со статистикой сразу после Начать
-             *  16.   Read line by line
+             *  16.   Excel выгружать числа как числа а не текст!
+             *  17.   Read line by line
             */
 
             InitializeComponent();
@@ -90,10 +91,10 @@ namespace wFrequencies
 
         }
 
-
+        CtrlHistory myCtrlHistory;
         private void Form1_Load(object sender, EventArgs e)
         {
-            CtrlHistory myCtrlHistory = new CtrlHistory();
+            myCtrlHistory = new CtrlHistory();
             myCtrlHistory.Dock = DockStyle.Fill;
 
 
@@ -142,6 +143,7 @@ namespace wFrequencies
                 loadFiles();
             }
         }
+        Stopwatch watch;
 
         private void btnStart_Click(object sender, EventArgs e)
         {
@@ -153,6 +155,7 @@ namespace wFrequencies
                 btnStart.BackColor = Color.IndianRed;
                 btnStart.Text = "Cтоп";
                 prbStatus.Visible = true;
+                watch = Stopwatch.StartNew();
             } else {
                 if (bgwCounter.IsBusy) bgwCounter.CancelAsync();
                 lblStatus.Text = "Отмена"; Update();
@@ -308,14 +311,26 @@ namespace wFrequencies
             btnStart.Text = "Старт";
             prbStatus.Visible = false;
             lblStatus.Text = "Работа выполнена";
+
+            // Пройденное время
+            watch.Stop();
+
+            // Время сейчас
+            DateTime dtTo = DateTime.Now;
+            DateTime dtFrom = dtTo.Subtract(watch.Elapsed);
+
+            Utils.history = DbHelper.GetHistory(dtFrom.ToString("yyyy-MM-dd HH:mm:ss"), dtTo.ToString("yyyy-MM-dd HH:mm:ss"));
+
+            FrmTotalDetails frmTotalDetails = new FrmTotalDetails();
+            frmTotalDetails.Show();
         }
 
         private void сброситьБДToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (Utils.msgConfirmation("Это действие приведет к полной очистке всей БД приложения, вы уверены?") == DialogResult.Yes) {
                 DbHelper.dropTables();
-                loadFiles();
                 lblStatus.Text = "База данных успешно очищена!";
+                myCtrlHistory.clearHistory();
             }
         }
 

@@ -11,9 +11,9 @@ using BrightIdeasSoftware;
 
 namespace wFrequencies
 {
-    public partial class FrmDetailedHistory : Form
+    public partial class FrmTotalDetails : Form
     {
-        public FrmDetailedHistory()
+        public FrmTotalDetails()
         {
             InitializeComponent();
         }

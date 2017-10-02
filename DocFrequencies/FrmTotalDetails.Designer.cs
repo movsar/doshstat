@@ -1,6 +1,6 @@
 ﻿namespace wFrequencies
 {
-    partial class FrmDetailedHistory
+    partial class FrmTotalDetails
     {
         /// <summary>
         /// Required designer variable.

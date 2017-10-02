@@ -125,11 +125,11 @@
     <Compile Include="FrmAbout.Designer.cs">
       <DependentUpon>FrmAbout.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmDetailedHistory.cs">
+    <Compile Include="FrmTotalDetails.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmDetailedHistory.Designer.cs">
-      <DependentUpon>FrmDetailedHistory.cs</DependentUpon>
+    <Compile Include="FrmTotalDetails.Designer.cs">
+      <DependentUpon>FrmTotalDetails.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmFrequencies.cs">
       <SubType>Form</SubType>
@@ -177,8 +177,8 @@
     <EmbeddedResource Include="FrmAbout.resx">
       <DependentUpon>FrmAbout.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmDetailedHistory.resx">
-      <DependentUpon>FrmDetailedHistory.cs</DependentUpon>
+    <EmbeddedResource Include="FrmTotalDetails.resx">
+      <DependentUpon>FrmTotalDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmFrequencies.resx">
       <DependentUpon>FrmFrequencies.cs</DependentUpon>

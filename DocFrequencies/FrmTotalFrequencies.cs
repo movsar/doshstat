@@ -40,5 +40,10 @@ namespace wFrequencies
             }
             lblSelectedWordsPercentage.Text = lblWordsPercentagePrefix + sumPercentage.ToString("F") + "%";
         }
+        
+        private void btnExport_Click_1(object sender, EventArgs e)
+        {
+            Utils.ExcelExport(olvTotalFrequencies, "Сводная Частотность", false);
+        }
     }
 }

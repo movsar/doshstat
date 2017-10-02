@@ -45,14 +45,8 @@
             this.справкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.оПрограммеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bgwCounter = new System.ComponentModel.BackgroundWorker();
-            this.tbpWordProcessor = new System.Windows.Forms.TabPage();
             this.tbpHistory = new System.Windows.Forms.TabPage();
             this.tbpCount = new System.Windows.Forms.TabPage();
-            this.btnBrowse = new System.Windows.Forms.Button();
-            this.txtWorkingDir = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.btnStart = new System.Windows.Forms.Button();
-            this.lblInfo = new System.Windows.Forms.Label();
             this.olvFiles = new BrightIdeasSoftware.ObjectListView();
             this.olvClmFileName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvClmFiction = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -60,6 +54,11 @@
             this.olvClmReligious = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvClmPoetry = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvScientific = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.txtWorkingDir = new System.Windows.Forms.TextBox();
+            this.lblInfo = new System.Windows.Forms.Label();
+            this.btnStart = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnBrowse = new System.Windows.Forms.Button();
             this.tbcMain = new System.Windows.Forms.TabControl();
             this.contextMenuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -197,16 +196,6 @@
             this.bgwCounter.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwCounter_DoWork);
             this.bgwCounter.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bgwCounter_ProgressChanged);
             // 
-            // tbpWordProcessor
-            // 
-            this.tbpWordProcessor.Location = new System.Drawing.Point(4, 22);
-            this.tbpWordProcessor.Name = "tbpWordProcessor";
-            this.tbpWordProcessor.Size = new System.Drawing.Size(755, 449);
-            this.tbpWordProcessor.TabIndex = 3;
-            this.tbpWordProcessor.Text = "Анализ слова";
-            this.tbpWordProcessor.ToolTipText = "Поиск по слову";
-            this.tbpWordProcessor.UseVisualStyleBackColor = true;
-            // 
             // tbpHistory
             // 
             this.tbpHistory.Location = new System.Drawing.Point(4, 22);
@@ -232,60 +221,6 @@
             this.tbpCount.TabIndex = 0;
             this.tbpCount.Text = "Главная";
             this.tbpCount.UseVisualStyleBackColor = true;
-            // 
-            // btnBrowse
-            // 
-            this.btnBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnBrowse.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.btnBrowse.Location = new System.Drawing.Point(678, 21);
-            this.btnBrowse.Name = "btnBrowse";
-            this.btnBrowse.Size = new System.Drawing.Size(78, 22);
-            this.btnBrowse.TabIndex = 10;
-            this.btnBrowse.Text = "Выбрать";
-            this.btnBrowse.UseVisualStyleBackColor = false;
-            this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
-            // 
-            // txtWorkingDir
-            // 
-            this.txtWorkingDir.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtWorkingDir.Location = new System.Drawing.Point(2, 21);
-            this.txtWorkingDir.Name = "txtWorkingDir";
-            this.txtWorkingDir.Size = new System.Drawing.Size(672, 20);
-            this.txtWorkingDir.TabIndex = 11;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(4, 4);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(197, 13);
-            this.label1.TabIndex = 12;
-            this.label1.Text = "Папка с обрабатываемыми файлами";
-            // 
-            // btnStart
-            // 
-            this.btnStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnStart.BackColor = System.Drawing.Color.LightGreen;
-            this.btnStart.Location = new System.Drawing.Point(678, 49);
-            this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(78, 23);
-            this.btnStart.TabIndex = 13;
-            this.btnStart.Text = "Начать";
-            this.btnStart.UseVisualStyleBackColor = false;
-            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
-            // 
-            // lblInfo
-            // 
-            this.lblInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblInfo.Location = new System.Drawing.Point(4, 46);
-            this.lblInfo.Name = "lblInfo";
-            this.lblInfo.Size = new System.Drawing.Size(665, 74);
-            this.lblInfo.TabIndex = 14;
-            this.lblInfo.Text = "Выберите папку с входными файлами\r\n *.doc, *.docx, *.pdf, *.txt, *.odt, *.xlsx, *" +
-    ".rtf, *.htm, *.html";
             // 
             // olvFiles
             // 
@@ -368,6 +303,60 @@
             this.olvScientific.Sortable = false;
             this.olvScientific.Text = "Научная";
             // 
+            // txtWorkingDir
+            // 
+            this.txtWorkingDir.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtWorkingDir.Location = new System.Drawing.Point(2, 21);
+            this.txtWorkingDir.Name = "txtWorkingDir";
+            this.txtWorkingDir.Size = new System.Drawing.Size(672, 20);
+            this.txtWorkingDir.TabIndex = 11;
+            // 
+            // lblInfo
+            // 
+            this.lblInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblInfo.Location = new System.Drawing.Point(4, 46);
+            this.lblInfo.Name = "lblInfo";
+            this.lblInfo.Size = new System.Drawing.Size(665, 37);
+            this.lblInfo.TabIndex = 14;
+            this.lblInfo.Text = "Выберите папку с входными файлами\r\n *.doc, *.docx, *.pdf, *.txt, *.odt, *.xlsx, *" +
+    ".rtf, *.htm, *.html";
+            // 
+            // btnStart
+            // 
+            this.btnStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnStart.BackColor = System.Drawing.Color.LightGreen;
+            this.btnStart.Location = new System.Drawing.Point(678, 49);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(78, 23);
+            this.btnStart.TabIndex = 13;
+            this.btnStart.Text = "Начать";
+            this.btnStart.UseVisualStyleBackColor = false;
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(4, 4);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(197, 13);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "Папка с обрабатываемыми файлами";
+            // 
+            // btnBrowse
+            // 
+            this.btnBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnBrowse.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btnBrowse.Location = new System.Drawing.Point(678, 21);
+            this.btnBrowse.Name = "btnBrowse";
+            this.btnBrowse.Size = new System.Drawing.Size(78, 22);
+            this.btnBrowse.TabIndex = 10;
+            this.btnBrowse.Text = "Выбрать";
+            this.btnBrowse.UseVisualStyleBackColor = false;
+            this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
+            // 
             // tbcMain
             // 
             this.tbcMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -375,7 +364,6 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbcMain.Controls.Add(this.tbpCount);
             this.tbcMain.Controls.Add(this.tbpHistory);
-            this.tbcMain.Controls.Add(this.tbpWordProcessor);
             this.tbcMain.Location = new System.Drawing.Point(-1, 27);
             this.tbcMain.Name = "tbcMain";
             this.tbcMain.SelectedIndex = 0;
@@ -428,7 +416,6 @@
         private System.Windows.Forms.ToolStripMenuItem сброситьБДToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem настройкиToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem экспортироватьСписокToolStripMenuItem;
-        private System.Windows.Forms.TabPage tbpWordProcessor;
         private System.Windows.Forms.TabPage tbpHistory;
         private System.Windows.Forms.TabPage tbpCount;
         private BrightIdeasSoftware.ObjectListView olvFiles;

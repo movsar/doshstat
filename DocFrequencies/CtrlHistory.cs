@@ -19,6 +19,10 @@ namespace wFrequencies
             InitializeComponent();
         }
 
+        public void clearHistory() {
+            olvHistory.ClearObjects();
+        }
+
         // A flag to prevent olv from updating two times on start because of initializing elements
         private bool isReady = false;
 
@@ -64,7 +68,7 @@ namespace wFrequencies
         private void btnFullReport_Click(object sender, EventArgs e)
         {
             if (Utils.history == null) return;
-            FrmDetailedHistory frmDetailedHistory = new FrmDetailedHistory();
+            FrmTotalDetails frmDetailedHistory = new FrmTotalDetails();
             frmDetailedHistory.Show();
         }
 
