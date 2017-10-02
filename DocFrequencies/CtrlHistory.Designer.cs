@@ -1,4 +1,4 @@
-﻿namespace wFrequencies
+﻿namespace StrangeWords
 {
     partial class CtrlHistory
     {
@@ -75,7 +75,7 @@
             this.olvHistory.UseHotItem = true;
             this.olvHistory.UseTranslucentHotItem = true;
             this.olvHistory.View = System.Windows.Forms.View.Details;
-            this.olvHistory.DoubleClick += new System.EventHandler(this.olvHistory_DoubleClick);
+            this.olvHistory.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.olvHistory_MouseDoubleClick);
             // 
             // olvColumn1
             // 

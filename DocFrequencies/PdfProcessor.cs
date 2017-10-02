@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace wFrequencies
+namespace StrangeWords
 {
     class PdfProcessor : ITextProcessor
     {

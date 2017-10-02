@@ -7,7 +7,7 @@ using System.Windows.Forms;
 using DocumentFormat.OpenXml.Spreadsheet;
 using SpreadsheetLight;
 
-namespace wFrequencies
+namespace StrangeWords
 {
     public class Utils
     {
@@ -18,7 +18,7 @@ namespace wFrequencies
 
         List<string> all_files; // For search files method
         public static List<xTextFile> fList; // Hold the files
-        private static string appName = "wFrequencies";
+        private static string appName = "StrangeWords";
         private static string separator = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ListSeparator;
 
         public static void ExcelExport(ObjectListView olv, string defaultName, bool withStyle)
@@ -143,7 +143,7 @@ namespace wFrequencies
 
         public static void ErrLog(Exception ex)
         {
-            using (StreamWriter sw = new StreamWriter("wfrequencies.log", true)) {
+            using (StreamWriter sw = new StreamWriter("StrangeWords.log", true)) {
                 sw.WriteLine(GetCurrentDateTime() + " : " + ex.Message);
                 sw.WriteLine(ex.StackTrace.ToString());
                 sw.WriteLine();
@@ -151,7 +151,7 @@ namespace wFrequencies
         }
         public static void ErrLog(String caption, String msg)
         {
-            using (StreamWriter sw = new StreamWriter("wfrequencies.log", true)) {
+            using (StreamWriter sw = new StreamWriter("StrangeWords.log", true)) {
                 sw.WriteLine(GetCurrentDateTime() + " : " + caption);
                 sw.WriteLine(msg);
                 sw.WriteLine();

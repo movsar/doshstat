@@ -11,7 +11,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace wFrequencies
+namespace StrangeWords
 {
     public static class DbHelper
     {
@@ -19,7 +19,7 @@ namespace wFrequencies
         private static SQLiteCommand sql_cmd;
         private static DataSet DS = new DataSet();
         private static DataTable DT = new DataTable();
-        private static string dbName = "wFrequencies.sqlite";
+        private static string dbName = "SwDatabase.sqlite";
 
         public static bool ifExists(int charactersCount, int wordsCount)
         {

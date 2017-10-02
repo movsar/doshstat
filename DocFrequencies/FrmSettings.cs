@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace wFrequencies
+namespace StrangeWords
 {
     public partial class FrmSettings : Form
     {

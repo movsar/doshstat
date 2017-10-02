@@ -9,7 +9,7 @@ using Microsoft.Office.Interop.Word;
 using System.IO;
 using System.Windows.Forms;
 
-namespace wFrequencies
+namespace StrangeWords
 {
     public sealed class DocxProcessor : ITextProcessor
     {

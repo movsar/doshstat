@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using BrightIdeasSoftware;
 using System.Diagnostics;
 
-namespace wFrequencies
+namespace StrangeWords
 {
     public partial class CtrlHistory : UserControl
     {
@@ -19,7 +19,8 @@ namespace wFrequencies
             InitializeComponent();
         }
 
-        public void clearHistory() {
+        public void clearHistory()
+        {
             olvHistory.ClearObjects();
         }
 
@@ -34,18 +35,9 @@ namespace wFrequencies
                 rowObject.isSelected = !rowObject.isSelected;
 
                 // After completion it will set the new value
-            };            
+            };
             isReady = true;
         }
-
-        private void olvHistory_DoubleClick(object sender, EventArgs e)
-        {
-            if (olvHistory.SelectedObject != null) {
-                FrmFrequencies frmFreq = new FrmFrequencies((xTextFile)(olvHistory.SelectedObject));
-                frmFreq.Show();
-            }
-        }
-
 
         public void loadHistory()
         {
@@ -66,31 +58,47 @@ namespace wFrequencies
         private void btnFullReport_Click(object sender, EventArgs e)
         {
             if (Utils.history == null) return;
+            this.Enabled = false;
             FrmTotalDetails frmDetailedHistory = new FrmTotalDetails();
             frmDetailedHistory.Show();
+            this.Enabled = true;
         }
 
         private void btnExport_Click(object sender, EventArgs e)
         {
             if (Utils.history == null) return;
+            this.Enabled = false;
             Utils.ExcelExport(olvHistory, "История", false);
+            this.Enabled = true;
         }
 
         private void btnTotalFrequencies_Click(object sender, EventArgs e)
         {
             if (Utils.history == null) return;
+            this.Enabled = false;
             FrmTotalFrequencies frmTotalFrequencies = new FrmTotalFrequencies();
             frmTotalFrequencies.Show();
+            this.Enabled = true;
         }
 
         private void dtpFrom_ValueChanged(object sender, EventArgs e)
         {
-            if (isReady)loadHistory();
+            if (isReady) loadHistory();
         }
 
         private void dtpTo_ValueChanged(object sender, EventArgs e)
         {
             if (isReady) loadHistory();
+        }
+
+        private void olvHistory_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left) {
+                if (olvHistory.SelectedObject != null) {
+                    FrmFrequencies frmFreq = new FrmFrequencies((xTextFile)(olvHistory.SelectedObject));
+                    frmFreq.Show();
+                }
+            }
         }
     }
 }

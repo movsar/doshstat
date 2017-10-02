@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace wFrequencies
+namespace StrangeWords
 {
     public sealed class DocProcessor : ITextProcessor
     {

@@ -1,4 +1,4 @@
-﻿namespace wFrequencies
+﻿namespace StrangeWords
 {
     partial class CtrlWordAnalyzer
     {

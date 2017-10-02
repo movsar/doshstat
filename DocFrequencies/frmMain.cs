@@ -11,8 +11,9 @@ using System.Text.RegularExpressions;
 using System.Diagnostics;
 using BrightIdeasSoftware;
 using System.Collections;
+using System.Reflection;
 
-namespace wFrequencies
+namespace StrangeWords
 {
     public partial class FrmMain : Form
     {
@@ -93,12 +94,19 @@ namespace wFrequencies
 
         }
 
+        public string AssemblyVersion
+        {
+            get {
+                return Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            }
+        }
+
         CtrlHistory myCtrlHistory;
         private void Form1_Load(object sender, EventArgs e)
-        {
+        {            
+            this.Text = "Strange Words ver." + AssemblyVersion;
             myCtrlHistory = new CtrlHistory();
             myCtrlHistory.Dock = DockStyle.Fill;
-
 
             tbpHistory.Controls.Add(myCtrlHistory);
 
@@ -119,9 +127,7 @@ namespace wFrequencies
 
                 // After completion it will set the new value
             };
-
-
-
+            
             loadFiles();
 
             // Refresh history list
@@ -319,7 +325,7 @@ namespace wFrequencies
             btnBrowse.Enabled = true;
             btnStart.Text = "Старт";
             prbStatus.Visible = false;
-            lblStatus.Text = "Работа выполнена за " + watch.Elapsed.TotalSeconds.ToString() + "сек.";
+            lblStatus.Text = "Работа выполнена за " + watch.Elapsed.TotalSeconds.ToString("F") + "сек.";
 
             // Refresh history list
             myCtrlHistory.loadHistory();

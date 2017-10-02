@@ -1,4 +1,4 @@
-﻿namespace wFrequencies
+﻿namespace StrangeWords
 {
     partial class FrmMain
     {
@@ -382,7 +382,7 @@
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FrmMain";
-            this.Text = "wFrequencies";
+            this.Text = "StrangeWords";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmMain_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.contextMenuStrip1.ResumeLayout(false);

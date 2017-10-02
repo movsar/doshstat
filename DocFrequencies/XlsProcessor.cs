@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
 
-namespace wFrequencies
+namespace StrangeWords
 {
     class XlsProcessor : ITextProcessor
     {

@@ -1,4 +1,4 @@
-﻿namespace wFrequencies
+﻿namespace StrangeWords
 {
     partial class FrmTotalDetails
     {
@@ -71,12 +71,14 @@
             // olvClmWord
             // 
             this.olvClmWord.AspectName = "word";
+            this.olvClmWord.Groupable = false;
             this.olvClmWord.Text = "Слово";
             this.olvClmWord.Width = 145;
             // 
             // olvClmFrequency
             // 
             this.olvClmFrequency.AspectName = "frequency";
+            this.olvClmFrequency.Groupable = false;
             this.olvClmFrequency.Text = "Частота";
             this.olvClmFrequency.Width = 89;
             // 
@@ -84,44 +86,45 @@
             // 
             this.olvClmPercentage.AspectName = "getNeatPercentage";
             this.olvClmPercentage.AspectToStringFormat = "";
+            this.olvClmPercentage.Groupable = false;
             this.olvClmPercentage.Text = "Плотность";
             this.olvClmPercentage.Width = 94;
             // 
             // olvClmDateTime
             // 
             this.olvClmDateTime.AspectName = "created_at";
+            this.olvClmDateTime.Groupable = false;
             this.olvClmDateTime.Text = "Дата и время";
             this.olvClmDateTime.Width = 138;
             // 
             // olvDetailedHistory
             // 
+            this.olvDetailedHistory.AllColumns.Add(this.olvClmFileName);
+            this.olvDetailedHistory.AllColumns.Add(this.olvClmCategory);
+            this.olvDetailedHistory.AllColumns.Add(this.olvClmWordsCount);
+            this.olvDetailedHistory.AllColumns.Add(this.olvClmUniqueWords);
             this.olvDetailedHistory.AllColumns.Add(this.olvClmWord);
             this.olvDetailedHistory.AllColumns.Add(this.olvClmFrequency);
             this.olvDetailedHistory.AllColumns.Add(this.olvClmPercentage);
-            this.olvDetailedHistory.AllColumns.Add(this.olvClmUniqueWords);
-            this.olvDetailedHistory.AllColumns.Add(this.olvClmWordsCount);
-            this.olvDetailedHistory.AllColumns.Add(this.olvClmFileName);
-            this.olvDetailedHistory.AllColumns.Add(this.olvClmCategory);
             this.olvDetailedHistory.AllColumns.Add(this.olvClmDateTime);
             this.olvDetailedHistory.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.olvDetailedHistory.CellEditUseWholeCell = false;
             this.olvDetailedHistory.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.olvClmFileName,
+            this.olvClmCategory,
+            this.olvClmWordsCount,
+            this.olvClmUniqueWords,
             this.olvClmWord,
             this.olvClmFrequency,
             this.olvClmPercentage,
-            this.olvClmUniqueWords,
-            this.olvClmWordsCount,
-            this.olvClmFileName,
-            this.olvClmCategory,
             this.olvClmDateTime});
             this.olvDetailedHistory.Cursor = System.Windows.Forms.Cursors.Default;
             this.olvDetailedHistory.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.olvDetailedHistory.FullRowSelect = true;
             this.olvDetailedHistory.GridLines = true;
             this.olvDetailedHistory.Location = new System.Drawing.Point(1, 0);
-            this.olvDetailedHistory.MultiSelect = false;
             this.olvDetailedHistory.Name = "olvDetailedHistory";
             this.olvDetailedHistory.ShowGroups = false;
             this.olvDetailedHistory.Size = new System.Drawing.Size(1046, 576);
@@ -129,6 +132,7 @@
             this.olvDetailedHistory.TintSortColumn = true;
             this.olvDetailedHistory.UseAlternatingBackColors = true;
             this.olvDetailedHistory.UseCompatibleStateImageBehavior = false;
+            this.olvDetailedHistory.UseExplorerTheme = true;
             this.olvDetailedHistory.UseFilterIndicator = true;
             this.olvDetailedHistory.UseFiltering = true;
             this.olvDetailedHistory.View = System.Windows.Forms.View.Details;
@@ -144,14 +148,14 @@
             this.btnExport.UseVisualStyleBackColor = true;
             this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
-            // FrmDetailedHistory
+            // FrmTotalDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1048, 606);
             this.Controls.Add(this.btnExport);
             this.Controls.Add(this.olvDetailedHistory);
-            this.Name = "FrmDetailedHistory";
+            this.Name = "FrmTotalDetails";
             this.Text = "Детализированная история обработки файлов";
             this.Load += new System.EventHandler(this.FrmDetailedHistory_Load);
             ((System.ComponentModel.ISupportInitialize)(this.olvDetailedHistory)).EndInit();

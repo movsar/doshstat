@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace wFrequencies
+namespace StrangeWords
 {
     partial class FrmAbout : Form
     {

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 
-namespace wFrequencies
+namespace StrangeWords
 {
     public partial class FrmTotalDetails : Form
     {

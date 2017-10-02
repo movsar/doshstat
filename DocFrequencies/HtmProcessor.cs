@@ -6,7 +6,7 @@ using System.Web;
 using System.Windows.Forms;
 using System.Xml.Linq;
 
-namespace wFrequencies
+namespace StrangeWords
 {
     class HtmProcessor : ITextProcessor
     {
