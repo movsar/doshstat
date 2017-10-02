@@ -319,7 +319,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblInfo.Location = new System.Drawing.Point(4, 46);
             this.lblInfo.Name = "lblInfo";
-            this.lblInfo.Size = new System.Drawing.Size(665, 37);
+            this.lblInfo.Size = new System.Drawing.Size(670, 37);
             this.lblInfo.TabIndex = 14;
             this.lblInfo.Text = "Выберите папку с входными файлами\r\n *.doc, *.docx, *.pdf, *.txt, *.odt, *.xlsx, *" +
     ".rtf, *.htm, *.html";

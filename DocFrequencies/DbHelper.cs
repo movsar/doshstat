@@ -21,6 +21,14 @@ namespace wFrequencies
         private static DataTable DT = new DataTable();
         private static string dbName = "wFrequencies.sqlite";
 
+        public static bool ifExists(int charactersCount, int wordsCount)
+        {
+            sql_cmd.CommandText = string.Format("SELECT count(*) FROM wf_files WHERE words_count={0} AND characters_count={1}", charactersCount, wordsCount);
+            int count = Convert.ToInt32(sql_cmd.ExecuteScalar());
+
+            return count != 0;
+        }
+
         public static void SetConnection()
         {
             // Set current things to Russian culture
@@ -155,6 +163,7 @@ namespace wFrequencies
         }
         public static void createTables()
         {
+            // I have removed from UNIQUE statement the uniquewordscount because by doing so I can skip files without checking their frequency whioch takes enormous time 
             if (!(new FileInfo(dbName).Exists)) { SQLiteConnection.CreateFile(dbName); }
             string sql = "create table IF NOT EXISTS wf_files (" +
                 "id INTEGER PRIMARY KEY," +
@@ -163,7 +172,7 @@ namespace wFrequencies
                 "unique_words_count int," +
                 "characters_count int," +
                 "category int," +
-                "created_at varchar(50), CONSTRAINT makeUnique UNIQUE (words_count, unique_words_count,characters_count))";
+                "created_at varchar(50), CONSTRAINT makeUnique UNIQUE (words_count, characters_count))";
 
             sql_cmd = sql_con.CreateCommand();
             sql_cmd.CommandText = sql;
@@ -239,7 +248,6 @@ namespace wFrequencies
                 return -1;
             }
         }
-
         public static long InsertWithTransaction(string table, List<Dictionary<string, object>> data)
         {
             try {

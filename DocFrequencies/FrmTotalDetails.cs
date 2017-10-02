@@ -23,8 +23,6 @@ namespace wFrequencies
             List<xDetails> rowObjects = new List<xDetails>();
 
             foreach (xTextFile fileInfo in Utils.history) {
-
-
                 string fileName = fileInfo.fileName;
                 int categoryIndex = fileInfo.categoryIndex;
                 int wordsCount = fileInfo.wordsCount;

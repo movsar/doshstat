@@ -41,9 +41,10 @@ namespace wFrequencies
              *  11.v  Percentage in export and in selection
              *  12.v  Общая частотность
              *  13.v  Add date from and date to, to SELECT for all history requests
-             *  14.   Статистика по слову
-             *  15.   Окно со статистикой сразу после Начать
-             *  16.   Excel выгружать числа как числа а не текст!
+             *  14.v  Окно со статистикой сразу после Начать
+             *  15.   Excel выгружать числа как числа а не текст!
+             *  16.   Статистика по слову
+             *  17.   Import DB
              *  17.   Read line by line
             */
 
@@ -121,9 +122,10 @@ namespace wFrequencies
 
 
             loadFiles();
+
+            // Refresh history list
+            myCtrlHistory.loadHistory();
         }
-
-
 
         private void btnBrowse_Click(object sender, EventArgs e)
         {
@@ -238,6 +240,9 @@ namespace wFrequencies
                 var wordPattern = new Regex(@"\w+");
                 xFile.wordsCount = wordPattern.Matches(contents).Count;
 
+                // Check if exists
+                if (DbHelper.ifExists(xFile.charactersCount, xFile.wordsCount))
+                    return;
                 int progress = 0;
                 foreach (Match match in wordPattern.Matches(contents)) {
                     if (bgwCounter.CancellationPending) {
@@ -305,24 +310,29 @@ namespace wFrequencies
         private void onFinishCounting()
         {
             isRunning = false;
+            // Пройденное время
+            watch.Stop();
+
+
             btnStart.BackColor = Color.LightGreen;
             txtWorkingDir.Enabled = true;
             btnBrowse.Enabled = true;
             btnStart.Text = "Старт";
             prbStatus.Visible = false;
-            lblStatus.Text = "Работа выполнена";
+            lblStatus.Text = "Работа выполнена за " + watch.Elapsed.TotalSeconds.ToString() + "сек.";
 
-            // Пройденное время
-            watch.Stop();
+            // Refresh history list
+            myCtrlHistory.loadHistory();
 
             // Время сейчас
             DateTime dtTo = DateTime.Now;
             DateTime dtFrom = dtTo.Subtract(watch.Elapsed);
 
             Utils.history = DbHelper.GetHistory(dtFrom.ToString("yyyy-MM-dd HH:mm:ss"), dtTo.ToString("yyyy-MM-dd HH:mm:ss"));
-
-            FrmTotalDetails frmTotalDetails = new FrmTotalDetails();
-            frmTotalDetails.Show();
+            if (Utils.history != null) {
+                FrmTotalDetails frmTotalDetails = new FrmTotalDetails();
+                frmTotalDetails.Show();
+            }
         }
 
         private void сброситьБДToolStripMenuItem_Click(object sender, EventArgs e)

@@ -28,20 +28,13 @@ namespace wFrequencies
 
         private void CtrlHistory_Load(object sender, EventArgs e)
         {
-            DateTime dt = DateTime.Now;
-            TimeSpan ts = new TimeSpan(6, 23, 59, 59);
-            dtpFrom.Value = dt.Subtract(ts);
-            dtpTo.Value = dt;
-
             olvHistory.SubItemChecking += delegate (object olvCheckSender, SubItemCheckingEventArgs olvCheckArgs) {
                 // Set false all the other categories
                 xTextFile rowObject = ((xTextFile)olvCheckArgs.RowObject);
                 rowObject.isSelected = !rowObject.isSelected;
 
                 // After completion it will set the new value
-            };
-
-            loadHistory();
+            };            
             isReady = true;
         }
 
@@ -54,8 +47,13 @@ namespace wFrequencies
         }
 
 
-        private void loadHistory()
+        public void loadHistory()
         {
+            DateTime dt = DateTime.Now;
+            TimeSpan ts = new TimeSpan(6, 23, 59, 59);
+            dtpFrom.Value = dt.Subtract(ts);
+            dtpTo.Value = dt;
+
             Utils.history = DbHelper.GetHistory(dtpFrom.Value.ToString("yyyy-MM-dd HH:mm:ss"), dtpTo.Value.ToString("yyyy-MM-dd HH:mm:ss"));
             if (Utils.history != null) {
                 Debug.WriteLine(Utils.history.Count);
