@@ -23,7 +23,7 @@ namespace wFrequencies
 
         public static bool ifExists(int charactersCount, int wordsCount)
         {
-            sql_cmd.CommandText = string.Format("SELECT count(*) FROM wf_files WHERE words_count={0} AND characters_count={1}", charactersCount, wordsCount);
+            sql_cmd.CommandText = String.Format("SELECT count(*) FROM `wf_files` WHERE `words_count`='{0}' AND `characters_count`='{1}'",wordsCount, charactersCount);
             int count = Convert.ToInt32(sql_cmd.ExecuteScalar());
 
             return count != 0;

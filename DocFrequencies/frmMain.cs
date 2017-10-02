@@ -44,9 +44,10 @@ namespace wFrequencies
              *  14.v  Окно со статистикой сразу после Начать
              *  15.   Excel выгружать числа как числа а не текст!
              *  16.   Статистика по слову
-             *  17.   Import DB
-             *  17.   Read line by line
-            */
+             *  17.   Import DB             
+             *  18.   Read line by line
+             *  19.   Embed a log
+             */
 
             InitializeComponent();
 
@@ -241,8 +242,8 @@ namespace wFrequencies
                 xFile.wordsCount = wordPattern.Matches(contents).Count;
 
                 // Check if exists
-                if (DbHelper.ifExists(xFile.charactersCount, xFile.wordsCount))
-                    return;
+                if (DbHelper.ifExists(xFile.charactersCount, xFile.wordsCount)) continue;
+
                 int progress = 0;
                 foreach (Match match in wordPattern.Matches(contents)) {
                     if (bgwCounter.CancellationPending) {
@@ -271,7 +272,6 @@ namespace wFrequencies
                 }
                 xFile.uniqueWordsCount = xFile.frequencies.Count();
                 xFile.SaveFileInfo();
-
             }
 
             bgwCounter.ReportProgress(-3, null);
