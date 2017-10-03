@@ -58,5 +58,17 @@ namespace StrangeWords.Properties {
                 this["ChkSubdirectories"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int ExStyle {
+            get {
+                return ((int)(this["ExStyle"]));
+            }
+            set {
+                this["ExStyle"] = value;
+            }
+        }
     }
 }

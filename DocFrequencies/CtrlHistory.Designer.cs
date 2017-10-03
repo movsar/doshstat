@@ -106,6 +106,7 @@
             // olvClmDateTime
             // 
             this.olvClmDateTime.AspectName = "created_at";
+            this.olvClmDateTime.Groupable = false;
             this.olvClmDateTime.Text = "Дата и время";
             this.olvClmDateTime.Width = 138;
             // 

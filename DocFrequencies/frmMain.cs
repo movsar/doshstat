@@ -43,8 +43,8 @@ namespace StrangeWords
              *  12.v  Общая частотность
              *  13.v  Add date from and date to, to SELECT for all history requests
              *  14.v  Окно со статистикой сразу после Начать
-             *  15.   Excel выгружать числа как числа а не текст!
-             *  16.   Статистика по слову
+             *  15.v  Excel выгружать числа как числа а не текст!
+             *  16.v  Статистика по слову
              *  17.   Import DB             
              *  18.   Read line by line
              *  19.   Embed a log
@@ -90,6 +90,7 @@ namespace StrangeWords
                 olvFiles.SetObjects(Utils.fList);
                 lblStatus.Text = "Готов";
             } catch (UnauthorizedAccessException unaex) {
+                Utils.ErrLog(unaex);
                 Utils.msgCriticalError("Недостаточно прав для обработки данной директори, запустите программу с правами администратора, или выберите другую папку");
             }
 
@@ -104,9 +105,11 @@ namespace StrangeWords
         CtrlHistory myCtrlHistory;
         CtrlWordAnalyzer myCtrlWordAnalyzer;
         // public static void setStatusMessage(string msg) // 
-       
+
         private void Form1_Load(object sender, EventArgs e)
         {
+           
+
             this.Text = "Strange Words ver." + AssemblyVersion;
             myCtrlHistory = new CtrlHistory();
             myCtrlHistory.Dock = DockStyle.Fill;
@@ -135,9 +138,11 @@ namespace StrangeWords
             };
 
             loadFiles();
-
             // Refresh history list
             myCtrlHistory.loadHistory();
+
+            olvFiles.PrimarySortColumn = olvFiles.GetColumn(0);
+            olvFiles.PrimarySortOrder = SortOrder.Descending;
         }
 
         private void btnBrowse_Click(object sender, EventArgs e)
@@ -369,7 +374,7 @@ namespace StrangeWords
 
         private void экспортироватьСписокToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Utils.ExcelExport(olvFiles, "Список файлов для обработки", false);
+            Utils.ExcelExport(olvFiles, "Список файлов для обработки");
         }
 
         private void chkSubdirectories_CheckedChanged(object sender, EventArgs e)

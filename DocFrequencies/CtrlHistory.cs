@@ -37,6 +37,9 @@ namespace StrangeWords
                 // After completion it will set the new value
             };
             isReady = true;
+
+
+          
         }
 
         public void loadHistory()
@@ -53,6 +56,11 @@ namespace StrangeWords
             } else {
                 olvHistory.ClearObjects();
             }
+
+
+            olvHistory.PrimarySortColumn = olvHistory.GetColumn(0);
+            olvHistory.PrimarySortOrder = SortOrder.Descending;
+            olvHistory.Sort();
         }
 
         private void btnFullReport_Click(object sender, EventArgs e)
@@ -68,7 +76,7 @@ namespace StrangeWords
         {
             if (Utils.history == null) return;
             this.Enabled = false;
-            Utils.ExcelExport(olvHistory, "История", false);
+            Utils.ExcelExport(olvHistory, "История");
             this.Enabled = true;
         }
 

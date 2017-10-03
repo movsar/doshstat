@@ -29,7 +29,7 @@ namespace StrangeWords
         private void FrmDetailedHistory_Load(object sender, EventArgs e)
         {
             List<xDetails> rowObjects = new List<xDetails>();
-
+            if (tFilesArray.Count == 0) return;
             foreach (xTextFile fileInfo in tFilesArray) {
                 string fileName = fileInfo.fileName;
                 int categoryIndex = fileInfo.categoryIndex;
@@ -51,11 +51,15 @@ namespace StrangeWords
             }
 
             olvDetailedHistory.SetObjects(rowObjects);
+
+            olvDetailedHistory.PrimarySortColumn = olvDetailedHistory.GetColumn(0);
+            olvDetailedHistory.PrimarySortOrder = SortOrder.Descending;
+            olvDetailedHistory.Sort();
         }
 
         private void btnExport_Click(object sender, EventArgs e)
         {
-            Utils.ExcelExport(olvDetailedHistory, "Подробная История", false);
+            Utils.ExcelExport(olvDetailedHistory, "Подробная История");
         }
     }
 }

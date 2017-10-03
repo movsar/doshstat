@@ -47,11 +47,15 @@ namespace StrangeWords
         private void frmFrequencies_Load(object sender, EventArgs e)
         {
             olvFrequencies.PrimarySortColumn = (olvFrequencies.GetColumn(1));
+
+            olvFrequencies.PrimarySortColumn = olvFrequencies.GetColumn(0);
+            olvFrequencies.PrimarySortOrder = SortOrder.Descending;
+            olvFrequencies.Sort();
         }
 
         private void btnExport_Click(object sender, EventArgs e)
         {
-            Utils.ExcelExport(olvFrequencies, _xFile.fileName, false);
+            Utils.ExcelExport(olvFrequencies, _xFile.fileName);
         }
 
         private void olvFrequencies_SelectionChanged(object sender, EventArgs e)

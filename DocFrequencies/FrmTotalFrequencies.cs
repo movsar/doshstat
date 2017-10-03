@@ -25,6 +25,10 @@ namespace StrangeWords
             lblUniqueWords.Text += totalFrequencies.Count.ToString();
             lblFilesCount.Text += DbHelper.FILES_COUNT.ToString();
             lblWordCount.Text += DbHelper.WORDS_COUNT.ToString();
+
+            olvTotalFrequencies.PrimarySortColumn = olvTotalFrequencies.GetColumn(0);
+            olvTotalFrequencies.PrimarySortOrder = SortOrder.Descending;
+            olvTotalFrequencies.Sort();
         }
 
         private void olvTotalFrequencies_SelectionChanged(object sender, EventArgs e)
@@ -39,11 +43,13 @@ namespace StrangeWords
                 sumPercentage += xwf.percentage;
             }
             lblSelectedWordsPercentage.Text = lblWordsPercentagePrefix + sumPercentage.ToString("F") + "%";
+
+
         }
         
         private void btnExport_Click_1(object sender, EventArgs e)
         {
-            Utils.ExcelExport(olvTotalFrequencies, "Сводная Частотность", false);
+            Utils.ExcelExport(olvTotalFrequencies, "Сводная Частотность");
         }
     }
 }

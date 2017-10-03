@@ -20,6 +20,7 @@ namespace StrangeWords
             foreach (var enc in System.Text.Encoding.GetEncodings()) {
                 comboBox1.Items.Add(enc.Name);
             }
+            comboBox2.SelectedIndex = Utils.StgGetInt("ExStyle");
         }
 
         private void FrmSettings_Load(object sender, EventArgs e)
@@ -37,12 +38,22 @@ namespace StrangeWords
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            /*----------------------------------------
+             * 0 Такой же как в программе
+             * 1 Синий
+             * 2 Зеленый
+             * 3 Оранжевый
+             * 4 Без стиля
+             ----------------------------------------*/
+
             if (comboBox1.SelectedIndex == 0)
                 Utils.StgSet("TxtCodepage", 0);
             else
                 Utils.StgSet("TxtCodepage", Encoding.GetEncoding(comboBox1.Text).CodePage);
 
-             Close();
+            Utils.StgSet("ExStyle", comboBox2.SelectedIndex);
+
+            Close();
         }
     }
 }

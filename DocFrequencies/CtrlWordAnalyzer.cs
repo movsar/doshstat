@@ -49,6 +49,9 @@ namespace StrangeWords
             }
             olvSearchResults.SetObjects(rowObjects);
             ((FrmMain)this.Parent.Parent.Parent).lblStatus.Text = string.Format("Найдено в {0} файлах(е)", rowObjects.GroupBy(xFile => xFile.fileId).Select(grp => grp.First()).ToList().Count.ToString());
+            olvSearchResults.PrimarySortColumn = olvSearchResults.GetColumn(0);
+            olvSearchResults.PrimarySortOrder = SortOrder.Descending;
+            olvSearchResults.Sort();
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -76,7 +79,7 @@ namespace StrangeWords
         private void btnExport_Click(object sender, EventArgs e)
         {
             if (olvSearchResults.Items.Count != 0)
-                Utils.ExcelExport(olvSearchResults, "Результаты поиска", false);
+                Utils.ExcelExport(olvSearchResults, "Результаты поиска");
         }
     }
 }

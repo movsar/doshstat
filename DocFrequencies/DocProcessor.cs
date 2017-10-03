@@ -35,7 +35,7 @@ namespace StrangeWords
             try {
                 wordApplication.Quit();
             } catch (Exception ex) {
-                Debug.WriteLine("couldn't close the app");
+                Utils.ErrLog(ex);
             }
         }
     }

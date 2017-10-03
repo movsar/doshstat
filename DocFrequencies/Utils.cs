@@ -17,7 +17,6 @@ namespace StrangeWords
         public static List<xTextFile> history;
         public static List<xWordFrequencies> frequencies;
 
-        List<string> all_files; // For search files method
         public static List<xTextFile> fList; // Hold the files
         private static string appName = "StrangeWords";
         private static string separator = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ListSeparator;
@@ -28,7 +27,7 @@ namespace StrangeWords
         }
 
 
-        public static void ExcelExport(ObjectListView olv, string defaultName, bool withStyle)
+        public static void ExcelExport(ObjectListView olv, string defaultName)
         {
             SLDocument sl = new SLDocument();
             SLStyle style = sl.CreateStyle();
@@ -40,24 +39,47 @@ namespace StrangeWords
             for (int i = 1; i <= olv.Columns.Count; ++i) {
                 for (int j = 1; j <= olv.Items.Count; ++j) {
                     string cellVal = olv.Items[j - 1].SubItems[i - 1].Text;
+                    int cellValNumeric = -1;
+                    if (int.TryParse(cellVal, out cellValNumeric)) {
+                        sl.SetCellValue(j + 1, i, cellValNumeric);
+                    } else {
+                        sl.SetCellValue(j + 1, i, cellVal);
+                    }
 
-                    sl.SetCellValue(j + 1, i, cellVal);
-
-                    if (withStyle) {
+                    if (StgGetInt("ExStyle") == 0) {
                         System.Drawing.Color backColor = olv.Items[j - 1].BackColor;
                         System.Drawing.Color foreColor = olv.Items[j - 1].ForeColor;
                         style.Fill.SetPattern(PatternValues.Solid, backColor, foreColor);
+
                         sl.SetCellStyle(j + 1, i, style);
                     }
+
+
                 }
             }
 
             SLTable tbl = sl.CreateTable(1, 1, olv.Items.Count + 1, olv.Columns.Count);
-            if (!withStyle) tbl.SetTableStyle(SLTableStyleTypeValues.Medium4);
+            switch (StgGetInt("ExStyle")) {
+                case 1:
+                    // Синий
+                    tbl.SetTableStyle(SLTableStyleTypeValues.Medium2);
+                    break;
+                case 2:
+                    // Зеленый
+                    tbl.SetTableStyle(SLTableStyleTypeValues.Medium4);
+                    break;
+                case 3:
+                    // Красный
+                    tbl.SetTableStyle(SLTableStyleTypeValues.Medium3);
+                    break;
+                case 4:
+                    // Никакой
+                    break;
+            }
+
 
             tbl.Sort(1, false);
             sl.InsertTable(tbl);
-
 
             SaveFileDialog saveFileDialog1 = new SaveFileDialog() {
                 Filter = "XLS Format|*.xlsx",
