@@ -64,7 +64,11 @@ namespace StrangeWords
                 Process.Start(saveFileDialog1.FileName);
             }
         }
-
+        public static void StgSet(string name, bool value)
+        {
+            Properties.Settings.Default[name] = value;
+            Properties.Settings.Default.Save();
+        }
         public static void StgSet(string name, int value)
         {
             Properties.Settings.Default[name] = value;
@@ -76,6 +80,10 @@ namespace StrangeWords
             Properties.Settings.Default.Save();
         }
 
+        public static bool StgGetBool(string name)
+        {
+            return Convert.ToBoolean(Properties.Settings.Default[name]);
+        }
         public static int StgGetInt(string name)
         {
             return Convert.ToInt32(Properties.Settings.Default[name]);
@@ -171,30 +179,8 @@ namespace StrangeWords
         }
         public static string GetCurrentDateTime()
         {
-            string dt = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
+            string dt = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             return dt;
-        }
-
-        public List<string> FindFilesRecursively(string filter)
-        {
-            all_files = new List<string>();
-
-            // Get files from this dir
-            foreach (string f in Directory.GetFiles(WorkDirPath, filter)) { all_files.Add(f); }
-
-            // And from its children
-            _findFilesRecursively(filter);
-            return all_files;
-        }
-        private void _findFilesRecursively(string filter)
-        {
-            // Get files from this dir's children
-            foreach (string d in Directory.GetDirectories(WorkDirPath)) {
-                foreach (string f in Directory.GetFiles(d, filter)) {
-                    all_files.Add(f);
-                }
-                _findFilesRecursively(filter);
-            }
         }
     }
 }

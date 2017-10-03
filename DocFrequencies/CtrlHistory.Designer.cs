@@ -72,8 +72,6 @@
             this.olvHistory.UseCompatibleStateImageBehavior = false;
             this.olvHistory.UseFilterIndicator = true;
             this.olvHistory.UseFiltering = true;
-            this.olvHistory.UseHotItem = true;
-            this.olvHistory.UseTranslucentHotItem = true;
             this.olvHistory.View = System.Windows.Forms.View.Details;
             this.olvHistory.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.olvHistory_MouseDoubleClick);
             // 

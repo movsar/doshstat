@@ -27,7 +27,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.olvDetailedHistory = new BrightIdeasSoftware.ObjectListView();
+            this.olvSearchResults = new BrightIdeasSoftware.ObjectListView();
             this.olvClmWord = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvClmFrequency = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvClmPercentage = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -36,30 +36,30 @@
             this.olvClmFileName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvClmCategory = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvClmDateTime = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtWord = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.olvDetailedHistory)).BeginInit();
+            this.btnSearch = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.olvSearchResults)).BeginInit();
             this.SuspendLayout();
             // 
-            // olvDetailedHistory
+            // olvSearchResults
             // 
-            this.olvDetailedHistory.AllColumns.Add(this.olvClmWord);
-            this.olvDetailedHistory.AllColumns.Add(this.olvClmFrequency);
-            this.olvDetailedHistory.AllColumns.Add(this.olvClmPercentage);
-            this.olvDetailedHistory.AllColumns.Add(this.olvClmUniqueWords);
-            this.olvDetailedHistory.AllColumns.Add(this.olvClmWordsCount);
-            this.olvDetailedHistory.AllColumns.Add(this.olvClmFileName);
-            this.olvDetailedHistory.AllColumns.Add(this.olvClmCategory);
-            this.olvDetailedHistory.AllColumns.Add(this.olvClmDateTime);
-            this.olvDetailedHistory.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.olvSearchResults.AllColumns.Add(this.olvClmWord);
+            this.olvSearchResults.AllColumns.Add(this.olvClmFrequency);
+            this.olvSearchResults.AllColumns.Add(this.olvClmPercentage);
+            this.olvSearchResults.AllColumns.Add(this.olvClmUniqueWords);
+            this.olvSearchResults.AllColumns.Add(this.olvClmWordsCount);
+            this.olvSearchResults.AllColumns.Add(this.olvClmFileName);
+            this.olvSearchResults.AllColumns.Add(this.olvClmCategory);
+            this.olvSearchResults.AllColumns.Add(this.olvClmDateTime);
+            this.olvSearchResults.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.olvDetailedHistory.CellEditUseWholeCell = false;
-            this.olvDetailedHistory.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.olvSearchResults.CellEditUseWholeCell = false;
+            this.olvSearchResults.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvClmWord,
             this.olvClmFrequency,
             this.olvClmPercentage,
@@ -68,28 +68,28 @@
             this.olvClmFileName,
             this.olvClmCategory,
             this.olvClmDateTime});
-            this.olvDetailedHistory.Cursor = System.Windows.Forms.Cursors.Default;
-            this.olvDetailedHistory.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.olvDetailedHistory.FullRowSelect = true;
-            this.olvDetailedHistory.GridLines = true;
-            this.olvDetailedHistory.Location = new System.Drawing.Point(0, 86);
-            this.olvDetailedHistory.MultiSelect = false;
-            this.olvDetailedHistory.Name = "olvDetailedHistory";
-            this.olvDetailedHistory.ShowGroups = false;
-            this.olvDetailedHistory.Size = new System.Drawing.Size(1031, 462);
-            this.olvDetailedHistory.TabIndex = 15;
-            this.olvDetailedHistory.TintSortColumn = true;
-            this.olvDetailedHistory.UseAlternatingBackColors = true;
-            this.olvDetailedHistory.UseCompatibleStateImageBehavior = false;
-            this.olvDetailedHistory.UseFilterIndicator = true;
-            this.olvDetailedHistory.UseFiltering = true;
-            this.olvDetailedHistory.View = System.Windows.Forms.View.Details;
+            this.olvSearchResults.Cursor = System.Windows.Forms.Cursors.Default;
+            this.olvSearchResults.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.olvSearchResults.FullRowSelect = true;
+            this.olvSearchResults.GridLines = true;
+            this.olvSearchResults.Location = new System.Drawing.Point(0, 86);
+            this.olvSearchResults.MultiSelect = false;
+            this.olvSearchResults.Name = "olvSearchResults";
+            this.olvSearchResults.ShowGroups = false;
+            this.olvSearchResults.Size = new System.Drawing.Size(1028, 462);
+            this.olvSearchResults.TabIndex = 15;
+            this.olvSearchResults.TintSortColumn = true;
+            this.olvSearchResults.UseAlternatingBackColors = true;
+            this.olvSearchResults.UseCompatibleStateImageBehavior = false;
+            this.olvSearchResults.UseFilterIndicator = true;
+            this.olvSearchResults.UseFiltering = true;
+            this.olvSearchResults.View = System.Windows.Forms.View.Details;
             // 
             // olvClmWord
             // 
             this.olvClmWord.AspectName = "word";
             this.olvClmWord.Text = "Слово";
-            this.olvClmWord.Width = 145;
+            this.olvClmWord.Width = 88;
             // 
             // olvClmFrequency
             // 
@@ -123,33 +123,20 @@
             this.olvClmFileName.AspectName = "fileName";
             this.olvClmFileName.Groupable = false;
             this.olvClmFileName.Text = "Файл";
-            this.olvClmFileName.Width = 162;
+            this.olvClmFileName.Width = 120;
             // 
             // olvClmCategory
             // 
             this.olvClmCategory.AspectName = "getCategoryName";
             this.olvClmCategory.Groupable = false;
             this.olvClmCategory.Text = "Категория";
-            this.olvClmCategory.Width = 154;
+            this.olvClmCategory.Width = 110;
             // 
             // olvClmDateTime
             // 
             this.olvClmDateTime.AspectName = "created_at";
             this.olvClmDateTime.Text = "Дата и время";
             this.olvClmDateTime.Width = 138;
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Равняется",
-            "Содержит",
-            "Начинается",
-            "Заканчивается"});
-            this.comboBox1.Location = new System.Drawing.Point(150, 7);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(150, 21);
-            this.comboBox1.TabIndex = 16;
             // 
             // label1
             // 
@@ -162,9 +149,9 @@
             // 
             // txtWord
             // 
-            this.txtWord.Location = new System.Drawing.Point(306, 7);
+            this.txtWord.Location = new System.Drawing.Point(150, 7);
             this.txtWord.Name = "txtWord";
-            this.txtWord.Size = new System.Drawing.Size(150, 20);
+            this.txtWord.Size = new System.Drawing.Size(139, 20);
             this.txtWord.TabIndex = 18;
             // 
             // label2
@@ -194,20 +181,30 @@
             this.label4.TabIndex = 21;
             this.label4.Text = "Всего слов в данных файлах";
             // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(295, 5);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(75, 23);
+            this.btnSearch.TabIndex = 22;
+            this.btnSearch.Text = "Искать";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
             // CtrlWordAnalyzer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtWord);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.olvDetailedHistory);
+            this.Controls.Add(this.olvSearchResults);
             this.Name = "CtrlWordAnalyzer";
             this.Size = new System.Drawing.Size(1031, 551);
-            ((System.ComponentModel.ISupportInitialize)(this.olvDetailedHistory)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.olvSearchResults)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -215,7 +212,7 @@
 
         #endregion
 
-        private BrightIdeasSoftware.ObjectListView olvDetailedHistory;
+        private BrightIdeasSoftware.ObjectListView olvSearchResults;
         private BrightIdeasSoftware.OLVColumn olvClmWord;
         private BrightIdeasSoftware.OLVColumn olvClmFrequency;
         private BrightIdeasSoftware.OLVColumn olvClmPercentage;
@@ -224,11 +221,11 @@
         private BrightIdeasSoftware.OLVColumn olvClmFileName;
         private BrightIdeasSoftware.OLVColumn olvClmCategory;
         private BrightIdeasSoftware.OLVColumn olvClmDateTime;
-        private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtWord;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button btnSearch;
     }
 }

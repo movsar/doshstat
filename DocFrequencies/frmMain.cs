@@ -60,6 +60,7 @@ namespace StrangeWords
             }
 
             Utils.StgSet("TxtCodepage", Convert.ToInt32(Properties.Settings.Default["TxtCodepage"]));
+            chkSubdirectories.Checked = Utils.StgGetBool("ChkSubdirectories");
         }
 
         public void UpdateStatus(string status)
@@ -81,7 +82,7 @@ namespace StrangeWords
 
             Utils.fList = new List<xTextFile>();
             try {
-                foreach (string file in Directory.EnumerateFiles(Utils.WorkDirPath, "*.*", SearchOption.AllDirectories)
+                foreach (string file in Directory.EnumerateFiles(Utils.WorkDirPath, "*.*", (chkSubdirectories.Checked) ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly)
           .Where(s => s.EndsWith(".doc") || s.EndsWith(".docx") || s.EndsWith(".odt") || s.EndsWith(".pdf") || s.EndsWith(".txt") || s.EndsWith(".xlsx") || s.EndsWith(".rtf") || s.EndsWith(".htm") || s.EndsWith(".html"))) {
                     Utils.fList.Add(new xTextFile(file));
                 }
@@ -94,21 +95,25 @@ namespace StrangeWords
 
         }
 
-        public string AssemblyVersion
-        {
+        public string AssemblyVersion {
             get {
                 return Assembly.GetExecutingAssembly().GetName().Version.ToString();
             }
         }
 
         CtrlHistory myCtrlHistory;
+        CtrlWordAnalyzer myCtrlWordAnalyzer;
+
         private void Form1_Load(object sender, EventArgs e)
-        {            
+        {
             this.Text = "Strange Words ver." + AssemblyVersion;
             myCtrlHistory = new CtrlHistory();
             myCtrlHistory.Dock = DockStyle.Fill;
-
             tbpHistory.Controls.Add(myCtrlHistory);
+
+            myCtrlWordAnalyzer = new CtrlWordAnalyzer();
+            myCtrlWordAnalyzer.Dock = DockStyle.Fill;
+            tbpAnalyzer.Controls.Add(myCtrlWordAnalyzer);
 
             DirectoryInfo dInfo = new DirectoryInfo(Utils.WorkDirPath);
             if (!dInfo.Exists) dInfo.Create();
@@ -127,7 +132,7 @@ namespace StrangeWords
 
                 // After completion it will set the new value
             };
-            
+
             loadFiles();
 
             // Refresh history list
@@ -364,6 +369,12 @@ namespace StrangeWords
         private void экспортироватьСписокToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Utils.ExcelExport(olvFiles, "Список файлов для обработки", false);
+        }
+
+        private void chkSubdirectories_CheckedChanged(object sender, EventArgs e)
+        {            
+            Utils.StgSet("ChkSubdirectories", chkSubdirectories.Checked);
+            loadFiles();
         }
     }
 }

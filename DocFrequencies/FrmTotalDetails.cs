@@ -15,14 +15,22 @@ namespace StrangeWords
     {
         public FrmTotalDetails()
         {
+            tFilesArray = Utils.history;
             InitializeComponent();
         }
+        public FrmTotalDetails(List<xTextFile> list)
+        {
+            tFilesArray = list;
+            InitializeComponent();
+        }
+
+        List<xTextFile> tFilesArray;
 
         private void FrmDetailedHistory_Load(object sender, EventArgs e)
         {
             List<xDetails> rowObjects = new List<xDetails>();
 
-            foreach (xTextFile fileInfo in Utils.history) {
+            foreach (xTextFile fileInfo in tFilesArray) {
                 string fileName = fileInfo.fileName;
                 int categoryIndex = fileInfo.categoryIndex;
                 int wordsCount = fileInfo.wordsCount;

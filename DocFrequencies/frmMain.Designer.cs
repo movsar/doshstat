@@ -47,6 +47,7 @@
             this.bgwCounter = new System.ComponentModel.BackgroundWorker();
             this.tbpHistory = new System.Windows.Forms.TabPage();
             this.tbpCount = new System.Windows.Forms.TabPage();
+            this.chkSubdirectories = new System.Windows.Forms.CheckBox();
             this.olvFiles = new BrightIdeasSoftware.ObjectListView();
             this.olvClmFileName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvClmFiction = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -60,6 +61,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnBrowse = new System.Windows.Forms.Button();
             this.tbcMain = new System.Windows.Forms.TabControl();
+            this.tbpAnalyzer = new System.Windows.Forms.TabPage();
             this.contextMenuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -208,6 +210,7 @@
             // 
             // tbpCount
             // 
+            this.tbpCount.Controls.Add(this.chkSubdirectories);
             this.tbpCount.Controls.Add(this.olvFiles);
             this.tbpCount.Controls.Add(this.txtWorkingDir);
             this.tbpCount.Controls.Add(this.lblInfo);
@@ -221,6 +224,19 @@
             this.tbpCount.TabIndex = 0;
             this.tbpCount.Text = "Главная";
             this.tbpCount.UseVisualStyleBackColor = true;
+            // 
+            // chkSubdirectories
+            // 
+            this.chkSubdirectories.AutoSize = true;
+            this.chkSubdirectories.Checked = true;
+            this.chkSubdirectories.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkSubdirectories.Location = new System.Drawing.Point(374, 53);
+            this.chkSubdirectories.Name = "chkSubdirectories";
+            this.chkSubdirectories.Size = new System.Drawing.Size(165, 17);
+            this.chkSubdirectories.TabIndex = 18;
+            this.chkSubdirectories.Text = "Искать файлы в подпапках";
+            this.chkSubdirectories.UseVisualStyleBackColor = true;
+            this.chkSubdirectories.CheckedChanged += new System.EventHandler(this.chkSubdirectories_CheckedChanged);
             // 
             // olvFiles
             // 
@@ -319,7 +335,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblInfo.Location = new System.Drawing.Point(4, 46);
             this.lblInfo.Name = "lblInfo";
-            this.lblInfo.Size = new System.Drawing.Size(670, 37);
+            this.lblInfo.Size = new System.Drawing.Size(364, 37);
             this.lblInfo.TabIndex = 14;
             this.lblInfo.Text = "Выберите папку с входными файлами\r\n *.doc, *.docx, *.pdf, *.txt, *.odt, *.xlsx, *" +
     ".rtf, *.htm, *.html";
@@ -364,12 +380,22 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbcMain.Controls.Add(this.tbpCount);
             this.tbcMain.Controls.Add(this.tbpHistory);
+            this.tbcMain.Controls.Add(this.tbpAnalyzer);
             this.tbcMain.Location = new System.Drawing.Point(-1, 27);
             this.tbcMain.Name = "tbcMain";
             this.tbcMain.SelectedIndex = 0;
             this.tbcMain.Size = new System.Drawing.Size(763, 475);
             this.tbcMain.TabIndex = 1;
             this.tbcMain.SelectedIndexChanged += new System.EventHandler(this.tbcHistory_SelectedIndexChanged);
+            // 
+            // tbpAnalyzer
+            // 
+            this.tbpAnalyzer.Location = new System.Drawing.Point(4, 22);
+            this.tbpAnalyzer.Name = "tbpAnalyzer";
+            this.tbpAnalyzer.Size = new System.Drawing.Size(755, 449);
+            this.tbpAnalyzer.TabIndex = 2;
+            this.tbpAnalyzer.Text = "Анализ слова";
+            this.tbpAnalyzer.UseVisualStyleBackColor = true;
             // 
             // FrmMain
             // 
@@ -431,6 +457,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnBrowse;
         private System.Windows.Forms.TabControl tbcMain;
+        private System.Windows.Forms.TabPage tbpAnalyzer;
+        private System.Windows.Forms.CheckBox chkSubdirectories;
     }
 }
 

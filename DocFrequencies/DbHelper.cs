@@ -23,7 +23,7 @@ namespace StrangeWords
 
         public static bool ifExists(int charactersCount, int wordsCount)
         {
-            sql_cmd.CommandText = String.Format("SELECT count(*) FROM `wf_files` WHERE `words_count`='{0}' AND `characters_count`='{1}'",wordsCount, charactersCount);
+            sql_cmd.CommandText = String.Format("SELECT count(*) FROM `wf_files` WHERE `words_count`='{0}' AND `characters_count`='{1}'", wordsCount, charactersCount);
             int count = Convert.ToInt32(sql_cmd.ExecuteScalar());
 
             return count != 0;
@@ -101,11 +101,64 @@ namespace StrangeWords
         public static int CHARACTERS_COUNT;
         public static int FILES_COUNT;
 
+        public static List<xTextFile> FindWord(string word)
+        {
+            ResetSQLiteConnection();
+            List<xWordFrequencies> xwfList = new List<xWordFrequencies>();
+            List<long> ids = new List<long>();
+
+
+            string query = string.Format("SELECT * FROM `wf_frequencies` WHERE `word` LIKE '{0}'", word);
+            string subquery = "SELECT * FROM `wf_files` WHERE `id` = ";
+            sql_cmd.CommandText = query;
+            SQLiteDataReader Reader = sql_cmd.ExecuteReader();
+            if (!Reader.HasRows) return null;
+
+            while (Reader.Read()) {
+                xWordFrequencies xwf = new xWordFrequencies() {
+                    id = Convert.ToInt64(GetDBInt64("id", Reader)),
+                    fileId = Convert.ToInt64(GetDBInt64("file_id", Reader)),
+                    word = GetDBString("word", Reader),
+                    frequency = GetDBInt("frequency", Reader),
+                    percentage = GetDBFloat("percentage", Reader),
+                };
+
+                xwfList.Add(xwf);
+
+                subquery += string.Format("'{0}' OR ", Convert.ToInt64(GetDBInt64("file_id", Reader)));
+            };
+            Reader.Close();
+
+            subquery = subquery.Substring(0, subquery.Length - 4);
+
+            List<xTextFile> list = new List<xTextFile>();
+            sql_cmd.CommandText = subquery;
+            Reader = sql_cmd.ExecuteReader();
+            if (!Reader.HasRows) return null;
+
+            while (Reader.Read()) {
+                xTextFile tFile = new xTextFile() {
+                    fileId = Convert.ToInt64(GetDBInt64("id", Reader)),
+                    fileName = GetDBString("file_name", Reader),
+                    wordsCount = GetDBInt("words_count", Reader),
+                    uniqueWordsCount = GetDBInt("unique_words_count", Reader),
+                    charactersCount = GetDBInt("characters_count", Reader),
+                    categoryIndex = GetDBInt("category", Reader),
+                    created_at = GetDBString("created_at", Reader),
+                    frequencies = GetFrequencies(Convert.ToInt64(GetDBInt64("id", Reader)))
+                };
+                           
+                list.Add(tFile);
+            }
+            Reader.Close();
+
+            return list;
+        }
 
         public static List<xTextFile> GetHistory(string dtFrom, string dtTo)
         {
             WORDS_COUNT = 0; CHARACTERS_COUNT = 0; FILES_COUNT = 0;
-            ResetSQLite();
+            ResetSQLiteConnection();
             Utils.frequencies = new List<xWordFrequencies>();
 
             string query = string.Format("SELECT * FROM `wf_files` WHERE strftime('%Y-%m-%d %H:%M:%S',created_at) BETWEEN ('{0}') AND ('{1}')", dtFrom, dtTo);
@@ -156,7 +209,7 @@ namespace StrangeWords
             GC.Collect();
         }
 
-        public static void ResetSQLite()
+        public static void ResetSQLiteConnection()
         {
             DisposeSQLite();
             SetConnection();
