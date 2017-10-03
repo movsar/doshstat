@@ -6,6 +6,7 @@ using System.IO;
 using System.Windows.Forms;
 using DocumentFormat.OpenXml.Spreadsheet;
 using SpreadsheetLight;
+using System.Linq;
 
 namespace StrangeWords
 {
@@ -20,6 +21,12 @@ namespace StrangeWords
         public static List<xTextFile> fList; // Hold the files
         private static string appName = "StrangeWords";
         private static string separator = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ListSeparator;
+
+        public static xTextFile GetTextFile(long id)
+        {
+            return history.First(file => (file.fileId == id));
+        }
+
 
         public static void ExcelExport(ObjectListView olv, string defaultName, bool withStyle)
         {

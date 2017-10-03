@@ -68,8 +68,6 @@
             this.olvFrequencies.UseCompatibleStateImageBehavior = false;
             this.olvFrequencies.UseFilterIndicator = true;
             this.olvFrequencies.UseFiltering = true;
-            this.olvFrequencies.UseHotItem = true;
-            this.olvFrequencies.UseTranslucentHotItem = true;
             this.olvFrequencies.View = System.Windows.Forms.View.Details;
             this.olvFrequencies.SelectionChanged += new System.EventHandler(this.olvFrequencies_SelectionChanged);
             // 

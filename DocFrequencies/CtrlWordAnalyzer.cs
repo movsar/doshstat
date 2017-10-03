@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace StrangeWords
 {
@@ -20,29 +21,38 @@ namespace StrangeWords
         private void btnSearch_Click(object sender, EventArgs e)
         {
             string word = txtWord.Text.Substring(0, 1).ToUpper() + txtWord.Text.Substring(1);
-            List<xTextFile> searchResults = DbHelper.FindWord(word);
+            List<xWordFrequencies> searchResults = DbHelper.FindInFrequencies(word);
+            if (searchResults == null) return;
+
             List<xDetails> rowObjects = new List<xDetails>();
 
-            foreach (xTextFile fileInfo in searchResults) {
-                string fileName = fileInfo.fileName;
-                int categoryIndex = fileInfo.categoryIndex;
-                int wordsCount = fileInfo.wordsCount;
-                int uniqueWordsCount = fileInfo.uniqueWordsCount;
-                string created_at = fileInfo.created_at;
-                foreach (xWordFrequencies xwf in fileInfo.frequencies) {
-                    xDetails rowObject = new xDetails();
-                    rowObject.fileName = fileName;
-                    rowObject.categoryIndex = categoryIndex;
-                    rowObject.wordsCount = wordsCount;
-                    rowObject.uniqueWordsCount = uniqueWordsCount;
-                    rowObject.created_at = created_at;
-                    rowObject.word = xwf.word;
-                    rowObject.frequency = xwf.frequency;
-                    rowObject.percentage = xwf.percentage;
-                    rowObjects.Add(rowObject);
-                }
+            foreach (xWordFrequencies xwf in searchResults) {
+                xTextFile fileInfo = Utils.GetTextFile(xwf.fileId);
+
+                xDetails rowObject = new xDetails();
+                rowObject.fileId = fileInfo.fileId;
+                rowObject.fileName = fileInfo.fileName;
+                rowObject.categoryIndex = fileInfo.categoryIndex;
+                rowObject.wordsCount = fileInfo.wordsCount;
+                rowObject.uniqueWordsCount = fileInfo.uniqueWordsCount;
+                rowObject.created_at = fileInfo.created_at;
+                rowObject.word = xwf.word;
+                rowObject.frequency = xwf.frequency;
+                rowObject.percentage = xwf.percentage;
+                rowObjects.Add(rowObject);
             }
             olvSearchResults.SetObjects(rowObjects);
+            Debug.WriteLine(rowObjects.GroupBy(xFile => xFile.fileId).Select(grp => grp.First()).ToList().Count);
+        }
+
+        private void olvSearchResults_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+                if (e.Button == MouseButtons.Left) {
+                    if (olvSearchResults.SelectedObject != null) {
+                        FrmFrequencies frmFreq = new FrmFrequencies(Utils.GetTextFile(((xDetails)olvSearchResults.SelectedObject).fileId), ((xDetails)olvSearchResults.SelectedObject).word);
+                        frmFreq.Show();
+                    }
+            }
         }
     }
 }

@@ -26,6 +26,20 @@ namespace StrangeWords
             lblWordCount.Text += xFile.wordsCount.ToString();
             olvFrequencies.SetObjects(xFile.frequencies);
         }
+        public FrmFrequencies(xTextFile xFile, string word)
+        {
+            InitializeComponent();
+
+            _xFile = xFile;
+            lblCategory.Text += xFile.getCategoryName();
+            lblCharactersCount.Text += xFile.charactersCount.ToString();
+            lblFileName.Text += xFile.fileName;
+            lblUniqueWords.Text += xFile.uniqueWordsCount.ToString();
+            lblWordCount.Text += xFile.wordsCount.ToString();
+            olvFrequencies.SetObjects(xFile.frequencies);
+
+            olvFrequencies.SelectedObject = (xFile.frequencies.First(xObj => xObj.word == word));
+        }
 
         private void frmFrequencies_Load(object sender, EventArgs e)
         {
