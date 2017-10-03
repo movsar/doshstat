@@ -61,7 +61,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnBrowse = new System.Windows.Forms.Button();
             this.tbcMain = new System.Windows.Forms.TabControl();
-            this.tbpAnalyzer = new System.Windows.Forms.TabPage();
+            this.tbpSearch = new System.Windows.Forms.TabPage();
             this.contextMenuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -380,7 +380,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbcMain.Controls.Add(this.tbpCount);
             this.tbcMain.Controls.Add(this.tbpHistory);
-            this.tbcMain.Controls.Add(this.tbpAnalyzer);
+            this.tbcMain.Controls.Add(this.tbpSearch);
             this.tbcMain.Location = new System.Drawing.Point(-1, 27);
             this.tbcMain.Name = "tbcMain";
             this.tbcMain.SelectedIndex = 0;
@@ -388,14 +388,14 @@
             this.tbcMain.TabIndex = 1;
             this.tbcMain.SelectedIndexChanged += new System.EventHandler(this.tbcHistory_SelectedIndexChanged);
             // 
-            // tbpAnalyzer
+            // tbpSearch
             // 
-            this.tbpAnalyzer.Location = new System.Drawing.Point(4, 22);
-            this.tbpAnalyzer.Name = "tbpAnalyzer";
-            this.tbpAnalyzer.Size = new System.Drawing.Size(755, 449);
-            this.tbpAnalyzer.TabIndex = 2;
-            this.tbpAnalyzer.Text = "Анализ слова";
-            this.tbpAnalyzer.UseVisualStyleBackColor = true;
+            this.tbpSearch.Location = new System.Drawing.Point(4, 22);
+            this.tbpSearch.Name = "tbpSearch";
+            this.tbpSearch.Size = new System.Drawing.Size(755, 449);
+            this.tbpSearch.TabIndex = 2;
+            this.tbpSearch.Text = "Поиск";
+            this.tbpSearch.UseVisualStyleBackColor = true;
             // 
             // FrmMain
             // 
@@ -430,7 +430,6 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem ctxRemoveFromtheList;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel lblStatus;
         private System.Windows.Forms.ToolStripProgressBar prbStatus;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem файлToolStripMenuItem;
@@ -457,8 +456,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnBrowse;
         private System.Windows.Forms.TabControl tbcMain;
-        private System.Windows.Forms.TabPage tbpAnalyzer;
+        private System.Windows.Forms.TabPage tbpSearch;
         private System.Windows.Forms.CheckBox chkSubdirectories;
+        public System.Windows.Forms.ToolStripStatusLabel lblStatus;
     }
 }
 

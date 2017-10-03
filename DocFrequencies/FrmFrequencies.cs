@@ -38,7 +38,10 @@ namespace StrangeWords
             lblWordCount.Text += xFile.wordsCount.ToString();
             olvFrequencies.SetObjects(xFile.frequencies);
 
+            // Select the element
             olvFrequencies.SelectedObject = (xFile.frequencies.First(xObj => xObj.word == word));
+            // Scroll to the selected element
+            olvFrequencies.EnsureModelVisible((xFile.frequencies.First(xObj => xObj.word == word)));
         }
 
         private void frmFrequencies_Load(object sender, EventArgs e)

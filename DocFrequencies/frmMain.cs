@@ -103,7 +103,8 @@ namespace StrangeWords
 
         CtrlHistory myCtrlHistory;
         CtrlWordAnalyzer myCtrlWordAnalyzer;
-
+        // public static void setStatusMessage(string msg) // 
+       
         private void Form1_Load(object sender, EventArgs e)
         {
             this.Text = "Strange Words ver." + AssemblyVersion;
@@ -113,7 +114,7 @@ namespace StrangeWords
 
             myCtrlWordAnalyzer = new CtrlWordAnalyzer();
             myCtrlWordAnalyzer.Dock = DockStyle.Fill;
-            tbpAnalyzer.Controls.Add(myCtrlWordAnalyzer);
+            tbpSearch.Controls.Add(myCtrlWordAnalyzer);
 
             DirectoryInfo dInfo = new DirectoryInfo(Utils.WorkDirPath);
             if (!dInfo.Exists) dInfo.Create();
@@ -372,7 +373,7 @@ namespace StrangeWords
         }
 
         private void chkSubdirectories_CheckedChanged(object sender, EventArgs e)
-        {            
+        {
             Utils.StgSet("ChkSubdirectories", chkSubdirectories.Checked);
             loadFiles();
         }

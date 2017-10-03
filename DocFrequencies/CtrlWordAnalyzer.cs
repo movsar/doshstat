@@ -18,11 +18,17 @@ namespace StrangeWords
             InitializeComponent();
         }
 
-        private void btnSearch_Click(object sender, EventArgs e)
+        private void search()
         {
+            if (txtWord.Text.Length < 1) return;
+
             string word = txtWord.Text.Substring(0, 1).ToUpper() + txtWord.Text.Substring(1);
             List<xWordFrequencies> searchResults = DbHelper.FindInFrequencies(word);
-            if (searchResults == null) return;
+            if (searchResults == null) {
+                olvSearchResults.ClearObjects();
+                ((FrmMain)this.Parent.Parent.Parent).lblStatus.Text = string.Format("Ничего не найдено");
+                return;
+            }
 
             List<xDetails> rowObjects = new List<xDetails>();
 
@@ -42,17 +48,35 @@ namespace StrangeWords
                 rowObjects.Add(rowObject);
             }
             olvSearchResults.SetObjects(rowObjects);
-            Debug.WriteLine(rowObjects.GroupBy(xFile => xFile.fileId).Select(grp => grp.First()).ToList().Count);
+            ((FrmMain)this.Parent.Parent.Parent).lblStatus.Text = string.Format("Найдено в {0} файлах(е)", rowObjects.GroupBy(xFile => xFile.fileId).Select(grp => grp.First()).ToList().Count.ToString());
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            search();
         }
 
         private void olvSearchResults_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-                if (e.Button == MouseButtons.Left) {
-                    if (olvSearchResults.SelectedObject != null) {
-                        FrmFrequencies frmFreq = new FrmFrequencies(Utils.GetTextFile(((xDetails)olvSearchResults.SelectedObject).fileId), ((xDetails)olvSearchResults.SelectedObject).word);
-                        frmFreq.Show();
-                    }
+            if (e.Button == MouseButtons.Left) {
+                if (olvSearchResults.SelectedObject != null) {
+                    FrmFrequencies frmFreq = new FrmFrequencies(Utils.GetTextFile(((xDetails)olvSearchResults.SelectedObject).fileId), ((xDetails)olvSearchResults.SelectedObject).word);
+                    frmFreq.Show();
+                }
             }
+        }
+
+        private void txtWord_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter) {
+                search();
+            }
+        }
+
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            if (olvSearchResults.Items.Count != 0)
+                Utils.ExcelExport(olvSearchResults, "Результаты поиска", false);
         }
     }
 }

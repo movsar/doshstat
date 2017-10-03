@@ -36,9 +36,9 @@
             this.olvClmFileName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvClmCategory = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvClmDateTime = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.label1 = new System.Windows.Forms.Label();
             this.txtWord = new System.Windows.Forms.TextBox();
             this.btnSearch = new System.Windows.Forms.Button();
+            this.btnExport = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.olvSearchResults)).BeginInit();
             this.SuspendLayout();
             // 
@@ -136,25 +136,18 @@
             this.olvClmDateTime.Text = "Дата и время";
             this.olvClmDateTime.Width = 138;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 7);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(140, 13);
-            this.label1.TabIndex = 17;
-            this.label1.Text = "Поиск слова по признаку:";
-            // 
             // txtWord
             // 
-            this.txtWord.Location = new System.Drawing.Point(150, 4);
+            this.txtWord.Location = new System.Drawing.Point(0, 4);
             this.txtWord.Name = "txtWord";
             this.txtWord.Size = new System.Drawing.Size(139, 20);
             this.txtWord.TabIndex = 18;
+            this.txtWord.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtWord_KeyUp);
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(295, 2);
+            this.btnSearch.Cursor = System.Windows.Forms.Cursors.Default;
+            this.btnSearch.Location = new System.Drawing.Point(145, 2);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(75, 23);
             this.btnSearch.TabIndex = 22;
@@ -162,13 +155,24 @@
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
+            // btnExport
+            // 
+            this.btnExport.Cursor = System.Windows.Forms.Cursors.Default;
+            this.btnExport.Location = new System.Drawing.Point(226, 2);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(75, 23);
+            this.btnExport.TabIndex = 23;
+            this.btnExport.Text = "Экспорт";
+            this.btnExport.UseVisualStyleBackColor = true;
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
+            // 
             // CtrlWordAnalyzer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnExport);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.txtWord);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.olvSearchResults);
             this.Name = "CtrlWordAnalyzer";
             this.Size = new System.Drawing.Size(1031, 551);
@@ -189,8 +193,8 @@
         private BrightIdeasSoftware.OLVColumn olvClmFileName;
         private BrightIdeasSoftware.OLVColumn olvClmCategory;
         private BrightIdeasSoftware.OLVColumn olvClmDateTime;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtWord;
         private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.Button btnExport;
     }
 }
