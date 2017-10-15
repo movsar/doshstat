@@ -39,6 +39,7 @@
             this.btnExport = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.lblFilesCount = new System.Windows.Forms.Label();
+            this.lblSelectedFrequency = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.olvTotalFrequencies)).BeginInit();
             this.SuspendLayout();
             // 
@@ -59,10 +60,10 @@
             this.olvTotalFrequencies.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.olvTotalFrequencies.FullRowSelect = true;
             this.olvTotalFrequencies.GridLines = true;
-            this.olvTotalFrequencies.Location = new System.Drawing.Point(-5, 48);
+            this.olvTotalFrequencies.Location = new System.Drawing.Point(-5, 61);
             this.olvTotalFrequencies.Name = "olvTotalFrequencies";
             this.olvTotalFrequencies.ShowGroups = false;
-            this.olvTotalFrequencies.Size = new System.Drawing.Size(469, 462);
+            this.olvTotalFrequencies.Size = new System.Drawing.Size(469, 449);
             this.olvTotalFrequencies.TabIndex = 13;
             this.olvTotalFrequencies.UseAlternatingBackColors = true;
             this.olvTotalFrequencies.UseCompatibleStateImageBehavior = false;
@@ -91,7 +92,7 @@
             // 
             this.olvClmPercentage.AspectName = "percentage";
             this.olvClmPercentage.AspectToStringFormat = "{0:0.0}%";
-            this.olvClmPercentage.Text = "Плотность";
+            this.olvClmPercentage.Text = "Относительная частота";
             this.olvClmPercentage.Width = 92;
             // 
             // lblSelectedWordsPercentage
@@ -166,11 +167,20 @@
             this.lblFilesCount.TabIndex = 31;
             this.lblFilesCount.Text = "Всего файлов: ";
             // 
+            // lblSelectedFrequency
+            // 
+            this.lblSelectedFrequency.AutoSize = true;
+            this.lblSelectedFrequency.Location = new System.Drawing.Point(6, 45);
+            this.lblSelectedFrequency.Name = "lblSelectedFrequency";
+            this.lblSelectedFrequency.Size = new System.Drawing.Size(0, 13);
+            this.lblSelectedFrequency.TabIndex = 32;
+            // 
             // FrmTotalFrequencies
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(463, 545);
+            this.Controls.Add(this.lblSelectedFrequency);
             this.Controls.Add(this.lblFilesCount);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnExport);
@@ -203,5 +213,6 @@
         private System.Windows.Forms.Button btnExport;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblFilesCount;
+        private System.Windows.Forms.Label lblSelectedFrequency;
     }
 }

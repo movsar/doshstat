@@ -87,7 +87,7 @@
             this.olvClmPercentage.AspectName = "getNeatPercentage";
             this.olvClmPercentage.AspectToStringFormat = "";
             this.olvClmPercentage.Groupable = false;
-            this.olvClmPercentage.Text = "Плотность";
+            this.olvClmPercentage.Text = "Относительная частота";
             this.olvClmPercentage.Width = 94;
             // 
             // olvClmDateTime

@@ -36,9 +36,9 @@
             this.lblUniqueWords = new System.Windows.Forms.Label();
             this.lblCharactersCount = new System.Windows.Forms.Label();
             this.btnExport = new System.Windows.Forms.Button();
-            this.lblFileName = new System.Windows.Forms.Label();
             this.lblSelectedWordsCount = new System.Windows.Forms.Label();
             this.lblSelectedWordsPercentage = new System.Windows.Forms.Label();
+            this.lblSelectedFrequency = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.olvFrequencies)).BeginInit();
             this.SuspendLayout();
             // 
@@ -59,10 +59,10 @@
             this.olvFrequencies.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.olvFrequencies.FullRowSelect = true;
             this.olvFrequencies.GridLines = true;
-            this.olvFrequencies.Location = new System.Drawing.Point(-5, 46);
+            this.olvFrequencies.Location = new System.Drawing.Point(-5, 58);
             this.olvFrequencies.Name = "olvFrequencies";
             this.olvFrequencies.ShowGroups = false;
-            this.olvFrequencies.Size = new System.Drawing.Size(471, 467);
+            this.olvFrequencies.Size = new System.Drawing.Size(471, 455);
             this.olvFrequencies.TabIndex = 12;
             this.olvFrequencies.UseAlternatingBackColors = true;
             this.olvFrequencies.UseCompatibleStateImageBehavior = false;
@@ -89,7 +89,7 @@
             // 
             this.olvClmPercentage.AspectName = "percentage";
             this.olvClmPercentage.AspectToStringFormat = "{0:0.0}%";
-            this.olvClmPercentage.Text = "Плотность";
+            this.olvClmPercentage.Text = "Относительная частота";
             this.olvClmPercentage.Width = 92;
             // 
             // lblCategory
@@ -139,16 +139,6 @@
             this.btnExport.UseVisualStyleBackColor = true;
             this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
-            // lblFileName
-            // 
-            this.lblFileName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblFileName.AutoSize = true;
-            this.lblFileName.Location = new System.Drawing.Point(3, 522);
-            this.lblFileName.Name = "lblFileName";
-            this.lblFileName.Size = new System.Drawing.Size(42, 13);
-            this.lblFileName.TabIndex = 20;
-            this.lblFileName.Text = "Файл: ";
-            // 
             // lblSelectedWordsCount
             // 
             this.lblSelectedWordsCount.AutoSize = true;
@@ -165,14 +155,22 @@
             this.lblSelectedWordsPercentage.Size = new System.Drawing.Size(0, 13);
             this.lblSelectedWordsPercentage.TabIndex = 22;
             // 
+            // lblSelectedFrequency
+            // 
+            this.lblSelectedFrequency.AutoSize = true;
+            this.lblSelectedFrequency.Location = new System.Drawing.Point(3, 42);
+            this.lblSelectedFrequency.Name = "lblSelectedFrequency";
+            this.lblSelectedFrequency.Size = new System.Drawing.Size(0, 13);
+            this.lblSelectedFrequency.TabIndex = 23;
+            // 
             // FrmFrequencies
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(463, 542);
+            this.Controls.Add(this.lblSelectedFrequency);
             this.Controls.Add(this.lblSelectedWordsPercentage);
             this.Controls.Add(this.lblSelectedWordsCount);
-            this.Controls.Add(this.lblFileName);
             this.Controls.Add(this.btnExport);
             this.Controls.Add(this.lblCharactersCount);
             this.Controls.Add(this.lblUniqueWords);
@@ -198,9 +196,9 @@
         private System.Windows.Forms.Label lblUniqueWords;
         private System.Windows.Forms.Label lblCharactersCount;
         private System.Windows.Forms.Button btnExport;
-        private System.Windows.Forms.Label lblFileName;
         private BrightIdeasSoftware.OLVColumn olvClmPercentage;
         private System.Windows.Forms.Label lblSelectedWordsCount;
         private System.Windows.Forms.Label lblSelectedWordsPercentage;
+        private System.Windows.Forms.Label lblSelectedFrequency;
     }
 }
