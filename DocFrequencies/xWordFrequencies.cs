@@ -9,6 +9,7 @@ namespace StrangeWords
     public class xWordFrequencies
     {
         public long id { get; set; }
+        public long rank { get; set; }
         public long fileId { get; set; }
         public string word { get; set; }
         public int frequency { get; set; }

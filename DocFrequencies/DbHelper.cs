@@ -86,6 +86,7 @@ namespace StrangeWords
                     id = Convert.ToInt64(GetDBInt64("id", Reader)),
                     fileId = Convert.ToInt64(GetDBInt64("file_id", Reader)),
                     word = GetDBString("word", Reader),
+                    rank = GetDBInt("rank", Reader),
                     frequency = GetDBInt("frequency", Reader),
                     percentage = GetDBFloat("percentage", Reader),
                 };
@@ -175,7 +176,7 @@ namespace StrangeWords
             createTables();
         }
 
-       
+
         public static void DisposeSQLite()
         {
             sql_con.Dispose();
@@ -210,6 +211,7 @@ namespace StrangeWords
             sql = "create table IF NOT EXISTS wf_frequencies (" +
                "id INTEGER PRIMARY KEY," +
                "file_id int," +
+               "rank int," +
                "word varchar (150)," +
                "frequency int," +
                "percentage real," +

@@ -39,11 +39,13 @@
             this.lblSelectedWordsCount = new System.Windows.Forms.Label();
             this.lblSelectedWordsPercentage = new System.Windows.Forms.Label();
             this.lblSelectedFrequency = new System.Windows.Forms.Label();
+            this.olvClmRank = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             ((System.ComponentModel.ISupportInitialize)(this.olvFrequencies)).BeginInit();
             this.SuspendLayout();
             // 
             // olvFrequencies
             // 
+            this.olvFrequencies.AllColumns.Add(this.olvClmRank);
             this.olvFrequencies.AllColumns.Add(this.olvClmWord);
             this.olvFrequencies.AllColumns.Add(this.olvClmFrequency);
             this.olvFrequencies.AllColumns.Add(this.olvClmPercentage);
@@ -52,6 +54,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.olvFrequencies.CellEditUseWholeCell = false;
             this.olvFrequencies.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.olvClmRank,
             this.olvClmWord,
             this.olvClmFrequency,
             this.olvClmPercentage});
@@ -163,6 +166,12 @@
             this.lblSelectedFrequency.Size = new System.Drawing.Size(0, 13);
             this.lblSelectedFrequency.TabIndex = 23;
             // 
+            // olvClmRank
+            // 
+            this.olvClmRank.AspectName = "rank";
+            this.olvClmRank.Text = "Ранг";
+            this.olvClmRank.Width = 50;
+            // 
             // FrmFrequencies
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -200,5 +209,6 @@
         private System.Windows.Forms.Label lblSelectedWordsCount;
         private System.Windows.Forms.Label lblSelectedWordsPercentage;
         private System.Windows.Forms.Label lblSelectedFrequency;
+        private BrightIdeasSoftware.OLVColumn olvClmRank;
     }
 }

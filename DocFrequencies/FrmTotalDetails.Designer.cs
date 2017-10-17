@@ -57,14 +57,18 @@
             // olvClmWordsCount
             // 
             this.olvClmWordsCount.AspectName = "wordsCount";
+            this.olvClmWordsCount.DisplayIndex = 2;
             this.olvClmWordsCount.Groupable = false;
+            this.olvClmWordsCount.IsVisible = false;
             this.olvClmWordsCount.Text = "Всего слов";
             this.olvClmWordsCount.Width = 100;
             // 
             // olvClmUniqueWords
             // 
             this.olvClmUniqueWords.AspectName = "uniqueWordsCount";
+            this.olvClmUniqueWords.DisplayIndex = 3;
             this.olvClmUniqueWords.Groupable = false;
+            this.olvClmUniqueWords.IsVisible = false;
             this.olvClmUniqueWords.Text = "Уникальных слов";
             this.olvClmUniqueWords.Width = 129;
             // 
@@ -93,7 +97,9 @@
             // olvClmDateTime
             // 
             this.olvClmDateTime.AspectName = "created_at";
+            this.olvClmDateTime.DisplayIndex = 5;
             this.olvClmDateTime.Groupable = false;
+            this.olvClmDateTime.IsVisible = false;
             this.olvClmDateTime.Text = "Дата и время";
             this.olvClmDateTime.Width = 138;
             // 
@@ -114,12 +120,9 @@
             this.olvDetailedHistory.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvClmFileName,
             this.olvClmCategory,
-            this.olvClmWordsCount,
-            this.olvClmUniqueWords,
             this.olvClmWord,
             this.olvClmFrequency,
-            this.olvClmPercentage,
-            this.olvClmDateTime});
+            this.olvClmPercentage});
             this.olvDetailedHistory.Cursor = System.Windows.Forms.Cursors.Default;
             this.olvDetailedHistory.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.olvDetailedHistory.FullRowSelect = true;

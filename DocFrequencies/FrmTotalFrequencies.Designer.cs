@@ -40,11 +40,13 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lblFilesCount = new System.Windows.Forms.Label();
             this.lblSelectedFrequency = new System.Windows.Forms.Label();
+            this.olvClmRank = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             ((System.ComponentModel.ISupportInitialize)(this.olvTotalFrequencies)).BeginInit();
             this.SuspendLayout();
             // 
             // olvTotalFrequencies
             // 
+            this.olvTotalFrequencies.AllColumns.Add(this.olvClmRank);
             this.olvTotalFrequencies.AllColumns.Add(this.olvClmWord);
             this.olvTotalFrequencies.AllColumns.Add(this.olvClmFrequency);
             this.olvTotalFrequencies.AllColumns.Add(this.olvClmPercentage);
@@ -53,6 +55,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.olvTotalFrequencies.CellEditUseWholeCell = false;
             this.olvTotalFrequencies.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.olvClmRank,
             this.olvClmWord,
             this.olvClmFrequency,
             this.olvClmPercentage});
@@ -79,7 +82,7 @@
             this.olvClmWord.AspectName = "word";
             this.olvClmWord.Groupable = false;
             this.olvClmWord.Text = "Слово";
-            this.olvClmWord.Width = 277;
+            this.olvClmWord.Width = 217;
             // 
             // olvClmFrequency
             // 
@@ -93,7 +96,7 @@
             this.olvClmPercentage.AspectName = "percentage";
             this.olvClmPercentage.AspectToStringFormat = "{0:0.0}%";
             this.olvClmPercentage.Text = "Относительная частота";
-            this.olvClmPercentage.Width = 92;
+            this.olvClmPercentage.Width = 102;
             // 
             // lblSelectedWordsPercentage
             // 
@@ -175,6 +178,12 @@
             this.lblSelectedFrequency.Size = new System.Drawing.Size(0, 13);
             this.lblSelectedFrequency.TabIndex = 32;
             // 
+            // olvClmRank
+            // 
+            this.olvClmRank.AspectName = "rang";
+            this.olvClmRank.Text = "Ранг";
+            this.olvClmRank.Width = 46;
+            // 
             // FrmTotalFrequencies
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -214,5 +223,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblFilesCount;
         private System.Windows.Forms.Label lblSelectedFrequency;
+        private BrightIdeasSoftware.OLVColumn olvClmRank;
     }
 }

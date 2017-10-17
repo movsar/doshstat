@@ -96,7 +96,8 @@ namespace StrangeWords
 
         }
 
-        public string AssemblyVersion {
+        public string AssemblyVersion
+        {
             get {
                 return Assembly.GetExecutingAssembly().GetName().Version.ToString();
             }
@@ -108,7 +109,7 @@ namespace StrangeWords
 
         private void Form1_Load(object sender, EventArgs e)
         {
-           
+
 
             this.Text = "Strange Words ver." + AssemblyVersion;
             myCtrlHistory = new CtrlHistory();
@@ -276,11 +277,22 @@ namespace StrangeWords
                 }
 
                 // Add words to object's list of words with frequencies
+                int rank = 0;
                 foreach (var row in words.OrderByDescending(pair => pair.Value)) {
                     xWordFrequencies xwf = new xWordFrequencies();
                     xwf.word = row.Key.ToLower();
                     xwf.word = xwf.word.Substring(0, 1).ToUpper() + xwf.word.Substring(1);
                     xwf.frequency = row.Value;
+
+                    if (rank != 0) {
+                        // It's not the first iteration
+                        if (xFile.frequencies[xFile.frequencies.Count - 1].frequency > xwf.frequency)
+                            rank++;
+                    } else {
+                        rank++;
+                    }
+
+                    xwf.rank = rank;
                     float freq = xwf.frequency;
 
                     // Why it doesn't work with xwf.frequency?

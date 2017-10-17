@@ -26,9 +26,12 @@ namespace StrangeWords
         {
             PdfReader reader = new PdfReader(path);
             string text = string.Empty;
-            for (int page = 1; page <= reader.NumberOfPages; page++)
-            {
-                text += PdfTextExtractor.GetTextFromPage(reader, page);
+            for (int page = 1; page <= reader.NumberOfPages; page++) {
+                try {
+                    text += PdfTextExtractor.GetTextFromPage(reader, page);
+                } catch (Exception ex) {
+                    Utils.ErrLog("Error processing page: " + page.ToString(), ex.Message);
+                }
             }
             reader.Close();
             return text;
