@@ -81,17 +81,22 @@ namespace StrangeWords
             SQLiteDataReader Reader = cmd.ExecuteReader();
             if (!Reader.HasRows) return null;
 
-            while (Reader.Read()) {
-                xWordFrequencies xwf = new xWordFrequencies() {
-                    id = Convert.ToInt64(GetDBInt64("id", Reader)),
-                    fileId = Convert.ToInt64(GetDBInt64("file_id", Reader)),
-                    word = GetDBString("word", Reader),
-                    rank = GetDBInt("rank", Reader),
-                    frequency = GetDBInt("frequency", Reader),
-                    percentage = GetDBFloat("percentage", Reader),
-                };
+            try {
+                while (Reader.Read()) {
+                    xWordFrequencies xwf = new xWordFrequencies() {
+                        id = Convert.ToInt64(GetDBInt64("id", Reader)),
+                        fileId = Convert.ToInt64(GetDBInt64("file_id", Reader)),
+                        word = GetDBString("word", Reader),
+                        rank = GetDBInt("rank", Reader),
+                        frequency = GetDBInt("frequency", Reader),
+                        percentage = GetDBFloat("percentage", Reader),
+                    };
 
-                list.Add(xwf);
+                    list.Add(xwf);
+                }
+            } catch (Exception ex) {
+                Utils.ErrLog("Ошибка при чтении xwf из БД", ex.Message);
+                Utils.msgInformation("Ошибка при чтении БД, требуется обновление БД");
             }
             Reader.Close();
 
