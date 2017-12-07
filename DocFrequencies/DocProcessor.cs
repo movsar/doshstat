@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StrangeWords
+namespace DoshStat
 {
     public sealed class DocProcessor : ITextProcessor
     {

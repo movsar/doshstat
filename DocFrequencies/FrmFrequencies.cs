@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace StrangeWords
+namespace DoshStat
 {
     public partial class FrmFrequencies : Form
     {

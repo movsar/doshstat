@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26403.7
+VisualStudioVersion = 15.0.27004.2009
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StrangeWords", "DocFrequencies\StrangeWords.csproj", "{659653B7-544F-49AB-974B-17496EA0636E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoshStat", "DocFrequencies\DoshStat.csproj", "{659653B7-544F-49AB-974B-17496EA0636E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,5 +18,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {136ACA86-D282-4AD0-8FEA-EF5120F189B3}
 	EndGlobalSection
 EndGlobal

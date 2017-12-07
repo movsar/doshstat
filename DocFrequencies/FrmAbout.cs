@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace StrangeWords
+namespace DoshStat
 {
     partial class FrmAbout : Form
     {

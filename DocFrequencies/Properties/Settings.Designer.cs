@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace StrangeWords.Properties {
+namespace DoshStat.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -68,6 +68,18 @@ namespace StrangeWords.Properties {
             }
             set {
                 this["ExStyle"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ShowResultsImmediately {
+            get {
+                return ((bool)(this["ShowResultsImmediately"]));
+            }
+            set {
+                this["ShowResultsImmediately"] = value;
             }
         }
     }

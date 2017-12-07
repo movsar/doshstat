@@ -6,7 +6,7 @@ using System.Web;
 using System.Windows.Forms;
 using System.Xml.Linq;
 
-namespace StrangeWords
+namespace DoshStat
 {
     class HtmProcessor : ITextProcessor
     {

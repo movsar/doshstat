@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
 
-namespace StrangeWords
+namespace DoshStat
 {
     /// <summary>
     ///     Экстрактор текста из файлов .odt

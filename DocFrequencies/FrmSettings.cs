@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace StrangeWords
+namespace DoshStat
 {
     public partial class FrmSettings : Form
     {
@@ -21,6 +21,7 @@ namespace StrangeWords
                 comboBox1.Items.Add(enc.Name);
             }
             comboBox2.SelectedIndex = Utils.StgGetInt("ExStyle");
+            checkBox1.Checked = Utils.StgGetBool("ShowResultsImmediately");
         }
 
         private void FrmSettings_Load(object sender, EventArgs e)
@@ -54,6 +55,11 @@ namespace StrangeWords
             Utils.StgSet("ExStyle", comboBox2.SelectedIndex);
 
             Close();
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            Utils.StgSet("ShowResultsImmediately",checkBox1.Checked);            
         }
     }
 }

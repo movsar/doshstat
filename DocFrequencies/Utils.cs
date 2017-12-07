@@ -8,7 +8,7 @@ using DocumentFormat.OpenXml.Spreadsheet;
 using SpreadsheetLight;
 using System.Linq;
 
-namespace StrangeWords
+namespace DoshStat
 {
     public class Utils
     {
@@ -18,7 +18,7 @@ namespace StrangeWords
         public static List<xWordFrequencies> frequencies;
 
         public static List<xTextFile> fList; // Hold the files
-        private static string appName = "StrangeWords";
+        private static string appName = "DoshStat";
         private static string separator = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ListSeparator;
 
         public static xTextFile GetTextFile(long id)
@@ -180,7 +180,7 @@ namespace StrangeWords
 
         public static void ErrLog(Exception ex)
         {
-            using (StreamWriter sw = new StreamWriter("StrangeWords.log", true)) {
+            using (StreamWriter sw = new StreamWriter("DoshStat.log", true)) {
                 sw.WriteLine(GetCurrentDateTime() + " : " + ex.Message);
                 sw.WriteLine(ex.StackTrace.ToString());
                 sw.WriteLine();
@@ -188,7 +188,7 @@ namespace StrangeWords
         }
         public static void ErrLog(String caption, String msg)
         {
-            using (StreamWriter sw = new StreamWriter("StrangeWords.log", true)) {
+            using (StreamWriter sw = new StreamWriter("DoshStat.log", true)) {
                 sw.WriteLine(GetCurrentDateTime() + " : " + caption);
                 sw.WriteLine(msg);
                 sw.WriteLine();

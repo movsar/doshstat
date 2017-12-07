@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
 
-namespace StrangeWords
+namespace DoshStat
 {
     class XlsProcessor : ITextProcessor
     {

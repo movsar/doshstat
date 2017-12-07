@@ -13,7 +13,7 @@ using BrightIdeasSoftware;
 using System.Collections;
 using System.Reflection;
 
-namespace StrangeWords
+namespace DoshStat
 {
     public partial class FrmMain : Form
     {
@@ -109,8 +109,6 @@ namespace StrangeWords
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
-
             this.Text = "Strange Words ver." + AssemblyVersion;
             myCtrlHistory = new CtrlHistory();
             myCtrlHistory.Dock = DockStyle.Fill;
@@ -358,7 +356,7 @@ namespace StrangeWords
             DateTime dtFrom = dtTo.Subtract(watch.Elapsed);
 
             Utils.history = DbHelper.GetHistory(dtFrom.ToString("yyyy-MM-dd HH:mm:ss"), dtTo.ToString("yyyy-MM-dd HH:mm:ss"));
-            if (Utils.history != null) {
+            if (Utils.history != null && Utils.StgGetBool("ShowResultsImmediately")) {
                 FrmTotalDetails frmTotalDetails = new FrmTotalDetails();
                 frmTotalDetails.Show();
             }

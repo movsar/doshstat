@@ -1,4 +1,4 @@
-﻿namespace StrangeWords
+﻿namespace DoshStat
 {
     partial class CtrlWordAnalyzer
     {

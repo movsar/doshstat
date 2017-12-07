@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 
-namespace StrangeWords
+namespace DoshStat
 {
     public partial class FrmTotalDetails : Form
     {

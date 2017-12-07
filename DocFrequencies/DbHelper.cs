@@ -11,7 +11,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace StrangeWords
+namespace DoshStat
 {
     public static class DbHelper
     {
@@ -201,7 +201,8 @@ namespace StrangeWords
             if (!(new FileInfo(dbName).Exists)) { SQLiteConnection.CreateFile(dbName); }
             string sql = "create table IF NOT EXISTS wf_files (" +
                 "id INTEGER PRIMARY KEY," +
-                "file_name varchar(150)," +
+                "file_name varchar(255)," +
+                "title varchar(255)," +
                 "words_count int," +
                 "unique_words_count int," +
                 "characters_count int," +

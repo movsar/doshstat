@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Windows.Forms;
 
-namespace StrangeWords
+namespace DoshStat
 {
     class TxtProcessor : ITextProcessor
     {
