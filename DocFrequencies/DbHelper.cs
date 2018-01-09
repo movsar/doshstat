@@ -44,22 +44,27 @@ namespace DoshStat
 
             // Combine all frequencies
             List<xWordFrequencies> combinedfrequencies = new List<xWordFrequencies>();
-            foreach (xTextFile xtf in Utils.history) {
+            foreach (xTextFile xtf in Utils.history)
+            {
                 combinedfrequencies.AddRange(xtf.frequencies);
             }
 
             // List for the all unique frequencies
             List<xWordFrequencies> allfrequencies = new List<xWordFrequencies>();
 
-            foreach (xWordFrequencies xwf in combinedfrequencies) {
+            foreach (xWordFrequencies xwf in combinedfrequencies)
+            {
                 // If our list already has such word, don't add new element but change it
                 xWordFrequencies existing = allfrequencies.Find(x => x.word.Equals(xwf.word));
-                if (existing != null) {
+                if (existing != null)
+                {
                     // Combine frequency
                     existing.frequency = existing.frequency + xwf.frequency;
                     float freq = existing.frequency;
                     existing.percentage = (freq / WORDS_COUNT) * 100;
-                } else {
+                }
+                else
+                {
                     float freq = xwf.frequency;
                     xwf.percentage = (freq / WORDS_COUNT) * 100;
                     allfrequencies.Add(xwf);
@@ -67,6 +72,66 @@ namespace DoshStat
             }
 
             return allfrequencies;
+        }
+        public static void Chistka()
+        {
+            ResetSQLiteConnection();
+            string query = string.Format("SELECT * FROM wf_frequencies");
+            List<xWordFrequencies> list = new List<xWordFrequencies>();
+            SQLiteCommand cmd = new SQLiteCommand();
+            cmd = sql_con.CreateCommand();
+            cmd.CommandText = query;
+            SQLiteDataReader Reader = cmd.ExecuteReader();
+            if (!Reader.HasRows) return;
+
+            try
+            {
+                while (Reader.Read())
+                {
+                    long id = Convert.ToInt64(GetDBInt64("id", Reader));
+                    String line = GetDBString("word", Reader);
+
+                    line = line.Replace("ѐ", "ё");
+                    line = line.Replace("e", "е");
+                    line = line.Replace("a", "а");
+                    line = line.Replace("p", "р");
+                    line = line.Replace("o", "о");
+                    line = line.Replace("i", "Ӏ");
+                    line = line.Replace("l", "Ӏ");
+                    line = line.Replace("k", "к");
+                    line = line.Replace("x", "х");
+                    line = line.Replace("y", "у");
+                    line = line.Replace("n", "п");
+                    line = line.Replace("m", "м");
+                    line = line.Replace("c", "с");
+                    line = line.Replace("r", "г");
+                    line = line.Replace("u", "и");
+
+                    line = line.Replace("Ѐ", "Ё");
+                    line = line.Replace("E", "Е");
+                    line = line.Replace("A", "А");
+                    line = line.Replace("B", "В");
+                    line = line.Replace("P", "Р");
+                    line = line.Replace("O", "О");
+                    line = line.Replace("I", "Ӏ");
+                    line = line.Replace("K", "К");
+                    line = line.Replace("X", "Х");
+                    line = line.Replace("T", "Т");
+                    line = line.Replace("M", "М");
+                    line = line.Replace("C", "С");
+
+                    Dictionary<string, object> nameValueData = new Dictionary<string, object>();
+
+                    nameValueData.Add("word", line);
+                    UpdateReq("wf_frequencies", nameValueData, id);
+                }
+            }
+            catch (Exception ex)
+            {
+                Utils.ErrLog("Ошибка при чтении xwf из БД", ex.Message);
+                Utils.msgInformation("Ошибка при чтении БД, требуется обновление БД");
+            }
+            Reader.Close();
         }
 
         public static List<xWordFrequencies> GetFrequencies(long fileId)
@@ -81,9 +146,12 @@ namespace DoshStat
             SQLiteDataReader Reader = cmd.ExecuteReader();
             if (!Reader.HasRows) return null;
 
-            try {
-                while (Reader.Read()) {
-                    xWordFrequencies xwf = new xWordFrequencies() {
+            try
+            {
+                while (Reader.Read())
+                {
+                    xWordFrequencies xwf = new xWordFrequencies()
+                    {
                         id = Convert.ToInt64(GetDBInt64("id", Reader)),
                         fileId = Convert.ToInt64(GetDBInt64("file_id", Reader)),
                         word = GetDBString("word", Reader),
@@ -94,7 +162,9 @@ namespace DoshStat
 
                     list.Add(xwf);
                 }
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 Utils.ErrLog("Ошибка при чтении xwf из БД", ex.Message);
                 Utils.msgInformation("Ошибка при чтении БД, требуется обновление БД");
             }
@@ -116,8 +186,10 @@ namespace DoshStat
             SQLiteDataReader Reader = sql_cmd.ExecuteReader();
             if (!Reader.HasRows) return null;
 
-            while (Reader.Read()) {
-                xWordFrequencies xwf = new xWordFrequencies() {
+            while (Reader.Read())
+            {
+                xWordFrequencies xwf = new xWordFrequencies()
+                {
                     id = Convert.ToInt64(GetDBInt64("id", Reader)),
                     fileId = Convert.ToInt64(GetDBInt64("file_id", Reader)),
                     word = GetDBString("word", Reader),
@@ -147,8 +219,10 @@ namespace DoshStat
             SQLiteDataReader Reader = sql_cmd.ExecuteReader();
             if (!Reader.HasRows) return null;
 
-            while (Reader.Read()) {
-                xTextFile tFile = new xTextFile() {
+            while (Reader.Read())
+            {
+                xTextFile tFile = new xTextFile()
+                {
                     fileId = Convert.ToInt64(GetDBInt64("id", Reader)),
                     fileName = GetDBString("file_name", Reader),
                     wordsCount = GetDBInt("words_count", Reader),
@@ -238,12 +312,14 @@ namespace DoshStat
         {
             string req = "INSERT INTO " + table;
             req += "(";
-            foreach (string name in nameValueData.Keys) {
+            foreach (string name in nameValueData.Keys)
+            {
                 req += name + ",";
             }
             // Remove "," from the end
             req = req.TrimLastCharacter() + ") VALUES (";
-            foreach (string name in nameValueData.Keys) {
+            foreach (string name in nameValueData.Keys)
+            {
                 req += "@" + name + ",";
             }
             req = req.TrimLastCharacter() + ")";
@@ -251,7 +327,8 @@ namespace DoshStat
 
             sql_cmd.CommandText = req;
 
-            foreach (KeyValuePair<string, object> nameValue in nameValueData) {
+            foreach (KeyValuePair<string, object> nameValue in nameValueData)
+            {
                 sql_cmd.Parameters.AddWithValue("@" + nameValue.Key, nameValue.Value);
             }
 
@@ -261,14 +338,16 @@ namespace DoshStat
         {
             string req = "UPDATE " + table;
             req += " SET ";
-            foreach (string name in nameValueData.Keys) {
+            foreach (string name in nameValueData.Keys)
+            {
                 req += name + "=@" + name + ",";
             }
             // Remove "," from the end
             req = req.TrimLastCharacter() + " WHERE id = " + id;
             sql_cmd.CommandText = req;
 
-            foreach (KeyValuePair<string, object> nameValue in nameValueData) {
+            foreach (KeyValuePair<string, object> nameValue in nameValueData)
+            {
                 sql_cmd.Parameters.AddWithValue("@" + nameValue.Key, nameValue.Value);
             }
 
@@ -276,37 +355,48 @@ namespace DoshStat
         }
         public static long RemoveReq(string table, long id)
         {
-            try {
+            try
+            {
                 sql_cmd.CommandText = "DELETE from `" + table + "` WHERE `id`=" + id.ToString();
                 return DbExecuteNonQuery(sql_cmd);
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 Utils.ErrLog(ex);
                 return -1;
             }
         }
         public static long InsertWithTransaction(string table, List<Dictionary<string, object>> data)
         {
-            try {
-                using (var cmd = new SQLiteCommand(sql_con)) {
-                    using (var transaction = sql_con.BeginTransaction()) {
+            try
+            {
+                using (var cmd = new SQLiteCommand(sql_con))
+                {
+                    using (var transaction = sql_con.BeginTransaction())
+                    {
                         //Add your query here.
 
-                        foreach (Dictionary<string, object> nameValueData in data) {
+                        foreach (Dictionary<string, object> nameValueData in data)
+                        {
                             InsertReq(table, nameValueData);
                         }
                         transaction.Commit();
                     }
                 }
                 return 1;
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 Utils.ErrLog(ex);
                 return -1;
             }
         }
         public static int GetColumnIndex(ListView lv, string colTitle)
         {
-            foreach (ColumnHeader col in lv.Columns) {
-                if (col.Text.ToLower().Equals(colTitle.ToLower())) {
+            foreach (ColumnHeader col in lv.Columns)
+            {
+                if (col.Text.ToLower().Equals(colTitle.ToLower()))
+                {
                     return col.Index;
                 }
             }
@@ -316,33 +406,46 @@ namespace DoshStat
 
         public static string TrimLastCharacter(this String str)
         {
-            if (String.IsNullOrEmpty(str)) {
+            if (String.IsNullOrEmpty(str))
+            {
                 return str;
-            } else {
+            }
+            else
+            {
                 return str.TrimEnd(str[str.Length - 1]);
             }
         }
 
         public static long DbExecuteNonQuery(SQLiteCommand cmd)
         {
-            try {
+            try
+            {
                 if (cmd.ExecuteNonQuery() > 0) return sql_con.LastInsertRowId; else return -1;
-            } catch (SQLiteException sqlex) {
+            }
+            catch (SQLiteException sqlex)
+            {
                 string msg = "";
 
-                if (sqlex.ErrorCode == 19) {
-                    if (cmd.Parameters[0].ParameterName == "@file_name") {
+                if (sqlex.ErrorCode == 19)
+                {
+                    if (cmd.Parameters[0].ParameterName == "@file_name")
+                    {
                         // It's a file insert request
                         msg = "файл: " + cmd.Parameters[0].Value.ToString();
-                    } else if (cmd.Parameters[0].ParameterName == "@file_id") {
+                    }
+                    else if (cmd.Parameters[0].ParameterName == "@file_id")
+                    {
                         // It's a frequency insert request
                         msg = "слово: " + cmd.Parameters[1].Value;
                     }
                     Utils.ErrLog("Запись уже существует", msg);
-                } else
+                }
+                else
                     Utils.ErrLog(sqlex);
                 return -1;
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 Utils.ErrLog(ex);
                 return -1;
             }

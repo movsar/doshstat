@@ -62,6 +62,7 @@
             this.btnBrowse = new System.Windows.Forms.Button();
             this.tbcMain = new System.Windows.Forms.TabControl();
             this.tbpSearch = new System.Windows.Forms.TabPage();
+            this.btnCleanUp = new System.Windows.Forms.Button();
             this.contextMenuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -210,6 +211,7 @@
             // 
             // tbpCount
             // 
+            this.tbpCount.Controls.Add(this.btnCleanUp);
             this.tbpCount.Controls.Add(this.chkSubdirectories);
             this.tbpCount.Controls.Add(this.olvFiles);
             this.tbpCount.Controls.Add(this.txtWorkingDir);
@@ -397,6 +399,16 @@
             this.tbpSearch.Text = "Поиск";
             this.tbpSearch.UseVisualStyleBackColor = true;
             // 
+            // btnCleanUp
+            // 
+            this.btnCleanUp.Location = new System.Drawing.Point(597, 49);
+            this.btnCleanUp.Name = "btnCleanUp";
+            this.btnCleanUp.Size = new System.Drawing.Size(75, 23);
+            this.btnCleanUp.TabIndex = 19;
+            this.btnCleanUp.Text = "Чистка";
+            this.btnCleanUp.UseVisualStyleBackColor = true;
+            this.btnCleanUp.Click += new System.EventHandler(this.btnCleanUp_Click);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -459,6 +471,7 @@
         private System.Windows.Forms.TabPage tbpSearch;
         private System.Windows.Forms.CheckBox chkSubdirectories;
         public System.Windows.Forms.ToolStripStatusLabel lblStatus;
+        private System.Windows.Forms.Button btnCleanUp;
     }
 }
 

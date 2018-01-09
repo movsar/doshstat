@@ -393,5 +393,10 @@ namespace DoshStat
             Utils.StgSet("ChkSubdirectories", chkSubdirectories.Checked);
             loadFiles();
         }
+
+        private void btnCleanUp_Click(object sender, EventArgs e)
+        {
+            DbHelper.Chistka();
+        }
     }
 }

@@ -39,8 +39,6 @@ namespace DoshStat
 
         public void loadHistory()
         {
-       
-
             Utils.history = DbHelper.GetHistory(dtpFrom.Value.ToString("yyyy-MM-dd HH:mm:ss"), dtpTo.Value.ToString("yyyy-MM-dd HH:mm:ss"));
             if (Utils.history != null)
             {
