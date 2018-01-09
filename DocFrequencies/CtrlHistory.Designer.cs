@@ -163,6 +163,7 @@
             this.dtpFrom.Name = "dtpFrom";
             this.dtpFrom.Size = new System.Drawing.Size(186, 20);
             this.dtpFrom.TabIndex = 50;
+            this.dtpFrom.CloseUp += new System.EventHandler(this.dtpFrom_CloseUp);
             this.dtpFrom.ValueChanged += new System.EventHandler(this.dtpFrom_ValueChanged);
             // 
             // label1

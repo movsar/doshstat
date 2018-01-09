@@ -31,22 +31,24 @@ namespace DoshStat
             };
             isReady = true;
 
-
-          
-        }
-
-        public void loadHistory()
-        {
             DateTime dt = DateTime.Now;
             TimeSpan ts = new TimeSpan(6, 23, 59, 59);
             dtpFrom.Value = dt.Subtract(ts);
             dtpTo.Value = dt;
+        }
+
+        public void loadHistory()
+        {
+       
 
             Utils.history = DbHelper.GetHistory(dtpFrom.Value.ToString("yyyy-MM-dd HH:mm:ss"), dtpTo.Value.ToString("yyyy-MM-dd HH:mm:ss"));
-            if (Utils.history != null) {
+            if (Utils.history != null)
+            {
                 Debug.WriteLine(Utils.history.Count);
                 olvHistory.SetObjects(Utils.history);
-            } else {
+            }
+            else
+            {
                 olvHistory.ClearObjects();
             }
 
@@ -100,6 +102,11 @@ namespace DoshStat
                     frmFreq.Show();
                 }
             }
+        }
+
+        private void dtpFrom_CloseUp(object sender, EventArgs e)
+        {
+           
         }
     }
 }
