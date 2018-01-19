@@ -7,6 +7,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -86,13 +87,21 @@ namespace DoshStat
             cmd.CommandText = query;
             SQLiteDataReader Reader = cmd.ExecuteReader();
             if (!Reader.HasRows) return;
+            int count = 853000;
+            int iteration = 0;
+            int removed = 0;
 
             try
             {
                 while (Reader.Read())
                 {
+                    iteration++;
                     long id = Convert.ToInt64(GetDBInt64("id", Reader));
                     String line = GetDBString("word", Reader);
+
+                    line = line.Replace("1", "Ӏ");
+                    line = line.Replace("I", "Ӏ");
+                    line = line.Replace("l", "Ӏ");
 
                     line = line.Replace("ѐ", "ё");
                     line = line.Replace("e", "е");
@@ -123,11 +132,39 @@ namespace DoshStat
                     line = line.Replace("M", "М");
                     line = line.Replace("C", "С");
 
-                    Dictionary<string, object> nameValueData = new Dictionary<string, object>();
+                    Debug.Write(string.Format("{0}/{1} {2} ", iteration, count, line));
 
+                    // IS IT CYRILLIC ?
+                    if (!Regex.IsMatch(line, @"\A[\s\W\p{IsCyrillic}]*\z"))
+                    {
+                        // if not, remove
+                        Debug.Write("ILLEGAL.. REMOVING..." + (RemoveReq(TABLE_FREQUENCIES, id) > 0 ? "OK": "FAIL"));
+                        Debug.WriteLine("");
+                        removed++;
+                        continue;
+                    }
+
+                    Dictionary<string, object> nameValueData = new Dictionary<string, object>();
                     nameValueData.Add("word", line);
-                    UpdateReq("wf_frequencies", nameValueData, id);
+
+                    if ((UpdateReq("wf_frequencies", nameValueData, id) > 0))
+                    {
+                        // OK
+                        Debug.Write("Ok");
+                    }
+                    else
+                    {
+                        // FAIL
+                        // Exception must mean that such element is already existing in the database, so remove it
+                        // Ideally I should have added their frequency but it's not that important so I am not doing it
+                        Debug.Write("FAIL, REMOVING ..." + (RemoveReq(TABLE_FREQUENCIES, id) > 0 ? "OK" : "FAIL"));
+                        removed++;
+                    }
+                    Debug.WriteLine("");
                 }
+
+                Debug.WriteLine("END OF THE UNIVERSE!");
+                Debug.WriteLine("REMOVED: " + removed);
             }
             catch (Exception ex)
             {
@@ -301,7 +338,9 @@ namespace DoshStat
             sql_cmd = sql_con.CreateCommand();
             sql_cmd.CommandText = sql;
 
-            DbExecuteNonQuery(sql_cmd);
+            // Execution and getting result
+            sql_cmd.ExecuteNonQuery();
+
 
             sql = "create table IF NOT EXISTS wf_frequencies (" +
                "id INTEGER PRIMARY KEY," +
@@ -314,8 +353,8 @@ namespace DoshStat
 
             sql_cmd = sql_con.CreateCommand();
             sql_cmd.CommandText = sql;
+            sql_cmd.ExecuteNonQuery();
 
-            DbExecuteNonQuery(sql_cmd);
         }
         public static long GetLastInsertedId(string table)
         {
@@ -347,8 +386,21 @@ namespace DoshStat
                 sql_cmd.Parameters.AddWithValue("@" + nameValue.Key, nameValue.Value);
             }
 
-            return DbExecuteNonQuery(sql_cmd);
+            // Execution and getting result
+            try
+            {
+                if (sql_cmd.ExecuteNonQuery() > 0)
+                    return sql_con.LastInsertRowId;
+                else
+                    return -1;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("ERR WHEN INSERTING NEW ROW");
+                return -1;
+            }
         }
+
         public static long UpdateReq(string table, Dictionary<string, object> nameValueData, long id)
         {
             string req = "UPDATE " + table;
@@ -366,7 +418,16 @@ namespace DoshStat
                 sql_cmd.Parameters.AddWithValue("@" + nameValue.Key, nameValue.Value);
             }
 
-            return DbExecuteNonQuery(sql_cmd);
+            // Execution and getting result
+            try
+            {
+                return sql_cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("ERR WHEN UPDATING A ROW");
+                return -1;
+            }
         }
 
         public static long RemoveReq(string table, long id)
@@ -374,7 +435,16 @@ namespace DoshStat
             try
             {
                 sql_cmd.CommandText = "DELETE from `" + table + "` WHERE `id`=" + id.ToString();
-                return DbExecuteNonQuery(sql_cmd);
+                // Execution and getting result
+                try
+                {
+                    return sql_cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("ERR WHEN DELETING A ROW");
+                    return -1;
+                }
             }
             catch (Exception ex)
             {
@@ -432,40 +502,6 @@ namespace DoshStat
             }
         }
 
-        public static long DbExecuteNonQuery(SQLiteCommand cmd)
-        {
-            try
-            {
-                if (cmd.ExecuteNonQuery() > 0) return sql_con.LastInsertRowId; else return -1;
-            }
-            catch (SQLiteException sqlex)
-            {
-                string msg = "";
-
-                if (sqlex.ErrorCode == 19)
-                {
-                    if (cmd.Parameters[0].ParameterName == "@file_name")
-                    {
-                        // It's a file insert request
-                        msg = "файл: " + cmd.Parameters[0].Value.ToString();
-                    }
-                    else if (cmd.Parameters[0].ParameterName == "@file_id")
-                    {
-                        // It's a frequency insert request
-                        msg = "слово: " + cmd.Parameters[1].Value;
-                    }
-                    Utils.ErrLog("Запись уже существует", msg);
-                }
-                else
-                    Utils.ErrLog(sqlex);
-                return -1;
-            }
-            catch (Exception ex)
-            {
-                Utils.ErrLog(ex);
-                return -1;
-            }
-        }
 
         public static string GetDBString(string SqlFieldName, SQLiteDataReader Reader)
         {
