@@ -15,6 +15,9 @@ namespace DoshStat
 {
     public static class DbHelper
     {
+        public const String TABLE_FILES = "wf_files";
+        public const String TABLE_FREQUENCIES = "wf_frequencies";
+
         private static SQLiteConnection sql_con;
         private static SQLiteCommand sql_cmd;
         private static DataSet DS = new DataSet();
@@ -23,7 +26,7 @@ namespace DoshStat
 
         public static bool ifExists(int charactersCount, int wordsCount)
         {
-            sql_cmd.CommandText = String.Format("SELECT count(*) FROM `wf_files` WHERE `words_count`='{0}' AND `characters_count`='{1}'", wordsCount, charactersCount);
+            sql_cmd.CommandText = String.Format("SELECT count(*) FROM `" + TABLE_FILES + "` WHERE `words_count`='{0}' AND `characters_count`='{1}'", wordsCount, charactersCount);
             int count = Convert.ToInt32(sql_cmd.ExecuteScalar());
 
             return count != 0;
@@ -207,12 +210,24 @@ namespace DoshStat
             return xwfList;
         }
 
+        private static String CACHE_DT_FROM, CACHE_DT_TO;
+
         public static List<xTextFile> GetHistory(string dtFrom, string dtTo)
         {
+            if (dtFrom != "")
+            {
+                CACHE_DT_FROM = dtFrom;
+                CACHE_DT_TO = dtTo;
+            }
+            else
+            {
+                dtFrom = CACHE_DT_FROM;
+                dtTo = CACHE_DT_TO;
+            }
+
             WORDS_COUNT = 0; CHARACTERS_COUNT = 0; FILES_COUNT = 0;
             ResetSQLiteConnection();
             Utils.frequencies = new List<xWordFrequencies>();
-
             string query = string.Format("SELECT * FROM `wf_files` WHERE strftime('%Y-%m-%d %H:%M:%S',created_at) BETWEEN ('{0}') AND ('{1}')", dtFrom, dtTo);
             List<xTextFile> list = new List<xTextFile>();
             sql_cmd.CommandText = query;
@@ -353,6 +368,7 @@ namespace DoshStat
 
             return DbExecuteNonQuery(sql_cmd);
         }
+
         public static long RemoveReq(string table, long id)
         {
             try

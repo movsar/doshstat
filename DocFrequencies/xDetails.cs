@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace DoshStat
 {
     class xDetails
-    {
+    {        
         public long fileId { get; set; }
         public String fileName { get; set; }
         public int wordsCount { get; set; }
@@ -35,10 +35,12 @@ namespace DoshStat
         public string getNeatPercentage() {
             return percentage.ToString("F") + "%";
         }
+
+        public long wordId { get; set; }
         public string word { get; set; }
         public int frequency { get; set; }
         public float percentage { get; set; }
-
+   
 
     }
 }
