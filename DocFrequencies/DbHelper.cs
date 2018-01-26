@@ -77,94 +77,124 @@ namespace DoshStat
 
             return allfrequencies;
         }
+
         public static void Chistka()
         {
             ResetSQLiteConnection();
-            string query = string.Format("SELECT * FROM wf_frequencies");
+            int iteration = -1;
+
+
+            string query = string.Format("SELECT * FROM `wf_frequencies` Where `id` > " + iteration);
             List<xWordFrequencies> list = new List<xWordFrequencies>();
             SQLiteCommand cmd = new SQLiteCommand();
             cmd = sql_con.CreateCommand();
             cmd.CommandText = query;
             SQLiteDataReader Reader = cmd.ExecuteReader();
             if (!Reader.HasRows) return;
-            int count = 853000;
-            int iteration = 0;
+            int count = 145000;
             int removed = 0;
 
             try
             {
-                while (Reader.Read())
+                using (StreamWriter sw_debug = new StreamWriter("output.log", true, Encoding.UTF8))
                 {
-                    iteration++;
-                    long id = Convert.ToInt64(GetDBInt64("id", Reader));
-                    String line = GetDBString("word", Reader);
-
-                    line = line.Replace("1", "Ӏ");
-                    line = line.Replace("I", "Ӏ");
-                    line = line.Replace("l", "Ӏ");
-
-                    line = line.Replace("ѐ", "ё");
-                    line = line.Replace("e", "е");
-                    line = line.Replace("a", "а");
-                    line = line.Replace("p", "р");
-                    line = line.Replace("o", "о");
-                    line = line.Replace("i", "Ӏ");
-                    line = line.Replace("l", "Ӏ");
-                    line = line.Replace("k", "к");
-                    line = line.Replace("x", "х");
-                    line = line.Replace("y", "у");
-                    line = line.Replace("n", "п");
-                    line = line.Replace("m", "м");
-                    line = line.Replace("c", "с");
-                    line = line.Replace("r", "г");
-                    line = line.Replace("u", "и");
-
-                    line = line.Replace("Ѐ", "Ё");
-                    line = line.Replace("E", "Е");
-                    line = line.Replace("A", "А");
-                    line = line.Replace("B", "В");
-                    line = line.Replace("P", "Р");
-                    line = line.Replace("O", "О");
-                    line = line.Replace("I", "Ӏ");
-                    line = line.Replace("K", "К");
-                    line = line.Replace("X", "Х");
-                    line = line.Replace("T", "Т");
-                    line = line.Replace("M", "М");
-                    line = line.Replace("C", "С");
-
-                    Debug.Write(string.Format("{0}/{1} {2} ", iteration, count, line));
-
-                    // IS IT CYRILLIC ?
-                    if (!Regex.IsMatch(line, @"\A[\s\W\p{IsCyrillic}]*\z"))
+                    using (StreamWriter sw_output = new StreamWriter("output.sql", true, Encoding.UTF8))
                     {
-                        // if not, remove
-                        Debug.Write("ILLEGAL.. REMOVING..." + (RemoveReq(TABLE_FREQUENCIES, id) > 0 ? "OK": "FAIL"));
-                        Debug.WriteLine("");
-                        removed++;
-                        continue;
-                    }
+                        while (Reader.Read())
+                        {
+                            iteration++;
 
-                    Dictionary<string, object> nameValueData = new Dictionary<string, object>();
-                    nameValueData.Add("word", line);
+                            xWordFrequencies xwf = new xWordFrequencies()
+                            {
+                                id = Convert.ToInt64(GetDBInt64("id", Reader)),
+                                fileId = Convert.ToInt64(GetDBInt64("file_id", Reader)),
+                                word = GetDBString("word", Reader),
+                                rank = GetDBInt("rank", Reader),
+                                frequency = GetDBInt("frequency", Reader),
+                                percentage = GetDBFloat("percentage", Reader),
+                            };
 
-                    if ((UpdateReq("wf_frequencies", nameValueData, id) > 0))
-                    {
-                        // OK
-                        Debug.Write("Ok");
+                            String line = xwf.word;
+
+                            line = line.Replace("1", "Ӏ");
+                            line = line.Replace("I", "Ӏ");
+                            line = line.Replace("l", "Ӏ");
+
+                            line = line.Replace("ѐ", "ё");
+                            line = line.Replace("e", "е");
+                            line = line.Replace("a", "а");
+                            line = line.Replace("p", "р");
+                            line = line.Replace("o", "о");
+                            line = line.Replace("i", "Ӏ");
+                            line = line.Replace("l", "Ӏ");
+                            line = line.Replace("k", "к");
+                            line = line.Replace("x", "х");
+                            line = line.Replace("y", "у");
+                            line = line.Replace("n", "п");
+                            line = line.Replace("m", "м");
+                            line = line.Replace("c", "с");
+                            line = line.Replace("r", "г");
+                            line = line.Replace("u", "и");
+
+                            line = line.Replace("Ѐ", "Ё");
+                            line = line.Replace("E", "Е");
+                            line = line.Replace("A", "А");
+                            line = line.Replace("B", "В");
+                            line = line.Replace("P", "Р");
+                            line = line.Replace("O", "О");
+                            line = line.Replace("I", "Ӏ");
+                            line = line.Replace("K", "К");
+                            line = line.Replace("X", "Х");
+                            line = line.Replace("T", "Т");
+                            line = line.Replace("M", "М");
+                            line = line.Replace("C", "С");
+
+                            xwf.word = line;
+
+                            sw_debug.Write(string.Format("{0}/{1} {2} ", iteration, count, line));
+                            Debug.Write(string.Format("{0}/{1} {2} ", iteration, count, line));
+
+                            // IS IT CYRILLIC ?
+                            if (!Regex.IsMatch(line, @"\A[\s\W\p{IsCyrillic}]*\z"))
+                            {
+                                // if not, remove
+                                // Debug.Write("ILLEGAL.. REMOVING..." + (RemoveReq(TABLE_FREQUENCIES, xwf.id) > 0 ? "OK" : "FAIL"));
+                                sw_debug.WriteLine("");
+                                Debug.WriteLine("");
+                                removed++;
+                                continue;
+                            }
+
+                            Dictionary<string, object> nameValueData = new Dictionary<string, object>();
+                            nameValueData.Add("word", line);
+
+                            if ((UpdateReq("wf_frequencies", nameValueData, xwf.id) > 0))
+                            {
+                                // OK
+                                sw_output.WriteLine("INSERT INTO `wf_frequencies` VALUES({0},{1},{2},'{3}',{4},{5})", xwf.id, xwf.fileId, xwf.rank, xwf.word, xwf.frequency, xwf.percentage);
+                                sw_debug.Write("Ok");
+                                Debug.Write("Ok");
+                            }
+                            else
+                            {
+                                // FAIL
+                                // Exception must mean that such element is already existing in the database, so remove it
+                                // Ideally I should have added their frequency but it's not that important so I am not doing it
+                                // Debug.Write("FAIL, REMOVING ..." + (RemoveReq(TABLE_FREQUENCIES, xwf.id) > 0 ? "OK" : "FAIL"));
+                                removed++;
+                            }
+
+                            sw_debug.WriteLine("");
+                            Debug.WriteLine("");
+                        }
+
+
                     }
-                    else
-                    {
-                        // FAIL
-                        // Exception must mean that such element is already existing in the database, so remove it
-                        // Ideally I should have added their frequency but it's not that important so I am not doing it
-                        Debug.Write("FAIL, REMOVING ..." + (RemoveReq(TABLE_FREQUENCIES, id) > 0 ? "OK" : "FAIL"));
-                        removed++;
-                    }
-                    Debug.WriteLine("");
+                    sw_debug.WriteLine("END OF THE UNIVERSE!");
+                    Debug.WriteLine("END OF THE UNIVERSE!");
+                    sw_debug.WriteLine("REMOVED: " + removed);
+                    Debug.WriteLine("REMOVED: " + removed);
                 }
-
-                Debug.WriteLine("END OF THE UNIVERSE!");
-                Debug.WriteLine("REMOVED: " + removed);
             }
             catch (Exception ex)
             {
