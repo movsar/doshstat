@@ -254,10 +254,10 @@ namespace DoshStat
 
                 xFile.frequencies = new List<xWordFrequencies>();
                 var words = new Dictionary<string, int>(StringComparer.CurrentCultureIgnoreCase);
-
-                var wordPattern = new Regex(@"\w+");
+                string stRegExp = Utils.StgGetString("TxtRegExp");
+                var wordPattern = new Regex(stRegExp.Replace(@"\\", @"\").Trim());
                 xFile.wordsCount = wordPattern.Matches(contents).Count;
-
+                if (xFile.wordsCount == 0) continue;
                 // Check if exists
                 if (DbHelper.ifExists(xFile.charactersCount, xFile.wordsCount)) continue;
 

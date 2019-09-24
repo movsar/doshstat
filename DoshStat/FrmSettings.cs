@@ -26,7 +26,7 @@ namespace DoshStat
 
         private void FrmSettings_Load(object sender, EventArgs e)
         {
-
+            txtRegExp.Text= Utils.StgGetString("TxtRegExp").Replace(@"\\", @"\");
 
             if (Utils.StgGetInt("TxtCodepage") == 0) {
                 comboBox1.Text = "Автоопределение";
@@ -53,7 +53,8 @@ namespace DoshStat
                 Utils.StgSet("TxtCodepage", Encoding.GetEncoding(comboBox1.Text).CodePage);
 
             Utils.StgSet("ExStyle", comboBox2.SelectedIndex);
-
+            Utils.StgSet("TxtRegExp", txtRegExp.Text.Replace(@"\\",@"\"));
+            
             Close();
         }
 
