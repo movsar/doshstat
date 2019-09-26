@@ -17,10 +17,11 @@ namespace DoshStat
             this.Text = String.Format("About {0}", AssemblyTitle);
             this.labelProductName.Text = AssemblyProduct;
             this.labelVersion.Text = String.Format("Version {0}", AssemblyVersion);
-            this.labelCopyright.Text = AssemblyCopyright;
+          
             this.labelContact.Text += " bekaev.movsar@gmail.com";
             this.textBoxDescription.Text = "Программа для парсинга документов и выявления частотности слов\r\n\r\n" +
-                "Для правильного чтения txt форматов, нужно чтобы эти файлы имели кодировку ASCII или имели BOM\r\n\r\n";
+                "Для правильного чтения txt форматов, нужно чтобы эти файлы имели кодировку ASCII или имели BOM\r\n\r\n" +
+                "Авторы:\r\nАбдулкадыров Адам Турпалалиевич, Асхабов Хаважи Исмаилович, Бадаева Айшат Салауддиновна, Бекаев Мовсар Хамидович, Израилова Элиса Салаудиновна, Султанов Зелимхан Аюбович, Умархаджиев Салаудин Мусаевич, Эльсаев Якуб Витальевич\r\n\r\nhttp://ps95.ru";
         }
 
         #region Assembly Attribute Accessors
