@@ -14,7 +14,7 @@ namespace DoshStat
         // Make it into a singleton
         private static readonly ITextProcessor _instance = new DocProcessor();
         public static ITextProcessor GetInstance() { return _instance; }
-        static Application wordApplication; // Make only one instance to make it work faster
+        static Application wordApplication;
         private DocProcessor() { }
 
         public string GetAllText(string path)
@@ -33,7 +33,7 @@ namespace DoshStat
         public static void Dispose()
         {
             try {
-                wordApplication.Quit();
+                wordApplication?.Quit();
             } catch (Exception ex) {
                 Utils.ErrLog(ex);
             }
