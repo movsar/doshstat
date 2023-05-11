@@ -298,7 +298,9 @@ namespace DoshStat
                 }
 
                 // Add words to object's list of words with frequencies
-                int rank = 1;
+                int rank = 0;
+                int prevFrequency = int.MaxValue;
+
                 foreach (var row in words.OrderByDescending(pair => pair.Value))
                 {
                     xWordFrequencies xwf = new xWordFrequencies();
@@ -306,11 +308,13 @@ namespace DoshStat
                     xwf.word = xwf.word.Substring(0, 1).ToUpper() + xwf.word.Substring(1);
                     xwf.frequency = row.Value;
 
-                    if (rank != 0)
+                    if (rank != 1)
                     {
                         // It's not the first iteration
-                        if (xFile.frequencies[xFile.frequencies.Count - 1].frequency > xwf.frequency)
+                        if (xwf.frequency != prevFrequency)
+                        {
                             rank++;
+                        }
                     }
                     else
                     {
@@ -318,6 +322,8 @@ namespace DoshStat
                     }
 
                     xwf.rank = rank;
+                    prevFrequency = xwf.frequency;
+
                     float freq = xwf.frequency;
 
                     // Why it doesn't work with xwf.frequency?
