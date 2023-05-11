@@ -47,35 +47,29 @@ namespace DoshStat
             // This function gets all frequencies between the range defined with dtFom and dtTO
 
             // Combine all frequencies
-            List<xWordFrequencies> combinedfrequencies = new List<xWordFrequencies>();
-            foreach (xTextFile xtf in Utils.history)
-            {
-                combinedfrequencies.AddRange(xtf.frequencies);
-            }
+            var combinedFrequencies = Utils.history.SelectMany(xtf => xtf.frequencies).ToList();
 
             // List for the all unique frequencies
-            List<xWordFrequencies> allfrequencies = new List<xWordFrequencies>();
+            var allFrequencies = new List<xWordFrequencies>();
 
-            foreach (xWordFrequencies xwf in combinedfrequencies)
+            foreach (var xwf in combinedFrequencies)
             {
                 // If our list already has such word, don't add new element but change it
-                xWordFrequencies existing = allfrequencies.Find(x => x.word.Equals(xwf.word));
+                var existing = allFrequencies.FirstOrDefault(x => x.word.Equals(xwf.word));
                 if (existing != null)
                 {
                     // Combine frequency
-                    existing.frequency = existing.frequency + xwf.frequency;
-                    float freq = existing.frequency;
-                    existing.percentage = (freq / WORDS_COUNT) * 100;
+                    existing.frequency += xwf.frequency;
+                    existing.percentage = (existing.frequency / WORDS_COUNT) * 100;
                 }
                 else
                 {
-                    float freq = xwf.frequency;
-                    xwf.percentage = (freq / WORDS_COUNT) * 100;
-                    allfrequencies.Add(xwf);
+                    xwf.percentage = (xwf.frequency / WORDS_COUNT) * 100;
+                    allFrequencies.Add(xwf);
                 }
             }
 
-            return allfrequencies;
+            return allFrequencies;
         }
 
         public static void Chistka()

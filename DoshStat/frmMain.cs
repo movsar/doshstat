@@ -12,6 +12,7 @@ using System.Diagnostics;
 using BrightIdeasSoftware;
 using System.Collections;
 using System.Reflection;
+using System.Linq;
 
 namespace DoshStat
 {
@@ -236,74 +237,88 @@ namespace DoshStat
             FrmAbout frmAbout = new FrmAbout();
             frmAbout.ShowDialog();
         }
-
         private void bgwCounter_DoWork(object sender, DoWorkEventArgs e)
         {
-
-            foreach (xTextFile xFile in Utils.fList) {
-                if (bgwCounter.CancellationPending) {
+            foreach (xTextFile xFile in Utils.fList)
+            {
+                if (bgwCounter.CancellationPending)
+                {
                     bgwCounter.ReportProgress(-1, xFile);
                     return;
                 }
+
                 bgwCounter.ReportProgress(-2, xFile);
 
                 string contents = xFile.Processor.GetAllText(xFile.filePath);
 
-
                 xFile.charactersCount = contents.Length;
 
-                xFile.frequencies = new List<xWordFrequencies>();
-                var words = new Dictionary<string, int>(StringComparer.CurrentCultureIgnoreCase);
-                string stRegExp = Utils.StgGetString("TxtRegExp");
-                var wordPattern = new Regex(stRegExp.Replace(@"\\", @"\").Trim());
-                xFile.wordsCount = wordPattern.Matches(contents).Count;
-                if (xFile.wordsCount == 0) continue;
-                // Check if exists
-                if (DbHelper.ifExists(xFile.charactersCount, xFile.wordsCount)) continue;
+                // Create a dictionary to store word frequencies
+                var wordFrequencies = new Dictionary<string, int>(StringComparer.CurrentCultureIgnoreCase);
 
+                // Use a regular expression to match words in the content
+                string wordPatternString = Utils.StgGetString("TxtRegExp").Replace(@"\\", @"\").Trim();
+                var wordPattern = new Regex(wordPatternString);
+
+                // Count the number of words in the content
+                xFile.wordsCount = wordPattern.Matches(contents).Count;
+
+                if (xFile.wordsCount == 0)
+                {
+                    continue;
+                }
+
+                // Check if the file has already been processed
+                if (DbHelper.ifExists(xFile.charactersCount, xFile.wordsCount))
+                {
+                    continue;
+                }
+
+                // Count the frequency of each word
                 int progress = 0;
-                foreach (Match match in wordPattern.Matches(contents)) {
-                    if (bgwCounter.CancellationPending) {
+                foreach (Match match in wordPattern.Matches(contents))
+                {
+                    if (bgwCounter.CancellationPending)
+                    {
                         bgwCounter.ReportProgress(-1, xFile);
                         return;
                     }
+
                     progress++;
-                    int currentCount = 0;
-                    words.TryGetValue(match.Value, out currentCount);
-                    bgwCounter.ReportProgress(progress, xFile);
-                    currentCount++;
-                    words[match.Value] = currentCount;
-                }
 
-                // Add words to object's list of words with frequencies
-                int rank = 0;
-                foreach (var row in words.OrderByDescending(pair => pair.Value)) {
-                    xWordFrequencies xwf = new xWordFrequencies();
-                    xwf.word = row.Key.ToLower();
-                    xwf.word = xwf.word.Substring(0, 1).ToUpper() + xwf.word.Substring(1);
-                    xwf.frequency = row.Value;
-
-                    if (rank != 0) {
-                        // It's not the first iteration
-                        if (xFile.frequencies[xFile.frequencies.Count - 1].frequency > xwf.frequency)
-                            rank++;
-                    } else {
-                        rank++;
+                    string word = match.Value.ToLower();
+                    if (wordFrequencies.ContainsKey(word))
+                    {
+                        wordFrequencies[word]++;
+                    }
+                    else
+                    {
+                        wordFrequencies[word] = 1;
                     }
 
-                    xwf.rank = rank;
-                    float freq = xwf.frequency;
-
-                    // Why it doesn't work with xwf.frequency?
-                    xwf.percentage = (freq / xFile.wordsCount) * 100;
-                    xFile.frequencies.Add(xwf);
+                    bgwCounter.ReportProgress(progress, xFile);
                 }
-                xFile.uniqueWordsCount = xFile.frequencies.Count();
+
+                // Create a list of xWordFrequencies objects from the dictionary
+                var wordFrequenciesList = wordFrequencies
+                    .OrderByDescending(pair => pair.Value)
+                    .Select((pair, index) => new xWordFrequencies
+                    {
+                        word = char.ToUpper(pair.Key[0]) + pair.Key.Substring(1),
+                        frequency = pair.Value,
+                        rank = index + 1,
+                        percentage = (pair.Value / (float)xFile.wordsCount) * 100
+                    })
+                    .ToList();
+
+                xFile.frequencies = wordFrequenciesList;
+                xFile.uniqueWordsCount = wordFrequenciesList.Count;
                 xFile.SaveFileInfo();
             }
 
             bgwCounter.ReportProgress(-3, null);
         }
+
 
         private void bgwCounter_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
