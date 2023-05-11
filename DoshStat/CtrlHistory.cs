@@ -22,7 +22,8 @@ namespace DoshStat
 
         private void CtrlHistory_Load(object sender, EventArgs e)
         {
-            olvHistory.SubItemChecking += delegate (object olvCheckSender, SubItemCheckingEventArgs olvCheckArgs) {
+            olvHistory.SubItemChecking += delegate (object olvCheckSender, SubItemCheckingEventArgs olvCheckArgs)
+            {
                 // Set false all the other categories
                 xTextFile rowObject = ((xTextFile)olvCheckArgs.RowObject);
                 rowObject.isSelected = !rowObject.isSelected;
@@ -34,7 +35,7 @@ namespace DoshStat
             DateTime dt = DateTime.Now;
             TimeSpan ts = new TimeSpan(6, 23, 59, 59);
             dtpFrom.Value = dt.Subtract(ts);
-            dtpTo.Value = dt;
+            dtpTo.Value = dt.AddMinutes(1);
         }
 
         public void loadHistory()
@@ -94,8 +95,10 @@ namespace DoshStat
 
         private void olvHistory_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left) {
-                if (olvHistory.SelectedObject != null) {
+            if (e.Button == MouseButtons.Left)
+            {
+                if (olvHistory.SelectedObject != null)
+                {
                     FrmFrequencies frmFreq = new FrmFrequencies((xTextFile)(olvHistory.SelectedObject));
                     frmFreq.Show();
                 }
@@ -104,7 +107,7 @@ namespace DoshStat
 
         private void dtpFrom_CloseUp(object sender, EventArgs e)
         {
-           
+
         }
     }
 }
