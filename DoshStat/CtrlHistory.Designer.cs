@@ -62,11 +62,13 @@
             this.olvHistory.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.olvHistory.FullRowSelect = true;
             this.olvHistory.GridLines = true;
+            this.olvHistory.HideSelection = false;
             this.olvHistory.Location = new System.Drawing.Point(0, 0);
+            this.olvHistory.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.olvHistory.MultiSelect = false;
             this.olvHistory.Name = "olvHistory";
             this.olvHistory.ShowGroups = false;
-            this.olvHistory.Size = new System.Drawing.Size(743, 416);
+            this.olvHistory.Size = new System.Drawing.Size(991, 511);
             this.olvHistory.TabIndex = 12;
             this.olvHistory.UseAlternatingBackColors = true;
             this.olvHistory.UseCompatibleStateImageBehavior = false;
@@ -113,9 +115,10 @@
             // btnExport
             // 
             this.btnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExport.Location = new System.Drawing.Point(418, 422);
+            this.btnExport.Location = new System.Drawing.Point(557, 519);
+            this.btnExport.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(68, 23);
+            this.btnExport.Size = new System.Drawing.Size(91, 28);
             this.btnExport.TabIndex = 14;
             this.btnExport.Text = "Экспорт";
             this.btnExport.UseVisualStyleBackColor = true;
@@ -124,20 +127,22 @@
             // btnFullReport
             // 
             this.btnFullReport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnFullReport.Location = new System.Drawing.Point(615, 422);
+            this.btnFullReport.Location = new System.Drawing.Point(820, 519);
+            this.btnFullReport.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnFullReport.Name = "btnFullReport";
-            this.btnFullReport.Size = new System.Drawing.Size(128, 23);
+            this.btnFullReport.Size = new System.Drawing.Size(171, 28);
             this.btnFullReport.TabIndex = 15;
-            this.btnFullReport.Text = "Подробный Отчет";
+            this.btnFullReport.Text = "Общий Отчёт";
             this.btnFullReport.UseVisualStyleBackColor = true;
             this.btnFullReport.Click += new System.EventHandler(this.btnFullReport_Click);
             // 
             // btnTotalFrequencies
             // 
             this.btnTotalFrequencies.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnTotalFrequencies.Location = new System.Drawing.Point(487, 422);
+            this.btnTotalFrequencies.Location = new System.Drawing.Point(652, 519);
+            this.btnTotalFrequencies.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnTotalFrequencies.Name = "btnTotalFrequencies";
-            this.btnTotalFrequencies.Size = new System.Drawing.Size(128, 23);
+            this.btnTotalFrequencies.Size = new System.Drawing.Size(164, 28);
             this.btnTotalFrequencies.TabIndex = 16;
             this.btnTotalFrequencies.Text = "Сводная Частотность";
             this.btnTotalFrequencies.UseVisualStyleBackColor = true;
@@ -146,22 +151,24 @@
             // dtpTo
             // 
             this.dtpTo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.dtpTo.CustomFormat = "dd.MMMM.yyyy HH:mm:ss";
+            this.dtpTo.CustomFormat = "dd.MM.yyyy HH:mm";
             this.dtpTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpTo.Location = new System.Drawing.Point(236, 423);
+            this.dtpTo.Location = new System.Drawing.Point(230, 521);
+            this.dtpTo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dtpTo.Name = "dtpTo";
-            this.dtpTo.Size = new System.Drawing.Size(176, 20);
+            this.dtpTo.Size = new System.Drawing.Size(170, 22);
             this.dtpTo.TabIndex = 51;
             this.dtpTo.ValueChanged += new System.EventHandler(this.dtpTo_ValueChanged);
             // 
             // dtpFrom
             // 
             this.dtpFrom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.dtpFrom.CustomFormat = "dd.MMMM.yyyy HH:mm:ss";
+            this.dtpFrom.CustomFormat = "dd.MM.yyyy HH:mm";
             this.dtpFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFrom.Location = new System.Drawing.Point(14, 423);
+            this.dtpFrom.Location = new System.Drawing.Point(19, 521);
+            this.dtpFrom.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dtpFrom.Name = "dtpFrom";
-            this.dtpFrom.Size = new System.Drawing.Size(186, 20);
+            this.dtpFrom.Size = new System.Drawing.Size(170, 22);
             this.dtpFrom.TabIndex = 50;
             this.dtpFrom.CloseUp += new System.EventHandler(this.dtpFrom_CloseUp);
             this.dtpFrom.ValueChanged += new System.EventHandler(this.dtpFrom_ValueChanged);
@@ -169,24 +176,26 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(-3, 427);
+            this.label1.Location = new System.Drawing.Point(-4, 526);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(17, 13);
+            this.label1.Size = new System.Drawing.Size(19, 16);
             this.label1.TabIndex = 52;
             this.label1.Text = "С:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(206, 427);
+            this.label2.Location = new System.Drawing.Point(197, 522);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(24, 13);
+            this.label2.Size = new System.Drawing.Size(28, 16);
             this.label2.TabIndex = 53;
             this.label2.Text = "По:";
             // 
             // CtrlHistory
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -196,8 +205,9 @@
             this.Controls.Add(this.olvHistory);
             this.Controls.Add(this.btnExport);
             this.Controls.Add(this.btnFullReport);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "CtrlHistory";
-            this.Size = new System.Drawing.Size(743, 447);
+            this.Size = new System.Drawing.Size(991, 550);
             this.Load += new System.EventHandler(this.CtrlHistory_Load);
             ((System.ComponentModel.ISupportInitialize)(this.olvHistory)).EndInit();
             this.ResumeLayout(false);
