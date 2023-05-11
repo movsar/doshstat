@@ -12,7 +12,6 @@ using System.Diagnostics;
 using BrightIdeasSoftware;
 using System.Collections;
 using System.Reflection;
-using System.Linq;
 
 namespace DoshStat
 {
@@ -54,9 +53,12 @@ namespace DoshStat
             InitializeComponent();
 
             // Load settings
-            if (Utils.StgGetString("WorkingDir") == "") {
+            if (Utils.StgGetString("WorkingDir") == "")
+            {
                 Utils.WorkDirPath = Environment.CurrentDirectory;
-            } else {
+            }
+            else
+            {
                 Utils.WorkDirPath = Utils.StgGetString("WorkingDir");
             }
 
@@ -82,15 +84,19 @@ namespace DoshStat
             this.Enabled = true;
 
             Utils.fList = new List<xTextFile>();
-            try {
+            try
+            {
                 foreach (string file in Directory.EnumerateFiles(Utils.WorkDirPath, "*.*", (chkSubdirectories.Checked) ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly)
-          .Where(s => s.EndsWith(".doc") || s.EndsWith(".docx") || s.EndsWith(".odt") || s.EndsWith(".pdf") || s.EndsWith(".txt") || s.EndsWith(".xlsx") || s.EndsWith(".rtf") || s.EndsWith(".htm") || s.EndsWith(".html"))) {
+          .Where(s => s.EndsWith(".doc") || s.EndsWith(".docx") || s.EndsWith(".odt") || s.EndsWith(".pdf") || s.EndsWith(".txt") || s.EndsWith(".xlsx") || s.EndsWith(".rtf") || s.EndsWith(".htm") || s.EndsWith(".html")))
+                {
                     Utils.fList.Add(new xTextFile(file));
                 }
 
                 olvFiles.SetObjects(Utils.fList);
                 lblStatus.Text = "Готов";
-            } catch (UnauthorizedAccessException unaex) {
+            }
+            catch (UnauthorizedAccessException unaex)
+            {
                 Utils.ErrLog(unaex);
                 Utils.msgCriticalError("Недостаточно прав для обработки данной директори, запустите программу с правами администратора, или выберите другую папку");
             }
@@ -99,7 +105,8 @@ namespace DoshStat
 
         public string AssemblyVersion
         {
-            get {
+            get
+            {
                 return Assembly.GetExecutingAssembly().GetName().Version.ToString();
             }
         }
@@ -126,7 +133,8 @@ namespace DoshStat
             DbHelper.SetConnection();
             DbHelper.createTables();
 
-            olvFiles.SubItemChecking += delegate (object olvCheckSender, SubItemCheckingEventArgs olvCheckArgs) {
+            olvFiles.SubItemChecking += delegate (object olvCheckSender, SubItemCheckingEventArgs olvCheckArgs)
+            {
                 // Set false all the other categories
                 xTextFile rowObject = ((xTextFile)olvCheckArgs.RowObject);
                 rowObject.isFiction = false;
@@ -153,7 +161,8 @@ namespace DoshStat
             fbWorkingDir.SelectedPath = txtWorkingDir.Text;
 
             DialogResult result = fbWorkingDir.ShowDialog();
-            if (result == DialogResult.OK) {
+            if (result == DialogResult.OK)
+            {
                 Utils.WorkDirPath = fbWorkingDir.SelectedPath;
                 txtWorkingDir.Text = Utils.WorkDirPath;
 
@@ -168,7 +177,8 @@ namespace DoshStat
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-            if (!isRunning) {
+            if (!isRunning)
+            {
                 txtWorkingDir.Enabled = false;
                 btnBrowse.Enabled = false;
                 isRunning = true;
@@ -177,7 +187,9 @@ namespace DoshStat
                 btnStart.Text = "Cтоп";
                 prbStatus.Visible = true;
                 watch = Stopwatch.StartNew();
-            } else {
+            }
+            else
+            {
                 if (bgwCounter.IsBusy) bgwCounter.CancelAsync();
                 lblStatus.Text = "Отмена"; Update();
                 onFinishCounting();
@@ -193,7 +205,8 @@ namespace DoshStat
 
         private void removeSelectedFromOlvFiles()
         {
-            foreach (xTextFile xtf in (olvFiles.SelectedObjects)) {
+            foreach (xTextFile xtf in (olvFiles.SelectedObjects))
+            {
                 Utils.fList.Remove(xtf);
             }
 
@@ -209,8 +222,11 @@ namespace DoshStat
 
         private void tbcHistory_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (tbcMain.SelectedTab == tbcMain.TabPages[1]) {
-            } else {
+            if (tbcMain.SelectedTab == tbcMain.TabPages[1])
+            {
+            }
+            else
+            {
 
             }
         }
@@ -222,7 +238,8 @@ namespace DoshStat
 
         private void olvFiles_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Delete && olvFiles.SelectedObjects.Count > 0) {
+            if (e.KeyCode == Keys.Delete && olvFiles.SelectedObjects.Count > 0)
+            {
                 removeSelectedFromOlvFiles();
             }
         }
@@ -237,8 +254,10 @@ namespace DoshStat
             FrmAbout frmAbout = new FrmAbout();
             frmAbout.ShowDialog();
         }
+
         private void bgwCounter_DoWork(object sender, DoWorkEventArgs e)
         {
+
             foreach (xTextFile xFile in Utils.fList)
             {
                 if (bgwCounter.CancellationPending)
@@ -246,35 +265,22 @@ namespace DoshStat
                     bgwCounter.ReportProgress(-1, xFile);
                     return;
                 }
-
                 bgwCounter.ReportProgress(-2, xFile);
 
                 string contents = xFile.Processor.GetAllText(xFile.filePath);
 
+
                 xFile.charactersCount = contents.Length;
 
-                // Create a dictionary to store word frequencies
-                var wordFrequencies = new Dictionary<string, int>(StringComparer.CurrentCultureIgnoreCase);
-
-                // Use a regular expression to match words in the content
-                string wordPatternString = Utils.StgGetString("TxtRegExp").Replace(@"\\", @"\").Trim();
-                var wordPattern = new Regex(wordPatternString);
-
-                // Count the number of words in the content
+                xFile.frequencies = new List<xWordFrequencies>();
+                var words = new Dictionary<string, int>(StringComparer.CurrentCultureIgnoreCase);
+                string stRegExp = Utils.StgGetString("TxtRegExp");
+                var wordPattern = new Regex(stRegExp.Replace(@"\\", @"\").Trim());
                 xFile.wordsCount = wordPattern.Matches(contents).Count;
+                if (xFile.wordsCount == 0) continue;
+                // Check if exists
+                if (DbHelper.ifExists(xFile.charactersCount, xFile.wordsCount)) continue;
 
-                if (xFile.wordsCount == 0)
-                {
-                    continue;
-                }
-
-                // Check if the file has already been processed
-                if (DbHelper.ifExists(xFile.charactersCount, xFile.wordsCount))
-                {
-                    continue;
-                }
-
-                // Count the frequency of each word
                 int progress = 0;
                 foreach (Match match in wordPattern.Matches(contents))
                 {
@@ -283,66 +289,82 @@ namespace DoshStat
                         bgwCounter.ReportProgress(-1, xFile);
                         return;
                     }
-
                     progress++;
+                    int currentCount = 0;
+                    words.TryGetValue(match.Value, out currentCount);
+                    bgwCounter.ReportProgress(progress, xFile);
+                    currentCount++;
+                    words[match.Value] = currentCount;
+                }
 
-                    string word = match.Value.ToLower();
-                    if (wordFrequencies.ContainsKey(word))
+                // Add words to object's list of words with frequencies
+                int rank = 1;
+                foreach (var row in words.OrderByDescending(pair => pair.Value))
+                {
+                    xWordFrequencies xwf = new xWordFrequencies();
+                    xwf.word = row.Key.ToLower();
+                    xwf.word = xwf.word.Substring(0, 1).ToUpper() + xwf.word.Substring(1);
+                    xwf.frequency = row.Value;
+
+                    if (rank != 0)
                     {
-                        wordFrequencies[word]++;
+                        // It's not the first iteration
+                        if (xFile.frequencies[xFile.frequencies.Count - 1].frequency > xwf.frequency)
+                            rank++;
                     }
                     else
                     {
-                        wordFrequencies[word] = 1;
+                        rank++;
                     }
 
-                    bgwCounter.ReportProgress(progress, xFile);
+                    xwf.rank = rank;
+                    float freq = xwf.frequency;
+
+                    // Why it doesn't work with xwf.frequency?
+                    xwf.percentageAgainstAllWordsInFile = (freq / xFile.wordsCount) * 100;
+                    xFile.frequencies.Add(xwf);
                 }
-
-                // Create a list of xWordFrequencies objects from the dictionary
-                var wordFrequenciesList = wordFrequencies
-                    .OrderByDescending(pair => pair.Value)
-                    .Select((pair, index) => new xWordFrequencies
-                    {
-                        word = char.ToUpper(pair.Key[0]) + pair.Key.Substring(1),
-                        frequency = pair.Value,
-                        rank = index + 1,
-                        percentage = (pair.Value / (float)xFile.wordsCount) * 100
-                    })
-                    .ToList();
-
-                xFile.frequencies = wordFrequenciesList;
-                xFile.uniqueWordsCount = wordFrequenciesList.Count;
+                xFile.uniqueWordsCount = xFile.frequencies.Count();
                 xFile.SaveFileInfo();
             }
 
             bgwCounter.ReportProgress(-3, null);
         }
 
-
         private void bgwCounter_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             xTextFile xFile = (xTextFile)e.UserState;
 
-            if (e.ProgressPercentage == -1) {
+            if (e.ProgressPercentage == -1)
+            {
                 // Is cancelled
                 lblStatus.Text = "Отменено пользователем";
-            } else if (e.ProgressPercentage == -2) {
+            }
+            else if (e.ProgressPercentage == -2)
+            {
                 // Still reading
-                if (!lblStatus.Text.Equals("Читаю: " + xFile.fileName)) {
+                if (!lblStatus.Text.Equals("Читаю: " + xFile.fileName))
+                {
                     lblStatus.Text = "Читаю: " + xFile.fileName; Update();
                 }
-            } else if (e.ProgressPercentage == -3) {
+            }
+            else if (e.ProgressPercentage == -3)
+            {
                 // Has finished
                 onFinishCounting();
-            } else {
+            }
+            else
+            {
                 // Counting
                 prbStatus.Maximum = xFile.wordsCount;
                 prbStatus.Value = e.ProgressPercentage;
-                if ((prbStatus.Maximum != prbStatus.Value) || prbStatus.Maximum == 0) {
+                if ((prbStatus.Maximum != prbStatus.Value) || prbStatus.Maximum == 0)
+                {
                     if (prbStatus.Visible == false) prbStatus.Visible = true;
                     if (!lblStatus.Text.Equals("Обрабатываю: " + xFile.fileName)) { lblStatus.Text = "Обрабатываю: " + xFile.fileName; Update(); }
-                } else {
+                }
+                else
+                {
                     // Current file has been finished, let's move to the next
                     prbStatus.Value = 0;
                     prbStatus.Visible = false;
@@ -372,7 +394,8 @@ namespace DoshStat
             DateTime dtFrom = dtTo.Subtract(watch.Elapsed);
 
             Utils.history = DbHelper.GetHistory(dtFrom.ToString("yyyy-MM-dd HH:mm:ss"), dtTo.ToString("yyyy-MM-dd HH:mm:ss"));
-            if (Utils.history != null && Utils.StgGetBool("ShowResultsImmediately")) {
+            if (Utils.history != null && Utils.StgGetBool("ShowResultsImmediately"))
+            {
                 FrmTotalDetails frmTotalDetails = new FrmTotalDetails();
                 frmTotalDetails.Show();
             }
@@ -380,7 +403,8 @@ namespace DoshStat
 
         private void сброситьБДToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (Utils.msgConfirmation("Это действие приведет к полной очистке всей БД приложения, вы уверены?") == DialogResult.Yes) {
+            if (Utils.msgConfirmation("Это действие приведет к полной очистке всей БД приложения, вы уверены?") == DialogResult.Yes)
+            {
                 DbHelper.dropTables();
                 lblStatus.Text = "База данных успешно очищена!";
                 myCtrlHistory.clearHistory();

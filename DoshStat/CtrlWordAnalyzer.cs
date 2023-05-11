@@ -39,7 +39,7 @@ namespace DoshStat
                 rowObject.created_at = fileInfo.created_at;
                 rowObject.word = xwf.word;
                 rowObject.frequency = xwf.frequency;
-                rowObject.percentage = xwf.percentage;
+                rowObject.percentage = xwf.percentageAgainstAllWordsInFile;
                 rowObjects.Add(rowObject);
             }
             olvSearchResults.SetObjects(rowObjects);

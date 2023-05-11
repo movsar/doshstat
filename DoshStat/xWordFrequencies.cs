@@ -13,6 +13,6 @@ namespace DoshStat
         public long fileId { get; set; }
         public string word { get; set; }
         public int frequency { get; set; }
-        public float percentage { get; set; }
+        public float percentageAgainstAllWordsInFile { get; set; }
     }
 }

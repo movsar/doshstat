@@ -69,7 +69,7 @@ namespace DoshStat
             int sumFrequencies = 0;
             foreach (var obj in olvFrequencies.SelectedObjects) {
                 xWordFrequencies xwf = (xWordFrequencies)obj;
-                sumPercentage += xwf.percentage;
+                sumPercentage += xwf.percentageAgainstAllWordsInFile;
                 sumFrequencies += xwf.frequency;
             }
             lblSelectedWordsPercentage.Text = lblWordsPercentagePrefix + sumPercentage.ToString("F") + "%";

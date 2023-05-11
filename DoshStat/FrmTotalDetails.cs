@@ -49,7 +49,7 @@ namespace DoshStat
                     rowObject.wordId = xwf.id;
                     rowObject.word = xwf.word;
                     rowObject.frequency = xwf.frequency;
-                    rowObject.percentage = xwf.percentage;
+                    rowObject.percentage = xwf.percentageAgainstAllWordsInFile;
                     rowObjects.Add(rowObject);
                 }
             }
