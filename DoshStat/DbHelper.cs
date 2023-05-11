@@ -60,13 +60,36 @@ namespace DoshStat
                 {
                     // Combine frequency
                     existing.frequency += xwf.frequency;
-                    existing.percentageAgainstAllWordsInFile = (existing.frequency / WORDS_COUNT) * 100;
                 }
                 else
                 {
-                    xwf.percentageAgainstAllWordsInFile = (xwf.frequency / WORDS_COUNT) * 100;
                     allFrequencies.Add(xwf);
                 }
+            }
+
+            // Recalculate ranks
+            int rank = 0;
+            int prevFrequency = int.MaxValue;
+
+            foreach (var xwf in allFrequencies.OrderByDescending(xwf => xwf.frequency))
+            {
+
+                if (rank != 1)
+                {
+                    // It's not the first iteration
+                    if (xwf.frequency != prevFrequency)
+                    {
+                        rank++;
+                    }
+                }
+                else
+                {
+                    rank++;
+                }
+
+                xwf.rank = rank;
+                xwf.percentage = ((float)xwf.frequency / allFrequencies.Count) * 100;
+                prevFrequency = xwf.frequency;
             }
 
             return allFrequencies;
@@ -105,7 +128,7 @@ namespace DoshStat
                                 word = GetDBString("word", Reader),
                                 rank = GetDBInt("rank", Reader),
                                 frequency = GetDBInt("frequency", Reader),
-                                percentageAgainstAllWordsInFile = GetDBFloat("percentage", Reader),
+                                percentage = GetDBFloat("percentage", Reader),
                             };
 
                             String line = xwf.word;
@@ -165,7 +188,7 @@ namespace DoshStat
                             if ((UpdateReq("wf_frequencies", nameValueData, xwf.id) > 0))
                             {
                                 // OK
-                                sw_output.WriteLine("INSERT INTO `wf_frequencies` VALUES({0},{1},{2},'{3}',{4},{5})", xwf.id, xwf.fileId, xwf.rank, xwf.word, xwf.frequency, xwf.percentageAgainstAllWordsInFile);
+                                sw_output.WriteLine("INSERT INTO `wf_frequencies` VALUES({0},{1},{2},'{3}',{4},{5})", xwf.id, xwf.fileId, xwf.rank, xwf.word, xwf.frequency, xwf.percentage);
                                 sw_debug.Write("Ok");
                                 Debug.Write("Ok");
                             }
@@ -221,7 +244,7 @@ namespace DoshStat
                         word = GetDBString("word", Reader),
                         rank = GetDBInt("rank", Reader),
                         frequency = GetDBInt("frequency", Reader),
-                        percentageAgainstAllWordsInFile = GetDBFloat("percentage", Reader),
+                        percentage = GetDBFloat("percentage", Reader),
                     };
 
                     list.Add(xwf);
@@ -258,7 +281,7 @@ namespace DoshStat
                     fileId = Convert.ToInt64(GetDBInt64("file_id", Reader)),
                     word = GetDBString("word", Reader),
                     frequency = GetDBInt("frequency", Reader),
-                    percentageAgainstAllWordsInFile = GetDBFloat("percentage", Reader),
+                    percentage = GetDBFloat("percentage", Reader),
                 };
 
                 xwfList.Add(xwf);

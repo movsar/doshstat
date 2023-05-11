@@ -327,7 +327,7 @@ namespace DoshStat
                     float freq = xwf.frequency;
 
                     // Why it doesn't work with xwf.frequency?
-                    xwf.percentageAgainstAllWordsInFile = (freq / xFile.wordsCount) * 100;
+                    xwf.percentage = (freq / xFile.wordsCount) * 100;
                     xFile.frequencies.Add(xwf);
                 }
                 xFile.uniqueWordsCount = xFile.frequencies.Count();
