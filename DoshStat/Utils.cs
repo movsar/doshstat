@@ -64,10 +64,8 @@ namespace DoshStat
                         System.Drawing.Color foreColor = olv.Items[j - 1].ForeColor;
                         style.Fill.SetPattern(PatternValues.Solid, backColor, foreColor);
 
-                        sl.SetCellStyle(j + 1, i, style);
+                        //sl.SetCellStyle(j + 1, i, style);
                     }
-
-
                 }
             }
 

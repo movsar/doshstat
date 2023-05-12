@@ -49,7 +49,7 @@ namespace DoshStat
             olvFrequencies.PrimarySortColumn = (olvFrequencies.GetColumn(1));
 
             olvFrequencies.PrimarySortColumn = olvFrequencies.GetColumn(0);
-            olvFrequencies.PrimarySortOrder = SortOrder.Descending;
+            olvFrequencies.PrimarySortOrder = SortOrder.Ascending;
             olvFrequencies.Sort();
         }
 
