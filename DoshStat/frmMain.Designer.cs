@@ -41,6 +41,7 @@
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.закрытьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.инструментыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fixCodepageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.сброситьБДToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.настройкиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.языкToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -67,7 +68,6 @@
             this.tbcMain = new System.Windows.Forms.TabControl();
             this.tbpSearch = new System.Windows.Forms.TabPage();
             this.myToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.fixCodepageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -159,6 +159,13 @@
             this.сброситьБДToolStripMenuItem,
             this.настройкиToolStripMenuItem});
             this.инструментыToolStripMenuItem.Name = "инструментыToolStripMenuItem";
+            // 
+            // fixCodepageToolStripMenuItem
+            // 
+            resources.ApplyResources(this.fixCodepageToolStripMenuItem, "fixCodepageToolStripMenuItem");
+            this.fixCodepageToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.fixCodepageToolStripMenuItem.Name = "fixCodepageToolStripMenuItem";
+            this.fixCodepageToolStripMenuItem.Click += new System.EventHandler(this.fixCodepageToolStripMenuItem_Click);
             // 
             // сброситьБДToolStripMenuItem
             // 
@@ -373,13 +380,6 @@
             this.tbpSearch.Name = "tbpSearch";
             this.myToolTip.SetToolTip(this.tbpSearch, resources.GetString("tbpSearch.ToolTip"));
             this.tbpSearch.UseVisualStyleBackColor = true;
-            // 
-            // fixCodepageToolStripMenuItem
-            // 
-            resources.ApplyResources(this.fixCodepageToolStripMenuItem, "fixCodepageToolStripMenuItem");
-            this.fixCodepageToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.fixCodepageToolStripMenuItem.Name = "fixCodepageToolStripMenuItem";
-            this.fixCodepageToolStripMenuItem.Click += new System.EventHandler(this.fixCodepageToolStripMenuItem_Click);
             // 
             // FrmMain
             // 

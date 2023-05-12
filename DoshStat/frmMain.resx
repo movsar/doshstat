@@ -826,6 +826,9 @@
   <data name="tbpSearch.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
+  <data name="&gt;&gt;fixCodepageToolStripMenuItem.Name" xml:space="preserve">
+    <value>fixCodepageToolStripMenuItem</value>
+  </data>
   <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>ru</value>
   </metadata>
@@ -849,5 +852,5 @@
   </metadata>
   <metadata name="bgwCounter.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>528, 17</value>
-  </metadata>
+  </metadata>  
 </root>
