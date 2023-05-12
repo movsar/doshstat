@@ -156,4 +156,7 @@
   <data name="Autodetect" xml:space="preserve">
     <value>Автоопределение</value>
   </data>
+  <data name="btnExport.Text" xml:space="preserve">
+    <value>Экспорт</value>
+  </data>
 </root>
