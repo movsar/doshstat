@@ -117,8 +117,7 @@ namespace DoshStat
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
-            this.Text = "Strange Words ver." + AssemblyVersion;
+            this.Text = "DoshStat ver." + AssemblyVersion;
             myCtrlHistory = new CtrlHistory();
             myCtrlHistory.Dock = DockStyle.Fill;
             tbpHistory.Controls.Add(myCtrlHistory);
