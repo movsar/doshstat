@@ -20,5 +20,8 @@
     <Setting Name="TxtRegExp" Type="System.String" Scope="User">
       <Value Profile="(Default)">\w+</Value>
     </Setting>
+    <Setting Name="CurrentCulture" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

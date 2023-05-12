@@ -122,9 +122,6 @@ namespace DoshStat
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //CultureInfo englishCulture = new CultureInfo("ru");
-            //Thread.CurrentThread.CurrentUICulture = englishCulture;
-
             this.Text = "DoshStat ver." + AssemblyVersion;
             myCtrlHistory = new CtrlHistory();
             myCtrlHistory.Dock = DockStyle.Fill;
@@ -458,5 +455,16 @@ namespace DoshStat
             DbHelper.Chistka();
         }
 
+        private void englishToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Utils.StgSet("CurrentCulture", "en");
+            Application.Restart();
+        }
+
+        private void русскийToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Utils.StgSet("CurrentCulture", "ru");
+            Application.Restart();
+        }
     }
 }

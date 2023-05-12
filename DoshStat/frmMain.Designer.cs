@@ -43,6 +43,9 @@
             this.инструментыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.сброситьБДToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.настройкиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.языкToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.русскийToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.englishToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.справкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.оПрограммеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bgwCounter = new System.ComponentModel.BackgroundWorker();
@@ -130,6 +133,7 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.файлToolStripMenuItem,
             this.инструментыToolStripMenuItem,
+            this.языкToolStripMenuItem,
             this.справкаToolStripMenuItem});
             this.menuStrip1.Name = "menuStrip1";
             this.myToolTip.SetToolTip(this.menuStrip1, resources.GetString("menuStrip1.ToolTip"));
@@ -167,6 +171,26 @@
             resources.ApplyResources(this.настройкиToolStripMenuItem, "настройкиToolStripMenuItem");
             this.настройкиToolStripMenuItem.Name = "настройкиToolStripMenuItem";
             this.настройкиToolStripMenuItem.Click += new System.EventHandler(this.настройкиToolStripMenuItem_Click);
+            // 
+            // языкToolStripMenuItem
+            // 
+            resources.ApplyResources(this.языкToolStripMenuItem, "языкToolStripMenuItem");
+            this.языкToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.русскийToolStripMenuItem1,
+            this.englishToolStripMenuItem1});
+            this.языкToolStripMenuItem.Name = "языкToolStripMenuItem";
+            // 
+            // русскийToolStripMenuItem1
+            // 
+            resources.ApplyResources(this.русскийToolStripMenuItem1, "русскийToolStripMenuItem1");
+            this.русскийToolStripMenuItem1.Name = "русскийToolStripMenuItem1";
+            this.русскийToolStripMenuItem1.Click += new System.EventHandler(this.русскийToolStripMenuItem_Click);
+            // 
+            // englishToolStripMenuItem1
+            // 
+            resources.ApplyResources(this.englishToolStripMenuItem1, "englishToolStripMenuItem1");
+            this.englishToolStripMenuItem1.Name = "englishToolStripMenuItem1";
+            this.englishToolStripMenuItem1.Click += new System.EventHandler(this.englishToolStripMenuItem_Click);
             // 
             // справкаToolStripMenuItem
             // 
@@ -422,6 +446,9 @@
         public System.Windows.Forms.ToolStripStatusLabel lblStatus;
         private System.Windows.Forms.Button btnCleanUp;
         private System.Windows.Forms.ToolTip myToolTip;
+        private System.Windows.Forms.ToolStripMenuItem языкToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem русскийToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem englishToolStripMenuItem1;
     }
 }
 
