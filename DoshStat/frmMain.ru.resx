@@ -230,6 +230,12 @@
   <data name="сброситьБДToolStripMenuItem.Text" xml:space="preserve">
     <value>Сброс БД</value>
   </data>
+  <data name="fixCodepageToolStripMenuItem.Text" xml:space="preserve">
+    <value>Исправить кириллицу</value>
+  </data>
+  <data name="fixCodepageToolStripMenuItem.ToolTip" xml:space="preserve">
+    <value>Заменит все похожие на кириллицу буквы на кириллические, не нажимайте если у вас есть иностранные тексты</value>
+  </data>
   <data name="olvClmSocPol.Text" xml:space="preserve">
     <value>Социально-политическая</value>
   </data>

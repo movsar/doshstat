@@ -154,6 +154,12 @@
   <data name="сброситьБДToolStripMenuItem.Text" xml:space="preserve">
     <value>Drop Database</value>
   </data>
+  <data name="fixCodepageToolStripMenuItem.Text" xml:space="preserve">
+    <value>Fix Codepage</value>
+  </data>
+    <data name="fixCodepageToolStripMenuItem.ToolTip" xml:space="preserve">
+    <value>Changes all characters that resemble Cyrillic letters, to proper Cyrillic letters, don't use it if you're working with non-Cyrillic texts</value>
+  </data>
   <data name="настройкиToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>151, 22</value>
   </data>

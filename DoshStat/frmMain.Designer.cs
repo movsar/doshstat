@@ -51,7 +51,6 @@
             this.bgwCounter = new System.ComponentModel.BackgroundWorker();
             this.tbpHistory = new System.Windows.Forms.TabPage();
             this.tbpCount = new System.Windows.Forms.TabPage();
-            this.btnCleanUp = new System.Windows.Forms.Button();
             this.chkSubdirectories = new System.Windows.Forms.CheckBox();
             this.olvFiles = new BrightIdeasSoftware.ObjectListView();
             this.olvClmFileName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -68,6 +67,7 @@
             this.tbcMain = new System.Windows.Forms.TabControl();
             this.tbpSearch = new System.Windows.Forms.TabPage();
             this.myToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.fixCodepageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -155,6 +155,7 @@
             // 
             resources.ApplyResources(this.инструментыToolStripMenuItem, "инструментыToolStripMenuItem");
             this.инструментыToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fixCodepageToolStripMenuItem,
             this.сброситьБДToolStripMenuItem,
             this.настройкиToolStripMenuItem});
             this.инструментыToolStripMenuItem.Name = "инструментыToolStripMenuItem";
@@ -222,7 +223,6 @@
             // tbpCount
             // 
             resources.ApplyResources(this.tbpCount, "tbpCount");
-            this.tbpCount.Controls.Add(this.btnCleanUp);
             this.tbpCount.Controls.Add(this.chkSubdirectories);
             this.tbpCount.Controls.Add(this.olvFiles);
             this.tbpCount.Controls.Add(this.txtWorkingDir);
@@ -233,15 +233,6 @@
             this.tbpCount.Name = "tbpCount";
             this.myToolTip.SetToolTip(this.tbpCount, resources.GetString("tbpCount.ToolTip"));
             this.tbpCount.UseVisualStyleBackColor = true;
-            // 
-            // btnCleanUp
-            // 
-            resources.ApplyResources(this.btnCleanUp, "btnCleanUp");
-            this.btnCleanUp.Name = "btnCleanUp";
-            this.btnCleanUp.Tag = "";
-            this.myToolTip.SetToolTip(this.btnCleanUp, resources.GetString("btnCleanUp.ToolTip"));
-            this.btnCleanUp.UseVisualStyleBackColor = true;
-            this.btnCleanUp.Click += new System.EventHandler(this.btnCleanUp_Click);
             // 
             // chkSubdirectories
             // 
@@ -383,6 +374,13 @@
             this.myToolTip.SetToolTip(this.tbpSearch, resources.GetString("tbpSearch.ToolTip"));
             this.tbpSearch.UseVisualStyleBackColor = true;
             // 
+            // fixCodepageToolStripMenuItem
+            // 
+            resources.ApplyResources(this.fixCodepageToolStripMenuItem, "fixCodepageToolStripMenuItem");
+            this.fixCodepageToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.fixCodepageToolStripMenuItem.Name = "fixCodepageToolStripMenuItem";
+            this.fixCodepageToolStripMenuItem.Click += new System.EventHandler(this.fixCodepageToolStripMenuItem_Click);
+            // 
             // FrmMain
             // 
             resources.ApplyResources(this, "$this");
@@ -444,11 +442,11 @@
         private System.Windows.Forms.TabPage tbpSearch;
         private System.Windows.Forms.CheckBox chkSubdirectories;
         public System.Windows.Forms.ToolStripStatusLabel lblStatus;
-        private System.Windows.Forms.Button btnCleanUp;
         private System.Windows.Forms.ToolTip myToolTip;
         private System.Windows.Forms.ToolStripMenuItem языкToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem русскийToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem englishToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem fixCodepageToolStripMenuItem;
     }
 }
 

@@ -179,6 +179,8 @@ namespace DoshStat
         }
         Stopwatch watch;
 
+        private static bool CancellationRequestPending = false;
+
         private void btnStart_Click(object sender, EventArgs e)
         {
             if (!isRunning)
@@ -195,7 +197,11 @@ namespace DoshStat
             }
             else
             {
-                if (bgwCounter.IsBusy) bgwCounter.CancelAsync();
+                if (bgwCounter.IsBusy)
+                {
+                    CancellationRequestPending = true;
+                    btnStart.Enabled = false;
+                }
 
                 lblStatus.Text = Utils.GetFormStringResource<FrmMain>("Cancel");
                 Update();
@@ -219,7 +225,7 @@ namespace DoshStat
 
             foreach (xTextFile xFile in Utils.fList)
             {
-                if (bgwCounter.CancellationPending)
+                if (CancellationRequestPending == true)
                 {
                     bgwCounter.ReportProgress(-1, xFile);
                     return;
@@ -303,6 +309,8 @@ namespace DoshStat
             if (e.ProgressPercentage == -1)
             {
                 // Is cancelled
+                btnStart.Enabled = true;
+                CancellationRequestPending = false;
                 lblStatus.Text = Utils.GetFormStringResource<FrmMain>("CancelledByUser");
             }
             else if (e.ProgressPercentage == -2)
@@ -460,5 +468,9 @@ namespace DoshStat
             frmAbout.ShowDialog();
         }
 
+        private void fixCodepageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
