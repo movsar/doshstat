@@ -32,8 +32,6 @@
             this.olvClmWord = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvClmFrequency = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvClmPercentage = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvClmUniqueWords = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvClmWordsCount = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvClmFileName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvClmCategory = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvClmDateTime = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -45,22 +43,18 @@
             // 
             // olvSearchResults
             // 
+            resources.ApplyResources(this.olvSearchResults, "olvSearchResults");
             this.olvSearchResults.AllColumns.Add(this.olvClmWord);
             this.olvSearchResults.AllColumns.Add(this.olvClmFrequency);
             this.olvSearchResults.AllColumns.Add(this.olvClmPercentage);
-            this.olvSearchResults.AllColumns.Add(this.olvClmUniqueWords);
-            this.olvSearchResults.AllColumns.Add(this.olvClmWordsCount);
             this.olvSearchResults.AllColumns.Add(this.olvClmFileName);
             this.olvSearchResults.AllColumns.Add(this.olvClmCategory);
             this.olvSearchResults.AllColumns.Add(this.olvClmDateTime);
-            resources.ApplyResources(this.olvSearchResults, "olvSearchResults");
             this.olvSearchResults.CellEditUseWholeCell = false;
             this.olvSearchResults.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvClmWord,
             this.olvClmFrequency,
             this.olvClmPercentage,
-            this.olvClmUniqueWords,
-            this.olvClmWordsCount,
             this.olvClmFileName,
             this.olvClmCategory,
             this.olvClmDateTime});
@@ -70,6 +64,7 @@
             this.olvSearchResults.HideSelection = false;
             this.olvSearchResults.MultiSelect = false;
             this.olvSearchResults.Name = "olvSearchResults";
+            this.olvSearchResults.OverlayText.Text = resources.GetString("resource.Text");
             this.olvSearchResults.ShowGroups = false;
             this.olvSearchResults.TintSortColumn = true;
             this.olvSearchResults.UseAlternatingBackColors = true;
@@ -94,18 +89,6 @@
             this.olvClmPercentage.AspectName = "getNeatPercentage";
             this.olvClmPercentage.AspectToStringFormat = "";
             resources.ApplyResources(this.olvClmPercentage, "olvClmPercentage");
-            // 
-            // olvClmUniqueWords
-            // 
-            this.olvClmUniqueWords.AspectName = "uniqueWordsCount";
-            this.olvClmUniqueWords.Groupable = false;
-            resources.ApplyResources(this.olvClmUniqueWords, "olvClmUniqueWords");
-            // 
-            // olvClmWordsCount
-            // 
-            this.olvClmWordsCount.AspectName = "wordsCount";
-            this.olvClmWordsCount.Groupable = false;
-            resources.ApplyResources(this.olvClmWordsCount, "olvClmWordsCount");
             // 
             // olvClmFileName
             // 
@@ -132,16 +115,16 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.Cursor = System.Windows.Forms.Cursors.Default;
             resources.ApplyResources(this.btnSearch, "btnSearch");
+            this.btnSearch.Cursor = System.Windows.Forms.Cursors.Default;
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // btnExport
             // 
-            this.btnExport.Cursor = System.Windows.Forms.Cursors.Default;
             resources.ApplyResources(this.btnExport, "btnExport");
+            this.btnExport.Cursor = System.Windows.Forms.Cursors.Default;
             this.btnExport.Name = "btnExport";
             this.btnExport.UseVisualStyleBackColor = true;
             this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
@@ -167,8 +150,6 @@
         private BrightIdeasSoftware.OLVColumn olvClmWord;
         private BrightIdeasSoftware.OLVColumn olvClmFrequency;
         private BrightIdeasSoftware.OLVColumn olvClmPercentage;
-        private BrightIdeasSoftware.OLVColumn olvClmUniqueWords;
-        private BrightIdeasSoftware.OLVColumn olvClmWordsCount;
         private BrightIdeasSoftware.OLVColumn olvClmFileName;
         private BrightIdeasSoftware.OLVColumn olvClmCategory;
         private BrightIdeasSoftware.OLVColumn olvClmDateTime;

@@ -24,7 +24,7 @@ namespace DoshStat
 
         public static xTextFile GetTextFile(long id)
         {
-            return history.First(file => (file.fileId == id));
+            return history.SingleOrDefault(file => (file.fileId == id));
         }
 
         public static string GetFormStringResource<T>(string title)

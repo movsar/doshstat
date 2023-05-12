@@ -18,33 +18,19 @@ namespace DoshStat
             if (txtWord.Text.Length < 1) return;
 
             string word = txtWord.Text.Substring(0, 1).ToUpper() + txtWord.Text.Substring(1);
-            List<xWordFrequencies> searchResults = DbHelper.FindInFrequencies(word);
-            if (searchResults == null) {
+            List<xDetails> searchResults = DbHelper.FindInFrequencies(word);
+            if (searchResults == null)
+            {
                 olvSearchResults.ClearObjects();
-                
+
                 ((FrmMain)this.Parent.Parent.Parent).lblStatus.Text = string.Format(Utils.GetFormStringResource<CtrlWordAnalyzer>("NothingFound"));
                 return;
             }
-
-            List<xDetails> rowObjects = new List<xDetails>();
-
-            foreach (xWordFrequencies xwf in searchResults) {
-                xTextFile fileInfo = Utils.GetTextFile(xwf.fileId);
-
-                xDetails rowObject = new xDetails();
-                rowObject.fileId = fileInfo.fileId;
-                rowObject.fileName = fileInfo.fileName;
-                rowObject.categoryIndex = fileInfo.categoryIndex;
-                rowObject.wordsCount = fileInfo.wordsCount;
-                rowObject.uniqueWordsCount = fileInfo.uniqueWordsCount;
-                rowObject.created_at = fileInfo.created_at;
-                rowObject.word = xwf.word;
-                rowObject.frequency = xwf.frequency;
-                rowObject.percentage = xwf.percentage;
-                rowObjects.Add(rowObject);
-            }
-            olvSearchResults.SetObjects(rowObjects);
-            ((FrmMain)this.Parent.Parent.Parent).lblStatus.Text = string.Format(Utils.GetFormStringResource<CtrlWordAnalyzer>("FoundIn"), rowObjects.GroupBy(xFile => xFile.fileId).Select(grp => grp.First()).ToList().Count.ToString());
+            olvSearchResults.SetObjects(searchResults);
+            var results = searchResults.GroupBy(xFile => xFile.fileId).Select(grp => grp.First());
+            var resultsCount = results.Count().ToString();
+            var strFoundIn = Utils.GetFormStringResource<CtrlWordAnalyzer>("FoundIn");
+            ((FrmMain)this.Parent.Parent.Parent).lblStatus.Text = string.Format(strFoundIn, resultsCount);
             olvSearchResults.PrimarySortColumn = olvSearchResults.GetColumn(0);
             olvSearchResults.PrimarySortOrder = SortOrder.Descending;
             olvSearchResults.Sort();
@@ -57,8 +43,10 @@ namespace DoshStat
 
         private void olvSearchResults_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left) {
-                if (olvSearchResults.SelectedObject != null) {
+            if (e.Button == MouseButtons.Left)
+            {
+                if (olvSearchResults.SelectedObject != null)
+                {
                     FrmSingleFileFrequencies frmFreq = new FrmSingleFileFrequencies(Utils.GetTextFile(((xDetails)olvSearchResults.SelectedObject).fileId), ((xDetails)olvSearchResults.SelectedObject).word);
                     frmFreq.Show();
                 }
@@ -67,7 +55,8 @@ namespace DoshStat
 
         private void txtWord_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter) {
+            if (e.KeyCode == Keys.Enter)
+            {
                 search();
             }
         }

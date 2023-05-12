@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -264,34 +265,48 @@ namespace DoshStat
         public static int CHARACTERS_COUNT;
         public static int FILES_COUNT;
 
-        public static List<xWordFrequencies> FindInFrequencies(string word)
+        public static List<xDetails> FindInFrequencies(string word)
         {
             ResetSQLiteConnection();
             List<xWordFrequencies> xwfList = new List<xWordFrequencies>();
-            string query = string.Format("SELECT * FROM `wf_frequencies` WHERE `word` LIKE '{0}'", word);
+
+            var output = new List<xDetails>();
+
+            string query = string.Format(@"SELECT wf_frequencies.*, wf_files.*
+                                        FROM wf_frequencies
+                                        JOIN wf_files ON wf_frequencies.file_id = wf_files.id
+                                        WHERE wf_frequencies.word LIKE '{0}'", word);
+
             sql_cmd.CommandText = query;
             SQLiteDataReader Reader = sql_cmd.ExecuteReader();
             if (!Reader.HasRows) return null;
 
             while (Reader.Read())
             {
-                xWordFrequencies xwf = new xWordFrequencies()
-                {
-                    id = Convert.ToInt64(GetDBInt64("id", Reader)),
-                    fileId = Convert.ToInt64(GetDBInt64("file_id", Reader)),
-                    word = GetDBString("word", Reader),
-                    frequency = GetDBInt("frequency", Reader),
-                    percentage = GetDBFloat("percentage", Reader),
-                };
 
-                xwfList.Add(xwf);
+
+                var xDetail = new xDetails();
+
+                xDetail.fileId = Convert.ToInt64(GetDBInt64("file_id", Reader));
+                xDetail.word = GetDBString("word", Reader);
+                xDetail.frequency = GetDBInt("frequency", Reader);
+                xDetail.percentage = GetDBFloat("percentage", Reader);
+                xDetail.fileName = GetDBString("file_name", Reader);
+                xDetail.wordsCount = GetDBInt("words_count", Reader);
+                xDetail.uniqueWordsCount = GetDBInt("unique_words_count", Reader);
+                xDetail.charactersCount = GetDBInt("characters_count", Reader);
+                xDetail.categoryIndex = GetDBInt("category", Reader);
+                xDetail.created_at = GetDBString("created_at", Reader);
+
+
+                output.Add(xDetail);
 
                 //   subquery += string.Format("'{0}' OR ", Convert.ToInt64(GetDBInt64("file_id", Reader)));
                 //   subquery = subquery.Substring(0, subquery.Length - 4);
             };
             Reader.Close();
 
-            return xwfList;
+            return output;
         }
 
         private static String CACHE_DT_FROM, CACHE_DT_TO;

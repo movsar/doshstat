@@ -48,6 +48,7 @@
             // 
             // olvHistory
             // 
+            resources.ApplyResources(this.olvHistory, "olvHistory");
             this.olvHistory.AllColumns.Add(this.olvColumn1);
             this.olvHistory.AllColumns.Add(this.olvClmCategory);
             this.olvHistory.AllColumns.Add(this.olvClmWordsCount);
@@ -61,12 +62,13 @@
             this.olvClmUniqueWords,
             this.olvClmDateTime});
             this.olvHistory.Cursor = System.Windows.Forms.Cursors.Default;
-            resources.ApplyResources(this.olvHistory, "olvHistory");
             this.olvHistory.FullRowSelect = true;
             this.olvHistory.GridLines = true;
             this.olvHistory.HideSelection = false;
             this.olvHistory.Name = "olvHistory";
+            this.olvHistory.OverlayText.Text = resources.GetString("resource.Text");
             this.olvHistory.ShowGroups = false;
+            this.toolTip1.SetToolTip(this.olvHistory, resources.GetString("olvHistory.ToolTip"));
             this.olvHistory.UseAlternatingBackColors = true;
             this.olvHistory.UseCompatibleStateImageBehavior = false;
             this.olvHistory.UseFilterIndicator = true;
@@ -108,6 +110,7 @@
             // 
             resources.ApplyResources(this.btnExport, "btnExport");
             this.btnExport.Name = "btnExport";
+            this.toolTip1.SetToolTip(this.btnExport, resources.GetString("btnExport.ToolTip"));
             this.btnExport.UseVisualStyleBackColor = true;
             this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
@@ -132,6 +135,7 @@
             resources.ApplyResources(this.dtpTo, "dtpTo");
             this.dtpTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpTo.Name = "dtpTo";
+            this.toolTip1.SetToolTip(this.dtpTo, resources.GetString("dtpTo.ToolTip"));
             this.dtpTo.ValueChanged += new System.EventHandler(this.dtpTo_ValueChanged);
             // 
             // dtpFrom
@@ -139,17 +143,20 @@
             resources.ApplyResources(this.dtpFrom, "dtpFrom");
             this.dtpFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpFrom.Name = "dtpFrom";
+            this.toolTip1.SetToolTip(this.dtpFrom, resources.GetString("dtpFrom.ToolTip"));
             this.dtpFrom.ValueChanged += new System.EventHandler(this.dtpFrom_ValueChanged);
             // 
             // label1
             // 
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
+            this.toolTip1.SetToolTip(this.label1, resources.GetString("label1.ToolTip"));
             // 
             // label2
             // 
             resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
+            this.toolTip1.SetToolTip(this.label2, resources.GetString("label2.ToolTip"));
             // 
             // CtrlHistory
             // 
@@ -164,6 +171,7 @@
             this.Controls.Add(this.btnExport);
             this.Controls.Add(this.btnFullReport);
             this.Name = "CtrlHistory";
+            this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.Load += new System.EventHandler(this.CtrlHistory_Load);
             ((System.ComponentModel.ISupportInitialize)(this.olvHistory)).EndInit();
             this.ResumeLayout(false);

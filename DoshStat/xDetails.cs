@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DoshStat
 {
-    class xDetails
+    public class xDetails
     {        
         public long fileId { get; set; }
         public String fileName { get; set; }
