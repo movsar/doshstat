@@ -223,10 +223,22 @@
     <Compile Include="Utils.cs" />
     <Compile Include="XlsProcessor.cs" />
     <Compile Include="xWordFrequencies.cs" />
+    <EmbeddedResource Include="CtrlHistory.en.resx">
+      <DependentUpon>CtrlHistory.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CtrlHistory.resx">
       <DependentUpon>CtrlHistory.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CtrlHistory.ru.resx">
+      <DependentUpon>CtrlHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CtrlWordAnalyzer.en.resx">
+      <DependentUpon>CtrlWordAnalyzer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CtrlWordAnalyzer.resx">
+      <DependentUpon>CtrlWordAnalyzer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CtrlWordAnalyzer.ru.resx">
       <DependentUpon>CtrlWordAnalyzer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmAbout.en.resx">

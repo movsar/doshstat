@@ -257,4 +257,34 @@
   <data name="NeedAdminPrivilegesError" xml:space="preserve">
     <value>Недостаточно прав для обработки данной директори, запустите программу с правами администратора, или выберите другую папку</value>
   </data>
+  <data name="CancelledByUser" xml:space="preserve">
+    <value>Отменено пользователем</value>
+  </data>
+  <data name="DbIsCleaned" xml:space="preserve">
+    <value>База данных успешно очищена!</value>
+  </data>
+  <data name="FilesToBeProcessed" xml:space="preserve">
+    <value>Список файлов для обработки</value>
+  </data>
+  <data name="JobFinishedIn" xml:space="preserve">
+    <value>Работа выполнена за</value>
+  </data>
+  <data name="LoadingFiles" xml:space="preserve">
+    <value>Загружаю список файлов</value>
+  </data>
+  <data name="Processing" xml:space="preserve">
+    <value>Обрабатываю</value>
+  </data>
+  <data name="Reading" xml:space="preserve">
+    <value>Читаю</value>
+  </data>
+  <data name="Sec" xml:space="preserve">
+    <value>сек</value>
+  </data>
+  <data name="Stop" xml:space="preserve">
+    <value>Стоп</value>
+  </data>
+  <data name="ThisWillFullyCleanDbAreYouSure" xml:space="preserve">
+    <value>Это действие приведет к полной очистке всей БД приложения, вы уверены?</value>
+  </data>
 </root>

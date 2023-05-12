@@ -82,7 +82,8 @@ namespace DoshStat
         {
             this.Enabled = false;
 
-            lblStatus.Text = "Загружаю список файлов";
+            var str = Utils.GetFormStringResource<FrmMain>("LoadingFiles");
+            lblStatus.Text = str;
             // Load all supported files from the chosen dretory 
             this.Enabled = true;
 
@@ -190,7 +191,8 @@ namespace DoshStat
                 isRunning = true;
                 bgwCounter.RunWorkerAsync();
                 btnStart.BackColor = Color.IndianRed;
-                btnStart.Text = "Cтоп";
+                var str = Utils.GetFormStringResource<FrmMain>("Stop");
+                btnStart.Text = str;
                 prbStatus.Visible = true;
                 watch = Stopwatch.StartNew();
             }
@@ -224,18 +226,6 @@ namespace DoshStat
             removeSelectedFromOlvFiles();
         }
 
-
-
-        private void tbcHistory_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (tbcMain.SelectedTab == tbcMain.TabPages[1])
-            {
-            }
-            else
-            {
-
-            }
-        }
 
         private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
         {
@@ -350,14 +340,16 @@ namespace DoshStat
             if (e.ProgressPercentage == -1)
             {
                 // Is cancelled
-                lblStatus.Text = "Отменено пользователем";
+                lblStatus.Text = Utils.GetFormStringResource<FrmMain>("CancelledByUser");
             }
             else if (e.ProgressPercentage == -2)
             {
                 // Still reading
-                if (!lblStatus.Text.Equals("Читаю: " + xFile.fileName))
+                var readingWord = Utils.GetFormStringResource<FrmMain>("Reading");
+                if (!lblStatus.Text.Equals($"{readingWord}: {xFile.fileName}"))
                 {
-                    lblStatus.Text = "Читаю: " + xFile.fileName; Update();
+                    lblStatus.Text = $"{readingWord}: {xFile.fileName} ";
+                    Update();
                 }
             }
             else if (e.ProgressPercentage == -3)
@@ -372,8 +364,18 @@ namespace DoshStat
                 prbStatus.Value = e.ProgressPercentage;
                 if ((prbStatus.Maximum != prbStatus.Value) || prbStatus.Maximum == 0)
                 {
-                    if (prbStatus.Visible == false) prbStatus.Visible = true;
-                    if (!lblStatus.Text.Equals("Обрабатываю: " + xFile.fileName)) { lblStatus.Text = "Обрабатываю: " + xFile.fileName; Update(); }
+                    var str = Utils.GetFormStringResource<FrmMain>("Processing");
+
+                    if (prbStatus.Visible == false)
+                    {
+                        prbStatus.Visible = true;
+                    }
+
+                    if (!lblStatus.Text.Equals($"{str}: {xFile.fileName}"))
+                    {
+                        lblStatus.Text = $"{str}: {xFile.fileName}";
+                        Update();
+                    }
                 }
                 else
                 {
@@ -394,9 +396,13 @@ namespace DoshStat
             btnStart.BackColor = Color.LightGreen;
             txtWorkingDir.Enabled = true;
             btnBrowse.Enabled = true;
-            btnStart.Text = "Старт";
+            btnStart.Text = Utils.GetFormStringResource<FrmMain>("btnStart.Text");
             prbStatus.Visible = false;
-            lblStatus.Text = "Работа выполнена за " + watch.Elapsed.TotalSeconds.ToString("F") + "сек.";
+
+            var jobFinishedInStr = Utils.GetFormStringResource<FrmMain>("JobFinishedIn");
+            var secStr = Utils.GetFormStringResource<FrmMain>("Sec");
+
+            lblStatus.Text = $"{jobFinishedInStr} {watch.Elapsed.TotalSeconds.ToString("F")} {secStr}";
 
             // Refresh history list
             myCtrlHistory.loadHistory();
@@ -415,10 +421,11 @@ namespace DoshStat
 
         private void сброситьБДToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (Utils.msgConfirmation("Это действие приведет к полной очистке всей БД приложения, вы уверены?") == DialogResult.Yes)
+            var areYouSureStr = Utils.GetFormStringResource<FrmMain>("ThisWillFullyCleanDbAreYouSure");
+            if (Utils.msgConfirmation(areYouSureStr) == DialogResult.Yes)
             {
                 DbHelper.dropTables();
-                lblStatus.Text = "База данных успешно очищена!";
+                lblStatus.Text = Utils.GetFormStringResource<FrmMain>("DbIsCleaned");
                 myCtrlHistory.clearHistory();
             }
         }
@@ -436,7 +443,8 @@ namespace DoshStat
 
         private void экспортироватьСписокToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Utils.ExcelExport(olvFiles, "Список файлов для обработки");
+            var str = Utils.GetFormStringResource<FrmMain>("FilesToBeProcessed");
+            Utils.ExcelExport(olvFiles, str);
         }
 
         private void chkSubdirectories_CheckedChanged(object sender, EventArgs e)
