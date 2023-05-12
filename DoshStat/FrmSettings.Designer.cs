@@ -110,6 +110,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.comboBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Name = "FrmSettings";
             this.Load += new System.EventHandler(this.FrmSettings_Load);
             this.ResumeLayout(false);

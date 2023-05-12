@@ -189,7 +189,7 @@ namespace DoshStat
                 btnBrowse.Enabled = false;
                 isRunning = true;
                 bgwCounter.RunWorkerAsync();
-                btnStart.BackColor = Color.IndianRed;
+                btnStart.BackColor = Color.PaleVioletRed;
                 var str = Utils.GetFormStringResource<FrmMain>("Stop");
                 btnStart.Text = str;
                 prbStatus.Visible = true;
