@@ -200,13 +200,12 @@ namespace DoshStat
                 if (bgwCounter.IsBusy)
                 {
                     lblStatus.Text = Utils.GetFormStringResource<FrmMain>("Stopping") + " ...";
+                    prbStatus.Visible = false;
                     CancellationRequestPending = true;
+                    bgwCounter.CancelAsync();
                     btnStart.Enabled = false;
                 }
-
-                lblStatus.Text = Utils.GetFormStringResource<FrmMain>("Cancel");
                 Update();
-                onFinishCounting();
             }
         }
 
@@ -309,9 +308,10 @@ namespace DoshStat
 
             if (e.ProgressPercentage == -1)
             {
-                // Is cancelled
+                // Is cancelled                
                 btnStart.Enabled = true;
                 CancellationRequestPending = false;
+                onFinishCounting();
                 lblStatus.Text = Utils.GetFormStringResource<FrmMain>("CancelledByUser");
             }
             else if (e.ProgressPercentage == -2)
