@@ -126,4 +126,83 @@
   <data name="настройкиToolStripMenuItem.Text" xml:space="preserve">
     <value>Settings</value>
   </data>
+  <data name="lblInfo.Text" xml:space="preserve">
+    <value>Set path to the text files, supports
+ *.doc, *.docx, *.pdf, *.txt, *.odt, *.xlsx, *.rtf, *.htm, *.html</value>
+  </data>
+  <data name="btnBrowse.Text" xml:space="preserve">
+    <value>Select</value>
+  </data>
+  <data name="btnBrowse.ToolTip" xml:space="preserve">
+    <value>Choose the initial folder to search for text files</value>
+  </data>
+  <data name="tbpCount.Text" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="lblStatus.Text" xml:space="preserve">
+    <value>Ready</value>
+  </data>
+  <data name="закрытьToolStripMenuItem.Text" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="инструментыToolStripMenuItem.Text" xml:space="preserve">
+    <value>Instruments</value>
+  </data>
+  <data name="chkSubdirectories.Text" xml:space="preserve">
+    <value>Search files in subdirectories</value>
+  </data>
+  <data name="tbpHistory.Text" xml:space="preserve">
+    <value>History</value>
+  </data>
+  <data name="btnStart.ToolTip" xml:space="preserve">
+    <value>Starts processing all files in the list</value>
+  </data>
+  <data name="оПрограммеToolStripMenuItem.Text" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="olvClmFileName.Text" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="файлToolStripMenuItem.Text" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="olvClmFiction.Text" xml:space="preserve">
+    <value>Fiction</value>
+  </data>
+  <data name="btnCleanUp.Text" xml:space="preserve">
+    <value>Fix Cyrillic</value>
+  </data>
+  <data name="экспортироватьСписокToolStripMenuItem.Text" xml:space="preserve">
+    <value>Export the list</value>
+  </data>
+  <data name="olvClmSocPol.Text" xml:space="preserve">
+    <value>Socio-political</value>
+  </data>
+  <data name="справкаToolStripMenuItem.Text" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="ctxRemoveFromtheList.Text" xml:space="preserve">
+    <value>Remove from the list</value>
+  </data>
+  <data name="сброситьБДToolStripMenuItem.Text" xml:space="preserve">
+    <value>Drop Database</value>
+  </data>
+  <data name="olvClmReligious.Text" xml:space="preserve">
+    <value>Religious</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Directory with the files to be processed </value>
+  </data>
+  <data name="tbpSearch.Text" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="olvClmPoetry.Text" xml:space="preserve">
+    <value>Poetical</value>
+  </data>
+  <data name="btnCleanUp.ToolTip" xml:space="preserve">
+    <value>Goes through all the processed texts and fixes cyrillic characters where there have been used latin equavalents</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>DoshStat</value>
+  </data>
 </root>

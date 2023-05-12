@@ -120,4 +120,34 @@
   <data name="olvClmCategory.Text" xml:space="preserve">
     <value>Category</value>
   </data>
+  <data name="olvClmWordsCount.Text" xml:space="preserve">
+    <value>Words count</value>
+  </data>
+  <data name="olvClmDateTime.Text" xml:space="preserve">
+    <value>Date and time</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Detailed history of files processed</value>
+  </data>
+  <data name="olvClmUniqueWords.Text" xml:space="preserve">
+    <value>Unique words count</value>
+  </data>
+  <data name="olvClmFileName.Text" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="olvClmFrequency.Text" xml:space="preserve">
+    <value>Frequency</value>
+  </data>
+  <data name="btnExport.Text" xml:space="preserve">
+    <value>Export</value>
+  </data>
+  <data name="olvClmWord.Text" xml:space="preserve">
+    <value>Word</value>
+  </data>
+  <data name="удалитьToolStripMenuItem.Text" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="olvClmPercentage.Text" xml:space="preserve">
+    <value>Relative frequency</value>
+  </data>
 </root>

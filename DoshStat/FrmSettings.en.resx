@@ -123,4 +123,31 @@
   <data name="label1.Text" xml:space="preserve">
     <value>Codepage for the *.txt files</value>
   </data>
+  <data name="comboBox2.Items2" xml:space="preserve">
+    <value>Green</value>
+  </data>
+  <data name="comboBox2.Items1" xml:space="preserve">
+    <value>Blue</value>
+  </data>
+  <data name="btnSave.Text" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="label3.Text" xml:space="preserve">
+    <value>Excel file styling</value>
+  </data>
+  <data name="comboBox2.Items" xml:space="preserve">
+    <value>Same as in the app</value>
+  </data>
+  <data name="checkBox1.Text" xml:space="preserve">
+    <value>Show processing results</value>
+  </data>
+  <data name="comboBox2.Items4" xml:space="preserve">
+    <value>No style</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>* AUTO = The app will try to figure out the codepage, it works most of the times, but not always</value>
+  </data>
 </root>

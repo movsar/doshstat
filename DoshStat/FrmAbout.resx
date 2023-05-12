@@ -229,7 +229,7 @@
     <value>tableLayoutPanel</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>FrmAbout</value>
+    <value>О Программе</value>
   </data>
   <data name="textBoxDescription.Location" type="System.Drawing.Point, System.Drawing">
     <value>14, 96</value>

@@ -121,7 +121,7 @@
     <value>* AUTO = Программа попытается распознать кодировку, но возможны ошибки, например, файлы с кодировкой UTF8 без BOM не будут корректно распознаны.</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>FrmSettings</value>
+    <value>Настройки</value>
   </data>
   <data name="comboBox2.Items4" xml:space="preserve">
     <value>Без стиля</value>

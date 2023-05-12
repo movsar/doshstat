@@ -274,6 +274,9 @@
     <EmbeddedResource Include="FrmTotalDetails.ru.resx">
       <DependentUpon>FrmTotalDetails.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmTotalFrequencies.en.resx">
+      <DependentUpon>FrmTotalFrequencies.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmTotalFrequencies.ru.resx">
       <DependentUpon>FrmTotalFrequencies.cs</DependentUpon>
     </EmbeddedResource>
