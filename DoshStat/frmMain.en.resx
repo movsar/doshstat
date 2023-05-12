@@ -157,7 +157,7 @@
   <data name="fixCodepageToolStripMenuItem.Text" xml:space="preserve">
     <value>Fix Codepage</value>
   </data>
-    <data name="fixCodepageToolStripMenuItem.ToolTipText" xml:space="preserve">
+  <data name="fixCodepageToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Changes all characters that resemble Cyrillic letters, to proper Cyrillic letters, don't use it if you're working with non-Cyrillic texts</value>
   </data>
   <data name="настройкиToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
@@ -176,7 +176,7 @@
     <value>67, 22</value>
   </data>
   <data name="englishToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>67, 22</value>
+    <value>119, 22</value>
   </data>
   <data name="языкToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>12, 20</value>
@@ -191,7 +191,7 @@
     <value>Language</value>
   </data>
   <data name="оПрограммеToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>107, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="оПрограммеToolStripMenuItem.Text" xml:space="preserve">
     <value>About</value>
@@ -266,16 +266,13 @@
   <data name="русскийToolStripMenuItem1.Text" xml:space="preserve">
     <value>Русский</value>
   </data>
-  <data name="englishToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>119, 22</value>
-  </data>
   <data name="englishToolStripMenuItem1.Text" xml:space="preserve">
     <value>English</value>
   </data>
   <data name="языкToolStripMenuItem.Text" xml:space="preserve">
     <value>Language</value>
   </data>
-  <data name="оПрограммеToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+  <data name="Stopping" xml:space="preserve">
+    <value>Stopping</value>
   </data>
 </root>

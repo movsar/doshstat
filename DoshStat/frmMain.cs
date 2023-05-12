@@ -199,6 +199,7 @@ namespace DoshStat
             {
                 if (bgwCounter.IsBusy)
                 {
+                    lblStatus.Text = Utils.GetFormStringResource<FrmMain>("Stopping") + " ...";
                     CancellationRequestPending = true;
                     btnStart.Enabled = false;
                 }

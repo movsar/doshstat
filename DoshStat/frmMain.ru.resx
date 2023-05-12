@@ -312,4 +312,7 @@
   <data name="Cancel" xml:space="preserve">
     <value>Отмена</value>
   </data>
+  <data name="Stopping" xml:space="preserve">
+    <value>Останавливаю</value>
+  </data>
 </root>
