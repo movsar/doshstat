@@ -442,5 +442,6 @@ namespace DoshStat
         {
             DbHelper.Chistka();
         }
+
     }
 }

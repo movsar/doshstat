@@ -94,6 +94,12 @@ namespace DoshStat
 
         private void ShowFrequencies()
         {
+            if (olvHistory.SelectedObjects.Count == 0)
+            {
+                MessageBox.Show("Выберите из списка данные обработки файла(ов)");
+                return;
+            }
+
             this.Enabled = false;
 
             if (olvHistory.SelectedObjects.Count > 1)
@@ -114,10 +120,8 @@ namespace DoshStat
         {
             if (e.Button == MouseButtons.Left)
             {
-                if (olvHistory.SelectedObject != null)
-                {
-                    ShowFrequencies();
-                }
+
+                ShowFrequencies();
             }
         }
     }

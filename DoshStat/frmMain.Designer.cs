@@ -47,6 +47,7 @@
             this.bgwCounter = new System.ComponentModel.BackgroundWorker();
             this.tbpHistory = new System.Windows.Forms.TabPage();
             this.tbpCount = new System.Windows.Forms.TabPage();
+            this.btnCleanUp = new System.Windows.Forms.Button();
             this.chkSubdirectories = new System.Windows.Forms.CheckBox();
             this.olvFiles = new BrightIdeasSoftware.ObjectListView();
             this.olvClmFileName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -62,7 +63,7 @@
             this.btnBrowse = new System.Windows.Forms.Button();
             this.tbcMain = new System.Windows.Forms.TabControl();
             this.tbpSearch = new System.Windows.Forms.TabPage();
-            this.btnCleanUp = new System.Windows.Forms.Button();
+            this.myToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.contextMenuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -227,6 +228,18 @@
             this.tbpCount.Text = "Главная";
             this.tbpCount.UseVisualStyleBackColor = true;
             // 
+            // btnCleanUp
+            // 
+            this.btnCleanUp.Location = new System.Drawing.Point(597, 49);
+            this.btnCleanUp.Name = "btnCleanUp";
+            this.btnCleanUp.Size = new System.Drawing.Size(75, 23);
+            this.btnCleanUp.TabIndex = 19;
+            this.btnCleanUp.Tag = "";
+            this.btnCleanUp.Text = "Чистка";
+            this.myToolTip.SetToolTip(this.btnCleanUp, "Проходит по обработанным текстам и очищает кириллицу от латинских эквивалентов");
+            this.btnCleanUp.UseVisualStyleBackColor = true;
+            this.btnCleanUp.Click += new System.EventHandler(this.btnCleanUp_Click);
+            // 
             // chkSubdirectories
             // 
             this.chkSubdirectories.AutoSize = true;
@@ -264,6 +277,7 @@
             this.olvFiles.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.olvFiles.FullRowSelect = true;
             this.olvFiles.GridLines = true;
+            this.olvFiles.HideSelection = false;
             this.olvFiles.Location = new System.Drawing.Point(0, 86);
             this.olvFiles.Name = "olvFiles";
             this.olvFiles.ShowGroups = false;
@@ -351,6 +365,7 @@
             this.btnStart.Size = new System.Drawing.Size(78, 23);
             this.btnStart.TabIndex = 13;
             this.btnStart.Text = "Начать";
+            this.myToolTip.SetToolTip(this.btnStart, "Начать обработку всех текстовых файлов в списке");
             this.btnStart.UseVisualStyleBackColor = false;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
@@ -372,6 +387,7 @@
             this.btnBrowse.Size = new System.Drawing.Size(78, 22);
             this.btnBrowse.TabIndex = 10;
             this.btnBrowse.Text = "Выбрать";
+            this.myToolTip.SetToolTip(this.btnBrowse, "Выбрать начальную папку в которой нужно искать тексты");
             this.btnBrowse.UseVisualStyleBackColor = false;
             this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
             // 
@@ -398,16 +414,6 @@
             this.tbpSearch.TabIndex = 2;
             this.tbpSearch.Text = "Поиск";
             this.tbpSearch.UseVisualStyleBackColor = true;
-            // 
-            // btnCleanUp
-            // 
-            this.btnCleanUp.Location = new System.Drawing.Point(597, 49);
-            this.btnCleanUp.Name = "btnCleanUp";
-            this.btnCleanUp.Size = new System.Drawing.Size(75, 23);
-            this.btnCleanUp.TabIndex = 19;
-            this.btnCleanUp.Text = "Чистка";
-            this.btnCleanUp.UseVisualStyleBackColor = true;
-            this.btnCleanUp.Click += new System.EventHandler(this.btnCleanUp_Click);
             // 
             // FrmMain
             // 
@@ -472,6 +478,7 @@
         private System.Windows.Forms.CheckBox chkSubdirectories;
         public System.Windows.Forms.ToolStripStatusLabel lblStatus;
         private System.Windows.Forms.Button btnCleanUp;
+        private System.Windows.Forms.ToolTip myToolTip;
     }
 }
 

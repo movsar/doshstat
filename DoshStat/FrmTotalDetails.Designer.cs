@@ -37,9 +37,9 @@
             this.olvClmPercentage = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvClmDateTime = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvDetailedHistory = new BrightIdeasSoftware.ObjectListView();
-            this.btnExport = new System.Windows.Forms.Button();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.удалитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnExport = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.olvDetailedHistory)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -93,7 +93,7 @@
             // olvClmPercentage
             // 
             this.olvClmPercentage.AspectName = "getNeatPercentage";
-            this.olvClmPercentage.AspectToStringFormat = "";
+            this.olvClmPercentage.AspectToStringFormat = "{0:0.000}%";
             this.olvClmPercentage.Groupable = false;
             this.olvClmPercentage.Text = "Относительная частота";
             this.olvClmPercentage.Width = 94;
@@ -132,6 +132,7 @@
             this.olvDetailedHistory.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.olvDetailedHistory.FullRowSelect = true;
             this.olvDetailedHistory.GridLines = true;
+            this.olvDetailedHistory.HideSelection = false;
             this.olvDetailedHistory.Location = new System.Drawing.Point(1, 0);
             this.olvDetailedHistory.Name = "olvDetailedHistory";
             this.olvDetailedHistory.ShowGroups = false;
@@ -145,17 +146,6 @@
             this.olvDetailedHistory.UseFiltering = true;
             this.olvDetailedHistory.View = System.Windows.Forms.View.Details;
             // 
-            // btnExport
-            // 
-            this.btnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExport.Location = new System.Drawing.Point(971, 580);
-            this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(75, 23);
-            this.btnExport.TabIndex = 15;
-            this.btnExport.Text = "Экспорт";
-            this.btnExport.UseVisualStyleBackColor = true;
-            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
-            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -166,9 +156,20 @@
             // удалитьToolStripMenuItem
             // 
             this.удалитьToolStripMenuItem.Name = "удалитьToolStripMenuItem";
-            this.удалитьToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.удалитьToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
             this.удалитьToolStripMenuItem.Text = "Удалить";
             this.удалитьToolStripMenuItem.Click += new System.EventHandler(this.удалитьToolStripMenuItem_Click);
+            // 
+            // btnExport
+            // 
+            this.btnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExport.Location = new System.Drawing.Point(971, 580);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(75, 23);
+            this.btnExport.TabIndex = 15;
+            this.btnExport.Text = "Экспорт";
+            this.btnExport.UseVisualStyleBackColor = true;
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
             // FrmTotalDetails
             // 
