@@ -73,25 +73,30 @@
             this.tbcMain.SuspendLayout();
             this.SuspendLayout();
             // 
+            // fbWorkingDir
+            // 
+            resources.ApplyResources(this.fbWorkingDir, "fbWorkingDir");
+            // 
             // contextMenuStrip1
             // 
+            resources.ApplyResources(this.contextMenuStrip1, "contextMenuStrip1");
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ctxRemoveFromtheList,
             this.экспортироватьСписокToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            resources.ApplyResources(this.contextMenuStrip1, "contextMenuStrip1");
+            this.myToolTip.SetToolTip(this.contextMenuStrip1, resources.GetString("contextMenuStrip1.ToolTip"));
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // ctxRemoveFromtheList
             // 
-            this.ctxRemoveFromtheList.Name = "ctxRemoveFromtheList";
             resources.ApplyResources(this.ctxRemoveFromtheList, "ctxRemoveFromtheList");
+            this.ctxRemoveFromtheList.Name = "ctxRemoveFromtheList";
             this.ctxRemoveFromtheList.Click += new System.EventHandler(this.ctxRemoveFromtheList_Click);
             // 
             // экспортироватьСписокToolStripMenuItem
             // 
-            this.экспортироватьСписокToolStripMenuItem.Name = "экспортироватьСписокToolStripMenuItem";
             resources.ApplyResources(this.экспортироватьСписокToolStripMenuItem, "экспортироватьСписокToolStripMenuItem");
+            this.экспортироватьСписокToolStripMenuItem.Name = "экспортироватьСписокToolStripMenuItem";
             this.экспортироватьСписокToolStripMenuItem.Click += new System.EventHandler(this.экспортироватьСписокToolStripMenuItem_Click);
             // 
             // statusStrip1
@@ -102,13 +107,14 @@
             this.prbStatus,
             this.lblStatus});
             this.statusStrip1.Name = "statusStrip1";
+            this.myToolTip.SetToolTip(this.statusStrip1, resources.GetString("statusStrip1.ToolTip"));
             // 
             // prbStatus
             // 
+            resources.ApplyResources(this.prbStatus, "prbStatus");
             this.prbStatus.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.prbStatus.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.prbStatus.Name = "prbStatus";
-            resources.ApplyResources(this.prbStatus, "prbStatus");
             // 
             // lblStatus
             // 
@@ -119,59 +125,60 @@
             // 
             // menuStrip1
             // 
+            resources.ApplyResources(this.menuStrip1, "menuStrip1");
             this.menuStrip1.BackColor = System.Drawing.Color.Silver;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.файлToolStripMenuItem,
             this.инструментыToolStripMenuItem,
             this.справкаToolStripMenuItem});
-            resources.ApplyResources(this.menuStrip1, "menuStrip1");
             this.menuStrip1.Name = "menuStrip1";
+            this.myToolTip.SetToolTip(this.menuStrip1, resources.GetString("menuStrip1.ToolTip"));
             // 
             // файлToolStripMenuItem
             // 
+            resources.ApplyResources(this.файлToolStripMenuItem, "файлToolStripMenuItem");
             this.файлToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.закрытьToolStripMenuItem});
             this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
-            resources.ApplyResources(this.файлToolStripMenuItem, "файлToolStripMenuItem");
             // 
             // закрытьToolStripMenuItem
             // 
-            this.закрытьToolStripMenuItem.Name = "закрытьToolStripMenuItem";
             resources.ApplyResources(this.закрытьToolStripMenuItem, "закрытьToolStripMenuItem");
+            this.закрытьToolStripMenuItem.Name = "закрытьToolStripMenuItem";
             this.закрытьToolStripMenuItem.Click += new System.EventHandler(this.закрытьToolStripMenuItem_Click);
             // 
             // инструментыToolStripMenuItem
             // 
+            resources.ApplyResources(this.инструментыToolStripMenuItem, "инструментыToolStripMenuItem");
             this.инструментыToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.сброситьБДToolStripMenuItem,
             this.настройкиToolStripMenuItem});
             this.инструментыToolStripMenuItem.Name = "инструментыToolStripMenuItem";
-            resources.ApplyResources(this.инструментыToolStripMenuItem, "инструментыToolStripMenuItem");
             // 
             // сброситьБДToolStripMenuItem
             // 
+            resources.ApplyResources(this.сброситьБДToolStripMenuItem, "сброситьБДToolStripMenuItem");
             this.сброситьБДToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.сброситьБДToolStripMenuItem.Name = "сброситьБДToolStripMenuItem";
-            resources.ApplyResources(this.сброситьБДToolStripMenuItem, "сброситьБДToolStripMenuItem");
             this.сброситьБДToolStripMenuItem.Click += new System.EventHandler(this.сброситьБДToolStripMenuItem_Click);
             // 
             // настройкиToolStripMenuItem
             // 
-            this.настройкиToolStripMenuItem.Name = "настройкиToolStripMenuItem";
             resources.ApplyResources(this.настройкиToolStripMenuItem, "настройкиToolStripMenuItem");
+            this.настройкиToolStripMenuItem.Name = "настройкиToolStripMenuItem";
             this.настройкиToolStripMenuItem.Click += new System.EventHandler(this.настройкиToolStripMenuItem_Click);
             // 
             // справкаToolStripMenuItem
             // 
+            resources.ApplyResources(this.справкаToolStripMenuItem, "справкаToolStripMenuItem");
             this.справкаToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.оПрограммеToolStripMenuItem});
             this.справкаToolStripMenuItem.Name = "справкаToolStripMenuItem";
-            resources.ApplyResources(this.справкаToolStripMenuItem, "справкаToolStripMenuItem");
             // 
             // оПрограммеToolStripMenuItem
             // 
-            this.оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
             resources.ApplyResources(this.оПрограммеToolStripMenuItem, "оПрограммеToolStripMenuItem");
+            this.оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
             this.оПрограммеToolStripMenuItem.Click += new System.EventHandler(this.оПрограммеToolStripMenuItem_Click);
             // 
             // bgwCounter
@@ -185,10 +192,12 @@
             // 
             resources.ApplyResources(this.tbpHistory, "tbpHistory");
             this.tbpHistory.Name = "tbpHistory";
+            this.myToolTip.SetToolTip(this.tbpHistory, resources.GetString("tbpHistory.ToolTip"));
             this.tbpHistory.UseVisualStyleBackColor = true;
             // 
             // tbpCount
             // 
+            resources.ApplyResources(this.tbpCount, "tbpCount");
             this.tbpCount.Controls.Add(this.btnCleanUp);
             this.tbpCount.Controls.Add(this.chkSubdirectories);
             this.tbpCount.Controls.Add(this.olvFiles);
@@ -197,8 +206,8 @@
             this.tbpCount.Controls.Add(this.btnStart);
             this.tbpCount.Controls.Add(this.label1);
             this.tbpCount.Controls.Add(this.btnBrowse);
-            resources.ApplyResources(this.tbpCount, "tbpCount");
             this.tbpCount.Name = "tbpCount";
+            this.myToolTip.SetToolTip(this.tbpCount, resources.GetString("tbpCount.ToolTip"));
             this.tbpCount.UseVisualStyleBackColor = true;
             // 
             // btnCleanUp
@@ -216,18 +225,19 @@
             this.chkSubdirectories.Checked = true;
             this.chkSubdirectories.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkSubdirectories.Name = "chkSubdirectories";
+            this.myToolTip.SetToolTip(this.chkSubdirectories, resources.GetString("chkSubdirectories.ToolTip"));
             this.chkSubdirectories.UseVisualStyleBackColor = true;
             this.chkSubdirectories.CheckedChanged += new System.EventHandler(this.chkSubdirectories_CheckedChanged);
             // 
             // olvFiles
             // 
+            resources.ApplyResources(this.olvFiles, "olvFiles");
             this.olvFiles.AllColumns.Add(this.olvClmFileName);
             this.olvFiles.AllColumns.Add(this.olvClmFiction);
             this.olvFiles.AllColumns.Add(this.olvClmSocPol);
             this.olvFiles.AllColumns.Add(this.olvClmReligious);
             this.olvFiles.AllColumns.Add(this.olvClmPoetry);
             this.olvFiles.AllColumns.Add(this.olvScientific);
-            resources.ApplyResources(this.olvFiles, "olvFiles");
             this.olvFiles.CellEditUseWholeCell = false;
             this.olvFiles.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvClmFileName,
@@ -242,7 +252,9 @@
             this.olvFiles.GridLines = true;
             this.olvFiles.HideSelection = false;
             this.olvFiles.Name = "olvFiles";
+            this.olvFiles.OverlayText.Text = resources.GetString("resource.Text");
             this.olvFiles.ShowGroups = false;
+            this.myToolTip.SetToolTip(this.olvFiles, resources.GetString("olvFiles.ToolTip"));
             this.olvFiles.UseAlternatingBackColors = true;
             this.olvFiles.UseCompatibleStateImageBehavior = false;
             this.olvFiles.View = System.Windows.Forms.View.Details;
@@ -259,50 +271,52 @@
             this.olvClmFiction.AspectName = "isFiction";
             this.olvClmFiction.CheckBoxes = true;
             this.olvClmFiction.Groupable = false;
-            this.olvClmFiction.Sortable = false;
             resources.ApplyResources(this.olvClmFiction, "olvClmFiction");
+            this.olvClmFiction.Sortable = false;
             // 
             // olvClmSocPol
             // 
             this.olvClmSocPol.AspectName = "isSocPol";
             this.olvClmSocPol.CheckBoxes = true;
             this.olvClmSocPol.Groupable = false;
-            this.olvClmSocPol.Sortable = false;
             resources.ApplyResources(this.olvClmSocPol, "olvClmSocPol");
+            this.olvClmSocPol.Sortable = false;
             // 
             // olvClmReligious
             // 
             this.olvClmReligious.AspectName = "isReligious";
             this.olvClmReligious.CheckBoxes = true;
             this.olvClmReligious.Groupable = false;
-            this.olvClmReligious.Sortable = false;
             resources.ApplyResources(this.olvClmReligious, "olvClmReligious");
+            this.olvClmReligious.Sortable = false;
             // 
             // olvClmPoetry
             // 
             this.olvClmPoetry.AspectName = "isPoetry";
             this.olvClmPoetry.CheckBoxes = true;
             this.olvClmPoetry.Groupable = false;
-            this.olvClmPoetry.Sortable = false;
             resources.ApplyResources(this.olvClmPoetry, "olvClmPoetry");
+            this.olvClmPoetry.Sortable = false;
             // 
             // olvScientific
             // 
             this.olvScientific.AspectName = "isScientific";
             this.olvScientific.CheckBoxes = true;
             this.olvScientific.Groupable = false;
-            this.olvScientific.Sortable = false;
             resources.ApplyResources(this.olvScientific, "olvScientific");
+            this.olvScientific.Sortable = false;
             // 
             // txtWorkingDir
             // 
             resources.ApplyResources(this.txtWorkingDir, "txtWorkingDir");
             this.txtWorkingDir.Name = "txtWorkingDir";
+            this.myToolTip.SetToolTip(this.txtWorkingDir, resources.GetString("txtWorkingDir.ToolTip"));
             // 
             // lblInfo
             // 
             resources.ApplyResources(this.lblInfo, "lblInfo");
             this.lblInfo.Name = "lblInfo";
+            this.myToolTip.SetToolTip(this.lblInfo, resources.GetString("lblInfo.ToolTip"));
             // 
             // btnStart
             // 
@@ -317,6 +331,7 @@
             // 
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
+            this.myToolTip.SetToolTip(this.label1, resources.GetString("label1.ToolTip"));
             // 
             // btnBrowse
             // 
@@ -335,12 +350,14 @@
             this.tbcMain.Controls.Add(this.tbpSearch);
             this.tbcMain.Name = "tbcMain";
             this.tbcMain.SelectedIndex = 0;
+            this.myToolTip.SetToolTip(this.tbcMain, resources.GetString("tbcMain.ToolTip"));
             this.tbcMain.SelectedIndexChanged += new System.EventHandler(this.tbcHistory_SelectedIndexChanged);
             // 
             // tbpSearch
             // 
             resources.ApplyResources(this.tbpSearch, "tbpSearch");
             this.tbpSearch.Name = "tbpSearch";
+            this.myToolTip.SetToolTip(this.tbpSearch, resources.GetString("tbpSearch.ToolTip"));
             this.tbpSearch.UseVisualStyleBackColor = true;
             // 
             // FrmMain
@@ -353,6 +370,7 @@
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FrmMain";
+            this.myToolTip.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmMain_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.contextMenuStrip1.ResumeLayout(false);
