@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using DocumentFormat.OpenXml.Spreadsheet;
 using SpreadsheetLight;
 using System.Linq;
+using System.ComponentModel;
 
 namespace DoshStat
 {
@@ -26,27 +27,39 @@ namespace DoshStat
             return history.First(file => (file.fileId == id));
         }
 
+        public static string GetFormStringResource<T>(string title)
+        {
+            var resources = new ComponentResourceManager(typeof(T));
+            return (resources.GetString(title));
+        }
 
         public static void ExcelExport(ObjectListView olv, string defaultName)
         {
             SLDocument sl = new SLDocument();
             SLStyle style = sl.CreateStyle();
 
-            for (int i = 1; i <= olv.Columns.Count; ++i) {
+            for (int i = 1; i <= olv.Columns.Count; ++i)
+            {
                 sl.SetCellValue(1, i, olv.Columns[i - 1].Text);
             }
 
-            for (int i = 1; i <= olv.Columns.Count; ++i) {
-                for (int j = 1; j <= olv.Items.Count; ++j) {
+            for (int i = 1; i <= olv.Columns.Count; ++i)
+            {
+                for (int j = 1; j <= olv.Items.Count; ++j)
+                {
                     string cellVal = olv.Items[j - 1].SubItems[i - 1].Text;
                     int cellValNumeric = -1;
-                    if (int.TryParse(cellVal, out cellValNumeric)) {
+                    if (int.TryParse(cellVal, out cellValNumeric))
+                    {
                         sl.SetCellValue(j + 1, i, cellValNumeric);
-                    } else {
+                    }
+                    else
+                    {
                         sl.SetCellValue(j + 1, i, cellVal);
                     }
 
-                    if (StgGetInt("ExStyle") == 0) {
+                    if (StgGetInt("ExStyle") == 0)
+                    {
                         System.Drawing.Color backColor = olv.Items[j - 1].BackColor;
                         System.Drawing.Color foreColor = olv.Items[j - 1].ForeColor;
                         style.Fill.SetPattern(PatternValues.Solid, backColor, foreColor);
@@ -59,7 +72,8 @@ namespace DoshStat
             }
 
             SLTable tbl = sl.CreateTable(1, 1, olv.Items.Count + 1, olv.Columns.Count);
-            switch (StgGetInt("ExStyle")) {
+            switch (StgGetInt("ExStyle"))
+            {
                 case 1:
                     // Синий
                     tbl.SetTableStyle(SLTableStyleTypeValues.Medium2);
@@ -81,14 +95,16 @@ namespace DoshStat
             tbl.Sort(1, false);
             sl.InsertTable(tbl);
 
-            SaveFileDialog saveFileDialog1 = new SaveFileDialog() {
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog()
+            {
                 Filter = "XLS Format|*.xlsx",
                 FileName = defaultName + " " + GetCurrentDate() + ".xlsx",
                 Title = "Экспорт ... "
             };
 
             DialogResult dResult = saveFileDialog1.ShowDialog();
-            if (dResult == DialogResult.OK) {
+            if (dResult == DialogResult.OK)
+            {
                 sl.SaveAs(saveFileDialog1.FileName);
                 Process.Start(saveFileDialog1.FileName);
             }
@@ -149,8 +165,10 @@ namespace DoshStat
 
         public static int GetColumnIndex(ListView lv, string colTitle)
         {
-            foreach (ColumnHeader col in lv.Columns) {
-                if (col.Text.ToLower().Equals(colTitle.ToLower())) {
+            foreach (ColumnHeader col in lv.Columns)
+            {
+                if (col.Text.ToLower().Equals(colTitle.ToLower()))
+                {
                     return col.Index;
                 }
             }
@@ -159,8 +177,10 @@ namespace DoshStat
         public static ListViewItem GetLVIByValue(ListView lv, string colTitle, string value)
         {
             int colIndex = GetColumnIndex(lv, colTitle);
-            foreach (ListViewItem li in lv.Columns[colIndex].ListView.Items) {
-                if (li.Text.ToLower().Equals(value.ToLower())) {
+            foreach (ListViewItem li in lv.Columns[colIndex].ListView.Items)
+            {
+                if (li.Text.ToLower().Equals(value.ToLower()))
+                {
                     return li;
                 }
             }
@@ -168,8 +188,10 @@ namespace DoshStat
         }
         public static ListViewItem GetLVIByValue(ListView lv, int colIndex, string value)
         {
-            foreach (ListViewItem li in lv.Columns[colIndex].ListView.Items) {
-                if (li.Text.ToLower().Equals(value.ToLower())) {
+            foreach (ListViewItem li in lv.Columns[colIndex].ListView.Items)
+            {
+                if (li.Text.ToLower().Equals(value.ToLower()))
+                {
                     return li;
                 }
             }
@@ -180,7 +202,8 @@ namespace DoshStat
 
         public static void ErrLog(Exception ex)
         {
-            using (StreamWriter sw = new StreamWriter("DoshStat.log", true)) {
+            using (StreamWriter sw = new StreamWriter("DoshStat.log", true))
+            {
                 sw.WriteLine(GetCurrentDateTime() + " : " + ex.Message);
                 sw.WriteLine(ex.StackTrace.ToString());
                 sw.WriteLine();
@@ -188,7 +211,8 @@ namespace DoshStat
         }
         public static void ErrLog(String caption, String msg)
         {
-            using (StreamWriter sw = new StreamWriter("DoshStat.log", true)) {
+            using (StreamWriter sw = new StreamWriter("DoshStat.log", true))
+            {
                 sw.WriteLine(GetCurrentDateTime() + " : " + caption);
                 sw.WriteLine(msg);
                 sw.WriteLine();

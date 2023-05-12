@@ -12,6 +12,9 @@ using System.Diagnostics;
 using BrightIdeasSoftware;
 using System.Collections;
 using System.Reflection;
+using System.Globalization;
+using System.Threading;
+using DoshStat.Properties;
 
 namespace DoshStat
 {
@@ -93,15 +96,13 @@ namespace DoshStat
                 }
 
                 olvFiles.SetObjects(Utils.fList);
-                lblStatus.Text = "Готов";
+                lblStatus.Text = Utils.GetFormStringResource<FrmMain>("lblStatus.Text");
             }
             catch (UnauthorizedAccessException unaex)
             {
                 Utils.ErrLog(unaex);
 
-                var resources = new ComponentResourceManager(typeof(FrmMain));
-                Utils.msgCriticalError(resources.GetString("NeedAdminPrivilegesError"));
-                // "Недостаточно прав для обработки данной директори, запустите программу с правами администратора, или выберите другую папку");
+                Utils.msgCriticalError(Utils.GetFormStringResource<FrmMain>("NeedAdminPrivilegesError"));
             }
 
         }
@@ -120,6 +121,9 @@ namespace DoshStat
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //CultureInfo englishCulture = new CultureInfo("ru");
+            //Thread.CurrentThread.CurrentUICulture = englishCulture;
+
             this.Text = "DoshStat ver." + AssemblyVersion;
             myCtrlHistory = new CtrlHistory();
             myCtrlHistory.Dock = DockStyle.Fill;

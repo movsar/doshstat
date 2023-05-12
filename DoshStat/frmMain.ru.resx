@@ -254,4 +254,7 @@
   <data name="экспортироватьСписокToolStripMenuItem.Text" xml:space="preserve">
     <value>Экспортировать список</value>
   </data>
+  <data name="NeedAdminPrivilegesError" xml:space="preserve">
+    <value>Недостаточно прав для обработки данной директори, запустите программу с правами администратора, или выберите другую папку</value>
+  </data>
 </root>
