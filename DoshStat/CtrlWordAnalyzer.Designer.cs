@@ -27,6 +27,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CtrlWordAnalyzer));
             this.olvSearchResults = new BrightIdeasSoftware.ObjectListView();
             this.olvClmWord = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvClmFrequency = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -52,9 +53,7 @@
             this.olvSearchResults.AllColumns.Add(this.olvClmFileName);
             this.olvSearchResults.AllColumns.Add(this.olvClmCategory);
             this.olvSearchResults.AllColumns.Add(this.olvClmDateTime);
-            this.olvSearchResults.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.olvSearchResults, "olvSearchResults");
             this.olvSearchResults.CellEditUseWholeCell = false;
             this.olvSearchResults.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvClmWord,
@@ -66,15 +65,12 @@
             this.olvClmCategory,
             this.olvClmDateTime});
             this.olvSearchResults.Cursor = System.Windows.Forms.Cursors.Default;
-            this.olvSearchResults.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.olvSearchResults.FullRowSelect = true;
             this.olvSearchResults.GridLines = true;
-            this.olvSearchResults.Location = new System.Drawing.Point(0, 30);
+            this.olvSearchResults.HideSelection = false;
             this.olvSearchResults.MultiSelect = false;
             this.olvSearchResults.Name = "olvSearchResults";
             this.olvSearchResults.ShowGroups = false;
-            this.olvSearchResults.Size = new System.Drawing.Size(1028, 518);
-            this.olvSearchResults.TabIndex = 15;
             this.olvSearchResults.TintSortColumn = true;
             this.olvSearchResults.UseAlternatingBackColors = true;
             this.olvSearchResults.UseCompatibleStateImageBehavior = false;
@@ -86,96 +82,79 @@
             // olvClmWord
             // 
             this.olvClmWord.AspectName = "word";
-            this.olvClmWord.Text = "Слово";
-            this.olvClmWord.Width = 88;
+            resources.ApplyResources(this.olvClmWord, "olvClmWord");
             // 
             // olvClmFrequency
             // 
             this.olvClmFrequency.AspectName = "frequency";
-            this.olvClmFrequency.Text = "Частота";
-            this.olvClmFrequency.Width = 89;
+            resources.ApplyResources(this.olvClmFrequency, "olvClmFrequency");
             // 
             // olvClmPercentage
             // 
             this.olvClmPercentage.AspectName = "getNeatPercentage";
             this.olvClmPercentage.AspectToStringFormat = "";
-            this.olvClmPercentage.Text = "Плотность";
-            this.olvClmPercentage.Width = 94;
+            resources.ApplyResources(this.olvClmPercentage, "olvClmPercentage");
             // 
             // olvClmUniqueWords
             // 
             this.olvClmUniqueWords.AspectName = "uniqueWordsCount";
             this.olvClmUniqueWords.Groupable = false;
-            this.olvClmUniqueWords.Text = "Уникальных слов";
-            this.olvClmUniqueWords.Width = 129;
+            resources.ApplyResources(this.olvClmUniqueWords, "olvClmUniqueWords");
             // 
             // olvClmWordsCount
             // 
             this.olvClmWordsCount.AspectName = "wordsCount";
             this.olvClmWordsCount.Groupable = false;
-            this.olvClmWordsCount.Text = "Всего слов";
-            this.olvClmWordsCount.Width = 100;
+            resources.ApplyResources(this.olvClmWordsCount, "olvClmWordsCount");
             // 
             // olvClmFileName
             // 
             this.olvClmFileName.AspectName = "fileName";
             this.olvClmFileName.Groupable = false;
-            this.olvClmFileName.Text = "Файл";
-            this.olvClmFileName.Width = 120;
+            resources.ApplyResources(this.olvClmFileName, "olvClmFileName");
             // 
             // olvClmCategory
             // 
             this.olvClmCategory.AspectName = "getCategoryName";
             this.olvClmCategory.Groupable = false;
-            this.olvClmCategory.Text = "Категория";
-            this.olvClmCategory.Width = 110;
+            resources.ApplyResources(this.olvClmCategory, "olvClmCategory");
             // 
             // olvClmDateTime
             // 
             this.olvClmDateTime.AspectName = "created_at";
-            this.olvClmDateTime.Text = "Дата и время";
-            this.olvClmDateTime.Width = 138;
+            resources.ApplyResources(this.olvClmDateTime, "olvClmDateTime");
             // 
             // txtWord
             // 
-            this.txtWord.Location = new System.Drawing.Point(0, 4);
+            resources.ApplyResources(this.txtWord, "txtWord");
             this.txtWord.Name = "txtWord";
-            this.txtWord.Size = new System.Drawing.Size(139, 20);
-            this.txtWord.TabIndex = 18;
             this.txtWord.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtWord_KeyUp);
             // 
             // btnSearch
             // 
             this.btnSearch.Cursor = System.Windows.Forms.Cursors.Default;
-            this.btnSearch.Location = new System.Drawing.Point(145, 2);
+            resources.ApplyResources(this.btnSearch, "btnSearch");
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(75, 23);
-            this.btnSearch.TabIndex = 22;
-            this.btnSearch.Text = "Искать";
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // btnExport
             // 
             this.btnExport.Cursor = System.Windows.Forms.Cursors.Default;
-            this.btnExport.Location = new System.Drawing.Point(226, 2);
+            resources.ApplyResources(this.btnExport, "btnExport");
             this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(75, 23);
-            this.btnExport.TabIndex = 23;
-            this.btnExport.Text = "Экспорт";
             this.btnExport.UseVisualStyleBackColor = true;
             this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
             // CtrlWordAnalyzer
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.btnExport);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.txtWord);
             this.Controls.Add(this.olvSearchResults);
             this.Name = "CtrlWordAnalyzer";
-            this.Size = new System.Drawing.Size(1031, 551);
             ((System.ComponentModel.ISupportInitialize)(this.olvSearchResults)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

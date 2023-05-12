@@ -117,4 +117,217 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="olvClmWord.Text" xml:space="preserve">
+    <value>Слово</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="olvClmWord.Width" type="System.Int32, mscorlib">
+    <value>88</value>
+  </data>
+  <data name="olvClmFrequency.Text" xml:space="preserve">
+    <value>Частота</value>
+  </data>
+  <data name="olvClmFrequency.Width" type="System.Int32, mscorlib">
+    <value>89</value>
+  </data>
+  <data name="olvClmPercentage.Text" xml:space="preserve">
+    <value>Плотность</value>
+  </data>
+  <data name="olvClmPercentage.Width" type="System.Int32, mscorlib">
+    <value>94</value>
+  </data>
+  <data name="olvClmUniqueWords.Text" xml:space="preserve">
+    <value>Уникальных слов</value>
+  </data>
+  <data name="olvClmUniqueWords.Width" type="System.Int32, mscorlib">
+    <value>129</value>
+  </data>
+  <data name="olvClmWordsCount.Text" xml:space="preserve">
+    <value>Всего слов</value>
+  </data>
+  <data name="olvClmWordsCount.Width" type="System.Int32, mscorlib">
+    <value>100</value>
+  </data>
+  <data name="olvClmFileName.Text" xml:space="preserve">
+    <value>Файл</value>
+  </data>
+  <data name="olvClmFileName.Width" type="System.Int32, mscorlib">
+    <value>120</value>
+  </data>
+  <data name="olvClmCategory.Text" xml:space="preserve">
+    <value>Категория</value>
+  </data>
+  <data name="olvClmCategory.Width" type="System.Int32, mscorlib">
+    <value>110</value>
+  </data>
+  <data name="olvClmDateTime.Text" xml:space="preserve">
+    <value>Дата и время</value>
+  </data>
+  <data name="olvClmDateTime.Width" type="System.Int32, mscorlib">
+    <value>138</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="olvSearchResults.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="olvSearchResults.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt</value>
+  </data>
+  <data name="olvSearchResults.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 30</value>
+  </data>
+  <data name="olvSearchResults.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1028, 518</value>
+  </data>
+  <data name="olvSearchResults.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="&gt;&gt;olvSearchResults.Name" xml:space="preserve">
+    <value>olvSearchResults</value>
+  </data>
+  <data name="&gt;&gt;olvSearchResults.Type" xml:space="preserve">
+    <value>BrightIdeasSoftware.ObjectListView, ObjectListView, Version=2.9.1.1072, Culture=neutral, PublicKeyToken=b1c5bf581481bcd4</value>
+  </data>
+  <data name="&gt;&gt;olvSearchResults.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;olvSearchResults.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="txtWord.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 4</value>
+  </data>
+  <data name="txtWord.Size" type="System.Drawing.Size, System.Drawing">
+    <value>139, 20</value>
+  </data>
+  <data name="txtWord.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="&gt;&gt;txtWord.Name" xml:space="preserve">
+    <value>txtWord</value>
+  </data>
+  <data name="&gt;&gt;txtWord.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtWord.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtWord.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="btnSearch.Location" type="System.Drawing.Point, System.Drawing">
+    <value>145, 2</value>
+  </data>
+  <data name="btnSearch.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="btnSearch.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
+  </data>
+  <data name="btnSearch.Text" xml:space="preserve">
+    <value>Искать</value>
+  </data>
+  <data name="&gt;&gt;btnSearch.Name" xml:space="preserve">
+    <value>btnSearch</value>
+  </data>
+  <data name="&gt;&gt;btnSearch.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnSearch.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnSearch.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="btnExport.Location" type="System.Drawing.Point, System.Drawing">
+    <value>226, 2</value>
+  </data>
+  <data name="btnExport.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="btnExport.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
+  </data>
+  <data name="btnExport.Text" xml:space="preserve">
+    <value>Экспорт</value>
+  </data>
+  <data name="&gt;&gt;btnExport.Name" xml:space="preserve">
+    <value>btnExport</value>
+  </data>
+  <data name="&gt;&gt;btnExport.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnExport.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnExport.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>en</value>
+  </metadata>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1031, 551</value>
+  </data>
+  <data name="&gt;&gt;olvClmWord.Name" xml:space="preserve">
+    <value>olvClmWord</value>
+  </data>
+  <data name="&gt;&gt;olvClmWord.Type" xml:space="preserve">
+    <value>BrightIdeasSoftware.OLVColumn, ObjectListView, Version=2.9.1.1072, Culture=neutral, PublicKeyToken=b1c5bf581481bcd4</value>
+  </data>
+  <data name="&gt;&gt;olvClmFrequency.Name" xml:space="preserve">
+    <value>olvClmFrequency</value>
+  </data>
+  <data name="&gt;&gt;olvClmFrequency.Type" xml:space="preserve">
+    <value>BrightIdeasSoftware.OLVColumn, ObjectListView, Version=2.9.1.1072, Culture=neutral, PublicKeyToken=b1c5bf581481bcd4</value>
+  </data>
+  <data name="&gt;&gt;olvClmPercentage.Name" xml:space="preserve">
+    <value>olvClmPercentage</value>
+  </data>
+  <data name="&gt;&gt;olvClmPercentage.Type" xml:space="preserve">
+    <value>BrightIdeasSoftware.OLVColumn, ObjectListView, Version=2.9.1.1072, Culture=neutral, PublicKeyToken=b1c5bf581481bcd4</value>
+  </data>
+  <data name="&gt;&gt;olvClmUniqueWords.Name" xml:space="preserve">
+    <value>olvClmUniqueWords</value>
+  </data>
+  <data name="&gt;&gt;olvClmUniqueWords.Type" xml:space="preserve">
+    <value>BrightIdeasSoftware.OLVColumn, ObjectListView, Version=2.9.1.1072, Culture=neutral, PublicKeyToken=b1c5bf581481bcd4</value>
+  </data>
+  <data name="&gt;&gt;olvClmWordsCount.Name" xml:space="preserve">
+    <value>olvClmWordsCount</value>
+  </data>
+  <data name="&gt;&gt;olvClmWordsCount.Type" xml:space="preserve">
+    <value>BrightIdeasSoftware.OLVColumn, ObjectListView, Version=2.9.1.1072, Culture=neutral, PublicKeyToken=b1c5bf581481bcd4</value>
+  </data>
+  <data name="&gt;&gt;olvClmFileName.Name" xml:space="preserve">
+    <value>olvClmFileName</value>
+  </data>
+  <data name="&gt;&gt;olvClmFileName.Type" xml:space="preserve">
+    <value>BrightIdeasSoftware.OLVColumn, ObjectListView, Version=2.9.1.1072, Culture=neutral, PublicKeyToken=b1c5bf581481bcd4</value>
+  </data>
+  <data name="&gt;&gt;olvClmCategory.Name" xml:space="preserve">
+    <value>olvClmCategory</value>
+  </data>
+  <data name="&gt;&gt;olvClmCategory.Type" xml:space="preserve">
+    <value>BrightIdeasSoftware.OLVColumn, ObjectListView, Version=2.9.1.1072, Culture=neutral, PublicKeyToken=b1c5bf581481bcd4</value>
+  </data>
+  <data name="&gt;&gt;olvClmDateTime.Name" xml:space="preserve">
+    <value>olvClmDateTime</value>
+  </data>
+  <data name="&gt;&gt;olvClmDateTime.Type" xml:space="preserve">
+    <value>BrightIdeasSoftware.OLVColumn, ObjectListView, Version=2.9.1.1072, Culture=neutral, PublicKeyToken=b1c5bf581481bcd4</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>CtrlWordAnalyzer</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

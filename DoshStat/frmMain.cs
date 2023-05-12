@@ -98,7 +98,10 @@ namespace DoshStat
             catch (UnauthorizedAccessException unaex)
             {
                 Utils.ErrLog(unaex);
-                Utils.msgCriticalError("Недостаточно прав для обработки данной директори, запустите программу с правами администратора, или выберите другую папку");
+
+                var resources = new ComponentResourceManager(typeof(FrmMain));
+                Utils.msgCriticalError(resources.GetString("NeedAdminPrivilegesError"));
+                // "Недостаточно прав для обработки данной директори, запустите программу с правами администратора, или выберите другую папку");
             }
 
         }
