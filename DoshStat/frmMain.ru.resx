@@ -315,4 +315,10 @@
   <data name="Stopping" xml:space="preserve">
     <value>Останавливаю</value>
   </data>
+  <data name="englishToolStripMenuItem.Text" xml:space="preserve">
+    <value>Английский</value>
+  </data>
+  <data name="русскийToolStripMenuItem.Text" xml:space="preserve">
+    <value>Русский</value>
+  </data>
 </root>

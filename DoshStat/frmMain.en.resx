@@ -275,4 +275,40 @@
   <data name="Stopping" xml:space="preserve">
     <value>Stopping</value>
   </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>DoshStat</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="CancelledByUser" xml:space="preserve">
+    <value>Cancelled by user</value>
+  </data>
+  <data name="DbIsCleaned" xml:space="preserve">
+    <value>Database has been successfully emptied!</value>
+  </data>
+  <data name="FilesToBeProcessed" xml:space="preserve">
+    <value>List of files to be processed</value>
+  </data>
+  <data name="LoadingFiles" xml:space="preserve">
+    <value>Loading files</value>
+  </data>
+  <data name="NeedAdminPrivilegesError" xml:space="preserve">
+    <value>Insufficient access privileges. Try running the app under administrator's account</value>
+  </data>
+  <data name="Processing" xml:space="preserve">
+    <value>Processing</value>
+  </data>
+  <data name="Reading" xml:space="preserve">
+    <value>Reading</value>
+  </data>
+  <data name="Sec" xml:space="preserve">
+    <value>sec.</value>
+  </data>
+  <data name="Stop" xml:space="preserve">
+    <value>Stop</value>
+  </data>
+  <data name="ThisWillFullyCleanDbAreYouSure" xml:space="preserve">
+    <value>This will completely destroy and clean all the data from the database, are you sure?</value>
+  </data>
 </root>
