@@ -1,6 +1,6 @@
 ﻿namespace DoshStat
 {
-    partial class FrmTotalFrequencies
+    partial class FrmMultipleFilesFrequencies
     {
         /// <summary>
         /// Required designer variable.
@@ -65,7 +65,7 @@
             this.olvTotalFrequencies.GridLines = true;
             this.olvTotalFrequencies.HideSelection = false;
             this.olvTotalFrequencies.Location = new System.Drawing.Point(-7, 75);
-            this.olvTotalFrequencies.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.olvTotalFrequencies.Margin = new System.Windows.Forms.Padding(4);
             this.olvTotalFrequencies.Name = "olvTotalFrequencies";
             this.olvTotalFrequencies.ShowGroups = false;
             this.olvTotalFrequencies.Size = new System.Drawing.Size(624, 552);
@@ -102,7 +102,7 @@
             // olvClmPercentage
             // 
             this.olvClmPercentage.AspectName = "percentage";
-            this.olvClmPercentage.AspectToStringFormat = "{0:0.0}%";
+            this.olvClmPercentage.AspectToStringFormat = "{0:0.00}%";
             this.olvClmPercentage.Text = "Относительная частота";
             this.olvClmPercentage.Width = 102;
             // 
@@ -158,7 +158,7 @@
             // 
             this.btnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExport.Location = new System.Drawing.Point(483, 635);
-            this.btnExport.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnExport.Margin = new System.Windows.Forms.Padding(4);
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(131, 31);
             this.btnExport.TabIndex = 29;
@@ -195,7 +195,7 @@
             this.lblSelectedFrequency.Size = new System.Drawing.Size(0, 16);
             this.lblSelectedFrequency.TabIndex = 32;
             // 
-            // FrmTotalFrequencies
+            // FrmMultipleFilesFrequencies
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -210,8 +210,8 @@
             this.Controls.Add(this.lblUniqueWords);
             this.Controls.Add(this.lblWordCount);
             this.Controls.Add(this.olvTotalFrequencies);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.Name = "FrmTotalFrequencies";
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Name = "FrmMultipleFilesFrequencies";
             this.Text = "Сводная частотность";
             this.Load += new System.EventHandler(this.TotalFrequencies_Load);
             ((System.ComponentModel.ISupportInitialize)(this.olvTotalFrequencies)).EndInit();

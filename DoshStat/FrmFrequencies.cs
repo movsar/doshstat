@@ -10,11 +10,11 @@ using System.Windows.Forms;
 
 namespace DoshStat
 {
-    public partial class FrmFrequencies : Form
+    public partial class FrmSingleFileFrequencies : Form
     {
         private xTextFile _xFile;
 
-        public FrmFrequencies(xTextFile xFile)
+        public FrmSingleFileFrequencies(xTextFile xFile)
         {
             InitializeComponent();
 
@@ -26,7 +26,7 @@ namespace DoshStat
             lblWordCount.Text += xFile.wordsCount.ToString();
             olvFrequencies.SetObjects(xFile.frequencies);
         }
-        public FrmFrequencies(xTextFile xFile, string word)
+        public FrmSingleFileFrequencies(xTextFile xFile, string word)
         {
             InitializeComponent();
 
@@ -75,5 +75,6 @@ namespace DoshStat
             lblSelectedWordsPercentage.Text = lblWordsPercentagePrefix + sumPercentage.ToString("F") + "%";
             lblSelectedFrequency.Text = lblWordsFrequenciesPrefix + sumFrequencies.ToString();
         }
+
     }
 }

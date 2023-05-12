@@ -64,8 +64,7 @@
             this.olvHistory.GridLines = true;
             this.olvHistory.HideSelection = false;
             this.olvHistory.Location = new System.Drawing.Point(0, 0);
-            this.olvHistory.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.olvHistory.MultiSelect = false;
+            this.olvHistory.Margin = new System.Windows.Forms.Padding(4);
             this.olvHistory.Name = "olvHistory";
             this.olvHistory.ShowGroups = false;
             this.olvHistory.Size = new System.Drawing.Size(991, 511);
@@ -116,7 +115,7 @@
             // 
             this.btnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExport.Location = new System.Drawing.Point(557, 519);
-            this.btnExport.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnExport.Margin = new System.Windows.Forms.Padding(4);
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(91, 28);
             this.btnExport.TabIndex = 14;
@@ -128,7 +127,7 @@
             // 
             this.btnFullReport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnFullReport.Location = new System.Drawing.Point(820, 519);
-            this.btnFullReport.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnFullReport.Margin = new System.Windows.Forms.Padding(4);
             this.btnFullReport.Name = "btnFullReport";
             this.btnFullReport.Size = new System.Drawing.Size(171, 28);
             this.btnFullReport.TabIndex = 15;
@@ -140,7 +139,7 @@
             // 
             this.btnTotalFrequencies.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnTotalFrequencies.Location = new System.Drawing.Point(652, 519);
-            this.btnTotalFrequencies.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnTotalFrequencies.Margin = new System.Windows.Forms.Padding(4);
             this.btnTotalFrequencies.Name = "btnTotalFrequencies";
             this.btnTotalFrequencies.Size = new System.Drawing.Size(164, 28);
             this.btnTotalFrequencies.TabIndex = 16;
@@ -154,7 +153,7 @@
             this.dtpTo.CustomFormat = "dd.MM.yyyy HH:mm";
             this.dtpTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpTo.Location = new System.Drawing.Point(230, 521);
-            this.dtpTo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpTo.Margin = new System.Windows.Forms.Padding(4);
             this.dtpTo.Name = "dtpTo";
             this.dtpTo.Size = new System.Drawing.Size(170, 22);
             this.dtpTo.TabIndex = 51;
@@ -166,11 +165,10 @@
             this.dtpFrom.CustomFormat = "dd.MM.yyyy HH:mm";
             this.dtpFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpFrom.Location = new System.Drawing.Point(19, 521);
-            this.dtpFrom.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpFrom.Margin = new System.Windows.Forms.Padding(4);
             this.dtpFrom.Name = "dtpFrom";
             this.dtpFrom.Size = new System.Drawing.Size(170, 22);
             this.dtpFrom.TabIndex = 50;
-            this.dtpFrom.CloseUp += new System.EventHandler(this.dtpFrom_CloseUp);
             this.dtpFrom.ValueChanged += new System.EventHandler(this.dtpFrom_ValueChanged);
             // 
             // label1
@@ -205,7 +203,7 @@
             this.Controls.Add(this.olvHistory);
             this.Controls.Add(this.btnExport);
             this.Controls.Add(this.btnFullReport);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "CtrlHistory";
             this.Size = new System.Drawing.Size(991, 550);
             this.Load += new System.EventHandler(this.CtrlHistory_Load);

@@ -2,6 +2,9 @@
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 using System.Diagnostics;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace DoshStat
 {
@@ -35,12 +38,12 @@ namespace DoshStat
             DateTime dt = DateTime.Now;
             TimeSpan ts = new TimeSpan(6, 23, 59, 59);
             dtpFrom.Value = dt.Subtract(ts);
-            dtpTo.Value = dt.AddMinutes(1);
+            dtpTo.Value = dt.AddDays(1);
         }
 
         public void loadHistory()
         {
-            Utils.history = DbHelper.GetHistory(dtpFrom.Value.ToString("yyyy-MM-dd HH:mm:ss"), dtpTo.Value.ToString("yyyy-MM-dd HH:mm:ss"));
+            Utils.history = DbHelper.GetHistory(dtpFrom.Value.ToString("yyyy-MM-dd HH:mm"), dtpTo.Value.ToString("yyyy-MM-dd HH:mm"));
             if (Utils.history != null)
             {
                 Debug.WriteLine(Utils.history.Count);
@@ -76,11 +79,7 @@ namespace DoshStat
 
         private void btnTotalFrequencies_Click(object sender, EventArgs e)
         {
-            if (Utils.history == null) return;
-            this.Enabled = false;
-            FrmTotalFrequencies frmTotalFrequencies = new FrmTotalFrequencies();
-            frmTotalFrequencies.Show();
-            this.Enabled = true;
+            ShowFrequencies();
         }
 
         private void dtpFrom_ValueChanged(object sender, EventArgs e)
@@ -93,21 +92,33 @@ namespace DoshStat
             if (isReady) loadHistory();
         }
 
+        private void ShowFrequencies()
+        {
+            this.Enabled = false;
+
+            if (olvHistory.SelectedObjects.Count > 1)
+            {
+                FrmMultipleFilesFrequencies frmTotalFrequencies = new FrmMultipleFilesFrequencies(olvHistory.SelectedObjects.Cast<xTextFile>());
+                frmTotalFrequencies.Show();
+            }
+            else
+            {
+                FrmSingleFileFrequencies frmFreq = new FrmSingleFileFrequencies((xTextFile)(olvHistory.SelectedObject));
+                frmFreq.Show();
+            }
+
+            this.Enabled = true;
+        }
+
         private void olvHistory_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
                 if (olvHistory.SelectedObject != null)
                 {
-                    FrmFrequencies frmFreq = new FrmFrequencies((xTextFile)(olvHistory.SelectedObject));
-                    frmFreq.Show();
+                    ShowFrequencies();
                 }
             }
-        }
-
-        private void dtpFrom_CloseUp(object sender, EventArgs e)
-        {
-
         }
     }
 }

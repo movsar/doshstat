@@ -58,7 +58,7 @@ namespace DoshStat
         {
             if (e.Button == MouseButtons.Left) {
                 if (olvSearchResults.SelectedObject != null) {
-                    FrmFrequencies frmFreq = new FrmFrequencies(Utils.GetTextFile(((xDetails)olvSearchResults.SelectedObject).fileId), ((xDetails)olvSearchResults.SelectedObject).word);
+                    FrmSingleFileFrequencies frmFreq = new FrmSingleFileFrequencies(Utils.GetTextFile(((xDetails)olvSearchResults.SelectedObject).fileId), ((xDetails)olvSearchResults.SelectedObject).word);
                     frmFreq.Show();
                 }
             }

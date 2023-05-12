@@ -10,24 +10,87 @@ using System.Windows.Forms;
 
 namespace DoshStat
 {
-    public partial class FrmTotalFrequencies : Form
+    public partial class FrmMultipleFilesFrequencies : Form
     {
-        public FrmTotalFrequencies()
+        private readonly IEnumerable<xTextFile> _selectedFiles;
+
+        public FrmMultipleFilesFrequencies(IEnumerable<xTextFile> enumerable)
         {
             InitializeComponent();
+
+            _selectedFiles = enumerable;
         }
 
+        private List<xWordFrequencies> GetFrequencies()
+        {
+            var combinedWordInfos = _selectedFiles.SelectMany(xtf => xtf.frequencies);
+
+            // List for the all unique frequencies
+            var uniqueWordInfos = new List<xWordFrequencies>();
+            float totalFrequency = 0;
+            foreach (var xwf in combinedWordInfos)
+            {
+                // If our list already has such word, don't add new element but change it
+                var existing = uniqueWordInfos.FirstOrDefault(x => x.word.Equals(xwf.word));
+                if (existing != null)
+                {
+                    // Combine frequency
+                    existing.frequency += xwf.frequency;
+                }
+                else
+                {
+                    uniqueWordInfos.Add(xwf);
+                }
+
+                totalFrequency += xwf.frequency;
+            }
+
+            // Recalculate ranks and percentage
+            int rank = 0;
+            int prevFrequency = int.MaxValue;
+            int topFrequency = 0;
+
+            foreach (var xwf in uniqueWordInfos.OrderByDescending(xwf => xwf.frequency))
+            {
+
+                if (rank != 1)
+                {
+                    // It's not the first iteration
+                    if (xwf.frequency != prevFrequency)
+                    {
+                        rank++;
+                        topFrequency = xwf.frequency;
+                    }
+                }
+                else
+                {
+                    rank++;
+                    topFrequency = xwf.frequency;
+                }
+
+                xwf.rank = rank;
+                xwf.percentage = xwf.frequency / totalFrequency * 100;
+                prevFrequency = xwf.frequency;
+            }
+
+            return uniqueWordInfos;
+        }
         private void TotalFrequencies_Load(object sender, EventArgs e)
         {
-            List<xWordFrequencies> totalFrequencies = DbHelper.GetCombinedFrequencies();
+            var totalFrequencies = GetFrequencies();
+            var totalWordsCount = _selectedFiles.Sum(file => file.wordsCount);
+            var totalUniqueWordsCount = _selectedFiles.Sum(file => file.uniqueWordsCount);
+            var totalCharactersCount = _selectedFiles.SelectMany(file => file.frequencies)
+                                                     .Sum(xwf => xwf.word.Length);
+
             olvTotalFrequencies.SetObjects(totalFrequencies);
-            lblCharactersCount.Text += DbHelper.CHARACTERS_COUNT.ToString();
+            lblCharactersCount.Text += totalCharactersCount.ToString();
             lblUniqueWords.Text += totalFrequencies.Count.ToString();
-            lblFilesCount.Text += DbHelper.FILES_COUNT.ToString();
-            lblWordCount.Text += DbHelper.WORDS_COUNT.ToString();
+            lblFilesCount.Text += _selectedFiles.Count().ToString();
+            lblWordCount.Text += totalWordsCount.ToString();
 
             olvTotalFrequencies.PrimarySortColumn = olvTotalFrequencies.GetColumn(0);
-            olvTotalFrequencies.PrimarySortOrder = SortOrder.Descending;
+            olvTotalFrequencies.PrimarySortOrder = SortOrder.Ascending;
             olvTotalFrequencies.Sort();
         }
 
@@ -40,7 +103,8 @@ namespace DoshStat
             lblSelectedWordsCount.Text = lblWordsCountPrefix + olvTotalFrequencies.SelectedObjects.Count.ToString();
             float sumPercentage = 0;
             int sumFrequencies = 0;
-            foreach (var obj in olvTotalFrequencies.SelectedObjects) {
+            foreach (var obj in olvTotalFrequencies.SelectedObjects)
+            {
                 xWordFrequencies xwf = (xWordFrequencies)obj;
                 sumPercentage += xwf.percentage;
                 sumFrequencies += xwf.frequency;

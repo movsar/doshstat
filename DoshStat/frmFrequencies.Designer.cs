@@ -1,6 +1,6 @@
 ﻿namespace DoshStat
 {
-    partial class FrmFrequencies
+    partial class FrmSingleFileFrequencies
     {
         /// <summary>
         /// Required designer variable.
@@ -28,6 +28,7 @@
         private void InitializeComponent()
         {
             this.olvFrequencies = new BrightIdeasSoftware.ObjectListView();
+            this.olvClmRank = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvClmWord = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvClmFrequency = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvClmPercentage = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -39,7 +40,6 @@
             this.lblSelectedWordsCount = new System.Windows.Forms.Label();
             this.lblSelectedWordsPercentage = new System.Windows.Forms.Label();
             this.lblSelectedFrequency = new System.Windows.Forms.Label();
-            this.olvClmRank = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             ((System.ComponentModel.ISupportInitialize)(this.olvFrequencies)).BeginInit();
             this.SuspendLayout();
             // 
@@ -62,10 +62,12 @@
             this.olvFrequencies.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.olvFrequencies.FullRowSelect = true;
             this.olvFrequencies.GridLines = true;
-            this.olvFrequencies.Location = new System.Drawing.Point(-5, 58);
+            this.olvFrequencies.HideSelection = false;
+            this.olvFrequencies.Location = new System.Drawing.Point(-7, 71);
+            this.olvFrequencies.Margin = new System.Windows.Forms.Padding(4);
             this.olvFrequencies.Name = "olvFrequencies";
             this.olvFrequencies.ShowGroups = false;
-            this.olvFrequencies.Size = new System.Drawing.Size(471, 455);
+            this.olvFrequencies.Size = new System.Drawing.Size(627, 559);
             this.olvFrequencies.TabIndex = 12;
             this.olvFrequencies.UseAlternatingBackColors = true;
             this.olvFrequencies.UseCompatibleStateImageBehavior = false;
@@ -73,6 +75,12 @@
             this.olvFrequencies.UseFiltering = true;
             this.olvFrequencies.View = System.Windows.Forms.View.Details;
             this.olvFrequencies.SelectionChanged += new System.EventHandler(this.olvFrequencies_SelectionChanged);
+            // 
+            // olvClmRank
+            // 
+            this.olvClmRank.AspectName = "rank";
+            this.olvClmRank.Text = "Ранг";
+            this.olvClmRank.Width = 50;
             // 
             // olvClmWord
             // 
@@ -98,45 +106,50 @@
             // lblCategory
             // 
             this.lblCategory.AutoSize = true;
-            this.lblCategory.Location = new System.Drawing.Point(3, 3);
+            this.lblCategory.Location = new System.Drawing.Point(4, 4);
+            this.lblCategory.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCategory.Name = "lblCategory";
-            this.lblCategory.Size = new System.Drawing.Size(66, 13);
+            this.lblCategory.Size = new System.Drawing.Size(81, 16);
             this.lblCategory.TabIndex = 14;
             this.lblCategory.Text = "Категория: ";
             // 
             // lblWordCount
             // 
             this.lblWordCount.AutoSize = true;
-            this.lblWordCount.Location = new System.Drawing.Point(3, 16);
+            this.lblWordCount.Location = new System.Drawing.Point(4, 20);
+            this.lblWordCount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblWordCount.Name = "lblWordCount";
-            this.lblWordCount.Size = new System.Drawing.Size(70, 13);
+            this.lblWordCount.Size = new System.Drawing.Size(85, 16);
             this.lblWordCount.TabIndex = 16;
             this.lblWordCount.Text = "Всего слов: ";
             // 
             // lblUniqueWords
             // 
             this.lblUniqueWords.AutoSize = true;
-            this.lblUniqueWords.Location = new System.Drawing.Point(190, 16);
+            this.lblUniqueWords.Location = new System.Drawing.Point(253, 20);
+            this.lblUniqueWords.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblUniqueWords.Name = "lblUniqueWords";
-            this.lblUniqueWords.Size = new System.Drawing.Size(103, 13);
+            this.lblUniqueWords.Size = new System.Drawing.Size(125, 16);
             this.lblUniqueWords.TabIndex = 17;
             this.lblUniqueWords.Text = "Уникальных слов: ";
             // 
             // lblCharactersCount
             // 
             this.lblCharactersCount.AutoSize = true;
-            this.lblCharactersCount.Location = new System.Drawing.Point(190, 3);
+            this.lblCharactersCount.Location = new System.Drawing.Point(253, 4);
+            this.lblCharactersCount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCharactersCount.Name = "lblCharactersCount";
-            this.lblCharactersCount.Size = new System.Drawing.Size(96, 13);
+            this.lblCharactersCount.Size = new System.Drawing.Size(118, 16);
             this.lblCharactersCount.TabIndex = 18;
             this.lblCharactersCount.Text = "Всего символов: ";
             // 
             // btnExport
             // 
             this.btnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExport.Location = new System.Drawing.Point(365, 516);
+            this.btnExport.Location = new System.Drawing.Point(487, 635);
+            this.btnExport.Margin = new System.Windows.Forms.Padding(4);
             this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(98, 25);
+            this.btnExport.Size = new System.Drawing.Size(131, 31);
             this.btnExport.TabIndex = 19;
             this.btnExport.Text = "Экспорт";
             this.btnExport.UseVisualStyleBackColor = true;
@@ -145,38 +158,35 @@
             // lblSelectedWordsCount
             // 
             this.lblSelectedWordsCount.AutoSize = true;
-            this.lblSelectedWordsCount.Location = new System.Drawing.Point(3, 29);
+            this.lblSelectedWordsCount.Location = new System.Drawing.Point(4, 36);
+            this.lblSelectedWordsCount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSelectedWordsCount.Name = "lblSelectedWordsCount";
-            this.lblSelectedWordsCount.Size = new System.Drawing.Size(0, 13);
+            this.lblSelectedWordsCount.Size = new System.Drawing.Size(0, 16);
             this.lblSelectedWordsCount.TabIndex = 21;
             // 
             // lblSelectedWordsPercentage
             // 
             this.lblSelectedWordsPercentage.AutoSize = true;
-            this.lblSelectedWordsPercentage.Location = new System.Drawing.Point(190, 29);
+            this.lblSelectedWordsPercentage.Location = new System.Drawing.Point(253, 36);
+            this.lblSelectedWordsPercentage.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSelectedWordsPercentage.Name = "lblSelectedWordsPercentage";
-            this.lblSelectedWordsPercentage.Size = new System.Drawing.Size(0, 13);
+            this.lblSelectedWordsPercentage.Size = new System.Drawing.Size(0, 16);
             this.lblSelectedWordsPercentage.TabIndex = 22;
             // 
             // lblSelectedFrequency
             // 
             this.lblSelectedFrequency.AutoSize = true;
-            this.lblSelectedFrequency.Location = new System.Drawing.Point(3, 42);
+            this.lblSelectedFrequency.Location = new System.Drawing.Point(4, 52);
+            this.lblSelectedFrequency.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSelectedFrequency.Name = "lblSelectedFrequency";
-            this.lblSelectedFrequency.Size = new System.Drawing.Size(0, 13);
+            this.lblSelectedFrequency.Size = new System.Drawing.Size(0, 16);
             this.lblSelectedFrequency.TabIndex = 23;
             // 
-            // olvClmRank
+            // FrmSingleFileFrequencies
             // 
-            this.olvClmRank.AspectName = "rank";
-            this.olvClmRank.Text = "Ранг";
-            this.olvClmRank.Width = 50;
-            // 
-            // FrmFrequencies
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(463, 542);
+            this.ClientSize = new System.Drawing.Size(617, 667);
             this.Controls.Add(this.lblSelectedFrequency);
             this.Controls.Add(this.lblSelectedWordsPercentage);
             this.Controls.Add(this.lblSelectedWordsCount);
@@ -186,7 +196,8 @@
             this.Controls.Add(this.lblWordCount);
             this.Controls.Add(this.lblCategory);
             this.Controls.Add(this.olvFrequencies);
-            this.Name = "FrmFrequencies";
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Name = "FrmSingleFileFrequencies";
             this.Text = "Частотность по файлу";
             this.Load += new System.EventHandler(this.frmFrequencies_Load);
             ((System.ComponentModel.ISupportInitialize)(this.olvFrequencies)).EndInit();
