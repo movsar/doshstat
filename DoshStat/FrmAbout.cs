@@ -18,7 +18,7 @@ namespace DoshStat
             this.labelProductName.Text = AssemblyProduct;
             this.labelVersion.Text = String.Format("Version {0}", AssemblyVersion);
 
-            this.labelContact.Text += " movsar.dev@gmail.com";
+            this.labelContact.Text += " movsar.dev@gmail.com | https://github.com/movsar/doshstat";
         }
 
         #region Assembly Attribute Accessors
@@ -100,5 +100,25 @@ namespace DoshStat
             }
         }
         #endregion
+
+        private void labelVersion_Click(object sender, EventArgs e)
+        {
+            GoToWebSite();
+        }
+
+        private void labelContact_Click(object sender, EventArgs e)
+        {
+            GoToWebSite();
+        }
+
+        private void labelProductName_Click(object sender, EventArgs e)
+        {
+            GoToWebSite();
+        }
+
+        private void GoToWebSite()
+        {
+            System.Diagnostics.Process.Start("https://github.com/movsar/doshstat");
+        }
     }
 }
