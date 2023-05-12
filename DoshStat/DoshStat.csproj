@@ -232,6 +232,9 @@
     <EmbeddedResource Include="FrmAbout.resx">
       <DependentUpon>FrmAbout.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmFrequencies.ru.resx">
+      <DependentUpon>FrmFrequencies.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmMain.en.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </EmbeddedResource>
@@ -249,6 +252,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmSettings.resx">
       <DependentUpon>FrmSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmTotalDetails.ru.resx">
+      <DependentUpon>FrmTotalDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmTotalFrequencies.ru.resx">
+      <DependentUpon>FrmTotalFrequencies.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
