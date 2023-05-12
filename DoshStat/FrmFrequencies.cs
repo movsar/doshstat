@@ -33,7 +33,7 @@ namespace DoshStat
             _xFile = xFile;
             lblCategory.Text += xFile.getCategoryName();
             lblCharactersCount.Text += xFile.charactersCount.ToString();
-            Text += " | "+xFile.fileName;
+            Text += " | " + xFile.fileName;
             lblUniqueWords.Text += xFile.uniqueWordsCount.ToString();
             lblWordCount.Text += xFile.wordsCount.ToString();
             olvFrequencies.SetObjects(xFile.frequencies);
@@ -67,13 +67,14 @@ namespace DoshStat
             lblSelectedWordsCount.Text = lblWordsCountPrefix + olvFrequencies.SelectedObjects.Count.ToString();
             float sumPercentage = 0;
             int sumFrequencies = 0;
-            foreach (var obj in olvFrequencies.SelectedObjects) {
+            foreach (var obj in olvFrequencies.SelectedObjects)
+            {
                 xWordFrequencies xwf = (xWordFrequencies)obj;
                 sumPercentage += xwf.percentage;
                 sumFrequencies += xwf.frequency;
             }
-            lblSelectedWordsPercentage.Text = lblWordsPercentagePrefix + sumPercentage.ToString("F") + "%";
-            lblSelectedFrequency.Text = lblWordsFrequenciesPrefix + sumFrequencies.ToString();
+            lblSelectedWordsPercentage.Text = lblWordsPercentagePrefix + ": " + sumPercentage.ToString("F") + "%";
+            lblSelectedFrequency.Text = lblWordsFrequenciesPrefix + ": " + sumFrequencies.ToString();
         }
 
     }

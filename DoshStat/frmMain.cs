@@ -196,16 +196,11 @@ namespace DoshStat
             else
             {
                 if (bgwCounter.IsBusy) bgwCounter.CancelAsync();
-                lblStatus.Text = "Отмена"; Update();
+
+                lblStatus.Text = Utils.GetFormStringResource<FrmMain>("Cancel");
+                Update();
                 onFinishCounting();
             }
-        }
-
-        private string spacer(int count)
-        {
-            string spaces = "";
-            for (int i = 0; i < count; i++) spaces += " ";
-            return spaces;
         }
 
         private void removeSelectedFromOlvFiles()
@@ -218,35 +213,6 @@ namespace DoshStat
             olvFiles.SetObjects(Utils.fList);
         }
 
-        private void ctxRemoveFromtheList_Click(object sender, EventArgs e)
-        {
-            removeSelectedFromOlvFiles();
-        }
-
-
-        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
-        {
-            ctxRemoveFromtheList.Enabled = (olvFiles.SelectedObjects.Count != 0);
-        }
-
-        private void olvFiles_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Delete && olvFiles.SelectedObjects.Count > 0)
-            {
-                removeSelectedFromOlvFiles();
-            }
-        }
-
-        private void закрытьToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
-        private void оПрограммеToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FrmAbout frmAbout = new FrmAbout();
-            frmAbout.ShowDialog();
-        }
 
         private void bgwCounter_DoWork(object sender, DoWorkEventArgs e)
         {
@@ -389,7 +355,6 @@ namespace DoshStat
             // Пройденное время
             watch.Stop();
 
-
             btnStart.BackColor = Color.LightGreen;
             txtWorkingDir.Enabled = true;
             btnBrowse.Enabled = true;
@@ -466,5 +431,34 @@ namespace DoshStat
             Utils.StgSet("CurrentCulture", "ru");
             Application.Restart();
         }
+
+        private void ctxRemoveFromtheList_Click(object sender, EventArgs e)
+        {
+            removeSelectedFromOlvFiles();
+        }
+
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+            ctxRemoveFromtheList.Enabled = (olvFiles.SelectedObjects.Count != 0);
+        }
+
+        private void olvFiles_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete && olvFiles.SelectedObjects.Count > 0)
+            {
+                removeSelectedFromOlvFiles();
+            }
+        }
+        private void закрытьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void оПрограммеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmAbout frmAbout = new FrmAbout();
+            frmAbout.ShowDialog();
+        }
+
     }
 }
