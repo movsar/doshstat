@@ -321,4 +321,7 @@
   <data name="русскийToolStripMenuItem.Text" xml:space="preserve">
     <value>Русский</value>
   </data>
+  <data name="TheseFilesFailed" xml:space="preserve">
+    <value>Эти файлы не удалось обработать</value>
+  </data>
 </root>

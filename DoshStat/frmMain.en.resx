@@ -311,4 +311,7 @@
   <data name="ThisWillFullyCleanDbAreYouSure" xml:space="preserve">
     <value>This will completely destroy and clean all the data from the database, are you sure?</value>
   </data>
+  <data name="TheseFilesFailed" xml:space="preserve">
+    <value>Couldn't process these files</value>
+  </data>
 </root>

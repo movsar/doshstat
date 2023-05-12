@@ -219,9 +219,11 @@ namespace DoshStat
             olvFiles.SetObjects(Utils.fList);
         }
 
+        static List<string> _failedFileNames = new List<string>();
 
         private void bgwCounter_DoWork(object sender, DoWorkEventArgs e)
         {
+            _failedFileNames.Clear();
 
             foreach (xTextFile xFile in Utils.fList)
             {
@@ -232,71 +234,80 @@ namespace DoshStat
                 }
                 bgwCounter.ReportProgress(-2, xFile);
 
-                string contents = xFile.Processor.GetAllText(xFile.filePath);
-
-
-                xFile.charactersCount = contents.Length;
-
-                xFile.frequencies = new List<xWordFrequencies>();
-                var words = new Dictionary<string, int>(StringComparer.CurrentCultureIgnoreCase);
-                string stRegExp = Utils.StgGetString("TxtRegExp");
-                var wordPattern = new Regex(stRegExp.Replace(@"\\", @"\").Trim());
-                xFile.wordsCount = wordPattern.Matches(contents).Count;
-                if (xFile.wordsCount == 0) continue;
-                // Check if exists
-                if (DbHelper.ifExists(xFile.charactersCount, xFile.wordsCount)) continue;
-
-                int progress = 0;
-                foreach (Match match in wordPattern.Matches(contents))
+                try
                 {
-                    if (bgwCounter.CancellationPending)
+                    string contents = xFile.Processor.GetAllText(xFile.filePath);
+
+
+                    xFile.charactersCount = contents.Length;
+
+                    xFile.frequencies = new List<xWordFrequencies>();
+                    var words = new Dictionary<string, int>(StringComparer.CurrentCultureIgnoreCase);
+                    string stRegExp = Utils.StgGetString("TxtRegExp");
+                    var wordPattern = new Regex(stRegExp.Replace(@"\\", @"\").Trim());
+                    xFile.wordsCount = wordPattern.Matches(contents).Count;
+                    if (xFile.wordsCount == 0) continue;
+                    // Check if exists
+                    if (DbHelper.ifExists(xFile.charactersCount, xFile.wordsCount)) continue;
+
+                    int progress = 0;
+                    foreach (Match match in wordPattern.Matches(contents))
                     {
-                        bgwCounter.ReportProgress(-1, xFile);
-                        return;
+                        if (bgwCounter.CancellationPending)
+                        {
+                            bgwCounter.ReportProgress(-1, xFile);
+                            return;
+                        }
+                        progress++;
+                        int currentCount = 0;
+                        words.TryGetValue(match.Value, out currentCount);
+                        bgwCounter.ReportProgress(progress, xFile);
+                        currentCount++;
+                        words[match.Value] = currentCount;
                     }
-                    progress++;
-                    int currentCount = 0;
-                    words.TryGetValue(match.Value, out currentCount);
-                    bgwCounter.ReportProgress(progress, xFile);
-                    currentCount++;
-                    words[match.Value] = currentCount;
-                }
 
-                // Add words to object's list of words with frequencies
-                int rank = 0;
-                int prevFrequency = int.MaxValue;
+                    // Add words to object's list of words with frequencies
+                    int rank = 0;
+                    int prevFrequency = int.MaxValue;
 
-                foreach (var row in words.OrderByDescending(pair => pair.Value))
-                {
-                    xWordFrequencies xwf = new xWordFrequencies();
-                    xwf.word = row.Key.ToLower();
-                    xwf.word = xwf.word.Substring(0, 1).ToUpper() + xwf.word.Substring(1);
-                    xwf.frequency = row.Value;
-
-                    if (rank != 1)
+                    foreach (var row in words.OrderByDescending(pair => pair.Value))
                     {
-                        // It's not the first iteration
-                        if (xwf.frequency != prevFrequency)
+                        xWordFrequencies xwf = new xWordFrequencies();
+                        xwf.word = row.Key.ToLower();
+                        xwf.word = xwf.word.Substring(0, 1).ToUpper() + xwf.word.Substring(1);
+                        xwf.frequency = row.Value;
+
+                        if (rank != 1)
+                        {
+                            // It's not the first iteration
+                            if (xwf.frequency != prevFrequency)
+                            {
+                                rank++;
+                            }
+                        }
+                        else
                         {
                             rank++;
                         }
+
+                        xwf.rank = rank;
+                        prevFrequency = xwf.frequency;
+
+                        float freq = xwf.frequency;
+
+                        // Why it doesn't work with xwf.frequency?
+                        xwf.percentage = (freq / xFile.wordsCount) * 100;
+                        xFile.frequencies.Add(xwf);
                     }
-                    else
-                    {
-                        rank++;
-                    }
-
-                    xwf.rank = rank;
-                    prevFrequency = xwf.frequency;
-
-                    float freq = xwf.frequency;
-
-                    // Why it doesn't work with xwf.frequency?
-                    xwf.percentage = (freq / xFile.wordsCount) * 100;
-                    xFile.frequencies.Add(xwf);
+                    xFile.uniqueWordsCount = xFile.frequencies.Count();
+                    xFile.SaveFileInfo();
                 }
-                xFile.uniqueWordsCount = xFile.frequencies.Count();
-                xFile.SaveFileInfo();
+                catch (Exception ex)
+                {
+                    _failedFileNames.Add(xFile.filePath);
+                    Utils.ErrLog(ex);
+                }
+
             }
 
             bgwCounter.ReportProgress(-3, null);
@@ -387,6 +398,12 @@ namespace DoshStat
             {
                 FrmTotalDetails frmTotalDetails = new FrmTotalDetails();
                 frmTotalDetails.Show();
+            }
+
+            if (_failedFileNames.Count > 0)
+            {
+                var str = Utils.GetFormStringResource<FrmMain>("TheseFilesFailed");
+                Utils.msgExclamation($"{str}:\r\n " + string.Join("\r\n", _failedFileNames));
             }
         }
 
