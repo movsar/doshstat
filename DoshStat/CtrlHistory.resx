@@ -117,221 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="olvColumn1.Text" xml:space="preserve">
-    <value>Файл</value>
+  <data name="&gt;&gt;olvClmDateTime.Type" xml:space="preserve">
+    <value>BrightIdeasSoftware.OLVColumn, ObjectListView, Version=2.9.1.1072, Culture=neutral, PublicKeyToken=b1c5bf581481bcd4</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="olvColumn1.Width" type="System.Int32, mscorlib">
-    <value>220</value>
-  </data>
-  <data name="olvClmCategory.Text" xml:space="preserve">
-    <value>Категория</value>
-  </data>
-  <data name="olvClmCategory.Width" type="System.Int32, mscorlib">
-    <value>89</value>
-  </data>
-  <data name="olvClmWordsCount.Text" xml:space="preserve">
-    <value>Всего слов</value>
-  </data>
-  <data name="olvClmWordsCount.Width" type="System.Int32, mscorlib">
-    <value>89</value>
-  </data>
-  <data name="olvClmUniqueWords.Text" xml:space="preserve">
-    <value>Уникальных слов</value>
-  </data>
-  <data name="olvClmUniqueWords.Width" type="System.Int32, mscorlib">
-    <value>129</value>
-  </data>
-  <data name="olvClmDateTime.Text" xml:space="preserve">
-    <value>Дата и время</value>
-  </data>
-  <data name="olvClmDateTime.Width" type="System.Int32, mscorlib">
-    <value>138</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="olvHistory.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="olvHistory.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 9.75pt</value>
-  </data>
-  <data name="olvHistory.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="olvHistory.Size" type="System.Drawing.Size, System.Drawing">
-    <value>743, 416</value>
-  </data>
-  <data name="olvHistory.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="&gt;&gt;olvHistory.Name" xml:space="preserve">
-    <value>olvHistory</value>
-  </data>
-  <data name="&gt;&gt;olvHistory.Type" xml:space="preserve">
-    <value>BrightIdeasSoftware.ObjectListView, ObjectListView, Version=2.9.1.1072, Culture=neutral, PublicKeyToken=b1c5bf581481bcd4</value>
-  </data>
-  <data name="&gt;&gt;olvHistory.Parent" xml:space="preserve">
+  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
     <value>$this</value>
-  </data>
-  <data name="&gt;&gt;olvHistory.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="btnExport.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
-  </data>
-  <data name="btnExport.Location" type="System.Drawing.Point, System.Drawing">
-    <value>418, 422</value>
-  </data>
-  <data name="btnExport.Size" type="System.Drawing.Size, System.Drawing">
-    <value>68, 23</value>
-  </data>
-  <data name="btnExport.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
-  <data name="btnExport.Text" xml:space="preserve">
-    <value>Экспорт</value>
-  </data>
-  <data name="&gt;&gt;btnExport.Name" xml:space="preserve">
-    <value>btnExport</value>
-  </data>
-  <data name="&gt;&gt;btnExport.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnExport.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;btnExport.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="btnFullReport.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
-  </data>
-  <data name="btnFullReport.Location" type="System.Drawing.Point, System.Drawing">
-    <value>615, 422</value>
-  </data>
-  <data name="btnFullReport.Size" type="System.Drawing.Size, System.Drawing">
-    <value>128, 23</value>
-  </data>
-  <data name="btnFullReport.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
-  </data>
-  <data name="btnFullReport.Text" xml:space="preserve">
-    <value>Общий Отчёт</value>
-  </data>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <data name="btnFullReport.ToolTip" xml:space="preserve">
-    <value>Создает отчет по всем данным из базы данных без складывания статистики. Может долго грузиться.</value>
-  </data>
-  <data name="&gt;&gt;btnFullReport.Name" xml:space="preserve">
-    <value>btnFullReport</value>
-  </data>
-  <data name="&gt;&gt;btnFullReport.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;btnFullReport.Parent" xml:space="preserve">
     <value>$this</value>
-  </data>
-  <data name="&gt;&gt;btnFullReport.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="btnTotalFrequencies.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
-  </data>
-  <data name="btnTotalFrequencies.Location" type="System.Drawing.Point, System.Drawing">
-    <value>489, 422</value>
-  </data>
-  <data name="btnTotalFrequencies.Size" type="System.Drawing.Size, System.Drawing">
-    <value>123, 23</value>
-  </data>
-  <data name="btnTotalFrequencies.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
-  <data name="btnTotalFrequencies.Text" xml:space="preserve">
-    <value>Частотность</value>
-  </data>
-  <data name="btnTotalFrequencies.ToolTip" xml:space="preserve">
-    <value>Отображает статистику по выделенным данным файлов. При множественном выделении статистика складывается</value>
-  </data>
-  <data name="&gt;&gt;btnTotalFrequencies.Name" xml:space="preserve">
-    <value>btnTotalFrequencies</value>
-  </data>
-  <data name="&gt;&gt;btnTotalFrequencies.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnTotalFrequencies.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;btnTotalFrequencies.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="dtpTo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
-  </data>
-  <data name="dtpTo.CustomFormat" xml:space="preserve">
-    <value>dd.MM.yyyy HH:mm</value>
-  </data>
-  <data name="dtpTo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>172, 423</value>
-  </data>
-  <data name="dtpTo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>128, 20</value>
-  </data>
-  <data name="dtpTo.TabIndex" type="System.Int32, mscorlib">
-    <value>51</value>
-  </data>
-  <data name="&gt;&gt;dtpTo.Name" xml:space="preserve">
-    <value>dtpTo</value>
-  </data>
-  <data name="&gt;&gt;dtpTo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dtpTo.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;dtpTo.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="dtpFrom.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
-  </data>
-  <data name="dtpFrom.CustomFormat" xml:space="preserve">
-    <value>dd.MM.yyyy HH:mm</value>
-  </data>
-  <data name="dtpFrom.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 423</value>
-  </data>
-  <data name="dtpFrom.Size" type="System.Drawing.Size, System.Drawing">
-    <value>128, 20</value>
-  </data>
-  <data name="dtpFrom.TabIndex" type="System.Int32, mscorlib">
-    <value>50</value>
-  </data>
-  <data name="&gt;&gt;dtpFrom.Name" xml:space="preserve">
-    <value>dtpFrom</value>
-  </data>
-  <data name="&gt;&gt;dtpFrom.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dtpFrom.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;dtpFrom.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>-3, 427</value>
-  </data>
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>17, 13</value>
-  </data>
-  <data name="label1.TabIndex" type="System.Int32, mscorlib">
-    <value>52</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>С:</value>
@@ -339,95 +135,314 @@
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
   </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;btnFullReport.ZOrder" xml:space="preserve">
+    <value>7</value>
   </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;dtpFrom.Name" xml:space="preserve">
+    <value>dtpFrom</value>
+  </data>
+  <data name="btnExport.Text" xml:space="preserve">
+    <value>Экспорт</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="btnFullReport.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="&gt;&gt;btnTotalFrequencies.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="olvClmUniqueWords.Text" xml:space="preserve">
+    <value>Уникальных слов</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="olvClmUniqueWords.Width" type="System.Int32, mscorlib">
+    <value>129</value>
+  </data>
+  <data name="&gt;&gt;olvClmCategory.Type" xml:space="preserve">
+    <value>BrightIdeasSoftware.OLVColumn, ObjectListView, Version=2.9.1.1072, Culture=neutral, PublicKeyToken=b1c5bf581481bcd4</value>
+  </data>
+  <data name="&gt;&gt;dtpFrom.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="label2.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="label2.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;dtpTo.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
-  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>148, 424</value>
+  <data name="olvHistory.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
   </data>
-  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>24, 13</value>
+  <data name="olvHistory.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="label2.TabIndex" type="System.Int32, mscorlib">
-    <value>53</value>
-  </data>
-  <data name="label2.Text" xml:space="preserve">
-    <value>По:</value>
+  <data name="btnTotalFrequencies.ToolTip" xml:space="preserve">
+    <value>Отображает статистику по выделенным данным файлов. При множественном выделении статистика складывается</value>
   </data>
   <data name="&gt;&gt;label2.Name" xml:space="preserve">
     <value>label2</value>
   </data>
-  <data name="&gt;&gt;label2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;dtpFrom.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
-  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;dtpTo.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>en</value>
-  </metadata>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+  <data name="olvClmCategory.Text" xml:space="preserve">
+    <value>Категория</value>
   </data>
-  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>743, 447</value>
+  <data name="btnFullReport.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
   </data>
-  <data name="&gt;&gt;olvColumn1.Name" xml:space="preserve">
-    <value>olvColumn1</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="dtpTo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>128, 20</value>
   </data>
-  <data name="&gt;&gt;olvColumn1.Type" xml:space="preserve">
-    <value>BrightIdeasSoftware.OLVColumn, ObjectListView, Version=2.9.1.1072, Culture=neutral, PublicKeyToken=b1c5bf581481bcd4</value>
+  <data name="btnExport.Location" type="System.Drawing.Point, System.Drawing">
+    <value>418, 422</value>
   </data>
-  <data name="&gt;&gt;olvClmCategory.Name" xml:space="preserve">
-    <value>olvClmCategory</value>
+  <data name="olvClmDateTime.Width" type="System.Int32, mscorlib">
+    <value>138</value>
   </data>
-  <data name="&gt;&gt;olvClmCategory.Type" xml:space="preserve">
-    <value>BrightIdeasSoftware.OLVColumn, ObjectListView, Version=2.9.1.1072, Culture=neutral, PublicKeyToken=b1c5bf581481bcd4</value>
+  <data name="&gt;&gt;btnFullReport.Name" xml:space="preserve">
+    <value>btnFullReport</value>
   </data>
-  <data name="&gt;&gt;olvClmWordsCount.Name" xml:space="preserve">
-    <value>olvClmWordsCount</value>
+  <data name="olvHistory.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
   </data>
-  <data name="&gt;&gt;olvClmWordsCount.Type" xml:space="preserve">
-    <value>BrightIdeasSoftware.OLVColumn, ObjectListView, Version=2.9.1.1072, Culture=neutral, PublicKeyToken=b1c5bf581481bcd4</value>
+  <data name="&gt;&gt;dtpFrom.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;olvClmUniqueWords.Name" xml:space="preserve">
-    <value>olvClmUniqueWords</value>
+  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 13</value>
   </data>
-  <data name="&gt;&gt;olvClmUniqueWords.Type" xml:space="preserve">
-    <value>BrightIdeasSoftware.OLVColumn, ObjectListView, Version=2.9.1.1072, Culture=neutral, PublicKeyToken=b1c5bf581481bcd4</value>
+  <data name="label2.Text" xml:space="preserve">
+    <value>По:</value>
   </data>
-  <data name="&gt;&gt;olvClmDateTime.Name" xml:space="preserve">
-    <value>olvClmDateTime</value>
+  <data name="dtpTo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>172, 423</value>
   </data>
-  <data name="&gt;&gt;olvClmDateTime.Type" xml:space="preserve">
-    <value>BrightIdeasSoftware.OLVColumn, ObjectListView, Version=2.9.1.1072, Culture=neutral, PublicKeyToken=b1c5bf581481bcd4</value>
+  <data name="dtpFrom.TabIndex" type="System.Int32, mscorlib">
+    <value>50</value>
   </data>
-  <data name="&gt;&gt;toolTip1.Name" xml:space="preserve">
-    <value>toolTip1</value>
+  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>148, 424</value>
   </data>
   <data name="&gt;&gt;toolTip1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>CtrlHistory</value>
+  <data name="label2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="olvClmWordsCount.Width" type="System.Int32, mscorlib">
+    <value>89</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;olvHistory.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;olvClmWordsCount.Name" xml:space="preserve">
+    <value>olvClmWordsCount</value>
+  </data>
+  <data name="dtpTo.CustomFormat" xml:space="preserve">
+    <value>dd.MM.yyyy HH:mm</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>CtrlHistory</value>
+  </data>
+  <data name="olvClmCategory.Width" type="System.Int32, mscorlib">
+    <value>89</value>
+  </data>
+  <data name="olvHistory.Size" type="System.Drawing.Size, System.Drawing">
+    <value>743, 416</value>
+  </data>
+  <data name="olvClmDateTime.Text" xml:space="preserve">
+    <value>Дата и время</value>
+  </data>
+  <data name="olvHistory.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt</value>
+  </data>
+  <data name="btnFullReport.Text" xml:space="preserve">
+    <value>Общий Отчёт</value>
+  </data>
+  <data name="&gt;&gt;olvClmWordsCount.Type" xml:space="preserve">
+    <value>BrightIdeasSoftware.OLVColumn, ObjectListView, Version=2.9.1.1072, Culture=neutral, PublicKeyToken=b1c5bf581481bcd4</value>
+  </data>
+  <data name="&gt;&gt;btnExport.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="btnTotalFrequencies.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="&gt;&gt;btnTotalFrequencies.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="dtpFrom.Size" type="System.Drawing.Size, System.Drawing">
+    <value>128, 20</value>
+  </data>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>743, 447</value>
+  </data>
+  <data name="btnFullReport.Size" type="System.Drawing.Size, System.Drawing">
+    <value>128, 23</value>
+  </data>
+  <data name="dtpTo.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;olvColumn1.Type" xml:space="preserve">
+    <value>BrightIdeasSoftware.OLVColumn, ObjectListView, Version=2.9.1.1072, Culture=neutral, PublicKeyToken=b1c5bf581481bcd4</value>
+  </data>
+  <data name="olvClmWordsCount.Text" xml:space="preserve">
+    <value>Всего слов</value>
+  </data>
+  <data name="btnExport.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;olvClmDateTime.Name" xml:space="preserve">
+    <value>olvClmDateTime</value>
+  </data>
+  <data name="btnTotalFrequencies.Text" xml:space="preserve">
+    <value>Частотность</value>
+  </data>
+  <data name="btnFullReport.Location" type="System.Drawing.Point, System.Drawing">
+    <value>615, 422</value>
+  </data>
+  <data name="&gt;&gt;btnExport.Name" xml:space="preserve">
+    <value>btnExport</value>
+  </data>
+  <data name="$this.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="btnExport.Size" type="System.Drawing.Size, System.Drawing">
+    <value>68, 23</value>
+  </data>
+  <data name="dtpFrom.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="btnFullReport.ToolTip" xml:space="preserve">
+    <value>Создает отчет по всем данным из базы данных без складывания статистики. Может долго грузиться.</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="dtpFrom.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 423</value>
+  </data>
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="dtpFrom.CustomFormat" xml:space="preserve">
+    <value>dd.MM.yyyy HH:mm</value>
+  </data>
+  <data name="label2.TabIndex" type="System.Int32, mscorlib">
+    <value>53</value>
+  </data>
+  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>-3, 427</value>
+  </data>
+  <data name="&gt;&gt;dtpTo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnExport.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;olvColumn1.Name" xml:space="preserve">
+    <value>olvColumn1</value>
+  </data>
+  <data name="&gt;&gt;olvHistory.Type" xml:space="preserve">
+    <value>BrightIdeasSoftware.ObjectListView, ObjectListView, Version=2.9.1.1072, Culture=neutral, PublicKeyToken=b1c5bf581481bcd4</value>
+  </data>
+  <data name="btnExport.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="btnTotalFrequencies.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="btnExport.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="label1.TabIndex" type="System.Int32, mscorlib">
+    <value>52</value>
+  </data>
+  <data name="&gt;&gt;olvClmCategory.Name" xml:space="preserve">
+    <value>olvClmCategory</value>
+  </data>
+  <data name="btnTotalFrequencies.Location" type="System.Drawing.Point, System.Drawing">
+    <value>489, 422</value>
+  </data>
+  <data name="label1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;label2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnTotalFrequencies.Name" xml:space="preserve">
+    <value>btnTotalFrequencies</value>
+  </data>
+  <data name="btnTotalFrequencies.Size" type="System.Drawing.Size, System.Drawing">
+    <value>123, 23</value>
+  </data>
+  <data name="&gt;&gt;olvClmUniqueWords.Name" xml:space="preserve">
+    <value>olvClmUniqueWords</value>
+  </data>
+  <data name="dtpTo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="&gt;&gt;toolTip1.Name" xml:space="preserve">
+    <value>toolTip1</value>
+  </data>
+  <data name="&gt;&gt;olvHistory.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="olvColumn1.Width" type="System.Int32, mscorlib">
+    <value>220</value>
+  </data>
+  <data name="&gt;&gt;dtpTo.Name" xml:space="preserve">
+    <value>dtpTo</value>
+  </data>
+  <data name="dtpFrom.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;btnTotalFrequencies.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>17, 13</value>
+  </data>
+  <data name="olvColumn1.Text" xml:space="preserve">
+    <value>Файл</value>
+  </data>
+  <data name="dtpTo.TabIndex" type="System.Int32, mscorlib">
+    <value>51</value>
+  </data>
+  <data name="&gt;&gt;olvHistory.Name" xml:space="preserve">
+    <value>olvHistory</value>
+  </data>
+  <data name="&gt;&gt;btnFullReport.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="resource.Text" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="olvHistory.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="&gt;&gt;olvClmUniqueWords.Type" xml:space="preserve">
+    <value>BrightIdeasSoftware.OLVColumn, ObjectListView, Version=2.9.1.1072, Culture=neutral, PublicKeyToken=b1c5bf581481bcd4</value>
   </data>
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
