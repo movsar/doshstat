@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,13 +117,40 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="btnStart.Text" xml:space="preserve">
-    <value>Start</value>
+  <data name="label2.Text" xml:space="preserve">
+    <value>* AUTO = Программа попытается распознать кодировку, но возможны ошибки, например, файлы с кодировкой UTF8 без BOM не будут корректно распознаны.</value>
   </data>
-  <data name="olvScientific.Text" xml:space="preserve">
-    <value>Scientific</value>
+  <data name="$this.Text" xml:space="preserve">
+    <value>FrmSettings</value>
   </data>
-  <data name="настройкиToolStripMenuItem.Text" xml:space="preserve">
-    <value>Settings</value>
+  <data name="comboBox2.Items4" xml:space="preserve">
+    <value>Без стиля</value>
+  </data>
+  <data name="comboBox2.Items2" xml:space="preserve">
+    <value>Зеленый</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Кодировка *.txt файлов:*</value>
+  </data>
+  <data name="comboBox2.Items3" xml:space="preserve">
+    <value>Красный</value>
+  </data>
+  <data name="checkBox1.Text" xml:space="preserve">
+    <value>Показывать результат обработки</value>
+  </data>
+  <data name="label4.Text" xml:space="preserve">
+    <value>Регулярное выражение - по умолчанию (\w+)</value>
+  </data>
+  <data name="comboBox2.Items1" xml:space="preserve">
+    <value>Синий</value>
+  </data>
+  <data name="btnSave.Text" xml:space="preserve">
+    <value>Сохранить</value>
+  </data>
+  <data name="label3.Text" xml:space="preserve">
+    <value>Стиль в файле excel</value>
+  </data>
+  <data name="comboBox2.Items" xml:space="preserve">
+    <value>Такой же как в программе</value>
   </data>
 </root>

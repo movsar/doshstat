@@ -146,7 +146,7 @@
     <value />
   </data>
   <data name="btnStart.Text" xml:space="preserve">
-    <value>Начат</value>
+    <value>Начать</value>
   </data>
   <data name="label1.ToolTip" xml:space="preserve">
     <value />
@@ -162,5 +162,96 @@
   </data>
   <data name="$this.ToolTip" xml:space="preserve">
     <value />
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>DoshStat</value>
+  </data>
+  <data name="menuStrip1.Text" xml:space="preserve">
+    <value>menuStrip1</value>
+  </data>
+  <data name="statusStrip1.Text" xml:space="preserve">
+    <value>statusStrip1</value>
+  </data>
+  <data name="lblInfo.Text" xml:space="preserve">
+    <value>Выберите папку с входными файлами
+ *.doc, *.docx, *.pdf, *.txt, *.odt, *.xlsx, *.rtf, *.htm, *.html</value>
+  </data>
+  <data name="btnBrowse.Text" xml:space="preserve">
+    <value>Выбрать</value>
+  </data>
+  <data name="btnBrowse.ToolTip" xml:space="preserve">
+    <value>Выбрать начальную папку в которой нужно искать тексты</value>
+  </data>
+  <data name="tbpCount.Text" xml:space="preserve">
+    <value>Главная</value>
+  </data>
+  <data name="lblStatus.Text" xml:space="preserve">
+    <value>Готов</value>
+  </data>
+  <data name="закрытьToolStripMenuItem.Text" xml:space="preserve">
+    <value>Закрыть</value>
+  </data>
+  <data name="инструментыToolStripMenuItem.Text" xml:space="preserve">
+    <value>Инструменты</value>
+  </data>
+  <data name="chkSubdirectories.Text" xml:space="preserve">
+    <value>Искать файлы в подпапках</value>
+  </data>
+  <data name="tbpHistory.Text" xml:space="preserve">
+    <value>История</value>
+  </data>
+  <data name="настройкиToolStripMenuItem.Text" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
+  <data name="olvScientific.Text" xml:space="preserve">
+    <value>Научная</value>
+  </data>
+  <data name="btnStart.ToolTip" xml:space="preserve">
+    <value>Начать обработку всех текстовых файлов в списке</value>
+  </data>
+  <data name="оПрограммеToolStripMenuItem.Text" xml:space="preserve">
+    <value>О программе</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Папка с обрабатываемыми файлами</value>
+  </data>
+  <data name="tbpSearch.Text" xml:space="preserve">
+    <value>Поиск</value>
+  </data>
+  <data name="olvClmPoetry.Text" xml:space="preserve">
+    <value>Поэтическая</value>
+  </data>
+  <data name="btnCleanUp.ToolTip" xml:space="preserve">
+    <value>Проходит по обработанным текстам и очищает кириллицу от латинских эквивалентов</value>
+  </data>
+  <data name="olvClmReligious.Text" xml:space="preserve">
+    <value>Религиозная</value>
+  </data>
+  <data name="сброситьБДToolStripMenuItem.Text" xml:space="preserve">
+    <value>Сброс БД</value>
+  </data>
+  <data name="olvClmSocPol.Text" xml:space="preserve">
+    <value>Социально-политическая</value>
+  </data>
+  <data name="справкаToolStripMenuItem.Text" xml:space="preserve">
+    <value>Справка</value>
+  </data>
+  <data name="ctxRemoveFromtheList.Text" xml:space="preserve">
+    <value>Удалить из списка</value>
+  </data>
+  <data name="olvClmFileName.Text" xml:space="preserve">
+    <value>Файл</value>
+  </data>
+  <data name="файлToolStripMenuItem.Text" xml:space="preserve">
+    <value>Файл</value>
+  </data>
+  <data name="olvClmFiction.Text" xml:space="preserve">
+    <value>Художественная</value>
+  </data>
+  <data name="btnCleanUp.Text" xml:space="preserve">
+    <value>Чистка</value>
+  </data>
+  <data name="экспортироватьСписокToolStripMenuItem.Text" xml:space="preserve">
+    <value>Экспортировать список</value>
   </data>
 </root>

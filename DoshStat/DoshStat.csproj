@@ -229,8 +229,17 @@
     <EmbeddedResource Include="CtrlWordAnalyzer.resx">
       <DependentUpon>CtrlWordAnalyzer.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmAbout.en.resx">
+      <DependentUpon>FrmAbout.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmAbout.resx">
       <DependentUpon>FrmAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmAbout.ru.resx">
+      <DependentUpon>FrmAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmFrequencies.en.resx">
+      <DependentUpon>FrmFrequencies.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmFrequencies.ru.resx">
       <DependentUpon>FrmFrequencies.cs</DependentUpon>
@@ -240,6 +249,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.ru.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmSettings.en.resx">
+      <DependentUpon>FrmSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmSettings.ru.resx">
+      <DependentUpon>FrmSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmTotalDetails.en.resx">
+      <DependentUpon>FrmTotalDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmTotalDetails.resx">
       <DependentUpon>FrmTotalDetails.cs</DependentUpon>

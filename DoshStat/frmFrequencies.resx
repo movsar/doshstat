@@ -127,9 +127,6 @@
   <data name="&gt;&gt;lblUniqueWords.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;lblSelectedWordsPercentage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>463, 542</value>
   </data>
@@ -142,9 +139,8 @@
   <data name="btnExport.Text" xml:space="preserve">
     <value>Экспорт</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="lblSelectedWordsPercentage.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lblSelectedWordsCount.Parent" xml:space="preserve">
     <value>$this</value>
@@ -156,6 +152,7 @@
   <data name="olvFrequencies.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="olvClmRank.Width" type="System.Int32, mscorlib">
     <value>50</value>
   </data>
@@ -168,17 +165,23 @@
   <data name="&gt;&gt;lblCharactersCount.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="lblCategory.Size" type="System.Drawing.Size, System.Drawing">
+    <value>66, 13</value>
+  </data>
   <data name="lblWordCount.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 16</value>
   </data>
   <data name="lblWordCount.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblCharactersCount.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="lblUniqueWords.Location" type="System.Drawing.Point, System.Drawing">
     <value>190, 16</value>
   </data>
-  <data name="&gt;&gt;lblUniqueWords.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="lblCharactersCount.Text" xml:space="preserve">
+    <value>Всего символов: </value>
   </data>
   <data name="lblSelectedWordsCount.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -186,17 +189,14 @@
   <data name="btnExport.Location" type="System.Drawing.Point, System.Drawing">
     <value>365, 516</value>
   </data>
-  <data name="&gt;&gt;lblSelectedWordsPercentage.Name" xml:space="preserve">
-    <value>lblSelectedWordsPercentage</value>
-  </data>
   <data name="&gt;&gt;olvFrequencies.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;lblCharactersCount.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <data name="&gt;&gt;olvClmWord.Name" xml:space="preserve">
+    <value>olvClmWord</value>
   </data>
-  <data name="lblCharactersCount.Text" xml:space="preserve">
-    <value>Всего символов: </value>
+  <data name="&gt;&gt;lblSelectedWordsCount.Name" xml:space="preserve">
+    <value>lblSelectedWordsCount</value>
   </data>
   <data name="lblCategory.Text" xml:space="preserve">
     <value>Категория: </value>
@@ -207,17 +207,14 @@
   <data name="&gt;&gt;lblSelectedWordsPercentage.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="lblCategory.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+  <data name="&gt;&gt;lblSelectedWordsPercentage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="lblSelectedWordsPercentage.Size" type="System.Drawing.Size, System.Drawing">
     <value>0, 13</value>
   </data>
   <data name="olvClmPercentage.Width" type="System.Int32, mscorlib">
     <value>92</value>
-  </data>
-  <data name="&gt;&gt;lblSelectedFrequency.Parent" xml:space="preserve">
-    <value>$this</value>
   </data>
   <data name="&gt;&gt;lblSelectedWordsCount.ZOrder" xml:space="preserve">
     <value>2</value>
@@ -231,17 +228,20 @@
   <data name="lblWordCount.Text" xml:space="preserve">
     <value>Всего слов: </value>
   </data>
-  <data name="&gt;&gt;olvClmWord.Name" xml:space="preserve">
-    <value>olvClmWord</value>
+  <data name="olvFrequencies.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt</value>
   </data>
   <data name="lblCharactersCount.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
   </data>
-  <data name="&gt;&gt;lblSelectedWordsCount.Name" xml:space="preserve">
-    <value>lblSelectedWordsCount</value>
+  <data name="lblSelectedFrequency.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="lblSelectedWordsCount.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
+  </data>
+  <data name="olvClmFrequency.Width" type="System.Int32, mscorlib">
+    <value>91</value>
   </data>
   <data name="&gt;&gt;lblUniqueWords.Parent" xml:space="preserve">
     <value>$this</value>
@@ -258,8 +258,8 @@
   <data name="&gt;&gt;lblWordCount.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="&gt;&gt;lblWordCount.Name" xml:space="preserve">
-    <value>lblWordCount</value>
+  <data name="&gt;&gt;lblSelectedFrequency.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="&gt;&gt;btnExport.ZOrder" xml:space="preserve">
     <value>3</value>
@@ -279,14 +279,14 @@
   <data name="&gt;&gt;lblSelectedFrequency.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;lblCharactersCount.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
   <data name="&gt;&gt;lblCharactersCount.Name" xml:space="preserve">
     <value>lblCharactersCount</value>
   </data>
   <data name="&gt;&gt;lblCategory.Name" xml:space="preserve">
     <value>lblCategory</value>
-  </data>
-  <data name="&gt;&gt;lblSelectedFrequency.Name" xml:space="preserve">
-    <value>lblSelectedFrequency</value>
   </data>
   <data name="olvClmFrequency.Text" xml:space="preserve">
     <value>Частота</value>
@@ -296,6 +296,9 @@
   </data>
   <data name="&gt;&gt;lblCharactersCount.Parent" xml:space="preserve">
     <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblUniqueWords.Name" xml:space="preserve">
+    <value>lblUniqueWords</value>
   </data>
   <data name="&gt;&gt;lblCategory.Parent" xml:space="preserve">
     <value>$this</value>
@@ -312,8 +315,8 @@
   <data name="lblCharactersCount.Location" type="System.Drawing.Point, System.Drawing">
     <value>190, 3</value>
   </data>
-  <data name="olvClmFrequency.Width" type="System.Int32, mscorlib">
-    <value>91</value>
+  <data name="&gt;&gt;lblUniqueWords.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lblSelectedWordsPercentage.Parent" xml:space="preserve">
     <value>$this</value>
@@ -345,32 +348,29 @@
   <data name="lblCategory.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
-  <data name="olvFrequencies.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 9.75pt</value>
+  <data name="&gt;&gt;lblSelectedWordsPercentage.Name" xml:space="preserve">
+    <value>lblSelectedWordsPercentage</value>
   </data>
   <data name="olvClmRank.Text" xml:space="preserve">
     <value>Ранг</value>
   </data>
-  <data name="&gt;&gt;lblWordCount.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="lblCategory.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
   </data>
   <data name="&gt;&gt;lblSelectedWordsCount.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="lblSelectedFrequency.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 42</value>
-  </data>
-  <data name="lblSelectedFrequency.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;lblSelectedFrequency.Name" xml:space="preserve">
+    <value>lblSelectedFrequency</value>
   </data>
   <data name="&gt;&gt;lblSelectedFrequency.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;olvClmRank.Name" xml:space="preserve">
-    <value>olvClmRank</value>
+  <data name="&gt;&gt;lblWordCount.Name" xml:space="preserve">
+    <value>lblWordCount</value>
   </data>
-  <data name="lblCategory.Size" type="System.Drawing.Size, System.Drawing">
-    <value>66, 13</value>
+  <data name="lblSelectedWordsPercentage.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="lblSelectedWordsPercentage.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
@@ -378,8 +378,11 @@
   <data name="lblWordCount.Size" type="System.Drawing.Size, System.Drawing">
     <value>70, 13</value>
   </data>
-  <data name="&gt;&gt;lblUniqueWords.Name" xml:space="preserve">
-    <value>lblUniqueWords</value>
+  <data name="lblSelectedFrequency.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 42</value>
+  </data>
+  <data name="&gt;&gt;lblWordCount.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="lblSelectedFrequency.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
@@ -396,14 +399,11 @@
   <data name="lblUniqueWords.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
   </data>
-  <data name="lblCharactersCount.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;olvClmRank.Name" xml:space="preserve">
+    <value>olvClmRank</value>
   </data>
   <data name="lblSelectedWordsPercentage.Location" type="System.Drawing.Point, System.Drawing">
     <value>190, 29</value>
-  </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
