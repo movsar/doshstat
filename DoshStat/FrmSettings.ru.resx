@@ -153,4 +153,7 @@
   <data name="comboBox2.Items" xml:space="preserve">
     <value>Такой же как в программе</value>
   </data>
+  <data name="Autodetect" xml:space="preserve">
+    <value>Автоопределение</value>
+  </data>
 </root>

@@ -60,9 +60,9 @@ namespace DoshStat
 
         private void olvFrequencies_SelectionChanged(object sender, EventArgs e)
         {
-            string lblWordsCountPrefix = "Выделено слов: ";
-            string lblWordsPercentagePrefix = "Выделено в процентах: ";
-            string lblWordsFrequenciesPrefix = "Сумма выделенных частот: ";
+            string lblWordsCountPrefix = Utils.GetFormStringResource<FrmMultipleFilesFrequencies>("WordsSelected");
+            string lblWordsPercentagePrefix = Utils.GetFormStringResource<FrmMultipleFilesFrequencies>("SelectedInPercentage");
+            string lblWordsFrequenciesPrefix = Utils.GetFormStringResource<FrmMultipleFilesFrequencies>("SelectedFrequency");
 
             lblSelectedWordsCount.Text = lblWordsCountPrefix + olvFrequencies.SelectedObjects.Count.ToString();
             float sumPercentage = 0;

@@ -73,7 +73,7 @@ namespace DoshStat
         {
             if (Utils.history == null) return;
             this.Enabled = false;
-            Utils.ExcelExport(olvHistory, "История");
+            Utils.ExcelExport(olvHistory, Utils.GetFormStringResource<CtrlHistory>("History"));
             this.Enabled = true;
         }
 
@@ -96,7 +96,6 @@ namespace DoshStat
         {
             if (olvHistory.SelectedObjects.Count == 0)
             {
-                MessageBox.Show("Выберите из списка данные обработки файла(ов)");
                 return;
             }
 

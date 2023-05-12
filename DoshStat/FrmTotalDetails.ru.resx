@@ -154,4 +154,7 @@
   <data name="btnExport.Text" xml:space="preserve">
     <value>Экспорт</value>
   </data>
+  <data name="DetailedReport" xml:space="preserve">
+    <value>Подробный отчет</value>
+  </data>
 </root>

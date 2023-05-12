@@ -147,4 +147,13 @@
   <data name="btnExport.Text" xml:space="preserve">
     <value>Export</value>
   </data>
+  <data name="NothingFound" xml:space="preserve">
+    <value>Nothing found</value>
+  </data>
+  <data name="SearchResults" xml:space="preserve">
+    <value>Search results</value>
+  </data>
+  <data name="FoundIn" xml:space="preserve">
+    <value>Found in {0} file(s)</value>
+  </data>
 </root>

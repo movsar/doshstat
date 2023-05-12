@@ -351,7 +351,6 @@
             this.tbcMain.Name = "tbcMain";
             this.tbcMain.SelectedIndex = 0;
             this.myToolTip.SetToolTip(this.tbcMain, resources.GetString("tbcMain.ToolTip"));
-            this.tbcMain.SelectedIndexChanged += new System.EventHandler(this.tbcHistory_SelectedIndexChanged);
             // 
             // tbpSearch
             // 

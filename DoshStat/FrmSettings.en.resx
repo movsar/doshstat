@@ -150,4 +150,10 @@
   <data name="label2.Text" xml:space="preserve">
     <value>* AUTO = The app will try to figure out the codepage, it works most of the times, but not always</value>
   </data>
+  <data name="Autodetect" xml:space="preserve">
+    <value>Autodetect</value>
+  </data>
+  <data name="label4.Text" xml:space="preserve">
+    <value>Regular expression - by default uses (\w+)</value>
+  </data>
 </root>

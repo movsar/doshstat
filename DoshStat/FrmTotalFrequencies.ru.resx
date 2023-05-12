@@ -154,4 +154,16 @@
   <data name="btnExport.Text" xml:space="preserve">
     <value>Экспорт</value>
   </data>
+  <data name="ConvergedFrequency" xml:space="preserve">
+    <value>Сводная Частотность</value>
+  </data>
+  <data name="SelectedFrequency" xml:space="preserve">
+    <value>Сумма выделенных частот</value>
+  </data>
+  <data name="SelectedInPercentage" xml:space="preserve">
+    <value>Выделено в процентах</value>
+  </data>
+  <data name="WordsSelected" xml:space="preserve">
+    <value>Выделено слов</value>
+  </data>
 </root>

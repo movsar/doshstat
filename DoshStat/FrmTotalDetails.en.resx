@@ -150,4 +150,7 @@
   <data name="olvClmPercentage.Text" xml:space="preserve">
     <value>Relative frequency</value>
   </data>
+  <data name="DetailedReport" xml:space="preserve">
+    <value>Detailed report</value>
+  </data>
 </root>

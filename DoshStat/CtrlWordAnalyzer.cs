@@ -21,7 +21,8 @@ namespace DoshStat
             List<xWordFrequencies> searchResults = DbHelper.FindInFrequencies(word);
             if (searchResults == null) {
                 olvSearchResults.ClearObjects();
-                ((FrmMain)this.Parent.Parent.Parent).lblStatus.Text = string.Format("Ничего не найдено");
+                
+                ((FrmMain)this.Parent.Parent.Parent).lblStatus.Text = string.Format(Utils.GetFormStringResource<CtrlWordAnalyzer>("NothingFound"));
                 return;
             }
 
@@ -43,7 +44,7 @@ namespace DoshStat
                 rowObjects.Add(rowObject);
             }
             olvSearchResults.SetObjects(rowObjects);
-            ((FrmMain)this.Parent.Parent.Parent).lblStatus.Text = string.Format("Найдено в {0} файлах(е)", rowObjects.GroupBy(xFile => xFile.fileId).Select(grp => grp.First()).ToList().Count.ToString());
+            ((FrmMain)this.Parent.Parent.Parent).lblStatus.Text = string.Format(Utils.GetFormStringResource<CtrlWordAnalyzer>("FoundIn"), rowObjects.GroupBy(xFile => xFile.fileId).Select(grp => grp.First()).ToList().Count.ToString());
             olvSearchResults.PrimarySortColumn = olvSearchResults.GetColumn(0);
             olvSearchResults.PrimarySortOrder = SortOrder.Descending;
             olvSearchResults.Sort();
@@ -74,7 +75,7 @@ namespace DoshStat
         private void btnExport_Click(object sender, EventArgs e)
         {
             if (olvSearchResults.Items.Count != 0)
-                Utils.ExcelExport(olvSearchResults, "Результаты поиска");
+                Utils.ExcelExport(olvSearchResults, Utils.GetFormStringResource<CtrlWordAnalyzer>("SearchResults"));
         }
     }
 }

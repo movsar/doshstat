@@ -96,11 +96,11 @@ namespace DoshStat
 
         private void olvTotalFrequencies_SelectionChanged(object sender, EventArgs e)
         {
-            string lblWordsCountPrefix = "Выделено слов: ";
-            string lblWordsPercentagePrefix = "Выделено в процентах: ";
-            string lblWordsFrequenciesPrefix = "Сумма выделенных частот: ";
+            string lblWordsCountPrefix = Utils.GetFormStringResource<FrmMultipleFilesFrequencies>("WordsSelected");
+            string lblWordsPercentagePrefix = Utils.GetFormStringResource<FrmMultipleFilesFrequencies>("SelectedInPercentage");
+            string lblWordsFrequenciesPrefix = Utils.GetFormStringResource<FrmMultipleFilesFrequencies>("SelectedFrequency");
 
-            lblSelectedWordsCount.Text = lblWordsCountPrefix + olvTotalFrequencies.SelectedObjects.Count.ToString();
+            lblSelectedWordsCount.Text = lblWordsCountPrefix + ": " + olvTotalFrequencies.SelectedObjects.Count.ToString();
             float sumPercentage = 0;
             int sumFrequencies = 0;
             foreach (var obj in olvTotalFrequencies.SelectedObjects)
@@ -109,13 +109,13 @@ namespace DoshStat
                 sumPercentage += xwf.percentage;
                 sumFrequencies += xwf.frequency;
             }
-            lblSelectedWordsPercentage.Text = lblWordsPercentagePrefix + sumPercentage.ToString("F") + "%";
-            lblSelectedFrequency.Text = lblWordsFrequenciesPrefix + sumFrequencies.ToString();
+            lblSelectedWordsPercentage.Text = lblWordsPercentagePrefix + ": " + sumPercentage.ToString("F") + "%";
+            lblSelectedFrequency.Text = lblWordsFrequenciesPrefix + ": " + sumFrequencies.ToString();
         }
 
         private void btnExport_Click_1(object sender, EventArgs e)
         {
-            Utils.ExcelExport(olvTotalFrequencies, "Сводная Частотность");
+            Utils.ExcelExport(olvTotalFrequencies, Utils.GetFormStringResource<FrmMultipleFilesFrequencies>("ConvergedFrequency"));
         }
     }
 }

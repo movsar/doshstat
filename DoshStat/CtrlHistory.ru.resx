@@ -153,4 +153,7 @@
   <data name="btnExport.Text" xml:space="preserve">
     <value>Экспорт</value>
   </data>
+  <data name="History" xml:space="preserve">
+    <value>История</value>
+  </data>
 </root>

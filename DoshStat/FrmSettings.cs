@@ -16,8 +16,10 @@ namespace DoshStat
         public FrmSettings()
         {
             InitializeComponent();
-            comboBox1.Items.Add("Автоопределение");
-            foreach (var enc in System.Text.Encoding.GetEncodings()) {
+                var str = Utils.GetFormStringResource<FrmSettings>("Autodetect");
+            comboBox1.Items.Add(str);
+            foreach (var enc in System.Text.Encoding.GetEncodings())
+            {
                 comboBox1.Items.Add(enc.Name);
             }
             comboBox2.SelectedIndex = Utils.StgGetInt("ExStyle");
@@ -26,11 +28,15 @@ namespace DoshStat
 
         private void FrmSettings_Load(object sender, EventArgs e)
         {
-            txtRegExp.Text= Utils.StgGetString("TxtRegExp").Replace(@"\\", @"\");
+            txtRegExp.Text = Utils.StgGetString("TxtRegExp").Replace(@"\\", @"\");
 
-            if (Utils.StgGetInt("TxtCodepage") == 0) {
-                comboBox1.Text = "Автоопределение";
-            } else {
+            if (Utils.StgGetInt("TxtCodepage") == 0)
+            {
+                var str = Utils.GetFormStringResource<FrmSettings>("Autodetect");
+                comboBox1.Text = str;
+            }
+            else
+            {
                 // Saved encoding
                 Encoding enc = Encoding.GetEncoding(Utils.StgGetInt("TxtCodepage"));
                 comboBox1.Text = enc.WebName;
@@ -53,14 +59,14 @@ namespace DoshStat
                 Utils.StgSet("TxtCodepage", Encoding.GetEncoding(comboBox1.Text).CodePage);
 
             Utils.StgSet("ExStyle", comboBox2.SelectedIndex);
-            Utils.StgSet("TxtRegExp", txtRegExp.Text.Replace(@"\\",@"\"));
-            
+            Utils.StgSet("TxtRegExp", txtRegExp.Text.Replace(@"\\", @"\"));
+
             Close();
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            Utils.StgSet("ShowResultsImmediately",checkBox1.Checked);            
+            Utils.StgSet("ShowResultsImmediately", checkBox1.Checked);
         }
     }
 }

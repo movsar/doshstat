@@ -147,4 +147,19 @@
   <data name="lblCharactersCount.Text" xml:space="preserve">
     <value>Characters count:</value>
   </data>
+  <data name="ConvergedFrequency" xml:space="preserve">
+    <value>Converged Frequency report</value>
+  </data>
+  <data name="SelectedInPercentage" xml:space="preserve">
+    <value>Selected in percentage</value>
+  </data>
+  <data name="SelectedFrequency" xml:space="preserve">
+    <value>Selected frequencies</value>
+  </data>
+  <data name="WordsSelected" xml:space="preserve">
+    <value>Selected words count</value>
+  </data>
+  <data name="olvClmRank.Text" xml:space="preserve">
+    <value>Rank</value>
+  </data>
 </root>

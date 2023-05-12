@@ -63,7 +63,8 @@ namespace DoshStat
 
         private void btnExport_Click(object sender, EventArgs e)
         {
-            Utils.ExcelExport(olvDetailedHistory, "Подробная История");
+
+            Utils.ExcelExport(olvDetailedHistory, Utils.GetFormStringResource<FrmTotalDetails>("DetailedReport"));
         }
 
         private void удалитьToolStripMenuItem_Click(object sender, EventArgs e)
